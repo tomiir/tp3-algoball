@@ -10,6 +10,7 @@ public abstract class Personaje {
 	int rangoDeAtaque;
 	int velocidad;
 	int ki = 0;
+	int poderDePelea;
 	Ataque ataqueEspecial;
 	Ataque ataqueNormal;
 	Casillero posicion;

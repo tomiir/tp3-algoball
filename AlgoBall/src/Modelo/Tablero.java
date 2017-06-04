@@ -7,9 +7,9 @@ public class Tablero {
 		casilleros = new Casillero[alto][ancho];
 	}
 	
-	public posicionar(Personaje personaje, pos_x,pos_y){
+	public void posicionar(Posicionable posicionable, int pos_x, int pos_y){
 		
-		casillero = casilleros[pos_x][pos_y];
-		
+		Casillero casillero = casilleros[pos_x][pos_y];
+		casillero.posicionar(posicionable);
 	}
 }
