@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Posicionable {
+public interface Posicionable {
 	
 
 

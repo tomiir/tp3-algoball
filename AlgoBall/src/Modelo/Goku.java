@@ -19,12 +19,5 @@ public class Goku extends Personaje {
 	}
 	
 	
-	@Override
-	public void atacar(Personaje personajeObjetivo, Ataque ataqueElegido) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	
 
 }

@@ -1,6 +1,10 @@
-package Modelo;
+package ModeloTests;
 
 import org.junit.Assert;
+
+import Modelo.Direccion;
+import Modelo.Goku;
+import Modelo.Tablero;
 
 public class PruebaTableroPosicionar {
 	

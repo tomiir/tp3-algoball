@@ -3,7 +3,7 @@ package Modelo;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class Personaje {
+public abstract class Personaje implements Posicionable{
 	
 	String nombre;
 	int puntosDeVida;
@@ -14,9 +14,29 @@ public abstract class Personaje {
 	Ataque ataqueEspecial;
 	Ataque ataqueNormal;
 	Casillero posicion;
+	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList();
 	
-	public abstract void atacar(Personaje personajeObjetivo, Ataque ataqueElegido);
+	public void recibirDaño(int cantidad){
+		puntosDeVida -= cantidad;
+	}
+	
+	public void mover(Casillero nuevoCasillero){
+		
+	}
+	
+	public void atacar(Personaje personajeObjetivo, Ataque ataqueElegido) throws ExcFueraDeRango, ExcAtaqueImposible{
+		if(estaEnRangoDeAtaque(personajeObjetivo.posicion)){
+			try{
+				ataqueElegido.enviar(this, personajeObjetivo);
+				ki -= ataqueElegido.costo();
+			} catch (ExcAtaqueImposible e){
+				throw e;
+			}
+		} else {
+			throw new ExcFueraDeRango();
+		}
+	}
 	
 	public Casillero posicion(){
 		return posicion;
@@ -24,6 +44,10 @@ public abstract class Personaje {
 	
 	public int velocidad(){
 		return velocidad;
+	}
+	
+	public int ki(){
+		return ki;
 	}
 	
 	public void transformar () {
@@ -34,10 +58,18 @@ public abstract class Personaje {
 			this.velocidad = transformacion.getVelocidad();
 			this.ataqueNormal = transformacion.getAtaqueNormal();
 		} else {
-			throw NoEsPosibleTransformarse;
+			throw new ExcNoEsPosibleTransformarse();
 		}
 	}
 	
+	private boolean estaEnRangoDeAtaque(Casillero objetivo){
+		if(.distancia(objetivo)>rangoDeAtaque){
+			return false;
+		}
+		return true;
+	}
 	
-	
+	public boolean estaMuerto(){
+		return (puntosDeVida<0);
+	}
 }
