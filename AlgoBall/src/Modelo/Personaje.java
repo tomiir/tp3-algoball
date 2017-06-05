@@ -63,9 +63,9 @@ public abstract class Personaje implements Posicionable{
 		Transformacion transformacion = transformaciones.peek();
 		if(transformacion.esPosible(this) && transformacion!=null){
 			transformaciones.remove();
-			rangoDeAtaque = transformacion.getRangoDeAtaque();
-			velocidad = transformacion.getVelocidad();
-			ataqueNormal = transformacion.transformarAtaqueNormal(ataqueNormal);		
+			rangoDeAtaque = transformacion.rangoDeAtaque();
+			velocidad = transformacion.velocidad();
+			ataqueNormal = transformacion.ataqueNormal();		
 		} else {
 			throw new ExcNoEsPosibleTransformarse();
 		}

@@ -1,7 +1,7 @@
 package Modelo;
 
 public abstract class Ataque {
-	
+
 	public void enviar(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible{
 		try{
 			this.verificarCondiciones(remitente, destinatario);

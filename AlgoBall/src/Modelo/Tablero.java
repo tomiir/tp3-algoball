@@ -20,4 +20,8 @@ public class Tablero {
 			throw e;
 		}
 	}
+	
+	public Casillero obtenerCasillero(int pos_x,int pos_y){
+		return casilleros[pos_x][pos_y];
+	}
 }
