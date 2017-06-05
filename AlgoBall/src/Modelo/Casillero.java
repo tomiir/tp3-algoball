@@ -27,6 +27,19 @@ public class Casillero {
 		if(this.estaOcupado()) throw new ExcCasilleroOcupado();
 		this.contenido = posicionable;
 	}
+	
+	public int pos_x(){
+		return pos_x;
+	}
+	
+	public int pos_y(){
+		return pos_y;
+	}
+
+	public int distanciaA(Casillero objetivo) {
+		int resultado = (int) Math.sqrt(Math.pow(pos_x-objetivo.pos_x,2)+Math.pow(pos_y-objetivo.pos_y,2));
+		return resultado;
+	}
 
 }
 

@@ -4,17 +4,16 @@ package Modelo;
 public class Goku extends Personaje {
 	
 	
-	public Goku(){
+	public Goku(Casillero posinicial, Tablero mundo){
 		
-		this.nombre = "Goku";
-		this.puntosDeVida = 500;
-		this.rangoDeAtaque = 2;
-		this.velocidad = 2;
-		this.poderDePelea = 20;
-		this.ataqueNormal = new AtaqueNormal(poderDePelea);
-		this.ataqueEspecial = new Kamehameha(20);
-		this.ki = super.ki;
-		
+		nombre = "Goku";
+		puntosDeVida = 500;
+		rangoDeAtaque = 2;
+		velocidad = 2;
+		ataqueNormal = new AtaqueNormal(20);
+		ataqueEspecial = null;
+		posicion = posinicial;
+		tablero = mundo;
 		
 	}
 	
