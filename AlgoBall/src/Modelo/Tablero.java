@@ -14,6 +14,7 @@ public class Tablero {
 	
 	public void posicionar(Posicionable posicionable, int pos_x, int pos_y) throws ExcCasilleroOcupado{
 		Casillero casillero = casilleros[pos_x][pos_y];
+		posicionable.posicionar(this.obtenerCasillero(pos_x,pos_y));
 		try{
 		    casillero.posicionar(posicionable);
 		} catch(ExcCasilleroOcupado e){

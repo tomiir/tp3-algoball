@@ -1,10 +1,10 @@
 package Modelo;
 
 public class AtaqueNormal extends Ataque {
-	int daño;
+	int dato;
 	
-	public AtaqueNormal(int puntosDaño){
-		daño=puntosDaño;
+	public AtaqueNormal(int puntosDato){
+		dato=puntosDato;
 	}
 
 	@Override
@@ -13,8 +13,8 @@ public class AtaqueNormal extends Ataque {
 	}
 
 	@Override
-	protected int daño(Personaje destinatario) {
-		return daño;
+	protected int dato(Personaje destinatario) {
+		return dato;
 	}
 
 	@Override

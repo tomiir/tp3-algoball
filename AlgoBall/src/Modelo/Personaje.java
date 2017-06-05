@@ -16,7 +16,7 @@ public abstract class Personaje implements Posicionable{
 	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList();
 	
-	public void recibirDaño(int cantidad){
+	public void recibirDato(int cantidad){
 		puntosDeVida -= cantidad;
 	}
 	
@@ -45,6 +45,12 @@ public abstract class Personaje implements Posicionable{
 		} else {
 			throw new ExcFueraDeRango();
 		}
+	}
+	
+	public void posicionar(Casillero casillero){
+		
+		this.posicion = casillero;
+		
 	}
 	
 	public Casillero posicion(){
