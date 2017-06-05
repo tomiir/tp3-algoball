@@ -3,7 +3,7 @@ package Modelo;
 public class Casillero {
 	int pos_x;
 	int pos_y;
-	Posicionable contenido;
+	Posicionable contenido=null;
 	
 	public Casillero(int x, int y){
 		this.pos_x = x;
@@ -11,7 +11,9 @@ public class Casillero {
 	}
 	
 	public boolean estaOcupado(){
-		if(contenido==null) return false;
+		if(contenido==null){
+			return false;
+		}
 		return true;
 	}
 	

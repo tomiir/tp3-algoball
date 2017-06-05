@@ -21,11 +21,6 @@ public class Tablero {
 		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
 		Casillero casillero = casilleros[posX][posY];
 		posicionable.posicionar(this.obtenerCasillero(posX,posY));
-		try{
-		    casillero.posicionar(posicionable);
-		} catch(ExcCasilleroOcupado e){
-			throw e;
-		}
 	}
 	
 	public Casillero obtenerCasillero(int posX,int posY) throws ExcFueraDeTablero{
