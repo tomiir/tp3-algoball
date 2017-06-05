@@ -8,10 +8,10 @@ public abstract class Ataque {
 		} catch(ExcAtaqueImposible e){
 			throw e;
 		}
-		destinatario.recibirDato(this.dato(destinatario));
+		destinatario.recibirDaño(this.daño(destinatario));
 	}
 	
 	protected abstract int costo();
-	protected abstract int dato(Personaje destinatario);
+	protected abstract int daño(Personaje destinatario);
 	protected abstract void verificarCondiciones(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible;
 }
