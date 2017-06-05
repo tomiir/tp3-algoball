@@ -24,11 +24,11 @@ public abstract class Personaje implements Posicionable{
 		if(sePuedeMoverA(nuevoCasillero)){
 			try{
 				nuevoCasillero.posicionar(this);
-				posicion.desocupar();
-				posicion=nuevoCasillero;
 			} catch (ExcCasilleroOcupado e){
 				throw new ExcMovimientoImposible();
 			}
+			posicion.desocupar();
+			posicion=nuevoCasillero;
 		} else {
 			throw new ExcMovimientoImposible();
 		}
@@ -38,10 +38,10 @@ public abstract class Personaje implements Posicionable{
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion)){
 			try{
 				ataqueElegido(esEspecial).enviar(this, personajeObjetivo);
-				ki -= ataqueElegido(esEspecial).costo();
 			} catch (ExcAtaqueImposible e){
 				throw e;
 			}
+			ki -= ataqueElegido(esEspecial).costo();
 		} else {
 			throw new ExcFueraDeRango();
 		}

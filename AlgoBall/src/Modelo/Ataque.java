@@ -5,10 +5,10 @@ public abstract class Ataque {
 	public void enviar(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible{
 		try{
 			this.verificarCondiciones(remitente, destinatario);
-			destinatario.recibirDaño(this.daño(destinatario));
 		} catch(ExcAtaqueImposible e){
 			throw e;
 		}
+		destinatario.recibirDaño(this.daño(destinatario));
 	}
 	
 	protected abstract int costo();
