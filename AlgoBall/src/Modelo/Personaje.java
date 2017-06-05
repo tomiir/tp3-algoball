@@ -97,10 +97,12 @@ public abstract class Personaje implements Posicionable{
 	}
 	//logica similar al metodo estaEnRangoDeAtaque, merece la separacion?
 	private boolean sePuedeMoverA(Casillero objetivo){
-		if(posicion.distanciaA(objetivo)<=velocidad && objetivo !=null){
+		if(posicion == null) return false;
+		if(posicion.distanciaA(objetivo) > (double)velocidad){
 			return false;
 		}
 		return true;
+
 	}
 	
 	

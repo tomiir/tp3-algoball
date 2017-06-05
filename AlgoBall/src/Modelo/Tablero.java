@@ -2,9 +2,14 @@ package Modelo;
 
 public class Tablero {
 	Casillero[][] casilleros;
+	int ancho; 
+	int alto;
 	
-	public Tablero(int alto,int ancho){
+	public Tablero(int altoDeseado,int anchoDeseado){
+		ancho = anchoDeseado;
+		alto = altoDeseado;
 		casilleros = new Casillero[alto][ancho];
+		
 		for(int i=0;i<alto;i++){
 			for(int j=0;j<ancho;j++){
 				casilleros[i][j] = new Casillero(i,j);
@@ -12,9 +17,10 @@ public class Tablero {
 		}
 	}
 	
-	public void posicionar(Posicionable posicionable, int pos_x, int pos_y) throws ExcCasilleroOcupado{
-		Casillero casillero = casilleros[pos_x][pos_y];
-		posicionable.posicionar(this.obtenerCasillero(pos_x,pos_y));
+	public void posicionar(Posicionable posicionable, int posX, int posY) throws ExcCasilleroOcupado, ExcFueraDeTablero{
+		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
+		Casillero casillero = casilleros[posX][posY];
+		posicionable.posicionar(this.obtenerCasillero(posX,posY));
 		try{
 		    casillero.posicionar(posicionable);
 		} catch(ExcCasilleroOcupado e){
@@ -22,7 +28,12 @@ public class Tablero {
 		}
 	}
 	
-	public Casillero obtenerCasillero(int pos_x,int pos_y){
-		return casilleros[pos_x][pos_y];
+	public Casillero obtenerCasillero(int posX,int posY) throws ExcFueraDeTablero{
+		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
+		return casilleros[posX][posY];
+	}
+	
+	private boolean coordenadasEstanEnRango(int posX, int posY) {
+		return (posX >= 0 && posX < ancho && posY >= 0 && posY < alto);
 	}
 }
