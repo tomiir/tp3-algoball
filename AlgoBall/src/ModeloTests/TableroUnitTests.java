@@ -11,15 +11,15 @@ import org.junit.Test;
 
 import com.sun.jndi.cosnaming.ExceptionMapper;
 
-public class TableroPruebas {
+public class TableroUnitTests {
 	
-	Tablero tablero = new Tablero(15,15);
+	Tablero tablero = new Tablero(20,30);
 	Posicionable posicionable1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
 	Posicionable posicionable2 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
 	
 	@Test
 	public void sePosicionaCorrectamente() throws ExcFueraDeTablero, ExcPosicionOcupada{
-		Posicion pos1=new Posicion(0,0);
+		Posicion pos1=new Posicion(20,30);
 		tablero.posicionar(posicionable1, pos1);
 		Assert.assertEquals("Se posiciona correctamente", posicionable1, tablero.obtenerCasillero(pos1).obtenerContenido());
 		
@@ -30,7 +30,7 @@ public class TableroPruebas {
 	
 	@Test (expected = ExcFueraDeTablero.class)
 	public void noSePuedePosicionarFueraDelTablero() throws ExcPosicionOcupada, ExcFueraDeTablero{
-		tablero.posicionar(posicionable1, new Posicion(1,15));
+		tablero.posicionar(posicionable1, new Posicion(21,15));
 	}
 	
 	@Test (expected = ExcPosicionOcupada.class)
@@ -41,11 +41,11 @@ public class TableroPruebas {
 	
 	@Test (expected = ExcFueraDeTablero.class)
 	public void noSePuedeObtenerCasilleroFueraDeRangoPositivo() throws ExcFueraDeTablero{
-		tablero.obtenerCasillero(new Posicion(15,15));
+		tablero.obtenerCasillero(new Posicion(12,31));
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
 	public void noSePuedeObtenerCasilleroFueraDeRangoNegativo() throws ExcFueraDeTablero{
-		tablero.obtenerCasillero(new Posicion(-1,-1));
+		tablero.obtenerCasillero(new Posicion(-1,1));
 	}
 }

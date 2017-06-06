@@ -87,7 +87,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	private Posicion interpretarDireccion(Direccion direccion){
-		return new Posicion(posicion.posX()+direccion.dx(),posicion.posX()+direccion.dy());
+		return new Posicion(posicion.posX()+direccion.dx(),posicion.posY()+direccion.dy());
 	}
 	
 	public boolean estaMuerto(){

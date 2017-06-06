@@ -13,9 +13,9 @@ import org.junit.Test;
 
 import com.sun.jndi.cosnaming.ExceptionMapper;
 
-public class PersonajePruebas {
+public class PersonajeUnitTests {
 	
-	Tablero tablero = new Tablero(15,15);
+	Tablero tablero = new Tablero(15,14);
 	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
 	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
 	
@@ -49,6 +49,31 @@ public class PersonajePruebas {
 		
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
+	
+	}
+	
+	@Test
+	public void seMueveCorrectamenteAlMinimo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+		tablero.posicionar(personaje1, new Posicion(2,2));
+		personaje1.mover (new Direccion(-1,-1));
+		
+		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 1, personaje1.posicion().posX());
+		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
+	}
+	
+	@Test
+	public void seMueveCorrectamenteAlMaximo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+		tablero.posicionar(personaje1, new Posicion(14,13));
+		personaje1.mover (new Direccion(1,1));
+		
+		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 15, personaje1.posicion().posX());
+		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 14, personaje1.posicion().posY());
+	}
+	
+	@Test (expected = ExcFueraDeTablero.class)
+	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {		
+		tablero.posicionar(personaje1, new Posicion(1,1));
+		personaje1.mover (new Direccion(-1,0));
 	}
 	
 	@Test (expected = ExcPosicionOcupada.class)
