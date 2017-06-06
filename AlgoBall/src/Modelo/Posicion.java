@@ -18,5 +18,7 @@ public class Posicion{
 		return posY;
 	}
 	
-	
+	public double distanciaA(Posicion posicion){
+		return (Math.sqrt(Math.pow(posicion.posX()-posX, 2)+Math.pow(posicion.posY()-posY, 2)));
+	}
 }

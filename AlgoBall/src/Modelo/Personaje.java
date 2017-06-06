@@ -20,18 +20,9 @@ public abstract class Personaje implements Posicionable{
 		puntosDeVida -= cantidad;
 	}
 	
-	public void mover(Casillero nuevoCasillero) throws ExcMovimientoImposible{
-		if(sePuedeMoverA(nuevoCasillero)){
-			try{
-				nuevoCasillero.posicionar(this);
-			} catch (ExcCasilleroOcupado e){
-				throw new ExcMovimientoImposible();
-			}
-			posicion.desocupar();
-			posicion = nuevoCasillero;
-		} else {
-			throw new ExcMovimientoImposible();
-		}
+	public void mover(Direccion direccion){
+		Posicion nuevaPos = interpretarDireccion(direccion);
+		tablero.posicionar(this, nuevaPos);
 	}
 	
 	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
@@ -47,7 +38,7 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	public void posicionar(Posicion casillero) throws ExcCasilleroOcupado{
+	public void setPosicion(Posicion casillero) throws ExcCasilleroOcupado{
 		this.posicion = casillero;
 	}
 	
@@ -88,6 +79,10 @@ public abstract class Personaje implements Posicionable{
 			return false;
 		}
 		return true;
+	}
+	
+	private Posicion interpretarDireccion(Direccion direccion){
+		
 	}
 	
 	public boolean estaMuerto(){
