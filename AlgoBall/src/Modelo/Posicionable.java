@@ -1,6 +1,6 @@
 package Modelo;
 
 public interface Posicionable {
-	public abstract Posicion setPosicion();
-	public abstract void posicionar(Posicion pos) throws ExcCasilleroOcupado;
+	public void setPosicion(Posicion casillero) throws ExcCasilleroOcupado;
+	public abstract Posicion posicion();
 }
