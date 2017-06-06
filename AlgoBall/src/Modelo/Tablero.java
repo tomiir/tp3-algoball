@@ -30,7 +30,7 @@ public class Tablero {
 			throw e;
 		}
 		posicionable.setPosicion(pos);
-		if(posAnterior != null) casilleros.get(posAnterior).desocupar;
+		if(posAnterior != null) casilleros.get(posAnterior).desocupar();
 	}
 	
 	private boolean coordenadasEstanEnRango(Posicion pos) {
