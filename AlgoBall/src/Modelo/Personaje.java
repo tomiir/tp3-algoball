@@ -14,7 +14,7 @@ public abstract class Personaje implements Posicionable{
 	AtaqueNormal ataqueNormal;
 	Posicion posicion;
 	Tablero tablero;
-	Queue <Transformacion> transformaciones = new LinkedList();
+	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	
 	public void recibirDaño(int cantidad){
 		puntosDeVida -= cantidad;

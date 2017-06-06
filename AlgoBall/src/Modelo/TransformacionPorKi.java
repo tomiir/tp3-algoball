@@ -16,7 +16,7 @@ public class TransformacionPorKi extends Transformacion {
 	
 	@Override
 	public boolean esPosible(Personaje personaje) {
-		return (personaje.ki()>=ki);
+		return (personaje.ki()>=this.ki);
 	}
 
 	@Override
