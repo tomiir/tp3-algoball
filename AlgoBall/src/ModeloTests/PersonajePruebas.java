@@ -1,10 +1,12 @@
 package ModeloTests;
+import Modelo.Direccion;
 import Modelo.ExcCasilleroOcupado;
+import Modelo.ExcDireccionInvalida;
 import Modelo.ExcFueraDeTablero;
-import Modelo.ExcMovimientoImposible;
 import Modelo.Goku;
 import Modelo.Personaje;
 import Modelo.PersonajeDePrueba;
+import Modelo.Posicion;
 import Modelo.Tablero;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,48 +21,34 @@ public class PersonajePruebas {
 	
 	@Test
 	public void seCreaEnPosicionCorrecta () throws ExcCasilleroOcupado, ExcFueraDeTablero{
-		personaje1.posicionar(posicion());
+		tablero.posicionar(personaje1, new Posicion(1,2));
 		
-		Assert.assertEquals ("El personaje esta en posicion 'x' correcta", 1, personaje1.posicion().pos_x());
-		Assert.assertEquals ("El personaje esta en posicion 'y' correcta", 2, personaje1.posicion().pos_y());
+		Assert.assertEquals ("El personaje esta en posicion 'x' correcta", 1, personaje1.posicion().posX());
+		Assert.assertEquals ("El personaje esta en posicion 'y' correcta", 2, personaje1.posicion().posY());
 	}
 	
 	@Test (expected = ExcCasilleroOcupado.class)
 	public void noSePuedenPosicionarDosEnMismaPosicion () throws ExcCasilleroOcupado, ExcFueraDeTablero {		
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
-		personaje2.posicionar(tablero.obtenerCasillero(1, 2));
+		tablero.posicionar(personaje1, new Posicion(1,2));
+		tablero.posicionar(personaje2, new Posicion(1,2));
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnLineaRecta() throws ExcMovimientoImposible, ExcCasilleroOcupado, ExcFueraDeTablero {
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
-		personaje1.mover (tablero.obtenerCasillero(3, 2));
+	public void seMueveCorrectamenteEnLineaRecta() throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcDireccionInvalida {
+		tablero.posicionar(personaje1, new Posicion(1,2));
+		personaje1.mover (new Direccion(1,0));
 		
-		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 3, personaje1.posicion().pos_x());
-		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 2, personaje1.posicion().pos_y());
+		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
+		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 2, personaje1.posicion().posY());
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnDiagonal () throws ExcMovimientoImposible, ExcCasilleroOcupado, ExcFueraDeTablero {
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
-		personaje1.mover (tablero.obtenerCasillero(3, 3));
+	public void seMueveCorrectamenteEnDiagonal () throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcDireccionInvalida {
+		tablero.posicionar(personaje1, new Posicion(1,2));
+		personaje1.mover (new Direccion(1,-1));
 		
-		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 3, personaje1.posicion().pos_x());
-		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 3, personaje1.posicion().pos_y());
-	}
-	
-	@Test (expected = ExcMovimientoImposible.class)
-	public void noSeMueveFueraDeRango () throws ExcMovimientoImposible, ExcCasilleroOcupado, ExcFueraDeTablero {
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
-		personaje1.mover (tablero.obtenerCasillero(4, 4));
-	}
-	
-	@Test (expected = ExcMovimientoImposible.class)
-	public void noSePuedeMoverACasilleroOcupado () throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcMovimientoImposible {
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
-		personaje2.posicionar(tablero.obtenerCasillero(3, 2));
-		
-		personaje1.mover(tablero.obtenerCasillero(3, 2));
+		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
+		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
 	}
 	
 }
