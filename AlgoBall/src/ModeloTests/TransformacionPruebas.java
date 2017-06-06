@@ -24,11 +24,13 @@ public class TransformacionPruebas {
 		tablero.posicionar(goku, posicion);
 		Assert.assertEquals(goku.posicion(), posicion);
 		
+		goku.incrementarKi(100);
 		
 		goku.transformar();
 		Assert.assertEquals(goku.velocidad(), 3);
 		Assert.assertEquals(goku.rangoDeAtaque(), 4);
-		
+		Assert.assertEquals(goku.getDmgNormal(), 40);
+		Assert.assertEquals(goku.ki(), 80);
 		
 	}
 }

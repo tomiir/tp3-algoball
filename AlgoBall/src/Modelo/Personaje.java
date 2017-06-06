@@ -20,6 +20,9 @@ public abstract class Personaje implements Posicionable{
 		puntosDeVida -= cantidad;
 	}
 	
+	public void incrementarKi(int cantidad){
+		this.ki += cantidad;
+	}
 	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero{
 		Posicion nuevaPos = interpretarDireccion(direccion);
 		tablero.posicionar(this, nuevaPos);
@@ -61,7 +64,8 @@ public abstract class Personaje implements Posicionable{
 			transformaciones.remove();
 			rangoDeAtaque = transformacion.rangoDeAtaque();
 			velocidad = transformacion.velocidad();
-			ataqueNormal = transformacion.ataqueNormal();		
+			ataqueNormal = transformacion.ataqueNormal();	
+			ki -= transformacion.costo();
 		} else {
 			throw new ExcNoEsPosibleTransformarse();
 		}
@@ -88,5 +92,14 @@ public abstract class Personaje implements Posicionable{
 	
 	public boolean estaMuerto(){
 		return (puntosDeVida<0);
+	}
+	
+	public int rangoDeAtaque(){
+		return this.rangoDeAtaque;
+		
+	}
+	
+	public int getDmgNormal(){
+		return this.ataqueNormal.daño;
 	}
 }

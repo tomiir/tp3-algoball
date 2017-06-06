@@ -37,4 +37,8 @@ public class TransformacionPorKi extends Transformacion {
 	public String nombre(){
 		return this.nombre;
 	}
+	
+	public int costo(){
+		return this.ki;
+	}
 }

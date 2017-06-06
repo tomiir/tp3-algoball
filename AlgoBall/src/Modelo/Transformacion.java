@@ -6,5 +6,5 @@ public abstract class Transformacion {
 	public abstract int rangoDeAtaque();
 	public abstract int velocidad();
 	public abstract AtaqueNormal ataqueNormal();
-	
+	public abstract int costo();
 }
