@@ -1,34 +1,35 @@
 package Modelo;
 
+import java.util.HashMap;
+
 public class Tablero {
-	Casillero[][] casilleros;
+	HashMap<Posicion, Casillero> casilleros;
 	int ancho; 
 	int alto;
 	
 	public Tablero(int altoDeseado,int anchoDeseado){
 		ancho = anchoDeseado;
 		alto = altoDeseado;
-		casilleros = new Casillero[alto][ancho];
+		casilleros = new HashMap<Posicion, Casillero>();
 		
-		for(int i=0;i<alto;i++){
-			for(int j=0;j<ancho;j++){
-				casilleros[i][j] = new Casillero(i,j);
-			}
-		}
+		
 	}
 	
-	public void posicionar(Posicionable posicionable, int posX, int posY) throws ExcCasilleroOcupado, ExcFueraDeTablero{
-		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
-		Casillero casillero = casilleros[posX][posY];
-		posicionable.posicionar(this.obtenerCasillero(posX,posY));
+	public void posicionar(Posicionable posicionable, Posicion posicion) throws ExcCasilleroOcupado, ExcFueraDeTablero{
+		if(!coordenadasEstanEnRango(posicion)) throw new ExcFueraDeTablero();
+		Casillero casillero = casilleros.get(posicion);
+		posicionable.posicionar(casillero);
 	}
 	
 	public Casillero obtenerCasillero(int posX,int posY) throws ExcFueraDeTablero{
-		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
-		return casilleros[posX][posY];
+		if(!coordenadasEstanEnRango(posicion)) throw new ExcFueraDeTablero();
+		return casilleros.get(posicion);
 	}
 	
-	private boolean coordenadasEstanEnRango(int posX, int posY) {
+	private boolean coordenadasEstanEnRango(Posicion posicion) {
+		posX = posicion.posX();
+		posY = posicion.posY();
+				
 		return (posX >= 0 && posX < ancho && posY >= 0 && posY < alto);
 	}
 }
