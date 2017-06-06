@@ -1,5 +1,7 @@
 package Modelo;
 
+import Modelo.Excepciones.ExcCasilleroOcupado;
+
 public class Casillero {
 	Posicionable contenido;
 	

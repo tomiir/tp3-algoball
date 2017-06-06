@@ -1,5 +1,8 @@
 package Modelo;
 
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcFueraDeTablero;
+import Modelo.Excepciones.ExcPosicionOcupada;
 
 public class Tablero {
 	Casillero[][] casilleros;

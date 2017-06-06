@@ -1,5 +1,7 @@
 package Modelo;
 
+import Modelo.Excepciones.ExcDireccionInvalida;
+
 public class Direccion {	
 	int dx;
 	int dy;

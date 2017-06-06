@@ -2,6 +2,8 @@ package Modelo;
 
 import java.util.ArrayList;
 
+import Modelo.Personajes.Personaje;
+
 public class Juego {
 	Tablero tablero;
 	ArrayList<Personaje> guerrerosZ;
@@ -20,8 +22,6 @@ public class Juego {
 		//mostrar mensaje
 		
 	}
-	
-	
 	
 	
 	

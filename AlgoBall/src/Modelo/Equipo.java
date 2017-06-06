@@ -2,6 +2,8 @@ package Modelo;
 
 import java.util.ArrayList;
 
+import Modelo.Personajes.Personaje;
+
 public class Equipo {
 	
 	ArrayList<Personaje> personajes;
