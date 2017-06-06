@@ -12,7 +12,7 @@ public abstract class Personaje implements Posicionable{
 	int ki = 0;
 	Ataque ataqueEspecial;
 	AtaqueNormal ataqueNormal;
-	Casillero posicion;
+	Posicion posicion;
 	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList();
 	
@@ -47,22 +47,16 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	public void posicionar(Casillero casillero) throws ExcCasilleroOcupado{
-		try{
-			casillero.posicionar(this);
-		}	catch(ExcCasilleroOcupado e){
-			throw e;
-		}
+	public void posicionar(Posicion casillero) throws ExcCasilleroOcupado{
 		this.posicion = casillero;
-		
-	}
-	
-	public Casillero posicion(){
-		return posicion;
 	}
 	
 	public int velocidad(){
 		return velocidad;
+	}
+	
+	public Posicion posicion(){
+		return posicion;
 	}
 	
 	public int ki(){
@@ -89,22 +83,12 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	private boolean estaEnRangoDeAtaque(Casillero objetivo){
+	private boolean estaEnRangoDeAtaque(Posicion objetivo){
 		if(posicion.distanciaA(objetivo)<=rangoDeAtaque){
 			return false;
 		}
 		return true;
 	}
-	//logica similar al metodo estaEnRangoDeAtaque, merece la separacion?
-	private boolean sePuedeMoverA(Casillero objetivo){
-		if(posicion == null) return false;
-		if(posicion.distanciaA(objetivo) > (double)velocidad){
-			return false;
-		}
-		return true;
-
-	}
-	
 	
 	public boolean estaMuerto(){
 		return (puntosDeVida<0);

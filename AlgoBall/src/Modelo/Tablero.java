@@ -17,18 +17,18 @@ public class Tablero {
 		}
 	}
 	
-	public void posicionar(Posicionable posicionable, int posX, int posY) throws ExcCasilleroOcupado, ExcFueraDeTablero{
-		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
-		Casillero casillero = casilleros[posX][posY];
-		posicionable.posicionar(this.obtenerCasillero(posX,posY));
+	public void posicionar(Posicionable posicionable, Posicion pos) throws ExcCasilleroOcupado, ExcFueraDeTablero{
+		if(!coordenadasEstanEnRango(pos)) throw new ExcFueraDeTablero();
+		Casillero casillero = casilleros[pos.posX()][pos.posY()];
+		try{
+			casillero.posicionar(posicionable);
+		}	catch(ExcCasilleroOcupado e){
+			throw e;
+		}
+		posicionable.posicionar(pos);
 	}
 	
-	public Casillero obtenerCasillero(int posX,int posY) throws ExcFueraDeTablero{
-		if(!coordenadasEstanEnRango(posX, posY)) throw new ExcFueraDeTablero();
-		return casilleros[posX][posY];
-	}
-	
-	private boolean coordenadasEstanEnRango(int posX, int posY) {
-		return (posX >= 0 && posX < ancho && posY >= 0 && posY < alto);
+	private boolean coordenadasEstanEnRango(Posicion pos) {
+		return (pos.posX() >= 0 && pos.posX() < ancho && pos.posY() >= 0 && pos.posY() < alto);
 	}
 }

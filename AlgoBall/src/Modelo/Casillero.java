@@ -38,10 +38,5 @@ public class Casillero {
 		return pos_y;
 	}
 
-	public double distanciaA(Casillero objetivo) {
-		double resultado = Math.sqrt(Math.pow(pos_x-objetivo.pos_x,2)+Math.pow(pos_y-objetivo.pos_y,2));
-		return resultado;
-	}
-
 }
 
