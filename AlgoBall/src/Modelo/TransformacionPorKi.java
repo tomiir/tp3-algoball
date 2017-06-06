@@ -33,5 +33,8 @@ public class TransformacionPorKi extends Transformacion {
 	public AtaqueNormal ataqueNormal() {
 		return new AtaqueNormal(datoAtaqueNormal);
 	}
-
+	
+	public String nombre(){
+		return this.nombre;
+	}
 }

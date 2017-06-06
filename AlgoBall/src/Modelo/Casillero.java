@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Casillero {
-	Posicionable contenido=null;
+	Posicionable contenido;
 	
 	public Casillero(Posicionable cont){
 		contenido=cont;
@@ -10,5 +10,7 @@ public class Casillero {
 	public Posicionable obtenerContenido(){
 		return contenido;
 	}
+
+
 }
 

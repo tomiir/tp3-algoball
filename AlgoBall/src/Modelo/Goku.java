@@ -14,6 +14,9 @@ public class Goku extends Personaje {
 		ataqueEspecial = null;
 		tablero = mundo;
 		
+		TransformacionPorKi kaioken = new TransformacionPorKi("Kaioken", 20, 4,3,40 );
+		
+		transformaciones.add(kaioken);
 	}
 	
 	

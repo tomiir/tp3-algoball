@@ -1,21 +1,34 @@
 package ModeloTests;
 
-import Modelo.Personaje;
-import Modelo.PersonajeDePrueba;
 import Modelo.Tablero;
+import Modelo.Goku;
+import Modelo.Posicion;
+import org.junit.Assert;
 
 import org.junit.Test;
 
+import Modelo.ExcFueraDeTablero;
 import Modelo.ExcNoEsPosibleTransformarse;
+import Modelo.ExcPosicionOcupada;
 
 
 public class TransformacionPruebas {
 	
 	Tablero tablero = new Tablero(15,15);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
+	Goku goku = new Goku(tablero);
+	
 	
 	@Test
-	public void Test04SeTransformaCorrectamente() throws ExcNoEsPosibleTransformarse{
+	public void Test04SePosicionaYTransformaCorrectamente() throws ExcNoEsPosibleTransformarse, ExcPosicionOcupada, ExcFueraDeTablero{
+		Posicion posicion =  new Posicion(10,10);
+		tablero.posicionar(goku, posicion);
+		Assert.assertEquals(goku.posicion(), posicion);
+		
+		
+		goku.transformar();
+		Assert.assertEquals(goku.velocidad(), 3);
+		Assert.assertEquals(goku.rangoDeAtaque(), 4);
+		
 		
 	}
 }
