@@ -20,7 +20,7 @@ public abstract class Personaje implements Posicionable{
 		puntosDeVida -= cantidad;
 	}
 	
-	public void mover(Direccion direccion) throws ExcCasilleroOcupado, ExcFueraDeTablero{
+	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero{
 		Posicion nuevaPos = interpretarDireccion(direccion);
 		
 		tablero.posicionar(this, nuevaPos);
@@ -42,7 +42,7 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	public void setPosicion(Posicion casillero) throws ExcCasilleroOcupado{
+	public void setPosicion(Posicion casillero){
 		this.posicion = casillero;
 	}
 	

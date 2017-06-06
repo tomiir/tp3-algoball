@@ -20,17 +20,16 @@ public class Tablero {
 		return casilleros.get(posicion);
 	}
 
-	public void posicionar(Posicionable posicionable, Posicion pos) throws ExcCasilleroOcupado, ExcFueraDeTablero{
+	public void posicionar(Posicionable posicionable, Posicion pos) throws ExcPosicionOcupada, ExcFueraDeTablero{
 		if(!coordenadasEstanEnRango(pos)) throw new ExcFueraDeTablero();
-		Casillero casillero = casilleros.get(pos);
 		Posicion posAnterior = posicionable.posicion();
-		try{
-			casillero.posicionar(posicionable);
-		}	catch(ExcCasilleroOcupado e){
-			throw e;
+		if(casilleros.containsKey(pos)){
+			throw new ExcPosicionOcupada();
+		} else {
+			Casillero casilleroNuevo= new Casillero(posicionable);
 		}
 		posicionable.setPosicion(pos);
-		if(posAnterior != null) casilleros.get(posAnterior).desocupar();
+		casilleros.remove(posAnterior);
 	}
 	
 	private boolean coordenadasEstanEnRango(Posicion pos) {
