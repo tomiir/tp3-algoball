@@ -28,7 +28,7 @@ public class Tablero {
 		}	catch(ExcCasilleroOcupado e){
 			throw e;
 		}
-		posicionable.posicionar(pos);
+		posicionable.setPosicion(pos);
 	}
 	
 	private boolean coordenadasEstanEnRango(Posicion pos) {
