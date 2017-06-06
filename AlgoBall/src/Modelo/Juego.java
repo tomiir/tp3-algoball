@@ -4,11 +4,24 @@ import java.util.ArrayList;
 
 public class Juego {
 	Tablero tablero;
-	ArrayList<Personaje> personajes;
+	ArrayList<Personaje> guerrerosZ;
+	ArrayList<Personaje> enemigosDeLaTierra;
+	
 	
 	public Juego(int sizex, int sizey){
 		tablero = new Tablero(sizex,sizey);
-		personajes = new ArrayList<Personaje>();
+		guerrerosZ = new ArrayList<Personaje>();
+		enemigosDeLaTierra = new ArrayList<Personaje>();
+
 	}
+	
+	public void elegirPersonajes(){
+		
+		//mostrar mensaje
+		
+	}
+	
+	
+	
 	
 }
