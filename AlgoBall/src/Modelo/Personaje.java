@@ -22,8 +22,12 @@ public abstract class Personaje implements Posicionable{
 	
 	public void mover(Direccion direccion){
 		Posicion nuevaPos = interpretarDireccion(direccion);
+		
 		tablero.posicionar(this, nuevaPos);
+		
+		
 	}
+	
 	
 	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){

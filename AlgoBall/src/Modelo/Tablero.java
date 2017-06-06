@@ -15,7 +15,7 @@ public class Tablero {
 		
 	}
 	
-	public Casillero obtenerCasillero(int posX,int posY) throws ExcFueraDeTablero{
+	public Casillero obtenerCasillero(Posicion posicion) throws ExcFueraDeTablero{
 		if(!coordenadasEstanEnRango(posicion)) throw new ExcFueraDeTablero();
 		return casilleros.get(posicion);
 	}
