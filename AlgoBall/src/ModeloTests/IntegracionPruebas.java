@@ -16,8 +16,24 @@ import Modelo.Juego;
 
 public class IntegracionPruebas {
 	
-	Juego juego = new Juego(15,15);
+	Gohan gohan = new Gohan();
+	Piccolo piccolo = new Piccolo();
+	Goku goku = new Goku();
 	
+	Cell cell = new Cell();
+	Freezer freezer = new Freezer();
+	MajinBoo majinBoo = new MajinBoo();
+	
+	Equipo equipo = new Equipo([gohan,goku,piccolo]);
+	
+	
+	@Test
+	public void crearNuevoJuego(){
+		
+		Juego juego = new Juego(15,15);
+		
+		
+	}
 	
 
 }
