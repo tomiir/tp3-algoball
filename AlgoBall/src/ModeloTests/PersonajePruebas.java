@@ -19,7 +19,7 @@ public class PersonajePruebas {
 	
 	@Test
 	public void seCreaEnPosicionCorrecta () throws ExcCasilleroOcupado, ExcFueraDeTablero{
-		personaje1.posicionar(tablero.obtenerCasillero(1, 2));
+		personaje1.posicionar(posicion());
 		
 		Assert.assertEquals ("El personaje esta en posicion 'x' correcta", 1, personaje1.posicion().pos_x());
 		Assert.assertEquals ("El personaje esta en posicion 'y' correcta", 2, personaje1.posicion().pos_y());

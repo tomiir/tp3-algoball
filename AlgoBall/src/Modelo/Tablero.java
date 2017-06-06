@@ -23,12 +23,14 @@ public class Tablero {
 	public void posicionar(Posicionable posicionable, Posicion pos) throws ExcCasilleroOcupado, ExcFueraDeTablero{
 		if(!coordenadasEstanEnRango(pos)) throw new ExcFueraDeTablero();
 		Casillero casillero = casilleros.get(pos);
+		Posicion posAnterior = posicionable.posicion();
 		try{
 			casillero.posicionar(posicionable);
 		}	catch(ExcCasilleroOcupado e){
 			throw e;
 		}
 		posicionable.setPosicion(pos);
+		if(posAnterior != null) casilleros.get(posAnterior).desocupar;
 	}
 	
 	private boolean coordenadasEstanEnRango(Posicion pos) {
