@@ -27,6 +27,7 @@ public class Tablero {
 			throw new ExcPosicionOcupada();
 		} else {
 			Casillero casilleroNuevo= new Casillero(posicionable);
+			casilleros.put(pos, casilleroNuevo);
 		}
 		posicionable.setPosicion(pos);
 		casilleros.remove(posAnterior);

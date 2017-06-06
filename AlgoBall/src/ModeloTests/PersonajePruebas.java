@@ -51,4 +51,11 @@ public class PersonajePruebas {
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
 	}
 	
+	@Test (expected = ExcPosicionOcupada.class)
+	public void noSePuedeMoverAPosicionDeOtro () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {		
+		tablero.posicionar(personaje1, new Posicion(1,2));
+		tablero.posicionar(personaje2, new Posicion(1,3));
+		personaje1.mover (new Direccion(0,1));
+	}
+	
 }
