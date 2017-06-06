@@ -22,10 +22,7 @@ public abstract class Personaje implements Posicionable{
 	
 	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero{
 		Posicion nuevaPos = interpretarDireccion(direccion);
-		
 		tablero.posicionar(this, nuevaPos);
-		
-		
 	}
 	
 	
@@ -86,7 +83,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	private Posicion interpretarDireccion(Direccion direccion){
-		return new Posicion(posicion.posX()+direccion.dx(),posicion.posX()+direccion.dx());
+		return new Posicion(posicion.posX()+direccion.dx(),posicion.posX()+direccion.dy());
 	}
 	
 	public boolean estaMuerto(){
