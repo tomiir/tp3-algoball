@@ -54,9 +54,9 @@ public class IntegracionPruebas {
 		jugador2.asignarEquipo(enemigos);
 		
 		
-		tablero.posicionar(goku,new Posicion(1,1));
-		tablero.posicionar(gohan,new Posicion(2,1));
-		tablero.posicionar(piccolo,new Posicion(3,1));
+		tablero.posicionarPersonaje(goku,new Posicion(1,1));
+		tablero.posicionarPersonaje(gohan,new Posicion(2,1));
+		tablero.posicionarPersonaje(piccolo,new Posicion(3,1));
 		
 		Assert.assertEquals("Goku se encuentra en la pos X espereada",goku.posicion().posX(),1);
 		Assert.assertEquals("Goku se encuentra en la pos Y espereada",goku.posicion().posY(),1);
@@ -67,9 +67,9 @@ public class IntegracionPruebas {
 		Assert.assertEquals("Piccolo se encuentra en la pos X espereada",piccolo.posicion().posX(),3);
 		Assert.assertEquals("Piccolo se encuentra en la pos Y espereada",piccolo.posicion().posY(),1);
 		
-		tablero.posicionar(freezer,  new Posicion(20,20));
-		tablero.posicionar(cell, new Posicion(19,20));
-		tablero.posicionar(majinBoo, new Posicion(18,20));
+		tablero.posicionarPersonaje(freezer,  new Posicion(20,20));
+		tablero.posicionarPersonaje(cell, new Posicion(19,20));
+		tablero.posicionarPersonaje(majinBoo, new Posicion(18,20));
 		
 		Assert.assertEquals("Freezer se encuentra en la pos X espereada",freezer.posicion().posX(),20);
 		Assert.assertEquals("Freezer se encuentra en la pos Y espereada",freezer.posicion().posY(),20);

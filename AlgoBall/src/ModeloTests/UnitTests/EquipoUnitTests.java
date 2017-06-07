@@ -7,7 +7,7 @@ import Modelo.Equipo;
 import Modelo.Tablero;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
-public class EquipoTest {
+public class EquipoUnitTests {
 	
 	
 	@Test

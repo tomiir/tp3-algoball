@@ -10,7 +10,7 @@ import Modelo.Personajes.PersonajeDePrueba;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AtaqueNormalUnitTest {
+public class AtaqueNormalUnitTests {
 	Tablero mundo = new Tablero(2,100);
 	Ataque ataque = new AtaqueNormal();
 	Personaje personaje1 = new PersonajeDePrueba(mundo,"1", 100, 100, 100,200);

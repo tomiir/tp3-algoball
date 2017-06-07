@@ -7,7 +7,7 @@ import Modelo.Direccion;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Posicion;
-import Modelo.Posicionable;
+import Modelo.Interfaces.Posicionable;
 import Modelo.Tablero;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Ataques.Ataque;
@@ -41,7 +41,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
 		Posicion nuevaPos = interpretarDireccion(direccion);
-		tablero.posicionar(this, nuevaPos);
+		tablero.posicionarPersonaje(this, nuevaPos);
 	}
 	
 	

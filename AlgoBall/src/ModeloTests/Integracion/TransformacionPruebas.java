@@ -16,17 +16,14 @@ import Modelo.Direccion;
 
 
 public class TransformacionPruebas {
-	
-	
-	
-	
+
 	@Test
 	public void Test04SePosicionaYTransformaCorrectamente() throws ExcNoEsPosibleTransformarse, ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
 		Tablero tablero = new Tablero(15,15);
 		Goku goku = new Goku(tablero);
 		Posicion posicion =  new Posicion(10,10);
 		
-		tablero.posicionar(goku, posicion);
+		tablero.posicionarPersonaje(goku, posicion);
 		Assert.assertEquals(goku.posicion(), posicion);
 		
 		goku.incrementarKi(100);
@@ -44,7 +41,7 @@ public class TransformacionPruebas {
 		 Goku goku = new Goku(tablero);
 		 Posicion posicion =  new Posicion(10,10);
 			
-		 tablero.posicionar(goku, posicion);
+		 tablero.posicionarPersonaje(goku, posicion);
 		 Assert.assertEquals(goku.posicion(), posicion);
 		goku.incrementarKi(100);
 		

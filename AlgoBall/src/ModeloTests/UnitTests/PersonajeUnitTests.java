@@ -20,7 +20,7 @@ public class PersonajeUnitTests {
 	
 	@Test
 	public void seCreaEnPosicionCorrecta () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
-		tablero.posicionar(personaje1, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
 		
 		Assert.assertEquals ("El personaje esta en posicion 'x' correcta", 1, personaje1.posicion().posX());
 		Assert.assertEquals ("El personaje esta en posicion 'y' correcta", 2, personaje1.posicion().posY());
@@ -28,13 +28,13 @@ public class PersonajeUnitTests {
 	
 	@Test (expected = ExcPosicionOcupada.class)
 	public void noSePuedenPosicionarDosEnMismaPosicion () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa {		
-		tablero.posicionar(personaje1, new Posicion(1,2));
-		tablero.posicionar(personaje2, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje2, new Posicion(1,2));
 	}
 	
 	@Test
 	public void seMueveCorrectamenteEnLineaRecta() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
-		tablero.posicionar(personaje1, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
 		personaje1.mover (new Direccion(1,0));
 		
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
@@ -43,7 +43,7 @@ public class PersonajeUnitTests {
 	
 	@Test
 	public void seMueveCorrectamenteEnDiagonal () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
-		tablero.posicionar(personaje1, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
 		personaje1.mover (new Direccion(1,-1));
 		
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
@@ -53,7 +53,7 @@ public class PersonajeUnitTests {
 	
 	@Test
 	public void seMueveCorrectamenteAlMinimo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
-		tablero.posicionar(personaje1, new Posicion(2,2));
+		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
 		personaje1.mover (new Direccion(-1,-1));
 		
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 1, personaje1.posicion().posX());
@@ -62,7 +62,7 @@ public class PersonajeUnitTests {
 	
 	@Test
 	public void seMueveCorrectamenteAlMaximo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
-		tablero.posicionar(personaje1, new Posicion(14,13));
+		tablero.posicionarPersonaje(personaje1, new Posicion(14,13));
 		personaje1.mover (new Direccion(1,1));
 		
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 15, personaje1.posicion().posX());
@@ -71,14 +71,14 @@ public class PersonajeUnitTests {
 	
 	@Test (expected = ExcFueraDeTablero.class)
 	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {		
-		tablero.posicionar(personaje1, new Posicion(1,1));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
 		personaje1.mover (new Direccion(-1,0));
 	}
 	
 	@Test (expected = ExcPosicionOcupada.class)
 	public void noSePuedeMoverAPosicionDeOtro () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {		
-		tablero.posicionar(personaje1, new Posicion(1,2));
-		tablero.posicionar(personaje2, new Posicion(1,3));
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
+		tablero.posicionarPersonaje(personaje2, new Posicion(1,3));
 		personaje1.mover (new Direccion(0,1));
 	}
 	

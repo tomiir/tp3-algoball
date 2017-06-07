@@ -1,26 +1,27 @@
 package Modelo;
 
 import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Personajes.Personaje;
 
 public class Casillero {
-	Posicionable contenido;
+	Personaje personaje;
 	
-	public Posicionable obtenerContenido(){
-		return contenido;
+	public Personaje obtenerPersonaje(){
+		return personaje;
 	}
 
 	public boolean estaOcupado() {
-		if(contenido==null) return false;
+		if(personaje==null) return false;
 		return true;
 	}
 
-	public void ocupar(Posicionable posicionable) throws ExcCasilleroOcupado{
+	public void ocupar(Personaje p) throws ExcCasilleroOcupado{
 		if(estaOcupado()) throw new ExcCasilleroOcupado();
-		contenido=posicionable;
+		personaje=p;
 	}
 
 	public void desocupar() {
-		contenido=null;
+		personaje=null;
 	}
 }
 

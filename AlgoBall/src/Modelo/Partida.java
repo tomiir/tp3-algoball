@@ -31,7 +31,7 @@ public class Partida {
 		}
 	}
 
-	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial){
+	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueIlegitimo{
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
 		//tablero.obtenerCasillero(posicion).obtenerContenido();
 	}
@@ -67,7 +67,7 @@ public class Partida {
 	private boolean ataqueLegitimo(Jugador jugador, Personaje personaje, Posicion posicion){
 		if(!personajePerteneceAJugador(jugador,personaje)) return false;
 		try {
-			Posicionable pos=tablero.obtenerCasillero(posicion).obtenerContenido();
+			Personaje pos=tablero.obtenerCasillero(posicion).obtenerPersonaje();
 		} catch (ExcFueraDeTablero e) {
 			return false;
 		}
