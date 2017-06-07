@@ -8,13 +8,14 @@ public class TransformacionPorKi extends Transformacion {
 	int rangoDeAtaque;
 	int velocidad;
 	int datoAtaqueNormal;
+	int poderDePelea;
 	
-	public TransformacionPorKi(String str, int costo, int rango, int velocida, int dato){
+	public TransformacionPorKi(String str, int costo, int rango, int velocida, int poder){
 		nombre=str;
 		ki=costo;
 		rangoDeAtaque=rango;
 		velocidad=velocida;
-		datoAtaqueNormal=dato;
+		poderDePelea=poder;
 	}
 	
 	@Override
@@ -25,6 +26,11 @@ public class TransformacionPorKi extends Transformacion {
 	@Override
 	public int rangoDeAtaque() {
 		return rangoDeAtaque;
+	}
+	
+	@Override
+	public int poderDePelea() {
+		return poderDePelea;
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import Modelo.Direccion;
 import Modelo.Excepciones.ExcDireccionInvalida;
-import Modelo.Excepciones.ExcFueraDeTablero;
 
 public class DireccionUnitTests {
 	

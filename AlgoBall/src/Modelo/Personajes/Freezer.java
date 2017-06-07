@@ -12,7 +12,6 @@ public class Freezer extends Personaje {
 		puntosDeVida = 400;
 		rangoDeAtaque = 3;
 		velocidad = 4;
-		ataqueNormal = new AtaqueNormal(20);
 		ataqueEspecial = null;
 		tablero = mundo;
 		

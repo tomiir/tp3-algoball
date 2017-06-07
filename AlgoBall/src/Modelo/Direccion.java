@@ -9,7 +9,7 @@ public class Direccion {
 	public Direccion(int x, int y) throws ExcDireccionInvalida{
 		if(x>1 || x<-1 || y>1 || y<-1) throw new ExcDireccionInvalida();
 		this.dx = x;
-		this.dy =y;
+		this.dy = y;
 	}
 	
 	public int dx(){

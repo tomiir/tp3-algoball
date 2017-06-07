@@ -11,11 +11,10 @@ public class MajinBoo extends Personaje {
 		puntosDeVida = 300;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		ataqueNormal = new AtaqueNormal(30);
 		ataqueEspecial = null;
 		tablero = mundo;
 		
-		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20, 2,3,50 );
+		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20, 2,3,50);
 		
 		transformaciones.add(booMalo);
 	}

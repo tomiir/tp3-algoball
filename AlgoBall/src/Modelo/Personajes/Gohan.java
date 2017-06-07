@@ -12,7 +12,6 @@ public class Gohan extends Personaje {
 		puntosDeVida = 300;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		ataqueNormal = new AtaqueNormal(15);
 		ataqueEspecial = null;
 		tablero = mundo;
 		

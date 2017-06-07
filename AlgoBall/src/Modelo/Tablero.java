@@ -20,7 +20,15 @@ public class Tablero {
 		if(!coordenadasEstanEnRango(posicion)) throw new ExcFueraDeTablero();
 		return casilleros[posicion.posX()-1][posicion.posY()-1];
 	}
-
+	
+	public int ancho(){
+		return ancho;
+	}
+	
+	public int alto(){
+		return alto;
+	}
+	
 	public void posicionar(Posicionable posicionable, Posicion pos) throws ExcPosicionOcupada, ExcFueraDeTablero{
 		Casillero casNuevo = obtenerCasillero(pos);
 		Posicion posAnterior = posicionable.posicion();

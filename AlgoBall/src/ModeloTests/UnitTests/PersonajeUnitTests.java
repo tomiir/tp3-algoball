@@ -4,6 +4,7 @@ import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcFueraDeTablero;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
@@ -11,16 +12,14 @@ import Modelo.Personajes.PersonajeDePrueba;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.sun.jndi.cosnaming.ExceptionMapper;
-
 public class PersonajeUnitTests {
 	
 	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
-	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3);
+	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
+	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
 	
 	@Test
-	public void seCreaEnPosicionCorrecta () throws ExcPosicionOcupada, ExcFueraDeTablero{
+	public void seCreaEnPosicionCorrecta () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
 		tablero.posicionar(personaje1, new Posicion(1,2));
 		
 		Assert.assertEquals ("El personaje esta en posicion 'x' correcta", 1, personaje1.posicion().posX());
@@ -28,13 +27,13 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcPosicionOcupada.class)
-	public void noSePuedenPosicionarDosEnMismaPosicion () throws ExcPosicionOcupada, ExcFueraDeTablero {		
+	public void noSePuedenPosicionarDosEnMismaPosicion () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa {		
 		tablero.posicionar(personaje1, new Posicion(1,2));
 		tablero.posicionar(personaje2, new Posicion(1,2));
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnLineaRecta() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+	public void seMueveCorrectamenteEnLineaRecta() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
 		tablero.posicionar(personaje1, new Posicion(1,2));
 		personaje1.mover (new Direccion(1,0));
 		
@@ -43,7 +42,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnDiagonal () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+	public void seMueveCorrectamenteEnDiagonal () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
 		tablero.posicionar(personaje1, new Posicion(1,2));
 		personaje1.mover (new Direccion(1,-1));
 		
@@ -53,7 +52,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMinimo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+	public void seMueveCorrectamenteAlMinimo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
 		tablero.posicionar(personaje1, new Posicion(2,2));
 		personaje1.mover (new Direccion(-1,-1));
 		
@@ -62,7 +61,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMaximo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {
+	public void seMueveCorrectamenteAlMaximo () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {
 		tablero.posicionar(personaje1, new Posicion(14,13));
 		personaje1.mover (new Direccion(1,1));
 		
@@ -71,13 +70,13 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
-	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {		
+	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {		
 		tablero.posicionar(personaje1, new Posicion(1,1));
 		personaje1.mover (new Direccion(-1,0));
 	}
 	
 	@Test (expected = ExcPosicionOcupada.class)
-	public void noSePuedeMoverAPosicionDeOtro () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida {		
+	public void noSePuedeMoverAPosicionDeOtro () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {		
 		tablero.posicionar(personaje1, new Posicion(1,2));
 		tablero.posicionar(personaje2, new Posicion(1,3));
 		personaje1.mover (new Direccion(0,1));

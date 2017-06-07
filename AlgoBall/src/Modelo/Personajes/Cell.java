@@ -11,7 +11,6 @@ public class Cell extends Personaje {
 		puntosDeVida = 500;
 		rangoDeAtaque = 3;
 		velocidad = 2;
-		ataqueNormal = new AtaqueNormal(20);
 		ataqueEspecial = null;
 		tablero = mundo;
 		

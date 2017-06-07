@@ -12,7 +12,6 @@ public class Piccolo extends Personaje {
 		puntosDeVida = 500;
 		rangoDeAtaque = 2;
 		velocidad = 3;
-		ataqueNormal = new AtaqueNormal(20);
 		ataqueEspecial = null;
 		tablero = mundo;
 		
