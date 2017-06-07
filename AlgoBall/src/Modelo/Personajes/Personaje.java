@@ -45,7 +45,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	
-	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible, ExcPosicionNegativa, ExcDireccionInvalida{
+	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
 			try{
 				ataqueElegido(esEspecial).enviar(this, personajeObjetivo);
@@ -107,8 +107,12 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	private boolean estaEnRangoDeAtaque(Posicion objetivo) throws ExcPosicionNegativa, ExcDireccionInvalida{
-		if(posicion.distanciaA(objetivo)<=rangoDeAtaque){
+	private boolean estaEnRangoDeAtaque(Posicion objetivo){
+		try {
+			if(posicion.distanciaA(objetivo)<=rangoDeAtaque){
+				return false;
+			}
+		} catch (ExcPosicionNegativa | ExcDireccionInvalida e) {
 			return false;
 		}
 		return true;

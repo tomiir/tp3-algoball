@@ -4,8 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Modelo.Excepciones.ExcAtaqueIlegitimo;
+import Modelo.Excepciones.ExcAtaqueImposible;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
+import Modelo.Excepciones.ExcDireccionInvalida;
+import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
@@ -31,9 +36,21 @@ public class Partida {
 		}
 	}
 
-	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueIlegitimo{
+	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero{
+		Personaje destinatario;
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
-		//tablero.obtenerCasillero(posicion).obtenerContenido();
+		
+		try {
+			destinatario = tablero.obtenerCasillero(posicion).obtenerPersonaje();
+		} catch (ExcCasilleroDesocupado e) {
+			throw new ExcAtaqueIlegitimo();
+		}
+		
+		try {
+			personaje.atacar(destinatario, esEspecial);
+		} catch (ExcFueraDeRango | ExcAtaqueImposible e) {
+			throw e;
+		}
 	}
 	
 	public void resetear() throws ExcHayGanador{
@@ -67,7 +84,11 @@ public class Partida {
 	private boolean ataqueLegitimo(Jugador jugador, Personaje personaje, Posicion posicion){
 		if(!personajePerteneceAJugador(jugador,personaje)) return false;
 		try {
-			Personaje pos=tablero.obtenerCasillero(posicion).obtenerPersonaje();
+			try {
+				Personaje pos=tablero.obtenerCasillero(posicion).obtenerPersonaje();
+			} catch (ExcCasilleroDesocupado e) {
+				return false;
+			}
 		} catch (ExcFueraDeTablero e) {
 			return false;
 		}

@@ -1,12 +1,14 @@
 package Modelo;
 
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Personajes.Personaje;
 
 public class Casillero {
 	Personaje personaje;
 	
-	public Personaje obtenerPersonaje(){
+	public Personaje obtenerPersonaje() throws ExcCasilleroDesocupado{
+		if(!estaOcupado()) throw new ExcCasilleroDesocupado();
 		return personaje;
 	}
 
