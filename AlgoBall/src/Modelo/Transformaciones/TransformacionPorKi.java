@@ -1,13 +1,11 @@
 package Modelo.Transformaciones;
 
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Personajes.Personaje;
 
 public class TransformacionPorKi extends Transformacion {
 	int ki;
 	int rangoDeAtaque;
 	int velocidad;
-	int datoAtaqueNormal;
 	int poderDePelea;
 	
 	public TransformacionPorKi(String str, int costo, int rango, int velocida, int poder){
@@ -36,11 +34,6 @@ public class TransformacionPorKi extends Transformacion {
 	@Override
 	public int velocidad() {
 		return velocidad;
-	}
-
-	@Override
-	public AtaqueNormal ataqueNormal() {
-		return new AtaqueNormal(datoAtaqueNormal);
 	}
 	
 	public String nombre(){

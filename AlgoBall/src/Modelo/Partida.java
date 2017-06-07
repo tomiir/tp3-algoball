@@ -33,7 +33,7 @@ public class Partida {
 
 	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial){
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
-		tablero.obtenerCasillero(posicion).obtenerContenido()
+		//tablero.obtenerCasillero(posicion).obtenerContenido();
 	}
 	
 	public void resetear() throws ExcHayGanador{

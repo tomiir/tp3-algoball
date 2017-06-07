@@ -3,6 +3,7 @@ import Modelo.Jugador;
 
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcFueraDeTablero;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 
 import Modelo.Personajes.*;
@@ -32,7 +33,7 @@ public class IntegracionPruebas {
 	
 	
 	@Test
-	public void Test06CrearJugadoresYPosicionarEquipos() throws ExcPosicionOcupada, ExcFueraDeTablero{
+	public void Test06CrearJugadoresYPosicionarEquipos() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
 	
 		Equipo guerrerosZ = new Equipo("Guerreros Z");
 		

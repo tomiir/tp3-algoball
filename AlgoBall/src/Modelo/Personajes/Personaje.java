@@ -92,7 +92,6 @@ public abstract class Personaje implements Posicionable{
 			transformaciones.remove();
 			rangoDeAtaque = transformacion.rangoDeAtaque();
 			velocidad = transformacion.velocidad();
-			ataqueNormal = transformacion.ataqueNormal();
 			poderDePelea = transformacion.poderDePelea();
 			ki -= transformacion.costo();
 		} else {
@@ -127,7 +126,4 @@ public abstract class Personaje implements Posicionable{
 		return this.rangoDeAtaque;
 	}
 	
-	public int getDmgNormal(){
-		return 0;
-	}
 }

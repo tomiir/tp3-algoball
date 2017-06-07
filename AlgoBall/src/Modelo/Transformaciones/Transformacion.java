@@ -1,6 +1,5 @@
 package Modelo.Transformaciones;
 
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Personajes.Personaje;
 
 public abstract class Transformacion {
@@ -9,6 +8,5 @@ public abstract class Transformacion {
 	public abstract int rangoDeAtaque();
 	public abstract int poderDePelea();
 	public abstract int velocidad();
-	public abstract AtaqueNormal ataqueNormal();
 	public abstract int costo();
 }
