@@ -30,7 +30,7 @@ public class Partida {
 		adversarios.put(jugador1.nombre(),jugador2);
 		adversarios.put(jugador2.nombre(),jugador1);
 		try {
-			resetear();
+			turnoTerminado();
 		} catch (ExcHayGanador e) {
 			throw new RuntimeException();
 		}
@@ -53,7 +53,7 @@ public class Partida {
 		}
 	}
 	
-	public void resetear() throws ExcHayGanador{
+	public void turnoTerminado() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		jugador1.equipo.forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador1.equipo.forEach((k,v)->yaAtaco.put(k,false));

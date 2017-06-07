@@ -1,21 +1,24 @@
-package ModeloTests.Integracion;
-import Modelo.Jugador;
+package ModeloTests.Entregas.Primera;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import Modelo.Equipo;
+import Modelo.Jugador;
+import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
+import Modelo.Personajes.Cell;
+import Modelo.Personajes.Freezer;
+import Modelo.Personajes.Gohan;
+import Modelo.Personajes.Goku;
+import Modelo.Personajes.MajinBoo;
+import Modelo.Personajes.Piccolo;
 
-import Modelo.Personajes.*;
-import Modelo.Posicion;
-import org.junit.Assert;
-import Modelo.Equipo;
-
-import org.junit.Test;
-
-
-public class IntegracionPruebas {
-	
+public class test06 {
 	
 	Jugador jugador1 = new Jugador("J1");
 	Jugador jugador2 = new Jugador("J2");
@@ -79,9 +82,7 @@ public class IntegracionPruebas {
 		
 		Assert.assertEquals("MajinBoo se encuentra en la pos X espereada",majinBoo.posicion().posX(),18);
 		Assert.assertEquals("MajinBoo se encuentra en la pos Y espereada",majinBoo.posicion().posY(),20);
+		
+		Partida partida = new Partida(tablero, jugador1, jugador2);
 	}	
-	
-	
-	
-
 }
