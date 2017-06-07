@@ -18,4 +18,9 @@ public class AtaqueNormal extends Ataque {
 		return;
 	}
 
+	@Override
+	protected int dañoParcial() {
+		return dañoBase();
+	}
+
 }

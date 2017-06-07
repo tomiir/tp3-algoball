@@ -5,7 +5,7 @@ import Modelo.Personajes.Personaje;
 
 public abstract class Ataque {
 
-	int daño = 50;
+	int dañoBase = 50;
 	
 	public void enviar(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible{
 		try{
@@ -17,9 +17,15 @@ public abstract class Ataque {
 	}
 	
 	protected int daño(Personaje remitente, Personaje destinatario) {
-		if(remitente.poderDePelea()<destinatario.poderDePelea()) return (daño*8)/10;
-		return daño;
+		if(remitente.poderDePelea()<destinatario.poderDePelea()) return (dañoParcial()*8)/10;
+		return dañoParcial();
 	}
+	
+	public int dañoBase(){
+		return dañoBase;
+	}
+	
+	protected abstract int dañoParcial();
 	
 	public abstract int costo();	
 	
