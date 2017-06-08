@@ -13,9 +13,14 @@ public class MajinBoo extends Personaje {
 		velocidad = 2;
 		ataqueEspecial = null;
 		tablero = mundo;
+		inicializar();
 		
 		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20, 2,3,50);
 		
 		transformaciones.add(booMalo);
+	}
+	
+	protected int bonificacionDeAtaquePorcentual(){
+		return 0;
 	}
 }

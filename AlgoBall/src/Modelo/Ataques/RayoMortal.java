@@ -1,22 +1,20 @@
 package Modelo.Ataques;
 
 import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Personajes.Personaje;
 
-public class AtaqueNormal extends Ataque {
+public class RayoMortal extends Ataque {
 	
-	public AtaqueNormal(){
-		costo=0;
+	public RayoMortal (){
+		costo = 10;
 	}
-
-	@Override
+	
 	protected int dañoParcial() {
-		return dañoBase();
+		return ((dañoBase*150)/100);	
 	}
 
 	@Override
 	protected void efectosColaterales(int dañoRealizado) {
 	}
-
+	
 }

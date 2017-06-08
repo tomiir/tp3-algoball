@@ -6,6 +6,7 @@ import java.util.Queue;
 import Modelo.Direccion;
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueImposible;
+import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Posicion;
 import Modelo.Interfaces.Posicionable;
@@ -22,6 +23,7 @@ import Modelo.Excepciones.ExcPosicionOcupada;
 public abstract class Personaje implements Posicionable{
 	
 	String nombre;
+	int vidaInicial;
 	int puntosDeVida;
 	int poderDePelea;
 	int rangoDeAtaque;
@@ -33,13 +35,15 @@ public abstract class Personaje implements Posicionable{
 	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	
-	public void recibirDaño(int cantidad){
+	public void recibirDaño(int cantidad) throws ExcDañoNegativo{
+		if(cantidad<0) throw new ExcDañoNegativo();
 		puntosDeVida -= cantidad;
 	}
 	
 	public void incrementarKi(int cantidad){
 		this.ki += cantidad;
 	}
+	
 	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero {
 		Posicion nuevaPos;
 		try {
@@ -50,11 +54,11 @@ public abstract class Personaje implements Posicionable{
 		tablero.posicionarPersonaje(this, nuevaPos);
 	}
 	
-	
 	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
+			if(ki<ataqueElegido(esEspecial).costo()) throw new ExcAtaqueImposible("Ki insuficiente");
 			try{
-				ataqueElegido(esEspecial).enviar(this, personajeObjetivo);
+				ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
 			} catch (ExcAtaqueImposible e){
 				throw e;
 			}
@@ -62,6 +66,10 @@ public abstract class Personaje implements Posicionable{
 		} else {
 			throw new ExcFueraDeRango();
 		}
+	}
+	
+	public int vidaPorcentual(){
+		return (int)(puntosDeVida/vidaInicial)*100;
 	}
 	
 	public void setPosicion(Posicion casillero){
@@ -92,6 +100,18 @@ public abstract class Personaje implements Posicionable{
 		return nombre;
 	}
 	
+	public boolean estaMuerto(){
+		return (puntosDeVida<0);
+	}
+	
+	public int rangoDeAtaque(){
+		return this.rangoDeAtaque;
+	}
+	
+	public int cantidadDeAbsorciones(){
+		return 0;
+	}
+	
 	public void transformar () throws ExcNoEsPosibleTransformarse {
 		Transformacion transformacion = transformaciones.peek();
 		if(transformacion.esPosible(this) && transformacion!=null){
@@ -108,6 +128,8 @@ public abstract class Personaje implements Posicionable{
 	public void sumarKi(int aumento){
 		ki +=aumento;
 	}
+	
+	protected abstract int bonificacionDeAtaquePorcentual();
 	
 	private Ataque ataqueElegido(boolean esEspecial){
 		if(esEspecial){
@@ -128,12 +150,8 @@ public abstract class Personaje implements Posicionable{
 		return true;
 	}
 	
-	public boolean estaMuerto(){
-		return (puntosDeVida<0);
-	}
-	
-	public int rangoDeAtaque(){
-		return this.rangoDeAtaque;
+	protected void inicializar(){
+		vidaInicial=puntosDeVida;
 	}
 	
 }

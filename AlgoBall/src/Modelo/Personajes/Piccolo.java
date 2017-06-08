@@ -14,10 +14,13 @@ public class Piccolo extends Personaje {
 		velocidad = 3;
 		ataqueEspecial = null;
 		tablero = mundo;
+		inicializar();
 		
 		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20, 4,3,40 );
 		
 		transformaciones.add(fortalecido);
 	}
-
+	protected int bonificacionDeAtaquePorcentual(){
+		return 0;
+	}
 }

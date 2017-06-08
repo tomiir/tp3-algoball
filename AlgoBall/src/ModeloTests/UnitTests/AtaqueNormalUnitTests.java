@@ -26,7 +26,7 @@ public class AtaqueNormalUnitTests {
 		int dañoEsperado=ataque.dañoBase();
 		
 		int vidaAnterior = personaje2.puntosDeVida();
-		ataque.enviar(personaje1, personaje2);
+		ataque.enviar(personaje1, personaje2, 0);
 		Assert.assertEquals("Se hizo el daño esperado", personaje2.puntosDeVida(), vidaAnterior-dañoEsperado);
 	}
 	
@@ -34,7 +34,7 @@ public class AtaqueNormalUnitTests {
 	public void ataqueDañaLoEsperadoParaMayorPoderDePelea () throws ExcAtaqueImposible{
 		int dañoEsperado = (ataque.dañoBase()*8) / 10; 
 		int vidaAnterior = personaje1.puntosDeVida(); 
-		ataque.enviar(personaje2, personaje1);
+		ataque.enviar(personaje2, personaje1, 0);
 		
 		Assert.assertEquals("Se hizo el daño esperado", personaje1.puntosDeVida(), vidaAnterior - dañoEsperado);
 	}

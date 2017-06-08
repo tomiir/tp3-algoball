@@ -4,13 +4,30 @@ import Modelo.Personajes.Personaje;
 
 public abstract class Transformacion {
 	String nombre;
+	int costo;
+	int rangoDeAtaque;
+	int velocidad;
+	int poderDePelea;
+	
 	public abstract boolean esPosible(Personaje personaje);
-	public abstract int rangoDeAtaque();
-	public abstract int poderDePelea();
-	public abstract int velocidad();
-	public abstract int costo();
+	
+	public int rangoDeAtaque() {
+		return this.rangoDeAtaque;	
+	}
+
+	public int poderDePelea() {
+		return this.poderDePelea;
+	}
+
+	public int velocidad() {
+		return this.velocidad;
+	}
+
+	public int costo() {
+		return this.costo;
+	}
 	
 	public String nombre(){
-		return nombre;
+		return this.nombre;
 	}
 }

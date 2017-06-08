@@ -14,9 +14,14 @@ public class Gohan extends Personaje {
 		velocidad = 2;
 		ataqueEspecial = null;
 		tablero = mundo;
+		inicializar();
 		
 		TransformacionPorKi superSaiyan1 = new TransformacionPorKi("Super Saiyan 1", 10, 2,2,30 );
 		
 		transformaciones.add(superSaiyan1);
-}
+	}
+	
+	protected int bonificacionDeAtaquePorcentual(){
+		return 0;
+	}
 }

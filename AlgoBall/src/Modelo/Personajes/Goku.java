@@ -15,12 +15,15 @@ public class Goku extends Personaje {
 		velocidad = 2;
 		ataqueEspecial = null;
 		tablero = mundo;
+		inicializar();
 		
 		TransformacionPorKi kaioken = new TransformacionPorKi("Kaioken", 20, 4,3,40);
 		
 		transformaciones.add(kaioken);
 	}
 	
-	
+	protected int bonificacionDeAtaquePorcentual(){
+		return 0;
+	}
 
 }

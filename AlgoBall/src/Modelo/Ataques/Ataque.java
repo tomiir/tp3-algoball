@@ -1,23 +1,25 @@
 package Modelo.Ataques;
 
 import Modelo.Excepciones.ExcAtaqueImposible;
+import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Personajes.Personaje;
 
 public abstract class Ataque {
 
-	int dañoBase = 50;
+	static final int dañoBase = 50;
+	int costo = 0;
 	
-	public void enviar(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible{
-		try{
-			this.verificarCondiciones(remitente, destinatario);
-		} catch(ExcAtaqueImposible e){
-			throw e;
+	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcAtaqueImposible{
+		try {
+			destinatario.recibirDaño(this.daño(remitente, destinatario, bonificacionPorcentual));
+		} catch (ExcDañoNegativo e) {
+			throw new ExcAtaqueImposible("No se pueden hacer daños negativos");
 		}
-		destinatario.recibirDaño(this.daño(remitente, destinatario));
+		this.efectosColaterales(this.daño(remitente, destinatario, bonificacionPorcentual));
 	}
 	
-	protected int daño(Personaje remitente, Personaje destinatario) {
-		if(remitente.poderDePelea()<destinatario.poderDePelea()) return (dañoParcial()*8)/10;
+	protected int daño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {
+		if(remitente.poderDePelea()<destinatario.poderDePelea()) return ( ((dañoParcial()*8)/10)*(100+bonificacionPorcentual) ) /100;
 		return dañoParcial();
 	}
 	
@@ -27,8 +29,9 @@ public abstract class Ataque {
 	
 	protected abstract int dañoParcial();
 	
-	public abstract int costo();	
+	public int costo() {
+		return this.costo;
+	}
 	
-	
-	protected abstract void verificarCondiciones(Personaje remitente, Personaje destinatario) throws ExcAtaqueImposible;
+	protected abstract void efectosColaterales(int dañoRealizado);
 }

@@ -1,22 +1,23 @@
 package Modelo.Ataques;
 
 import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Personajes.Personaje;
 
-public class AtaqueNormal extends Ataque {
+public class Kamekameha extends Ataque {
 	
-	public AtaqueNormal(){
-		costo=0;
+	public Kamekameha() {
+		costo = 20;
 	}
 
 	@Override
 	protected int dañoParcial() {
-		return dañoBase();
+		return ((dañoBase*150)/100);
+	
 	}
 
 	@Override
 	protected void efectosColaterales(int dañoRealizado) {
 	}
-
+	
+	
 }

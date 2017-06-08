@@ -2,6 +2,7 @@ package Modelo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueIlegitimo;
@@ -40,7 +41,7 @@ public class Partida {
 	}
 
 	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero{
-		Personaje destinatario;
+		Personaje destinatario; 
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
 		
 		try {
@@ -76,6 +77,8 @@ public class Partida {
 		jugador2.equipo.forEach((k,v)->v.sumarKi(5));
 	}
 	
+	
+	public void iterarEquipoAliado(Personaje personaje, )
 	private Jugador ganador(){
 		return jugador1;
 		//Devuelve al ganador
@@ -112,4 +115,7 @@ public class Partida {
 		return adversarios.get(jugador.nombre);
 	}
 	
+
+	
 }
+

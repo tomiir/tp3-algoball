@@ -3,14 +3,11 @@ package Modelo.Transformaciones;
 import Modelo.Personajes.Personaje;
 
 public class TransformacionPorKi extends Transformacion {
-	int ki;
-	int rangoDeAtaque;
-	int velocidad;
-	int poderDePelea;
+	
 	
 	public TransformacionPorKi(String str, int costo, int rango, int velocida, int poder){
 		nombre=str;
-		ki=costo;
+		this.costo=costo;
 		rangoDeAtaque=rango;
 		velocidad=velocida;
 		poderDePelea=poder;
@@ -18,7 +15,7 @@ public class TransformacionPorKi extends Transformacion {
 	
 	@Override
 	public boolean esPosible(Personaje personaje) {
-		return (personaje.ki()>=this.ki);
+		return (personaje.ki()>=this.costo);
 	}
 
 	@Override
@@ -41,6 +38,6 @@ public class TransformacionPorKi extends Transformacion {
 	}
 	
 	public int costo(){
-		return this.ki;
+		return this.costo;
 	}
 }
