@@ -98,16 +98,13 @@ public class Partida {
 	
 	private boolean ataqueLegitimo(Jugador jugador, Personaje personaje, Posicion posicion){
 		if(!personajePerteneceAJugador(jugador,personaje)) return false;
+		Personaje destinatario;
 		try {
-			try {
-				Personaje pos=tablero.obtenerCasillero(posicion).obtenerPersonaje();
-			} catch (ExcCasilleroDesocupado e) {
-				return false;
-			}
-		} catch (ExcFueraDeTablero e) {
+				destinatario=tablero.obtenerCasillero(posicion).obtenerPersonaje();
+		} catch (ExcCasilleroDesocupado | ExcFueraDeTablero e) {
 			return false;
 		}
-		if(!adversario(jugador).equipo().personajePertenece(personaje)) return false;
+		if(!adversario(jugador).equipo().personajePertenece(destinatario)) return false;
 		return yaAtaco.get(personaje.nombre());
 	}
 	
