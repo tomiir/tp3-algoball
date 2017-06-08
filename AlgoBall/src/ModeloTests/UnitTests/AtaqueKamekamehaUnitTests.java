@@ -25,7 +25,6 @@ public class AtaqueKamekamehaUnitTests {
 		personaje1.incrementarKi(20);
 		
 		mundo.posicionarPersonaje(personaje1, new Posicion(2,3));
-				
 		mundo.posicionarPersonaje(personaje2, new Posicion(3,3));
 		
 		personaje1.atacar(personaje2, true);
@@ -33,5 +32,18 @@ public class AtaqueKamekamehaUnitTests {
 		Assert.assertEquals(personaje2.puntosDeVida(), 300 - (personaje1.poderDePelea()*150) / 100);
 	}
 	
+
+	@Test
+	public void utilizaElKiCorrecto () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa, ExcFueraDeRango, ExcAtaqueImposible {
+		personaje1.setAtaqueEspecial(new Kamekameha());
+		personaje1.incrementarKi(20);
+		
+		mundo.posicionarPersonaje(personaje1, new Posicion (2,3));
+		mundo.posicionarPersonaje(personaje2, new Posicion(3,3));
+		
+		personaje1.atacar(personaje2, true);
+		
+		Assert.assertEquals(personaje1.ki(), 0);		
+	}
 	
 }

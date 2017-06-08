@@ -14,7 +14,7 @@ import javafx.scene.control.Tab;
 import org.junit.Assert;
 import Modelo.Posicion;
 
-public class AtaqueMakansosappoUnitTest {
+public class AtaqueMakansosappoUnitTests {
 	Tablero mundo = new Tablero(5, 5);
 	PersonajeDePrueba personaje1 = new PersonajeDePrueba(mundo, "Nombre1", 300, 5, 3, 50);
 	PersonajeDePrueba personaje2 = new PersonajeDePrueba(mundo, "Nombre1", 300, 5, 3, 50);

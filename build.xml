@@ -139,7 +139,7 @@
             <classpath location="${build}" />
             <classpath refid="classpath" />
             <batchtest todir="${reports.xml.dir}" unless="testcase">
-                <fileset dir="${build}/tests" includes="**/*Test.class" />
+                <fileset dir="${build}/tests" includes="**/*.class" />
                 <formatter type="plain" usefile="false"/>
             </batchtest>
         </junit>
