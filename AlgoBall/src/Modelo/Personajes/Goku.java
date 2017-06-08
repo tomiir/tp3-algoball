@@ -11,6 +11,7 @@ public class Goku extends Personaje {
 		
 		nombre = "Goku";
 		puntosDeVida = 500;
+		poderDePelea = 20;
 		rangoDeAtaque = 2;
 		velocidad = 2;
 		ataqueEspecial = null;

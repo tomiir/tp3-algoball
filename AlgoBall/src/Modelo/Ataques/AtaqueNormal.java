@@ -8,11 +8,7 @@ public class AtaqueNormal extends Ataque {
 	
 	public AtaqueNormal(){
 		costo=0;
-	}
-
-	@Override
-	protected int dañoParcial() {
-		return dañoBase();
+		
 	}
 
 	@Override

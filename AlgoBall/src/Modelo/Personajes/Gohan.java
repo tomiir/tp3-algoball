@@ -10,6 +10,7 @@ public class Gohan extends Personaje {
 			
 		nombre = "Gohan";
 		puntosDeVida = 300;
+		poderDePelea = 15;
 		rangoDeAtaque = 2;
 		velocidad = 2;
 		ataqueEspecial = null;

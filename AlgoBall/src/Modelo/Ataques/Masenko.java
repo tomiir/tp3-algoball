@@ -7,11 +7,7 @@ public class Masenko extends Ataque {
 	
 	public Masenko (){
 		costo = 10;
-	}
-	
-	protected int dañoParcial() {
-		return ((dañoBase*125)/100);
-	
+		modificadorDaño = 125;
 	}
 
 	@Override

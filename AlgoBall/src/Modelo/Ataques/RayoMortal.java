@@ -7,11 +7,9 @@ public class RayoMortal extends Ataque {
 	
 	public RayoMortal (){
 		costo = 10;
+		modificadorDaño = 150;
 	}
 	
-	protected int dañoParcial() {
-		return ((dañoBase*150)/100);	
-	}
 
 	@Override
 	protected void efectosColaterales(int dañoRealizado) {

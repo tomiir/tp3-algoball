@@ -10,6 +10,7 @@ public class Piccolo extends Personaje {
 		
 		nombre = "Piccolo";
 		puntosDeVida = 500;
+		poderDePelea = 20;
 		rangoDeAtaque = 2;
 		velocidad = 3;
 		ataqueEspecial = null;

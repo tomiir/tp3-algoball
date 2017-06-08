@@ -15,8 +15,7 @@ public class SemiPerfecto extends Transformacion {
 	
 	@Override
 	public boolean esPosible(Personaje personaje) {
-		if(personaje.cantidadDeAbsorciones()>=4) return true;
-		return false;
+		return (personaje.cantidadDeAbsorciones()>=4);
 	}
 
 }

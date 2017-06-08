@@ -9,6 +9,7 @@ public class MajinBoo extends Personaje {
 		
 		nombre = "Majin Boo";
 		puntosDeVida = 300;
+		poderDePelea = 30;
 		rangoDeAtaque = 2;
 		velocidad = 2;
 		ataqueEspecial = null;

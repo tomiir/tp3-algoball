@@ -14,11 +14,6 @@ public class Absorcion extends Ataque{
 	}
 	
 	@Override
-	protected int dañoParcial() {
-		return dañoBase();
-	}
-
-	@Override
 	protected void efectosColaterales(int dañoRealizado) {
 		beneficiario.aumentarVidaPorAbsorcion(dañoRealizado);
 	}

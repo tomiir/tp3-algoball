@@ -56,7 +56,7 @@ public abstract class Personaje implements Posicionable{
 	
 	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
-			if(ki<ataqueElegido(esEspecial).costo()) throw new ExcAtaqueImposible("Ki insuficiente");
+			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcAtaqueImposible("Ki insuficiente");
 			try{
 				ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
 			} catch (ExcAtaqueImposible e){

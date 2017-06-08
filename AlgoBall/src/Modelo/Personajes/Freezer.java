@@ -10,6 +10,7 @@ public class Freezer extends Personaje {
 		
 		nombre = "Freezer";
 		puntosDeVida = 400;
+		poderDePelea = 20;
 		rangoDeAtaque = 3;
 		velocidad = 4;
 		ataqueEspecial = null;

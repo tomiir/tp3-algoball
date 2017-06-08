@@ -11,6 +11,7 @@ public class Cell extends Personaje {
 		
 		nombre = "Cell";
 		puntosDeVida = 500;
+		poderDePelea = 20;
 		rangoDeAtaque = 3;
 		velocidad = 2;
 		ataqueEspecial = null;

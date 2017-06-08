@@ -6,28 +6,33 @@ import Modelo.Personajes.Personaje;
 
 public abstract class Ataque {
 
-	static final int dañoBase = 50;
 	int costo = 0;
 	
+	int modificadorDaño = 100;
+	
 	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcAtaqueImposible{
+		
+		int dañoActual = calcularDaño(remitente, destinatario, bonificacionPorcentual);
+		
 		try {
-			destinatario.recibirDaño(this.daño(remitente, destinatario, bonificacionPorcentual));
+			destinatario.recibirDaño(dañoActual);
 		} catch (ExcDañoNegativo e) {
 			throw new ExcAtaqueImposible("No se pueden hacer daños negativos");
 		}
-		this.efectosColaterales(this.daño(remitente, destinatario, bonificacionPorcentual));
+		this.efectosColaterales(dañoActual);
 	}
 	
-	protected int daño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {
-		if(remitente.poderDePelea()<destinatario.poderDePelea()) return ( ((dañoParcial()*8)/10)*(100+bonificacionPorcentual) ) /100;
-		return dañoParcial();
+	protected int calcularDaño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {
+		
+		int daño = remitente.poderDePelea() * modificadorDaño / 100;
+		
+		if(remitente.poderDePelea()<destinatario.poderDePelea()){
+			daño = daño*8/10;
+		}
+		return daño*((100+bonificacionPorcentual)/100);
+		
 	}
 	
-	public int dañoBase(){
-		return dañoBase;
-	}
-	
-	protected abstract int dañoParcial();
 	
 	public int costo() {
 		return this.costo;

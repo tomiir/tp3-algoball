@@ -28,10 +28,13 @@ public class GohanSS2 extends Transformacion {
 		
 		Equipo equipo = this.partida.obtenerEquipoAliado(personaje);
 				
-		equipo.forEach((k,v) -> ok&= this.comprobarCondicion(personaje,v));
+		equipo.forEach((k,v)->(actualizarBool(ok,this.comprobarCondicion(personaje,v))));
 		
 		return ok;
 		
+	}
+	public void actualizarBool(boolean var, boolean value){
+		var &= value;
 	}
 	
 	public boolean comprobarCondicion(Personaje personaje, Personaje aliado){

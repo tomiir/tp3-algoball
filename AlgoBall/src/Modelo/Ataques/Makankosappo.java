@@ -5,15 +5,11 @@ import Modelo.Personajes.Personaje;
 
 public class Makankosappo extends Ataque {
 	
-	public void Masenko (){
+	public Makankosappo (){
 		costo = 10;
+		modificadorDaño = 125;
 	}
 	
-	protected int dañoParcial() {
-		return ((dañoBase*120)/100);
-	
-	}
-
 	@Override
 	protected void efectosColaterales(int dañoRealizado) {
 	}

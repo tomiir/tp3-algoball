@@ -114,6 +114,18 @@ public class Partida {
 	private Jugador adversario(Jugador jugador){
 		return adversarios.get(jugador.nombre);
 	}
+
+	public Equipo obtenerEquipoAliado(Personaje personaje) {
+		
+		Equipo equipo1 = jugador1.equipo();		
+		Equipo equipo2 = jugador2.equipo();
+		
+		if(equipo1.personajePertenece(personaje)){
+			return equipo1;
+		}
+		return equipo2;
+		
+	}
 	
 
 	
