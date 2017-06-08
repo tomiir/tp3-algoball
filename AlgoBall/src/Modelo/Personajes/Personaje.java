@@ -105,6 +105,10 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
+	public void sumarKi(int aumento){
+		ki +=aumento;
+	}
+	
 	private Ataque ataqueElegido(boolean esEspecial){
 		if(esEspecial){
 			return ataqueEspecial;

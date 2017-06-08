@@ -69,8 +69,11 @@ public class Partida {
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		jugador1.equipo.forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador1.equipo.forEach((k,v)->yaAtaco.put(k,false));
+		jugador1.equipo.forEach((k,v)->v.sumarKi(5));
+		
 		jugador2.equipo.forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador2.equipo.forEach((k,v)->yaAtaco.put(k,false));
+		jugador2.equipo.forEach((k,v)->v.sumarKi(5));
 	}
 	
 	private Jugador ganador(){

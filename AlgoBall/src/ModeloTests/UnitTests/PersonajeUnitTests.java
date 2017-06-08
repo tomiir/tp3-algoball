@@ -106,4 +106,14 @@ public class PersonajeUnitTests {
 		personaje1.atacar(personaje2, false);
 	}
 	
+	@Test
+	public void puedoSumarKi() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
+		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
+		Assert.assertEquals("El ki inicial es correcto",personaje1.ki(),0);
+		personaje1.sumarKi(5);
+		Assert.assertEquals("El ki aumentado es correcto",personaje1.ki(),5);
+		personaje1.sumarKi(-5);
+		Assert.assertEquals("El ki aumentado es correcto",personaje1.ki(),0);
+	}
+	
 }
