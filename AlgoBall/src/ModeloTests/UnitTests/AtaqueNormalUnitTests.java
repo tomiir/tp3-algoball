@@ -23,7 +23,7 @@ public class AtaqueNormalUnitTests {
 	
 	@Test
 	public void ataqueDañaLoEsperadoParaMenorPoderDePelea() throws ExcAtaqueImposible{
-		int dañoEsperado=ataque.dañoBase();
+		int dañoEsperado=100;
 		
 		int vidaAnterior = personaje2.puntosDeVida();
 		ataque.enviar(personaje1, personaje2, 0);
@@ -32,7 +32,7 @@ public class AtaqueNormalUnitTests {
 	
 	@Test
 	public void ataqueDañaLoEsperadoParaMayorPoderDePelea () throws ExcAtaqueImposible{
-		int dañoEsperado = (ataque.dañoBase()*8) / 10; 
+		int dañoEsperado = 80; 
 		int vidaAnterior = personaje1.puntosDeVida(); 
 		ataque.enviar(personaje2, personaje1, 0);
 		
