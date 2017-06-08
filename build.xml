@@ -1,5 +1,6 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="nicopaez.tutoriales.oo.notas" basedir="." default="test">
 	<property name="build" location="build" />
+	<property name="rootFolder" location="AlgoBall" />
 	<property name="libs" location="libs" />
 	<property name="classes.dir" location="build" />
 	<property name="instrumented.dir" location="${build}/instrumented" />
@@ -53,19 +54,19 @@
 	</target>
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
-		<javac srcdir="src" destdir="${build}" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src" destdir="${build}" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
-		<javac srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
-        <javac srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+        <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath" />
         </javac>
     </target>
