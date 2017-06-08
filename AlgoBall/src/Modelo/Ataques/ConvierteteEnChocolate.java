@@ -9,6 +9,6 @@ public class ConvierteteEnChocolate extends Ataque {
 	
 	@Override
 	protected void efectosColaterales(int dañoRealizado) {
+		
 	}
-
 }

@@ -2,6 +2,7 @@ package Modelo.Transformaciones;
 
 import Modelo.Equipo;
 import Modelo.Partida;
+import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
 
 public class Protector extends Transformacion {
@@ -19,7 +20,12 @@ public class Protector extends Transformacion {
 	@Override
 	public boolean esPosible(Personaje personaje) {
 		
-		Personaje gohan = partida.obtenerPersonaje("Gohan");
+		Personaje gohan;
+		try {
+			gohan = partida.obtenerPersonaje("Gohan");
+		} catch (ExcNoHayPersonaje e) {
+			return false;
+		}
 		
 		return gohan.vidaPorcentual() < 20;
 		

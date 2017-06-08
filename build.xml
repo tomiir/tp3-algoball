@@ -60,19 +60,13 @@
 	</target>
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
-		<javac srcdir="${rootFolder}/src/ModeloTests/UnitTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-			<classpath refid="classpath" />
-		</javac>
-		<javac srcdir="${rootFolder}/src/ModeloTests/Entregas" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
-        <javac srcdir="${rootFolder}/src/ModeloTests/UnitTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-            <classpath refid="classpath" />
-        </javac>
-	<javac srcdir="${rootFolder}/src/ModeloTests/Entregas" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
+        <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath" />
         </javac>
     </target>
@@ -101,8 +95,8 @@
             <formatter type="xml" />
             <test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
             <batchtest todir="${reports.xml.dir}" unless="testcase">
-                <fileset dir="${build}/tests" includes="**/*Test.class" />
-                <fileset dir="${build}/tests" includes="**/Prueba*.class" />
+                <fileset dir="${build}/tests" includes="**/*.class" />
+                <fileset dir="${build}/tests" includes="**/*.class" />
             </batchtest>
         </junit>
         <fail message="Pruebas fallidas" if="test.failure" />

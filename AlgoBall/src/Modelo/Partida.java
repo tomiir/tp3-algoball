@@ -13,6 +13,7 @@ import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Excepciones.ExcMovimientoIlegitimo;
+import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
@@ -87,9 +88,14 @@ public class Partida {
 		return equipo2;
 	}
 
-	public Personaje obtenerPersonaje(String nombre){
-		return null;
-		
+	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{
+		Personaje busqueda1 = jugador1.equipo().buscarPersonaje(nombre);
+		Personaje busqueda2 = jugador1.equipo().buscarPersonaje(nombre);
+		if(busqueda1==null){
+			if(busqueda2==null) throw new ExcNoHayPersonaje();
+			return busqueda2;
+		}
+		return busqueda1;
 	}
 	
 	private Jugador ganador(){

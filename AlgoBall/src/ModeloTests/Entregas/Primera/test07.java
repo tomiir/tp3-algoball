@@ -27,11 +27,10 @@ public class test07 {
 		int pts1inicial=personaje1.puntosDeVida();
 		int pts2inicial=personaje2.puntosDeVida();
 		
-		//Se sabe que el daño base para el ataque normal es 50
 		personaje1.atacar(personaje2, false);
-		Assert.assertEquals("El personaje2 recibe el daño esperado",pts2inicial-personaje2.puntosDeVida(),(50*8)/10);
+		Assert.assertEquals("El personaje2 recibe el daño esperado",pts2inicial-personaje2.puntosDeVida(),(100*8)/10);
 		personaje2.atacar(personaje1, false);
-		Assert.assertEquals("El personaje1 recibe el daño esperado",pts1inicial-personaje1.puntosDeVida(),50);
+		Assert.assertEquals("El personaje1 recibe el daño esperado",pts1inicial-personaje1.puntosDeVida(),200);
 	}
 	
 	@Test (expected = ExcFueraDeRango.class)
