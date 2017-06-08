@@ -3,6 +3,7 @@ package Modelo;
 import java.util.HashMap;
 import java.util.Map;
 
+import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueIlegitimo;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
@@ -10,7 +11,9 @@ import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Excepciones.ExcMovimientoIlegitimo;
 import Modelo.Excepciones.ExcPosicionNegativa;
+import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
@@ -32,7 +35,7 @@ public class Partida {
 		try {
 			turnoTerminado();
 		} catch (ExcHayGanador e) {
-			throw new RuntimeException();
+			throw new ErrorFatal();
 		}
 	}
 
@@ -49,6 +52,15 @@ public class Partida {
 		try {
 			personaje.atacar(destinatario, esEspecial);
 		} catch (ExcFueraDeRango | ExcAtaqueImposible e) {
+			throw e;
+		}
+	}
+	
+	public void realizarMovimiento(Jugador jugador, Personaje personaje, Direccion direccion) throws ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcFueraDeTablero{
+		if(!movimientoLegitimo(jugador, personaje, direccion)) throw new ExcMovimientoIlegitimo();
+		try {
+			personaje.mover(direccion);
+		} catch (ExcPosicionOcupada | ExcFueraDeTablero e) {
 			throw e;
 		}
 	}

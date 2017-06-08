@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import Modelo.Direccion;
+import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Posicion;
@@ -39,8 +40,13 @@ public abstract class Personaje implements Posicionable{
 	public void incrementarKi(int cantidad){
 		this.ki += cantidad;
 	}
-	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
-		Posicion nuevaPos = interpretarDireccion(direccion);
+	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero {
+		Posicion nuevaPos;
+		try {
+			nuevaPos = posicion.interpretarDireccion(direccion);
+		} catch (ExcPosicionNegativa e) {
+			throw new ExcFueraDeTablero();
+		}
 		tablero.posicionarPersonaje(this, nuevaPos);
 	}
 	
@@ -116,10 +122,6 @@ public abstract class Personaje implements Posicionable{
 			return false;
 		}
 		return true;
-	}
-	
-	private Posicion interpretarDireccion(Direccion direccion) throws ExcPosicionNegativa{
-		return new Posicion(posicion.posX()+direccion.dx(),posicion.posY()+direccion.dy());
 	}
 	
 	public boolean estaMuerto(){

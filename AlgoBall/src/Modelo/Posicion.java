@@ -40,6 +40,10 @@ public class Posicion{
 		if(dirX!=0) dirX=dirX/Math.abs(dirX);
 		if(dirY!=0) dirY=dirY/Math.abs(dirY);
 		return new Direccion(dirX, dirY);
+	}
+
+	public Posicion interpretarDireccion(Direccion direccion) throws ExcPosicionNegativa {
+		return new Posicion(posX+direccion.dx(),posY+direccion.dy());
 	} 
 	
 }
