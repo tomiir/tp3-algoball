@@ -5,7 +5,7 @@ import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class Protector extends Transformacion {
-
+	Partida partida;
 	public Protector(Partida partida){
 		this.nombre = "Protector";
 		this.partida = partida;
@@ -19,9 +19,9 @@ public class Protector extends Transformacion {
 	@Override
 	public boolean esPosible(Personaje personaje) {
 		
-		Personaje personaje = partida.obtenerPersonaje("Gohan");
+		Personaje gohan = partida.obtenerPersonaje("Gohan");
 		
-		return personaje.vidaPorcentual() < 20;
+		return gohan.vidaPorcentual() < 20;
 		
 		
 	}

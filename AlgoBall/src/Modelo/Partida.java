@@ -19,7 +19,6 @@ import Modelo.Personajes.Personaje;
 
 public class Partida {
 	//LOGICA DE LA PARTIDA (turnos,...)
-	//
 	Jugador jugador1;
 	Jugador jugador2;
 	Tablero tablero;
@@ -77,11 +76,24 @@ public class Partida {
 		jugador2.equipo.forEach((k,v)->v.sumarKi(5));
 	}
 	
+	public Equipo obtenerEquipoAliado(Personaje personaje) {
+		
+		Equipo equipo1 = jugador1.equipo();		
+		Equipo equipo2 = jugador2.equipo();
+		
+		if(equipo1.personajePertenece(personaje)){
+			return equipo1;
+		}
+		return equipo2;
+	}
+
+	public Personaje obtenerPersonaje(String nombre){
+		return null;
+		
+	}
 	
-	public void iterarEquipoAliado(Personaje personaje, )
 	private Jugador ganador(){
 		return jugador1;
-		//Devuelve al ganador
 	}
 	
 	private boolean personajePerteneceAJugador(Jugador jugador, Personaje personaje){
@@ -90,7 +102,6 @@ public class Partida {
 	
 	private boolean hayGanador(){
 		return false;
-		//Iterar equipos y ver si hay alguno con todos muertos
 	}
 	
 	private boolean movimientoLegitimo(Jugador jugador, Personaje personaje, Direccion dir){
@@ -114,18 +125,7 @@ public class Partida {
 	private Jugador adversario(Jugador jugador){
 		return adversarios.get(jugador.nombre);
 	}
-
-	public Equipo obtenerEquipoAliado(Personaje personaje) {
-		
-		Equipo equipo1 = jugador1.equipo();		
-		Equipo equipo2 = jugador2.equipo();
-		
-		if(equipo1.personajePertenece(personaje)){
-			return equipo1;
-		}
-		return equipo2;
-		
-	}
+	
 	
 
 	

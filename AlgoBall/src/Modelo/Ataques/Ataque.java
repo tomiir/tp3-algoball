@@ -8,7 +8,7 @@ public abstract class Ataque {
 
 	int costo = 0;
 	
-	int modificadorDaño = 100;
+	int modificadorDaño=100;
 	
 	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcAtaqueImposible{
 		

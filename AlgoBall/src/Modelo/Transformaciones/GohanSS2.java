@@ -18,23 +18,20 @@ public class GohanSS2 extends Transformacion {
 		this.poderDePelea = 100;
 		
 	}
-	
-	
-	//Funcionara?
+	protected boolean aux;
 	@Override
 	public boolean esPosible(Personaje personaje) {
 		
-		boolean ok = personaje.ki() >= this.costo;
+		aux = (personaje.ki() >= this.costo);
 		
 		Equipo equipo = this.partida.obtenerEquipoAliado(personaje);
 				
-		equipo.forEach((k,v)->(actualizarBool(ok,this.comprobarCondicion(personaje,v))));
+		equipo.forEach((k,v)->{
+			aux=this.comprobarCondicion(personaje,v);
+			});
 		
-		return ok;
+		return aux;
 		
-	}
-	public void actualizarBool(boolean var, boolean value){
-		var &= value;
 	}
 	
 	public boolean comprobarCondicion(Personaje personaje, Personaje aliado){

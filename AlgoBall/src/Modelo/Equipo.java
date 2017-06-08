@@ -30,7 +30,10 @@ public class Equipo{
 	public boolean personajePertenece(Personaje personaje){
 		return personajes.containsKey(personaje.nombre());
 	}
-
+	
+	public Personaje buscarPersonaje(String nombre){
+		return personajes.get(nombre);
+	}
 
 	public String nombre() {
 		return this.nombre;
