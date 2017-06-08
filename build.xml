@@ -54,19 +54,19 @@
 	</target>
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
-		<javac srcdir="${rootFolder}/src" destdir="${build}" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src" destdir="${build}" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
-		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
-        <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+        <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath" />
         </javac>
     </target>
@@ -148,7 +148,7 @@
 
 
     <target name="compilar.paquete" depends="test">
-		<javac srcdir="src" destdir="${build}/classes" debug="no">
+		<javac srcdir="src" destdir="${build}/classes" encoding="iso-8859-1" debug="no">
 		</javac>
 	</target>
 
