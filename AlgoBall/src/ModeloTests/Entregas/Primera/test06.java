@@ -82,7 +82,5 @@ public class test06 {
 		
 		Assert.assertEquals("MajinBoo se encuentra en la pos X espereada",majinBoo.posicion().posX(),18);
 		Assert.assertEquals("MajinBoo se encuentra en la pos Y espereada",majinBoo.posicion().posY(),20);
-		
-		Partida partida = new Partida(tablero, jugador1, jugador2);
 	}	
 }

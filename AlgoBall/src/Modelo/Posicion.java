@@ -28,8 +28,8 @@ public class Posicion{
 		
 		while(auxiliar.posX()!=destino.posX() || auxiliar.posY()!=destino.posY()){
 			Direccion movimiento = obtenerMovimientoUnitario(auxiliar, destino);
+			distancia++;
 			auxiliar=new Posicion(auxiliar.posX()+movimiento.dx(), auxiliar.posY()+movimiento.dy());
-			if(auxiliar.posX()!=destino.posX() || auxiliar.posY()!=destino.posY()) distancia++;
 		}
 		return distancia;
 	}

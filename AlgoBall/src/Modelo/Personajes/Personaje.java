@@ -115,7 +115,7 @@ public abstract class Personaje implements Posicionable{
 	
 	private boolean estaEnRangoDeAtaque(Posicion objetivo){
 		try {
-			if(posicion.distanciaA(objetivo)<=rangoDeAtaque){
+			if(posicion.distanciaA(objetivo)>rangoDeAtaque){
 				return false;
 			}
 		} catch (ExcPosicionNegativa | ExcDireccionInvalida e) {

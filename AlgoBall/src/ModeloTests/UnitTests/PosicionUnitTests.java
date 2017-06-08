@@ -26,6 +26,10 @@ public class PosicionUnitTests {
 	public void posicionCalculaSuDistanciaBien() throws ExcPosicionNegativa, ExcDireccionInvalida {
 		Posicion pos1 = new Posicion(1,1);
 		Posicion pos2 = new Posicion(2,6);
-		Assert.assertEquals("La posicion es lo que debe ser",pos1.distanciaA(pos2),4);
+		Assert.assertEquals("La distancia es lo que debe",pos1.distanciaA(pos2),5);
+		
+		pos1 = new Posicion(1,2);
+		pos2 = new Posicion(1,4);
+		Assert.assertEquals("La distancia es lo que debe",pos1.distanciaA(pos2),2);
 	}
 }
