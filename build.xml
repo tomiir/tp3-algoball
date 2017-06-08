@@ -63,7 +63,7 @@
 		<javac srcdir="${rootFolder}/src/ModeloTests/UnitTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
-		<javac srcdir="${rootFolder}/src/ModeloTests/Entrega" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
+		<javac srcdir="${rootFolder}/src/ModeloTests/Entregas" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
@@ -72,7 +72,7 @@
         <javac srcdir="${rootFolder}/src/ModeloTests/UnitTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath" />
         </javac>
-	<javac srcdir="${rootFolder}/src/ModeloTests/Entrega" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
+	<javac srcdir="${rootFolder}/src/ModeloTests/Entregas" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath" />
         </javac>
     </target>
