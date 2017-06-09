@@ -1,4 +1,4 @@
-package ModeloTests.UnitTests;
+package ModeloTests.UnitTests.Ataques;
 
 import org.junit.Assert;
 import org.junit.Test;

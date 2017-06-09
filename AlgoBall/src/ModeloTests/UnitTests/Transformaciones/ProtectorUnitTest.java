@@ -1,5 +1,6 @@
-package ModeloTests.UnitTests;
+package ModeloTests.UnitTests.Transformaciones;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
@@ -7,13 +8,10 @@ import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcDañoNegativo;
-import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Personajes.PersonajeDePrueba;
-import Modelo.Transformaciones.GohanSS2;
-import org.junit.Assert;
+import Modelo.Transformaciones.Protector;
 
-public class GohanSS2UnitTest {
-	
+public class ProtectorUnitTest {
 	Tablero tablero = new Tablero(5, 5);
 	Jugador jugador1 = new Jugador("nombre1");
 	Jugador jugador2 = new Jugador("nombre2");
@@ -22,9 +20,10 @@ public class GohanSS2UnitTest {
 	Equipo equipo2 = new Equipo("equipo2");
 	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "Personaje1", 300, 3, 3, 1);
 	PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida, "Personaje2", 300, 3, 3, 1);
-	PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida, "Personaje3", 300, 3, 3, 1);
+	PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida, "Gohan", 300, 3, 3, 1);
 	PersonajeDePrueba personaje4 = new PersonajeDePrueba(partida, "Personaje4", 300, 3, 3, 1);
 	
+	Protector transformacionProtector = new Protector(partida);
 	
 	private void iniciarPartida(){
 		equipo1.agregarPersonaje (personaje1);
@@ -32,36 +31,32 @@ public class GohanSS2UnitTest {
 		equipo2.agregarPersonaje (personaje3);
 		equipo2.agregarPersonaje (personaje4);
 		jugador1.asignarEquipo(equipo1);
-		jugador2.asignarEquipo(equipo1);
+		jugador2.asignarEquipo(equipo2);
 		partida.iniciar();
 	}
 	
-	GohanSS2 transformacionEspecialGohan = new GohanSS2 (partida);
-	
 	@Test
-	public void seCreaCorrectamente() {
+	public void seCreaCorrectamente (){
 		iniciarPartida();
-		Assert.assertEquals(transformacionEspecialGohan.costo(), 30);
-		Assert.assertEquals(transformacionEspecialGohan.poderDePelea(), 100);
-		Assert.assertEquals(transformacionEspecialGohan.rangoDeAtaque(), 4);
-		Assert.assertEquals(transformacionEspecialGohan.velocidad(), 3);
-	
-	}	
-	
-	@Test 
-	public void noEsPosibleTransformarGohanSS2 () throws ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1) , false);	
 		
+		Assert.assertEquals(transformacionProtector.costo(), 0);
+		Assert.assertEquals(transformacionProtector.poderDePelea(), 60);
+		Assert.assertEquals(transformacionProtector.rangoDeAtaque(), 6);
+		Assert.assertEquals(transformacionProtector.velocidad(), 4);
 	}
 	
 	@Test
-	public void esPosibleTransformarGohanSS2 () throws ExcDañoNegativo{
+	public void noEsPosibleTransformarProtector (){
 		iniciarPartida();
-		personaje1.sumarKi(30);
-		personaje2.recibirDaño(250);
-		
-		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1), true);		
+		Assert.assertEquals(transformacionProtector.esPosible(personaje1) , false);	
 	}
-	 
+	
+	@Test
+	public void esPosibleTransformarProtector ()throws ExcDañoNegativo{
+		iniciarPartida();
+		personaje3.recibirDaño(241);
+		
+		Assert.assertEquals(transformacionProtector.esPosible(personaje1), true);
+	}
+	
 }

@@ -45,8 +45,7 @@ public class Partida {
 	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
 		Personaje destinatario; 
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
-		Integer turnos = turnosInmovilizados.get(personaje.nombre());
-		if(turnos!=null && turnos>0) throw new ExcPersonajeInmovilizado();
+		if(estaInmovilizado(personaje)) throw new ExcPersonajeInmovilizado();
 		try {
 			destinatario = tablero.obtenerCasillero(posicion).obtenerPersonaje();
 		} catch (ExcCasilleroDesocupado e) {
@@ -62,8 +61,7 @@ public class Partida {
 	
 	public void realizarMovimiento(Jugador jugador, Personaje personaje, Direccion direccion) throws ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcFueraDeTablero, ExcPersonajeInmovilizado{
 		if(!movimientoLegitimo(jugador, personaje, direccion)) throw new ExcMovimientoIlegitimo();
-		Integer turnos = turnosInmovilizados.get(personaje.nombre());
-		if(turnos!=null && turnos>0) throw new ExcPersonajeInmovilizado();
+		if(estaInmovilizado(personaje)) throw new ExcPersonajeInmovilizado();
 		try {
 			personaje.mover(direccion);
 		} catch (ExcPosicionOcupada | ExcFueraDeTablero e) {
@@ -109,7 +107,7 @@ public class Partida {
 
 	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{
 		Personaje busqueda1 = jugador1.equipo().buscarPersonaje(nombre);
-		Personaje busqueda2 = jugador1.equipo().buscarPersonaje(nombre);
+		Personaje busqueda2 = jugador2.equipo().buscarPersonaje(nombre);
 		if(busqueda1==null){
 			if(busqueda2==null) throw new ExcNoHayPersonaje();
 			return busqueda2;
@@ -117,6 +115,11 @@ public class Partida {
 		return busqueda1;
 	}
 	
+	public boolean estaInmovilizado(Personaje personaje){
+		Integer turnos = turnosInmovilizados.get(personaje.nombre());
+		if(turnos!=null && turnos>0) return true;
+		return false;
+	}
 
 	public Tablero tablero() {
 		return tablero;

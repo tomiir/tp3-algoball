@@ -1,4 +1,4 @@
-package ModeloTests.UnitTests;
+package ModeloTests.UnitTests.Ataques;
 
 import Modelo.Jugador;
 import Modelo.Partida;

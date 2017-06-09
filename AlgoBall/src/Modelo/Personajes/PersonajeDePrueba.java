@@ -7,7 +7,7 @@ import Modelo.Transformaciones.Transformacion;
 
 public class PersonajeDePrueba extends Personaje {
 	
-	
+	int cantidadAbsorciones;
 	public PersonajeDePrueba(Partida par, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
 		
 		nombre = Inombre;
@@ -35,5 +35,13 @@ public class PersonajeDePrueba extends Personaje {
 	
 	public void setKi(int nuevo){
 		ki=nuevo;
+	}
+	
+	public void setAbsorciones(int num){
+		cantidadAbsorciones=num;
+	}
+	
+	public int cantidadDeAbsorciones(){
+		return cantidadAbsorciones;
 	}
 }
