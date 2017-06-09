@@ -1,18 +1,20 @@
 package Modelo.Personajes;
 
+import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
+import Modelo.Transformaciones.Transformacion;
 
 public class PersonajeDePrueba extends Personaje {
 	
 	
-	public PersonajeDePrueba(Tablero mundo, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
+	public PersonajeDePrueba(Partida par, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
 		
 		nombre = Inombre;
 		puntosDeVida = IpuntosDeVida;
 		rangoDeAtaque = IrangoDeAtaque;
 		velocidad = Ivelocidad;
-		tablero = mundo;
+		partida = par;
 		poderDePelea=IpoderDePelea;
 		ataqueEspecial = null;
 		inicializar();
@@ -25,5 +27,13 @@ public class PersonajeDePrueba extends Personaje {
 	
 	public void setAtaqueEspecial (Ataque ataque){
 		this.ataqueEspecial = ataque;
+	}
+	
+	public void agregarTransformacion(Transformacion trans){
+		transformaciones.add(trans);
+	}
+	
+	public void setKi(int nuevo){
+		ki=nuevo;
 	}
 }

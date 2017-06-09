@@ -6,13 +6,13 @@ import Modelo.Personajes.Personaje;
 public class RayoMortal extends Ataque {
 	
 	public RayoMortal (){
-		costo = 10;
+		costo = 20;
 		modificadorDaño = 150;
 	}
 	
 
 	@Override
-	protected void efectosColaterales(int dañoRealizado) {
+	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) {
 	}
 	
 }

@@ -1,4 +1,7 @@
 package ModeloTests.UnitTests;
+import Modelo.Equipo;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcFueraDeTablero;
@@ -6,15 +9,23 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
+import Modelo.Transformaciones.GohanSS2;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TableroUnitTests {
 	
-	Tablero tablero = new Tablero(20,30);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
-	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
+	Tablero tablero = new Tablero(20, 30);
+	Jugador jugador1 = new Jugador("nombre1");
+	Jugador jugador2 = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, jugador1, jugador2);
+	Equipo equipo1 = new Equipo("equipo1");
+	Equipo equipo2 = new Equipo("equipo2");
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje4 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
 	
 	@Test
 	public void sePosicionaCorrectamente() throws ExcFueraDeTablero, ExcPosicionOcupada, ExcPosicionNegativa{

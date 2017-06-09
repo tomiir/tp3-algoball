@@ -20,19 +20,19 @@ import Modelo.Personajes.Piccolo;
 
 public class test06 {
 	
-	Jugador jugador1 = new Jugador("J1");
-	Jugador jugador2 = new Jugador("J2");
-	
 	Tablero tablero = new Tablero(20,20);
+	Jugador primerJugador = new Jugador("nombre1");
+	Jugador segundoJugador = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
 	
-	Goku goku = new Goku(tablero);
-	Gohan gohan = new Gohan(tablero);
-	Piccolo piccolo = new Piccolo(tablero);
+	Goku goku = new Goku(partida);
+	Gohan gohan = new Gohan(partida);
+	Piccolo piccolo = new Piccolo(partida);
 	
 
-	Cell cell = new Cell(tablero);
-	Freezer freezer = new Freezer(tablero);
-	MajinBoo majinBoo = new MajinBoo(tablero);
+	Cell cell = new Cell(partida);
+	Freezer freezer = new Freezer(partida);
+	MajinBoo majinBoo = new MajinBoo(partida);
 	
 	
 	@Test
@@ -53,8 +53,8 @@ public class test06 {
 		enemigos.agregarPersonaje(majinBoo);
 		Assert.assertEquals("Cantidad de integrantes del equipo Enemigos correcto",enemigos.cantidadPersonajes(),3);
 		
-		jugador1.asignarEquipo(guerrerosZ);
-		jugador2.asignarEquipo(enemigos);
+		primerJugador.asignarEquipo(guerrerosZ);
+		segundoJugador.asignarEquipo(enemigos);
 		
 		
 		tablero.posicionarPersonaje(goku,new Posicion(1,1));

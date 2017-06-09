@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import Modelo.Direccion;
+import Modelo.Partida;
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDañoNegativo;
@@ -32,7 +33,7 @@ public abstract class Personaje implements Posicionable{
 	Modelo.Ataques.Ataque ataqueEspecial;
 	AtaqueNormal ataqueNormal = new AtaqueNormal();
 	Posicion posicion;
-	Tablero tablero;
+	Partida partida;
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	
 	public void recibirDaño(int cantidad) throws ExcDañoNegativo{
@@ -51,7 +52,7 @@ public abstract class Personaje implements Posicionable{
 		} catch (ExcPosicionNegativa e) {
 			throw new ExcFueraDeTablero();
 		}
-		tablero.posicionarPersonaje(this, nuevaPos);
+		partida.tablero().posicionarPersonaje(this, nuevaPos);
 	}
 	
 	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{

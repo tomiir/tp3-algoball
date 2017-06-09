@@ -3,6 +3,8 @@ package ModeloTests.Entregas.Primera;
 import org.junit.Assert;
 import org.junit.Test;
 
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcAtaqueImposible;
@@ -16,8 +18,12 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class test07 {
 	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 1, 3,100);
-	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 1, 3,200);
+	Jugador primerJugador = new Jugador("nombre1");
+	Jugador segundoJugador = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
+	
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba (partida, "Nombre", 300, 1, 3,100);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba (partida, "Nombre", 300, 1, 3,200);
 	
 	@Test
 	public void atacaConDañoEsperado () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa, ExcFueraDeRango, ExcAtaqueImposible {		

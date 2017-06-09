@@ -1,5 +1,8 @@
 package ModeloTests.UnitTests;
 import Modelo.Direccion;
+import Modelo.Equipo;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcAtaqueImposible;
@@ -10,15 +13,21 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
+import Modelo.Transformaciones.GohanSS2;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class PersonajeUnitTests {
 	
-	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 1, 3,100);
-	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre", 300, 1, 3,200);
+	Tablero tablero = new Tablero(15, 14);
+	Jugador jugador1 = new Jugador("nombre1");
+	Jugador jugador2 = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, jugador1, jugador2);
+	Equipo equipo1 = new Equipo("equipo1");
+	Equipo equipo2 = new Equipo("equipo2");
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "nombre", 300, 1, 3, 50);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida, "nombre", 300, 1, 3, 100);
 	
 	@Test
 	public void seCreaEnPosicionCorrecta () throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
@@ -96,7 +105,7 @@ public class PersonajeUnitTests {
 		personaje1.atacar(personaje2, false);
 		Assert.assertEquals("El personaje2 recibe el daño esperado",pts2inicial-personaje2.puntosDeVida(),(50*8)/10);
 		personaje2.atacar(personaje1, false);
-		Assert.assertEquals("El personaje1 recibe el daño esperado",pts1inicial-personaje1.puntosDeVida(),50);
+		Assert.assertEquals("El personaje1 recibe el daño esperado",pts1inicial-personaje1.puntosDeVida(),100);
 	}
 	
 	@Test (expected = ExcFueraDeRango.class)

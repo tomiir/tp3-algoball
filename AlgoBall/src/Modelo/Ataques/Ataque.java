@@ -19,7 +19,7 @@ public abstract class Ataque {
 		} catch (ExcDañoNegativo e) {
 			throw new ExcAtaqueImposible("No se pueden hacer daños negativos");
 		}
-		this.efectosColaterales(dañoActual);
+		this.efectosColaterales(remitente, destinatario, dañoActual);
 	}
 	
 	protected int calcularDaño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {
@@ -33,10 +33,13 @@ public abstract class Ataque {
 		
 	}
 	
+	public int modificadorDaño (){
+		return this.modificadorDaño;
+	}
 	
 	public int costo() {
 		return this.costo;
 	}
 	
-	protected abstract void efectosColaterales(int dañoRealizado);
+	protected abstract void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado);
 }

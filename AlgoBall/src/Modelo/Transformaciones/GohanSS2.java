@@ -8,6 +8,7 @@ import Modelo.Personajes.Personaje;
 
 public class GohanSS2 extends Transformacion {
 	Partida partida;
+	protected boolean aux;
 	
 	public GohanSS2(Partida partida){
 		this.nombre = "Gohan SS2";
@@ -18,25 +19,23 @@ public class GohanSS2 extends Transformacion {
 		this.poderDePelea = 100;
 		
 	}
-	protected boolean aux;
+	
 	@Override
 	public boolean esPosible(Personaje personaje) {
-		
 		aux = (personaje.ki() >= this.costo);
 		
 		Equipo equipo = this.partida.obtenerEquipoAliado(personaje);
 				
 		equipo.forEach((k,v)->{
-			aux=this.comprobarCondicion(personaje,v);
+			aux &=this.comprobarCondicion(personaje,v);
 			});
 		
 		return aux;
-		
 	}
 	
 	public boolean comprobarCondicion(Personaje personaje, Personaje aliado){
 		if(aliado.nombre() != personaje.nombre()){
-			return (personaje.vidaPorcentual() <= 30);
+			return (aliado.vidaPorcentual() <= 30);
 		}
 		return true;
 	}

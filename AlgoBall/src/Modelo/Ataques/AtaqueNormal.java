@@ -12,7 +12,7 @@ public class AtaqueNormal extends Ataque {
 	}
 
 	@Override
-	protected void efectosColaterales(int dañoRealizado) {
+	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) {
 	}
 
 }

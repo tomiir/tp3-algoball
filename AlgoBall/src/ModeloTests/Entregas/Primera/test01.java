@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Direccion;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcDireccionInvalida;
@@ -15,7 +17,10 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class test01 {
 	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
+	Jugador primerJugador = new Jugador("nombre1");
+	Jugador segundoJugador = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
+	Personaje personaje1 = new PersonajeDePrueba (partida, "Nombre", 300, 5, 3,100);
 	
 	@Test
 	public void seMueveCorrectamenteEnLineaRecta() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcPosicionNegativa {

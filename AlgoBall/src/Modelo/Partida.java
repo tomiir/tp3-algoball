@@ -14,18 +14,21 @@ import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Excepciones.ExcMovimientoIlegitimo;
 import Modelo.Excepciones.ExcNoHayPersonaje;
+import Modelo.Excepciones.ExcPersonajeInmovilizado;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
 	//LOGICA DE LA PARTIDA (turnos,...)
+	boolean iniciada=false;
 	Jugador jugador1;
 	Jugador jugador2;
 	Tablero tablero;
 	Map<String, Integer> movsRestantes= new HashMap<String, Integer>();
 	Map<String, Boolean> yaAtaco= new HashMap<String, Boolean>();
 	Map<String, Jugador> adversarios= new HashMap<String, Jugador>();
+	Map<String, Integer> turnosInmovilizados= new HashMap<String, Integer>();
 	
 	public Partida (Tablero tab, Jugador primerJugador, Jugador segundoJugador){
 		tablero = tab;
@@ -33,17 +36,17 @@ public class Partida {
 		jugador2 = segundoJugador;
 		adversarios.put(jugador1.nombre(),jugador2);
 		adversarios.put(jugador2.nombre(),jugador1);
-		try {
-			turnoTerminado();
-		} catch (ExcHayGanador e) {
-			throw new ErrorFatal();
-		}
+	}
+	
+	public void paralizarPorTurnos(Personaje personaje, int turnos){
+		turnosInmovilizados.put(personaje.nombre(), turnos);
 	}
 
-	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero{
+	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
 		Personaje destinatario; 
 		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
-		
+		Integer turnos = turnosInmovilizados.get(personaje.nombre());
+		if(turnos!=null && turnos>0) throw new ExcPersonajeInmovilizado();
 		try {
 			destinatario = tablero.obtenerCasillero(posicion).obtenerPersonaje();
 		} catch (ExcCasilleroDesocupado e) {
@@ -57,8 +60,10 @@ public class Partida {
 		}
 	}
 	
-	public void realizarMovimiento(Jugador jugador, Personaje personaje, Direccion direccion) throws ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcFueraDeTablero{
+	public void realizarMovimiento(Jugador jugador, Personaje personaje, Direccion direccion) throws ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcFueraDeTablero, ExcPersonajeInmovilizado{
 		if(!movimientoLegitimo(jugador, personaje, direccion)) throw new ExcMovimientoIlegitimo();
+		Integer turnos = turnosInmovilizados.get(personaje.nombre());
+		if(turnos!=null && turnos>0) throw new ExcPersonajeInmovilizado();
 		try {
 			personaje.mover(direccion);
 		} catch (ExcPosicionOcupada | ExcFueraDeTablero e) {
@@ -66,15 +71,29 @@ public class Partida {
 		}
 	}
 	
-	public void turnoTerminado() throws ExcHayGanador{
+	public void iniciar(){
+		if(iniciada=false){
+			try {
+				reiniciar();
+			} catch (ExcHayGanador e) {
+				throw new ErrorFatal();
+			}
+			iniciada=true;
+		}
+	}
+	
+	public void reiniciar() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
-		jugador1.equipo.forEach((k,v)->movsRestantes.put(k, v.velocidad()));
-		jugador1.equipo.forEach((k,v)->yaAtaco.put(k,false));
-		jugador1.equipo.forEach((k,v)->v.sumarKi(5));
 		
-		jugador2.equipo.forEach((k,v)->movsRestantes.put(k, v.velocidad()));
-		jugador2.equipo.forEach((k,v)->yaAtaco.put(k,false));
-		jugador2.equipo.forEach((k,v)->v.sumarKi(5));
+		jugador1.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
+		jugador1.equipo().forEach((k,v)->yaAtaco.put(k,false));
+		jugador1.equipo().forEach((k,v)->v.sumarKi(5));
+		
+		jugador2.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
+		jugador2.equipo().forEach((k,v)->yaAtaco.put(k,false));
+		jugador2.equipo().forEach((k,v)->v.sumarKi(5));
+		
+		turnosInmovilizados.forEach((k,v)->v--);
 	}
 	
 	public Equipo obtenerEquipoAliado(Personaje personaje) {
@@ -96,6 +115,11 @@ public class Partida {
 			return busqueda2;
 		}
 		return busqueda1;
+	}
+	
+
+	public Tablero tablero() {
+		return tablero;
 	}
 	
 	private Jugador ganador(){
@@ -131,9 +155,6 @@ public class Partida {
 	private Jugador adversario(Jugador jugador){
 		return adversarios.get(jugador.nombre);
 	}
-	
-	
-
 	
 }
 

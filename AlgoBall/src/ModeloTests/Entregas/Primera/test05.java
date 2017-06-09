@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Direccion;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcDireccionInvalida;
@@ -14,14 +16,18 @@ import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Goku;
 
 public class test05 {
-	 @Test
+	Tablero tablero = new Tablero(15,14);
+	Jugador primerJugador = new Jugador("nombre1");
+	Jugador segundoJugador = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
+	
+	@Test
 	 public void Test05TransformaYMueveCorrectamente() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcDireccionInvalida, ExcNoEsPosibleTransformarse, ExcPosicionNegativa{
-		 Tablero tablero = new Tablero(15,15);
-		 Goku goku = new Goku(tablero);
-		 Posicion posicion =  new Posicion(10,10);
+		Goku goku = new Goku(partida);
+		Posicion posicion =  new Posicion(10,10);
 			
-		 tablero.posicionarPersonaje(goku, posicion);
-		 Assert.assertEquals(goku.posicion(), posicion);
+		tablero.posicionarPersonaje(goku, posicion);
+		Assert.assertEquals(goku.posicion(), posicion);
 		goku.incrementarKi(100);
 		
 		goku.transformar();

@@ -1,22 +1,34 @@
 package Modelo.Personajes;
 
+import Modelo.Partida;
 import Modelo.Tablero;
+import Modelo.Ataques.Absorcion;
 import Modelo.Ataques.AtaqueNormal;
+import Modelo.Transformaciones.Perfecto;
+import Modelo.Transformaciones.SemiPerfecto;
 
 public class Cell extends Personaje {
 	
 	int absorciones=0;
 	
-	public Cell(Tablero mundo){
+	public Cell(Partida p){
 		
 		nombre = "Cell";
 		puntosDeVida = 500;
 		poderDePelea = 20;
 		rangoDeAtaque = 3;
 		velocidad = 2;
-		ataqueEspecial = null;
-		tablero = mundo;
+		ataqueEspecial = new Absorcion(this);
+		partida = p;
+		
+		SemiPerfecto semiPerfecto = new SemiPerfecto();
+		Perfecto perfecto = new Perfecto();
+		
+		transformaciones.add(semiPerfecto);
+		transformaciones.add(perfecto);
+		
 		inicializar();
+		
 		//Transformacion especial no implementado
 	}
 	

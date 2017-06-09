@@ -12,25 +12,35 @@ import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.PersonajeDePrueba;
 import javafx.scene.control.Tab;
 import org.junit.Assert;
+
+import Modelo.Equipo;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Posicion;
 
 public class AtaqueMakansosappoUnitTests {
 	Tablero mundo = new Tablero(5, 5);
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(mundo, "Nombre1", 300, 5, 3, 50);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(mundo, "Nombre1", 300, 5, 3, 50);
+	Jugador jugador1 = new Jugador("nombre1");
+	Jugador jugador2 = new Jugador("nombre2");
+	Partida partida = new Partida(mundo, jugador1, jugador2);
+	Equipo equipo1 = new Equipo("equipo1");
+	Equipo equipo2 = new Equipo("equipo2");
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "Nombre1", 300, 5, 3, 50);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida, "Nombre1", 300, 5, 3, 50);
 	
 	@Test
-	public void haceElDañoCorrecto () throws ExcFueraDeRango, ExcAtaqueImposible, ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa {
-		personaje1.setAtaqueEspecial(new Makankosappo());
-		personaje1.incrementarKi(10);
+	public void seCreaCorrectamente () {
+		Makankosappo makanko = new Makankosappo();
 		
-		mundo.posicionarPersonaje(personaje1, new Posicion(2,3));
-				
-		mundo.posicionarPersonaje(personaje2, new Posicion(3,3));
-		
-		personaje1.atacar(personaje2, true);
-				
-		Assert.assertEquals(personaje2.puntosDeVida(),238);
+		Assert.assertEquals(makanko.costo(), 10);
+	}
+	
+	@Test
+	public void haceElDañoCorrecto () throws ExcAtaqueImposible {
+		Makankosappo makanko = new Makankosappo();
+		makanko.enviar(personaje1, personaje2, 0);
+	
+		Assert.assertEquals(personaje2.puntosDeVida(), 300 - (personaje1.poderDePelea()*125) / 100);
 	}
 	
 }

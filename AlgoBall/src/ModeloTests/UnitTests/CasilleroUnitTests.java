@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import Modelo.Casillero;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Personajes.Personaje;
@@ -11,8 +13,11 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class CasilleroUnitTests {
 	Tablero tablero = new Tablero(10,10);
+	Jugador jugador1 = new Jugador("nombre1");
+	Jugador jugador2 = new Jugador("nombre2");
+	Partida partida = new Partida(tablero, jugador1, jugador2);
+	Personaje personaje1 = new PersonajeDePrueba (partida, "Nombre", 300, 5, 3,100);
 	Casillero casilleroNuevo = new Casillero();
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
 	
 	@Test
 	public void seCreaCorrectamente(){
