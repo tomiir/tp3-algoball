@@ -115,7 +115,7 @@ public abstract class Personaje implements Posicionable{
 	
 	public void transformar () throws ExcNoEsPosibleTransformarse {
 		Transformacion transformacion = transformaciones.peek();
-		if(transformacion.esPosible(this) && transformacion!=null){
+		if(transformacion!=null && transformacion.esPosible(this)){
 			transformaciones.remove();
 			rangoDeAtaque = transformacion.rangoDeAtaque();
 			velocidad = transformacion.velocidad();

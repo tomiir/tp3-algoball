@@ -72,15 +72,16 @@ public class Partida {
 	public void iniciar(){
 		if(iniciada=false){
 			try {
-				reiniciar();
+				posicionPersonajesInicial();
+				avanzarTurno();
 			} catch (ExcHayGanador e) {
 				throw new ErrorFatal();
 			}
 			iniciada=true;
 		}
 	}
-	
-	public void reiniciar() throws ExcHayGanador{
+
+	public void avanzarTurno() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		
 		jugador1.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
@@ -157,6 +158,38 @@ public class Partida {
 	
 	private Jugador adversario(Jugador jugador){
 		return adversarios.get(jugador.nombre);
+	}
+	
+	private void posicionPersonajesInicial() {
+		jugador1.equipo().forEach((n,p)->{
+			int i=1;
+			try {
+				while(tablero.obtenerCasillero(new Posicion(1,i)).estaOcupado()){
+					i++;
+				}
+			} catch (ExcFueraDeTablero | ExcPosicionNegativa e) {
+			}
+			try {
+				tablero.posicionarPersonaje(p, new Posicion(1,i));
+			} catch (ExcPosicionOcupada | ExcFueraDeTablero | ExcPosicionNegativa e) {
+
+			}
+		}
+		);
+		jugador2.equipo().forEach((n,p)->{
+			int i=1;
+			try {
+				while(tablero.obtenerCasillero(new Posicion(tablero.alto(),i)).estaOcupado()){
+					i++;
+				}
+			} catch (ExcFueraDeTablero | ExcPosicionNegativa e) {
+			}
+			try {
+				tablero.posicionarPersonaje(p, new Posicion(tablero.alto(),i));
+			} catch (ExcPosicionOcupada | ExcFueraDeTablero | ExcPosicionNegativa e) {
+			}
+		}
+		);
 	}
 	
 }

@@ -24,6 +24,7 @@ public class Goku extends Personaje {
 		TransformacionPorKi superSaiyan = new TransformacionPorKi("Super-Saiyan", 50, 4,5,60);
 		
 		transformaciones.add(kaioken);
+		transformaciones.add(superSaiyan);
 	}
 	
 	protected int bonificacionDeAtaquePorcentual(){
