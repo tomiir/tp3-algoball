@@ -109,8 +109,8 @@ public class Partida {
 	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{
 		Personaje busqueda1 = jugador1.equipo().buscarPersonaje(nombre);
 		Personaje busqueda2 = jugador2.equipo().buscarPersonaje(nombre);
-		if(busqueda1==null){
-			if(busqueda2==null) throw new ExcNoHayPersonaje();
+		if(busqueda1 == null){
+			if(busqueda2 == null) throw new ExcNoHayPersonaje();
 			return busqueda2;
 		}
 		return busqueda1;

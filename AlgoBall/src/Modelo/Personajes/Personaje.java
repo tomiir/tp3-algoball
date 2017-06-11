@@ -70,7 +70,8 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public int vidaPorcentual(){
-		return (int)(puntosDeVida/vidaInicial)*100;
+		float porcentaje = (puntosDeVida*100)/vidaInicial;
+		return (int)porcentaje;
 	}
 	
 	public void setPosicion(Posicion casillero){

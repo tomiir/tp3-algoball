@@ -32,7 +32,8 @@ public class Equipo{
 	}
 	
 	public Personaje buscarPersonaje(String nombre){
-		return personajes.get(nombre);
+		if(personajes.containsKey(nombre)) return personajes.get(nombre);
+		return null;
 	}
 
 	public String nombre() {

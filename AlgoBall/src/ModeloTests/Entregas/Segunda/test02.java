@@ -1,11 +1,13 @@
 package ModeloTests.Entregas.Segunda;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Personajes.Cell;
@@ -14,9 +16,8 @@ import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Piccolo;
-import org.junit.Assert;
 
-public class test01 {
+public class test02 {
 	Tablero tablero = new Tablero(15, 15);
 	Jugador jugador1 = new Jugador("Jugador Guerreros Z");
 	Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
@@ -33,7 +34,7 @@ public class test01 {
 	
 	
 	private void iniciarPartida(){
-		partida = new Partida(tablero, jugador1, jugador2);
+		
 		equipo1 = new Equipo("Guerreros Z");
 		equipo2 = new Equipo("Enemigos de la tierra");
 		goku = new Goku(partida);
@@ -55,44 +56,20 @@ public class test01 {
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
+		
+		partida = new Partida(tablero, jugador1, jugador2);
+		
 		partida.iniciar();
 	}
 	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void GohanNoSePuedeTransformar() throws ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		gohan.transformar();
-	}
 	
+
 	@Test
-	public void GohanSePuedeTransformarPasados2Turnos() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
+	public void gohanSePuedeTransformarConCondicionesCorrectas() throws ExcHayGanador, ExcNoEsPosibleTransformarse, ExcDañoNegativo{
 		iniciarPartida();
-		for(int i=0;i<2;i++){
-			partida.avanzarTurno();
-		}
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
-		gohan.transformar();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
-		Assert.assertEquals("El poder de pelea de gohan es correcto", gohan.poderDePelea(),30);
-		Assert.assertEquals("El rango de ataque de gohan es correcto", gohan.rangoDeAtaque(), 2);
-		Assert.assertEquals("La velocidad de gohan es correcta", gohan.velocidad(), 2);
-	}
-	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void GohanNoSePuedeTransformarDevuelta() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
+		
 		iniciarPartida();
-		for(int i=0;i<2;i++){
-			partida.avanzarTurno();
-		}
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
-		gohan.transformar();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
-		gohan.transformar();
-	}
-	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void gohanNoSePuedeTransformarDevueltaConKiSuficiente() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
+		
 		for(int i=0;i<2;i++){
 			partida.avanzarTurno();
 		}
@@ -103,7 +80,24 @@ public class test01 {
 			partida.avanzarTurno();
 		}
 		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 30);
+		
+		Assert.assertEquals("La vida porcentualde goku es correcta",goku.vidaPorcentual(), 100);
+		Assert.assertEquals("La vida porcentualde piccolo es correcta",goku.vidaPorcentual(), 100);
+		
+		
+		goku.recibirDaño(350);
+		piccolo.recibirDaño(350);
+		
+		Assert.assertEquals("La vida porcentualde goku es correcta",goku.vidaPorcentual(), 30);
+		Assert.assertEquals("La vida porcentualde piccolo es correcta",piccolo.vidaPorcentual(), 30);
+		
 		gohan.transformar();
+
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
+		Assert.assertEquals("El poder de pelea de gohan es correcto", gohan.poderDePelea(),100);
+		Assert.assertEquals("El rango de ataque de gohan es correcto", gohan.rangoDeAtaque(), 4);
+		Assert.assertEquals("La velocidad de gohan es correcta", gohan.velocidad(), 3);
+		
 	}
 	
 }
