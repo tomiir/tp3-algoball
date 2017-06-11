@@ -7,7 +7,6 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
-import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Transformaciones.TransformacionPorKi;

@@ -7,9 +7,7 @@ import Modelo.Tablero;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
-import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
-import Modelo.Transformaciones.GohanSS2;
 
 import org.junit.Assert;
 import org.junit.Test;

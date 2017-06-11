@@ -5,18 +5,12 @@ import org.junit.Test;
 import Modelo.Tablero;
 import Modelo.Ataques.Makankosappo;
 import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcFueraDeRango;
-import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.PersonajeDePrueba;
-import javafx.scene.control.Tab;
 import org.junit.Assert;
 
 import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
-import Modelo.Posicion;
 
 public class AtaqueMakansosappoUnitTests {
 	Tablero mundo = new Tablero(5, 5);

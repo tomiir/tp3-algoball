@@ -5,13 +5,11 @@ import java.util.Queue;
 
 import Modelo.Direccion;
 import Modelo.Partida;
-import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Posicion;
 import Modelo.Interfaces.Posicionable;
-import Modelo.Tablero;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Ataques.Ataque;
 import Modelo.Ataques.AtaqueNormal;

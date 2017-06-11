@@ -13,7 +13,6 @@ import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
-import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
 
 public class test07 {

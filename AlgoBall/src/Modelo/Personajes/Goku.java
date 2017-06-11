@@ -1,8 +1,6 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
-import Modelo.Tablero;
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Ataques.Kamekameha;
 import Modelo.Transformaciones.TransformacionPorKi;
 

@@ -1,18 +1,14 @@
 package Modelo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueIlegitimo;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
-import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;

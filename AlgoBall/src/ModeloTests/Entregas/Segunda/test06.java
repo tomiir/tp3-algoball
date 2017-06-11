@@ -3,7 +3,6 @@ package ModeloTests.Entregas.Segunda;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Modelo.Direccion;
 import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;

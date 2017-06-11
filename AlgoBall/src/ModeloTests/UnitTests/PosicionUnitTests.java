@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Posicion;
-import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcPosicionNegativa;
 
@@ -19,7 +18,7 @@ public class PosicionUnitTests {
 	
 	@Test (expected = ExcPosicionNegativa.class)
 	public void posicionNegativaNoSePuedeCrear() throws ExcPosicionNegativa, ExcDireccionInvalida {
-		Posicion pos1 = new Posicion(-1,1);
+		new Posicion(-1,1);
 	}
 	
 	@Test

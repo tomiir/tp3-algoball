@@ -1,9 +1,7 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
-import Modelo.Tablero;
 import Modelo.Ataques.Absorcion;
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Transformaciones.Perfecto;
 import Modelo.Transformaciones.SemiPerfecto;
 

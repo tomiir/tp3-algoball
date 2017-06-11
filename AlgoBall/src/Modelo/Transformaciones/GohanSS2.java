@@ -1,7 +1,5 @@
 package Modelo.Transformaciones;
 
-import java.util.function.BiConsumer;
-
 import Modelo.Equipo;
 import Modelo.Partida;
 import Modelo.Personajes.Personaje;

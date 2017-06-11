@@ -7,7 +7,6 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Personajes.Cell;

@@ -38,7 +38,6 @@ public class EquipoUnitTests {
 	@Test
 	public void agregaMiembrosCorrectamente(){
 		
-		Tablero tablero = new Tablero(15,15);
 		String nombre = "Test";
 		Equipo equipo = new Equipo(nombre);
 		
@@ -63,7 +62,6 @@ public class EquipoUnitTests {
 	@Test
 	public void iteraCorrectamente(){
 		
-		Tablero tablero = new Tablero(15,15);
 		String nombre = "Test";
 		Equipo equipo = new Equipo(nombre);
 		

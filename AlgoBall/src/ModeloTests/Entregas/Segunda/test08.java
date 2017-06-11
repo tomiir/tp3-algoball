@@ -10,7 +10,6 @@ import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcAtaqueIlegitimo;
 import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;

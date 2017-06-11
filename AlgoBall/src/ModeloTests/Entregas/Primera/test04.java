@@ -12,8 +12,6 @@ import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Goku;
-import Modelo.Personajes.Personaje;
-import Modelo.Personajes.PersonajeDePrueba;
 
 public class test04 {
 	

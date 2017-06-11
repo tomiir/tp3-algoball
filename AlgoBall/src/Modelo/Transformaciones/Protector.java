@@ -1,6 +1,5 @@
 package Modelo.Transformaciones;
 
-import Modelo.Equipo;
 import Modelo.Partida;
 import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;

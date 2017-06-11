@@ -2,8 +2,6 @@ package Modelo.Personajes;
 
 import Modelo.Partida;
 import Modelo.Transformaciones.GohanSS2;
-import Modelo.Tablero;
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Ataques.Masenko;
 import Modelo.Transformaciones.TransformacionPorKi;
 
