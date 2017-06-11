@@ -27,15 +27,12 @@ public class Partida {
 	Tablero tablero;
 	Map<String, Integer> movsRestantes= new HashMap<String, Integer>();
 	Map<String, Boolean> yaAtaco= new HashMap<String, Boolean>();
-	Map<String, Jugador> adversarios= new HashMap<String, Jugador>();
 	Map<String, Integer> turnosInmovilizados= new HashMap<String, Integer>();
 	
 	public Partida (Tablero tab, Jugador primerJugador, Jugador segundoJugador){
 		tablero = tab;
 		jugador1 = primerJugador;
 		jugador2 = segundoJugador;
-		adversarios.put(jugador1.nombre(),jugador2);
-		adversarios.put(jugador2.nombre(),jugador1);
 	}
 	
 	public void paralizarPorTurnos(Personaje personaje, int turnos){
@@ -161,7 +158,10 @@ public class Partida {
 	}
 	
 	private Jugador adversario(Jugador jugador){
-		return adversarios.get(jugador.nombre);
+		if(jugador==jugador1){
+			return jugador2;
+		}
+		return jugador1;
 	}
 	
 	private void posicionPersonajesInicial() {

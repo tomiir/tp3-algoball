@@ -123,4 +123,6 @@ public class PersonajeUnitTests {
 		Assert.assertEquals("El ki aumentado es correcto",personaje1.ki(),0);
 	}
 	
+	
+	
 }
