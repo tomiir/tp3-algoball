@@ -1,5 +1,6 @@
 package ModeloTests.Entregas.Segunda;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
@@ -14,9 +15,8 @@ import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Piccolo;
-import org.junit.Assert;
 
-public class test01 {
+public class test05 {
 	Tablero tablero = new Tablero(15, 15);
 	Jugador jugador1 = new Jugador("Jugador Guerreros Z");
 	Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
@@ -59,45 +59,18 @@ public class test01 {
 	}
 	
 	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void GohanNoSePuedeTransformar() throws ExcNoEsPosibleTransformarse{
+	public void cellNoPuedeTransformarse() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
 		iniciarPartida();
-		gohan.transformar();
-	}
-	
-	@Test
-	public void GohanSePuedeTransformarPasados2Turnos() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		partida.avanzarTurno();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
-		gohan.transformar();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
-		Assert.assertEquals("El poder de pelea de gohan es correcto", gohan.poderDePelea(),30);
-		Assert.assertEquals("El rango de ataque de gohan es correcto", gohan.rangoDeAtaque(), 2);
-		Assert.assertEquals("La velocidad de gohan es correcta", gohan.velocidad(), 2);
+		cell.transformar();
 	}
 	
 	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void GohanNoSePuedeTransformarDevuelta() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
+	public void cellNoPuedeTransformarseInclusoConKi() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
 		iniciarPartida();
-		partida.avanzarTurno();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
-		gohan.transformar();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
-		gohan.transformar();
-	}
-	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void gohanNoSePuedeTransformarDevueltaConKiSuficiente() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		partida.avanzarTurno();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
-		gohan.transformar();
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
-		for(int i=0;i<6;i++){
+		for(int i=0;i<999;i++){
 			partida.avanzarTurno();
 		}
-		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 30);
-		gohan.transformar();
+		Assert.assertEquals("El ki de cell es correcto", cell.ki(), 5000);
+		cell.transformar();
 	}
-	
 }

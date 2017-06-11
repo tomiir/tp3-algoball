@@ -28,6 +28,7 @@ public class Goku extends Personaje {
 	}
 	
 	protected int bonificacionDeAtaquePorcentual(){
+		if(this.vidaPorcentual()<30) return 20;
 		return 0;
 	}
 

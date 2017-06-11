@@ -1,6 +1,10 @@
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -70,7 +74,7 @@ public class Partida {
 	}
 	
 	public void iniciar(){
-		if(iniciada=false){
+		if(iniciada==false){
 			try {
 				posicionPersonajesInicial();
 				avanzarTurno();
@@ -86,11 +90,15 @@ public class Partida {
 		
 		jugador1.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador1.equipo().forEach((k,v)->yaAtaco.put(k,false));
-		jugador1.equipo().forEach((k,v)->v.sumarKi(5));
+		jugador1.equipo().forEach((k,v)->{
+			if(!estaInmovilizado(v)) v.sumarKi(5);
+		});
 		
 		jugador2.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador2.equipo().forEach((k,v)->yaAtaco.put(k,false));
-		jugador2.equipo().forEach((k,v)->v.sumarKi(5));
+		jugador2.equipo().forEach((k,v)->{
+			if(!estaInmovilizado(v)) v.sumarKi(5);
+		});
 		
 		turnosInmovilizados.forEach((k,v)->v--);
 	}
@@ -153,7 +161,7 @@ public class Partida {
 			return false;
 		}
 		if(!adversario(jugador).equipo().personajePertenece(destinatario)) return false;
-		return yaAtaco.get(personaje.nombre());
+		return !yaAtaco.get(personaje.nombre());
 	}
 	
 	private Jugador adversario(Jugador jugador){
@@ -161,35 +169,28 @@ public class Partida {
 	}
 	
 	private void posicionPersonajesInicial() {
-		jugador1.equipo().forEach((n,p)->{
-			int i=1;
+		LinkedList<Personaje> listaEquipo1 = new LinkedList<Personaje>();
+		LinkedList<Personaje> listaEquipo2 = new LinkedList<Personaje>();
+		jugador1.equipo().forEach((n,p)->listaEquipo1.addLast(p));
+		jugador2.equipo().forEach((n,p)->listaEquipo2.addLast(p));
+		Iterator<Personaje> iter1 = listaEquipo1.iterator();
+		int i = 1;
+		while(iter1.hasNext()){
 			try {
-				while(tablero.obtenerCasillero(new Posicion(1,i)).estaOcupado()){
-					i++;
-				}
-			} catch (ExcFueraDeTablero | ExcPosicionNegativa e) {
-			}
-			try {
-				tablero.posicionarPersonaje(p, new Posicion(1,i));
-			} catch (ExcPosicionOcupada | ExcFueraDeTablero | ExcPosicionNegativa e) {
-
-			}
-		}
-		);
-		jugador2.equipo().forEach((n,p)->{
-			int i=1;
-			try {
-				while(tablero.obtenerCasillero(new Posicion(tablero.alto(),i)).estaOcupado()){
-					i++;
-				}
-			} catch (ExcFueraDeTablero | ExcPosicionNegativa e) {
-			}
-			try {
-				tablero.posicionarPersonaje(p, new Posicion(tablero.alto(),i));
+				tablero.posicionarPersonaje(iter1.next(), new Posicion(i, 1));
 			} catch (ExcPosicionOcupada | ExcFueraDeTablero | ExcPosicionNegativa e) {
 			}
+			i++;
 		}
-		);
+		Iterator<Personaje> iter2 = listaEquipo2.iterator();
+		i = 1;
+		while(iter2.hasNext()){
+			try {
+				tablero.posicionarPersonaje(iter2.next(), new Posicion(i, tablero.alto()));
+			} catch (ExcPosicionOcupada | ExcFueraDeTablero | ExcPosicionNegativa e) {
+			}
+			i++;
+		}
 	}
 	
 }

@@ -29,7 +29,7 @@ public abstract class Ataque {
 		if(remitente.poderDePelea()<destinatario.poderDePelea()){
 			daño = daño*8/10;
 		}
-		return daño*((100+bonificacionPorcentual)/100);
+		return (daño*(100+bonificacionPorcentual))/100;
 		
 	}
 	

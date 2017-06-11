@@ -7,9 +7,14 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcAtaqueIlegitimo;
+import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDañoNegativo;
+import Modelo.Excepciones.ExcFueraDeRango;
+import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
+import Modelo.Excepciones.ExcPersonajeInmovilizado;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
@@ -17,9 +22,9 @@ import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Piccolo;
 	
-	public class test03 {
+	public class test09 {
 		
-		Tablero tablero = new Tablero(15, 15);
+		Tablero tablero = new Tablero(3, 3);
 		Jugador jugador1 = new Jugador("Jugador Guerreros Z");
 		Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
 		Partida partida;
@@ -59,35 +64,26 @@ import Modelo.Personajes.Piccolo;
 			jugador2.asignarEquipo(equipo2);
 			partida.iniciar();
 		}
-	@Test (expected = ExcNoEsPosibleTransformarse.class)	
-	public void piccoloNoSePuedeTransformarSinKi() throws ExcNoEsPosibleTransformarse{
+		
+	@Test	
+	public void gokuAumentaDañoAlTenerMenosDel30PorcientoDeVida() throws ExcNoEsPosibleTransformarse, ExcDañoNegativo, ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador{
 		iniciarPartida();
-		piccolo.transformar();
+		
+		int vida_cell = cell.puntosDeVida();
+		partida.realizarAtaque(jugador1, goku, cell.posicion(), false);
+		
+		Assert.assertEquals("El ataque hace el daño correcto",cell.puntosDeVida(),vida_cell-goku.poderDePelea());
+		
+		goku.recibirDaño(355);
+		partida.avanzarTurno();
+		
+		Assert.assertEquals("La vida porcentual de goku es correcta",goku.vidaPorcentual(), 29);
+		int vida_freezer = freezer.puntosDeVida();
+		partida.realizarAtaque(jugador1, goku, freezer.posicion(), false);
+		
+		Assert.assertEquals("El ataque hace 20% mas de daño ",freezer.puntosDeVida(),vida_freezer-goku.poderDePelea()-(goku.poderDePelea()*20)/100);
 	}
 	
-	@Test
-	public void piccoloSePuedeTransformarConKiSuficiente() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		for(int i=0;i<3;i++){
-			partida.avanzarTurno();
-		}
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 20);
-		piccolo.transformar();
-		
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 0);
-		Assert.assertEquals("El poder de pelea de piccolo es correcto", piccolo.poderDePelea(),40);
-		Assert.assertEquals("El rango de ataque de piccolo es correcto", piccolo.rangoDeAtaque(), 4);
-		Assert.assertEquals("La velocidad de piccolo es correcta", piccolo.velocidad(), 3);
-	}
-
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void piccoloNoSePuedeTransformarDevuelta() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		partida.avanzarTurno();
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 10);
-		piccolo.transformar();
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 0);
-		piccolo.transformar();
-	}
+	
 		
 }

@@ -35,6 +35,7 @@ public class test02 {
 	
 	private void iniciarPartida(){
 		
+		partida = new Partida(tablero, jugador1, jugador2);
 		equipo1 = new Equipo("Guerreros Z");
 		equipo2 = new Equipo("Enemigos de la tierra");
 		goku = new Goku(partida);
@@ -56,23 +57,55 @@ public class test02 {
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
-		
-		partida = new Partida(tablero, jugador1, jugador2);
-		
 		partida.iniciar();
 	}
 	
+	@Test (expected = ExcNoEsPosibleTransformarse.class)
+	public void gohanNoSePuedeTransformarSegundaTransformacionPorKi() throws ExcHayGanador, ExcNoEsPosibleTransformarse, ExcDañoNegativo{
+		iniciarPartida();
+		
+		partida.avanzarTurno();
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
+		gohan.transformar();
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
+		
+		Assert.assertEquals("La vida porcentualde goku es correcta",goku.vidaPorcentual(), 100);
+		Assert.assertEquals("La vida porcentualde piccolo es correcta",goku.vidaPorcentual(), 100);
+		
+		
+		goku.recibirDaño(350);
+		piccolo.recibirDaño(350);
+		
+		Assert.assertEquals("La vida porcentual de goku es correcta",goku.vidaPorcentual(), 30);
+		Assert.assertEquals("La vida porcentual de piccolo es correcta",piccolo.vidaPorcentual(), 30);
+		
+		gohan.transformar();
+	}
 	
-
-	@Test
-	public void gohanSePuedeTransformarConCondicionesCorrectas() throws ExcHayGanador, ExcNoEsPosibleTransformarse, ExcDañoNegativo{
+	@Test (expected = ExcNoEsPosibleTransformarse.class)
+	public void gohanNoSePuedeTransformarSegundaTransformacionPorCompañerosConVidaMayorA30Porciento() throws ExcHayGanador, ExcDañoNegativo, ExcNoEsPosibleTransformarse{
 		iniciarPartida();
 		
-		iniciarPartida();
+		partida.avanzarTurno();
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
+		gohan.transformar();
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
 		
-		for(int i=0;i<2;i++){
+		Assert.assertEquals("La vida porcentualde goku es correcta",goku.vidaPorcentual(), 100);
+		Assert.assertEquals("La vida porcentualde piccolo es correcta",goku.vidaPorcentual(), 100);
+		
+		for(int i=0;i<6;i++){
 			partida.avanzarTurno();
 		}
+		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 30);
+		gohan.transformar();
+	}
+	
+	@Test
+	public void gohanSePuedeTransformarSegundaTransformacionConCondicionesCorrectas() throws ExcHayGanador, ExcNoEsPosibleTransformarse, ExcDañoNegativo{
+		iniciarPartida();
+		
+		partida.avanzarTurno();
 		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 10);
 		gohan.transformar();
 		Assert.assertEquals("El ki de gohan es correcto", gohan.ki(), 0);
