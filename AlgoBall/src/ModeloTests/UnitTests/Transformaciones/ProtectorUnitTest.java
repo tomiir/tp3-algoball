@@ -48,15 +48,14 @@ public class ProtectorUnitTest {
 	@Test
 	public void noEsPosibleTransformarProtector (){
 		iniciarPartida();
-		Assert.assertEquals(transformacionProtector.esPosible(personaje1) , false);	
+		Assert.assertEquals(transformacionProtector.esPosible(personaje1, partida) , false);	
 	}
 	
 	@Test
 	public void esPosibleTransformarProtector ()throws ExcDañoNegativo{
 		iniciarPartida();
 		personaje3.recibirDaño(241);
-		
-		Assert.assertEquals(transformacionProtector.esPosible(personaje1), true);
+		Assert.assertEquals(transformacionProtector.esPosible(personaje1, partida), true);
 	}
 	
 }

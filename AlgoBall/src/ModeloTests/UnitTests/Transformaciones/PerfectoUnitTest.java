@@ -25,12 +25,12 @@ public class PerfectoUnitTest {
 	
 	@Test
 	public void NoEsPosibleTransformarSemiPerfecto(){
-		Assert.assertEquals(perfecto.esPosible(personaje1),false);
+		Assert.assertEquals(perfecto.esPosible(personaje1, partida),false);
 	} 
 	@Test
 	public void esPosibleTransformarSemiPerfecto() {
 		personaje1.setAbsorciones(8);
-		Assert.assertEquals(perfecto.esPosible(personaje1), true);
+		Assert.assertEquals(perfecto.esPosible(personaje1, partida), true);
 	}
 	
 }

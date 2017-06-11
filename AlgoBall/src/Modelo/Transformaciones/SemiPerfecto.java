@@ -1,5 +1,6 @@
 package Modelo.Transformaciones;
 
+import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class SemiPerfecto extends Transformacion {
@@ -14,7 +15,7 @@ public class SemiPerfecto extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje) {
+	public boolean esPosible(Personaje personaje, Partida partida) {
 		return (personaje.cantidadDeAbsorciones()>=4);
 	}
 

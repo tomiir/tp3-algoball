@@ -19,7 +19,7 @@ public class GohanSS2 extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje) {
+	public boolean esPosible(Personaje personaje, Partida partida) {
 		aux = (personaje.ki() >= this.costo);
 		
 		Equipo equipo = this.partida.obtenerEquipoAliado(personaje);

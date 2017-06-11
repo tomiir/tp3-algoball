@@ -34,12 +34,12 @@ public class TransformacionPorKiUnitTests {
 	
 	@Test
 	public void transformacionNoEsPosible(){
-		Assert.assertFalse(trans.esPosible(personaje1));
+		Assert.assertFalse(trans.esPosible(personaje1, partida));
 	}
 	
 	@Test
 	public void transformacionEsPosible(){
 		personaje1.sumarKi(10);
-		Assert.assertTrue(trans.esPosible(personaje1));
+		Assert.assertTrue(trans.esPosible(personaje1, partida));
 	}
 }

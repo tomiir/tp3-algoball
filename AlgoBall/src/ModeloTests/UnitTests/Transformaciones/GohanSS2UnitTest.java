@@ -51,7 +51,7 @@ public class GohanSS2UnitTest {
 	@Test 
 	public void noEsPosibleTransformarGohanSS2 () throws ExcNoEsPosibleTransformarse{
 		iniciarPartida();
-		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1) , false);	
+		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1, partida) , false);	
 		
 	}
 	
@@ -61,7 +61,7 @@ public class GohanSS2UnitTest {
 		personaje1.sumarKi(30);
 		personaje2.recibirDaño(250);
 		
-		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1), true);		
+		Assert.assertEquals(transformacionEspecialGohan.esPosible(personaje1, partida), true);		
 	}
 	 
 }

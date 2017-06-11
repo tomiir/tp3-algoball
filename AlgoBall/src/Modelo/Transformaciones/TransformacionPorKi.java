@@ -1,5 +1,6 @@
 package Modelo.Transformaciones;
 
+import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class TransformacionPorKi extends Transformacion {
@@ -14,7 +15,7 @@ public class TransformacionPorKi extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje) {
+	public boolean esPosible(Personaje personaje, Partida partida) {
 		return (personaje.ki()>=this.costo);
 	}
 

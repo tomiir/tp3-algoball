@@ -1,5 +1,6 @@
 package Modelo.Transformaciones;
 
+import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class Perfecto extends Transformacion {
@@ -14,7 +15,7 @@ public class Perfecto extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje) {
+	public boolean esPosible(Personaje personaje, Partida partida) {
 		if(personaje.cantidadDeAbsorciones()>=8) return true;
 		return false;
 	}

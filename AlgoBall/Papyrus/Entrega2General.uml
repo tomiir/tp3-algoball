@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_edHVoE7tEeeBf7V-_Ms3pw" name="Entrega2General">
+  <packagedElement xmi:type="uml:Class" xmi:id="_lMq94E7tEeeBf7V-_Ms3pw" name="Personaje">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ciLBAk7vEeesfOqCrjlFpw" name="transformacion" type="_XEvH8E7vEeesfOqCrjlFpw" association="_ciKZ8E7vEeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_t3rmME7tEeeBf7V-_Ms3pw" name="Partida"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3PWgME7tEeeBf7V-_Ms3pw" memberEnd="_3PaxoE7tEeeBf7V-_Ms3pw _3PecAE7tEeeBf7V-_Ms3pw" navigableOwnedEnd="_3PaxoE7tEeeBf7V-_Ms3pw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3PYVYE7tEeeBf7V-_Ms3pw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3PY8cE7tEeeBf7V-_Ms3pw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3PecAE7tEeeBf7V-_Ms3pw" name="personaje" type="_lMq94E7tEeeBf7V-_Ms3pw" association="_3PWgME7tEeeBf7V-_Ms3pw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_N0DcME7uEeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_N0I7wE7uEeesfOqCrjlFpw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3PaxoE7tEeeBf7V-_Ms3pw" name="partida" type="_t3rmME7tEeeBf7V-_Ms3pw" association="_3PWgME7tEeeBf7V-_Ms3pw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CSQM8E7uEeeBf7V-_Ms3pw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CT2vcE7uEeeBf7V-_Ms3pw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_RPHN0E7uEeesfOqCrjlFpw" name="Tablero"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_TsZvoE7uEeesfOqCrjlFpw" memberEnd="_TscL4E7uEeesfOqCrjlFpw _TscL4U7uEeesfOqCrjlFpw" navigableOwnedEnd="_TscL4E7uEeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Tsa9wE7uEeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Tsbk0E7uEeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_TscL4U7uEeesfOqCrjlFpw" name="partida" type="_t3rmME7tEeeBf7V-_Ms3pw" association="_TsZvoE7uEeesfOqCrjlFpw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_TscL4E7uEeesfOqCrjlFpw" name="tablero" type="_RPHN0E7uEeesfOqCrjlFpw" association="_TsZvoE7uEeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VSp7wE7uEeesfOqCrjlFpw" name="Casillero"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XPSAgE7uEeesfOqCrjlFpw" memberEnd="_XPT1sU7uEeesfOqCrjlFpw _XPmwoE7uEeesfOqCrjlFpw" navigableOwnedEnd="_XPT1sU7uEeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XPTOoE7uEeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XPT1sE7uEeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XPmwoE7uEeesfOqCrjlFpw" name="tablero" type="_RPHN0E7uEeesfOqCrjlFpw" association="_XPSAgE7uEeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dIEY0E7uEeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dI4RIE7uEeesfOqCrjlFpw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XPT1sU7uEeesfOqCrjlFpw" name="casillero" type="_VSp7wE7uEeesfOqCrjlFpw" aggregation="composite" association="_XPSAgE7uEeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hsb74E7uEeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hsgNUE7uEeesfOqCrjlFpw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_vJpH4E7uEeesfOqCrjlFpw" name="Ataque"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_yeXoAE7uEeesfOqCrjlFpw" memberEnd="_yeduoE7uEeesfOqCrjlFpw _yefj0E7uEeesfOqCrjlFpw" navigableOwnedEnd="_yeduoE7uEeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_yeb5cE7uEeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_yedHkE7uEeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_yeduoE7uEeesfOqCrjlFpw" name="ataque" type="_vJpH4E7uEeesfOqCrjlFpw" aggregation="composite" association="_yeXoAE7uEeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NQoJkE7vEeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NRJuAE7vEeesfOqCrjlFpw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_yefj0E7uEeesfOqCrjlFpw" name="personaje" type="_lMq94E7tEeeBf7V-_Ms3pw" association="_yeXoAE7uEeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LvV9AE7vEeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Lvyo8E7vEeesfOqCrjlFpw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XEvH8E7vEeesfOqCrjlFpw" name="Transformacion"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ciKZ8E7vEeesfOqCrjlFpw" memberEnd="_ciLBAk7vEeesfOqCrjlFpw _ciLBA07vEeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ciLBAE7vEeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ciLBAU7vEeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ciLBA07vEeesfOqCrjlFpw" name="personaje" type="_lMq94E7tEeeBf7V-_Ms3pw" association="_ciKZ8E7vEeesfOqCrjlFpw"/>
+  </packagedElement>
+</uml:Model>

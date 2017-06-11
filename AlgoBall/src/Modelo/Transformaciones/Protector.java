@@ -17,7 +17,7 @@ public class Protector extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje) {
+	public boolean esPosible(Personaje personaje, Partida partida) {
 		
 		Personaje gohan;
 		try {
