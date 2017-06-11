@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_4zXaME75EeesfOqCrjlFpw" name="Partida">
+  <packagedElement xmi:type="uml:Class" xmi:id="_XbokAE76EeesfOqCrjlFpw" name="Partida">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_4pCkE076EeesfOqCrjlFpw" name="tablero" type="_vPsPEE76EeesfOqCrjlFpw" association="_4pCkEE76EeesfOqCrjlFpw"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_6s88kk76EeesfOqCrjlFpw" name="jugador" type="_wBmNIE76EeesfOqCrjlFpw" association="_6s8VgE76EeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9FYzkE76EeesfOqCrjlFpw" value="2"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9Fp5UE76EeesfOqCrjlFpw" value="2"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_34QK4E77EeesfOqCrjlFpw" name="realizarAtaque">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_MmsI0E78EeesfOqCrjlFpw" name="jugador" type="_wBmNIE76EeesfOqCrjlFpw"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_OWBYcE78EeesfOqCrjlFpw" name="personaje">
+        <type xmi:type="uml:Class" href="PersonajeClases.uml#_zZsD8E7yEeesfOqCrjlFpw"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_SFFEIE78EeesfOqCrjlFpw" name="posicion">
+        <type xmi:type="uml:Class" href="PersonajeClases.uml#_VRRIwE77EeesfOqCrjlFpw"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_THm4IE78EeesfOqCrjlFpw" name="realizarMovimiento">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_XNqukE78EeesfOqCrjlFpw" name="jugador" type="_wBmNIE76EeesfOqCrjlFpw"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZwnMcE78EeesfOqCrjlFpw" name="personaje">
+        <type xmi:type="uml:Class" href="PersonajeClases.uml#_zZsD8E7yEeesfOqCrjlFpw"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dcfoUE78EeesfOqCrjlFpw" name="dir">
+        <type xmi:type="uml:Class" href="PersonajeClases.uml#_x6KYoE73EeesfOqCrjlFpw"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_mGMCAE78EeesfOqCrjlFpw" name="avanzarTurno"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_vPsPEE76EeesfOqCrjlFpw" name="Tablero">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ArCroE77EeesfOqCrjlFpw" name="casillero" type="_1irQEE76EeesfOqCrjlFpw" aggregation="composite" association="_ArBdgE77EeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_C7OlkE77EeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_C7aLwE77EeesfOqCrjlFpw" value="*"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_nlyzkE78EeesfOqCrjlFpw" name="obtenerCasillero">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_qU1zwE78EeesfOqCrjlFpw" name="p">
+        <type xmi:type="uml:Class" href="PersonajeClases.uml#_VRRIwE77EeesfOqCrjlFpw"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wBmNIE76EeesfOqCrjlFpw" name="Jugador">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="__vXtkU76EeesfOqCrjlFpw" name="equipo" type="_wpyOgE76EeesfOqCrjlFpw" association="__vXGgE76EeesfOqCrjlFpw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_gMJsgE78EeesfOqCrjlFpw" name="Equipo equipo"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wpyOgE76EeesfOqCrjlFpw" name="Equipo">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Z1rvI077EeesfOqCrjlFpw" name="personaje" type="_GVV8AE77EeesfOqCrjlFpw" association="_Z1rvIE77EeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dlwHcE77EeesfOqCrjlFpw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dmcrAE77EeesfOqCrjlFpw" value="*"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_tIPvgE78EeesfOqCrjlFpw" name="forEach"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1irQEE76EeesfOqCrjlFpw" name="Casillero">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_XUBDok77EeesfOqCrjlFpw" name="personaje" type="_GVV8AE77EeesfOqCrjlFpw" association="_XUAckE77EeesfOqCrjlFpw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Y7G9QE77EeesfOqCrjlFpw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y7kQQE77EeesfOqCrjlFpw" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_vz-V8E78EeesfOqCrjlFpw" name="obtenerPersonaje"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_4pCkEE76EeesfOqCrjlFpw" memberEnd="_4pCkE076EeesfOqCrjlFpw _4pDLIE76EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4pCkEU76EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_4pCkEk76EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4pDLIE76EeesfOqCrjlFpw" name="partida" type="_XbokAE76EeesfOqCrjlFpw" association="_4pCkEE76EeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6s8VgE76EeesfOqCrjlFpw" memberEnd="_6s88kk76EeesfOqCrjlFpw _6s88k076EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6s88kE76EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_6s88kU76EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6s88k076EeesfOqCrjlFpw" name="partida" type="_XbokAE76EeesfOqCrjlFpw" association="_6s8VgE76EeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="__vXGgE76EeesfOqCrjlFpw" memberEnd="__vXtkU76EeesfOqCrjlFpw __vXtkk76EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__vXGgU76EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="__vXtkE76EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="__vXtkk76EeesfOqCrjlFpw" name="jugador" type="_wBmNIE76EeesfOqCrjlFpw" association="__vXGgE76EeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ArBdgE77EeesfOqCrjlFpw" memberEnd="_ArCroE77EeesfOqCrjlFpw _ArCroU77EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ArCEkE77EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ArCEkU77EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ArCroU77EeesfOqCrjlFpw" name="tablero" type="_vPsPEE76EeesfOqCrjlFpw" association="_ArBdgE77EeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_GVV8AE77EeesfOqCrjlFpw" name="Personaje"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XUAckE77EeesfOqCrjlFpw" memberEnd="_XUBDok77EeesfOqCrjlFpw _XUBDo077EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XUBDoE77EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XUBDoU77EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XUBDo077EeesfOqCrjlFpw" name="casillero" type="_1irQEE76EeesfOqCrjlFpw" association="_XUAckE77EeesfOqCrjlFpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Z1rvIE77EeesfOqCrjlFpw" memberEnd="_Z1rvI077EeesfOqCrjlFpw _Z1rvJE77EeesfOqCrjlFpw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Z1rvIU77EeesfOqCrjlFpw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Z1rvIk77EeesfOqCrjlFpw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Z1rvJE77EeesfOqCrjlFpw" name="equipo" type="_wpyOgE76EeesfOqCrjlFpw" association="_Z1rvIE77EeesfOqCrjlFpw"/>
+  </packagedElement>
+</uml:Model>

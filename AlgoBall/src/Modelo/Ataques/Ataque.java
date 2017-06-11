@@ -33,10 +33,6 @@ public abstract class Ataque {
 		
 	}
 	
-	public int modificadorDaño (){
-		return this.modificadorDaño;
-	}
-	
 	public int costo() {
 		return this.costo;
 	}
