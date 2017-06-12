@@ -1,0 +1,167 @@
+\documentclass[a4paper]{article}
+
+\usepackage{color} % Paquete para darle color a la sintaxis del codigo fuente.
+
+% Establece los márgenes de la hoja, aunque los margenes por defecto son bastante buenos.
+%\usepackage[top=3cm, bottom=3cm, left=2cm, right=2cm]{geometry} 
+
+\usepackage{latexsym} % Este paquete permite usar simbolos especiales, no relacionados con la matemática, como  \Join o \Box
+\usepackage{verbatim} % Para escribir codigo fuente.
+\usepackage{amsmath} % La gran mayoría de los simbolos matemáticos
+\usepackage{amssymb} % Algunos pocos símbolos matemáticos más raros, como \digamma
+
+\usepackage[spanish]{babel} % Definimos el documento como que esta en español.
+
+\usepackage[utf8]{inputenx} % Este paquete permite usar los acentos y eñes directamente en el texto.
+
+\usepackage{graphicx} % Para usar imagenes
+
+\title{Trabajo Practico Nro 2: DragonAlgoBall}
+
+\author{ Facundo Costa \and Tomas Rocchi\and Uriel Kelman \and Gianmarco Cafferata}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{description}
+
+\item [Consigna]: Se pide desarrollar un juego basado en el popular anime "Dragon Ball Z", usando programacion orientada a objetos.
+
+\item [Entrega Nro 2]: 1ra entrega + transformaciones con requisitos especiales + ataques especiales con efectos.
+
+\end{description}
+
+
+
+
+\newpage
+\section{Supuestos}
+
+\begin{itemize}
+
+\item Un personaje puede atacar a otro que esté en su rango de ataque incluso si hay otros personajes entre ellos.
+\item SUPUESTOS QUE TIENE FACU
+
+\end{itemize}
+
+
+
+
+\section{Modelo de dominio}
+
+Se presentan a continuación los siguientes objetos utilizados para el modelado de la aplicación: 
+
+\subsection{Partida} Es el ente controlador del juego. Una partida requiere a dos jugadores para ser creada y un tablero, el cuál es el espacio lógico donde se lleva acabo la misma. La partida es la encargada de inicializar el juego y realizar todas las verificaciones lógicas que permiten el desarrollo del mismo. Para ello tiene conocimiento de los jugadores y a su vez de sus equipos asignados, de los cuales puede extraer la información que necesita. La partida  lleva la cuenta de que acciones realizó cada personaje, cuánto se movió, si tiene algún efecto especial aplicado, etc. y utiliza esta información para realizar verificaciones sobre las acciones que realizan los usuarios.
+
+\subsection{Jugador}
+Ente que modela a la persona que interactúa con la aplicación.
+
+\subsection{Personaje}
+Actor del juego. Los distintos personajes del juego heredan de esta clase y definen sus atributos acorde a lo especificado en la consigna. Un personaje tiene acceso a todos los datos relevantes para el desarrollo del juego tales como su ki, rango de ataque, puntos de vida y velocidad entre otros. Cada personaje tiene dos transformaciones disponibles, las cuales se almacenan en una cola de transformaciones propias a cada personaje. De acuerdo con nuestro alcance, los personajes son parte de una partida, y no tiene sentido su existencia fuera de este entorno, por ende, requieren una referencia al mismo en su creación. Los personajes tienen un ataque normal y un ataque especial, el cual puede o no depender del ataque normal. 
+
+
+\subsection{Transformación}
+ Modificador de atributos de un personaje. Los personajes tienen transformaciones características, las cuales modifican los valores de los atributos de los mismos. Tiene sus transformaciones en una cola y puede acceder a los datos acerca de sus atributos para modificar los del personaje. Las transformaciones tienen un costo en ki y a veces se deben cumplir ciertas condiciones para poder realizarse.
+
+\subsection{TransformaciónPorKi}
+Transformación sin condiciones adicionales al costo de ki.
+
+\subsection{Transformaciones Específicas}
+Transformación con condiciones adicionales. Requiere conocimiento de la partida que se está desarrollando para corroborar que se cumplen las condiciones para que se dé la transformación.
+
+\subsection{Personajes Específicos}
+Especificación de un personaje, con los atributos seteados acorde al enunciado.
+
+\subsection{PersonajeDePrueba}
+Especificación de un personaje a medida para realizar pruebas sobre el mismo.
+
+\subsection{Casillero}
+Posición en la cual puede posicionarse un personaje o un item. Un casillero tiene conocimiento sobre su posición y su contenido. En conjunto con otros casilleros forma parte de un tablero.
+
+\subsection{Tablero} El espacio donde se pueden mover los personajes. Está modelado con una matriz de Casilleros te tamaño genérico. El tablero tiene conocimiento de los casilleros que lo conforma y puede acceder a la información en ellos. El tablero es el encargado de posicionar a los personajes y mantener la información respecto de su posición.
+
+\subsection{Ataque}
+Clase abstracta que modela un ataque de un personaje a otro. Para que un personaje dañe a otro, debe realizar un ataque. Cada ataque tiene un costo y un daño y es quien sabe si es posible realizarse en el marco en el que es llamado. El ataque siempre es creado por un personaje, el cual define el dano de dicho ataque. El daño del ataque depende del poder de pelea del usuario y del tipo de ataque que se realice. Algunos ataques tienen otros efectos mas allá del daño realizado y se contemplan proveyendo un método para aplicar efectos colaterales.
+
+\subsection{AtaqueNormal}
+Ataque general de cualquier personaje.
+
+\subsection{Ataque Específico}
+Ataque especial, definido acorde a los datos del enunciado. Cada ataque especial tiene un costo en ki y un modificador de daño. El modificador de daño permite aplicar incrementos al daño que realizará el ataque, con respecto al daño que realizaría tomando en cuenta el poder de pelea del personaje que lo utiliza. 
+
+
+
+\newpage
+\section{Diagramas de clases}
+
+\newpage
+\section{Diagramas de secuencia}
+
+\newpage
+\section{Diagramas de paquetes}
+	
+\newpage
+\section{Diagramas de estados}
+
+\newpage
+\section{Excepciones}
+
+
+\subsection{AtaqueIlegitimo}
+ Excepción que es lanzada si el ataque no es legitimo. Un ataque no es ligitimo cuando un personaje ataca a un jugador de un mismo equipo.
+
+\subsection{AtaqueImposible}
+ Excepción que es lanzada cuando un ataque no se puede realizar. Esto ocurre si por ejemplo el ataque es negativo. Imprime la razon por la cual el ataque es imposible.
+
+\subsection{CasilleroDesocupado}
+
+\subsection{CasilleroOcupado}
+
+\subsection{DañoNegativo}
+Excepción que es lanzado si el daño es negativo. Los personajes no deberian tener poder de pelea negativo, aun asi la agarramos y resolvemos en caso de ser necesario.
+
+\subsection{DireccionInvalida}
+Excepción que es lanzada cuando una direccion es invalida. Las unicas direcciones validas son (0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)
+
+\subsection{FueraDeRango} 
+
+\subsection{FueraDeTablero} 
+
+\subsection{HayGanador}
+Excepción que es lanzada si se encuentra un ganado. Es lanzada y agarrada cuando un jugador ganó. Imprime el jugador que ganó.
+
+\subsection{MovimientoIlegitimo}
+
+\subsection{NoEsPosibleTransformarse}
+Excepción que es lanzada cuando un personaje no puede transformarse. Un personaje no puede transformarse cuando no cumple con los requisitos de la transformación.
+
+\subsection{NoHayPersonaje}
+
+\subsection{PosicionNegativa}
+Excepción que es lanzada cuando la posicion que se crea es negativa. No existen posiciones negativas.
+
+
+\subsection{PosicionOcupada}
+
+\subsection{PersonajeInmovilizado}
+Excepción que es lanzada cuando un personaje esta inmovilizado. Un personaje se encuentra inmovilizado si recibio el ataque especial "ConvierteteEnChocolate".
+
+\subsection{ErrorFatal}
+Excepción que es lanzada cuando el error es incoherente. Esta excepcion es provisional y se utilizó para resolver excepciones que no tienen sentido. 
+
+
+
+\newpage
+\section{Detalles de Implementacion}
+Lo primero que notamos al encarar el TP fue que ibamos a tener que representar interacciones entre personajes dentro de un mundo acotado al juego. Este mundo puede ser interpretado como el tablero sobre el que los personajes se mueven e interactúan. 
+Decidimos representar al tablero como una matriz de Casilleros de tamaño genérico, a la cuál se puede acceder por índice y obtener la información necesaria del casillero guardado en dicha posición.
+Consideramos que sobre el tablero podemos posicionar tanto items como personajes, y decidimos que los casilleros pudieran almacenar ambas cosas por separado, e ideamos que en caso de encontrarse en el mismo casillero, el personaje consumirá al item.
+Notamos que todos los ataques normales tienen el mismo formato, mientras que los ataques especiales son todos diferentes, lo cuál hizo que diferenciaramos las clases por herencia, permitiendo más flexibilidad a futuro para modelar AtaqueEspecial.
+En tanto a las transformaciones, notamos que hay de dos tipos, transformaciones que cuestan únicamente ki, y transformaciones que tienen condiciones especiales para ser cumplidas. Decidimos hacer una clase TransformacionPorKi que modelara a una transformación genérica de éste tipo y modelar una clase aparte para cada transformación específica con otros requerimientos.
+En tanto a la partida, es el ente que permite posicionar a los personajes en un tablero y realizar acciones como ataques o movimientos. Se planea expandir la funcionalidad de la misma para acciones más complejas en futuras entregas. 
+
+
+\end{document}
