@@ -1,5 +1,6 @@
 package Modelo.Transformaciones;
 
+import Modelo.Equipo;
 import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
@@ -10,7 +11,7 @@ public abstract class Transformacion {
 	int velocidad;
 	int poderDePelea;
 	
-	public abstract boolean esPosible(Personaje personaje, Partida partida);
+	public abstract boolean esPosible(Personaje personaje, Equipo equipo);
 	
 	public int rangoDeAtaque() {
 		return this.rangoDeAtaque;	

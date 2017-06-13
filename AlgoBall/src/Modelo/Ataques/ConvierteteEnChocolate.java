@@ -4,15 +4,14 @@ import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class ConvierteteEnChocolate extends Ataque {
-	Partida partida;
-	public ConvierteteEnChocolate(Partida p) {
+	
+	public ConvierteteEnChocolate() {
 		costo = 30;
 		modificadorDaño = 0;
-		partida = p;
 	}
 	
 	@Override
 	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) {
-		partida.paralizarPorTurnos(destinatario, 3);
+		destinatario.convertirEnChocolate(3);
 	}
 }

@@ -3,6 +3,7 @@ package Modelo;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionOcupada;
+import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
 public class Tablero {
@@ -52,5 +53,18 @@ public class Tablero {
 				casilleros[i][j]=new Casillero();
 			}
 		}
+	}
+	
+	
+	public void removerSiEstaMuerto(Atacable atacable){
+		
+		if(atacable.estaMuerto()){
+			Posicion posicion = atacable.posicion();
+			Casillero casillero = casilleros[posicion.posX()][posicion.posY()];
+			casillero.desocupar();	
+		}
+		
+		
+	
 	}
 }

@@ -3,6 +3,7 @@ package Modelo;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 
+import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
 
 public class Equipo{
@@ -31,9 +32,12 @@ public class Equipo{
 		return personajes.containsKey(personaje.nombre());
 	}
 	
-	public Personaje buscarPersonaje(String nombre){
-		if(personajes.containsKey(nombre)) return personajes.get(nombre);
-		return null;
+	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{
+		if(personajes.containsKey(nombre)){
+			return personajes.get(nombre);
+		} else {
+			throw new ExcNoHayPersonaje();
+		}
 	}
 
 	public String nombre() {

@@ -5,12 +5,10 @@ import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class GohanSS2 extends Transformacion {
-	Partida partida;
 	protected boolean aux;
 	
-	public GohanSS2(Partida partida){
+	public GohanSS2(){
 		this.nombre = "Gohan SS2";
-		this.partida = partida;
 		this.rangoDeAtaque =4;
 		this.costo = 30;
 		this.velocidad = 3;
@@ -19,10 +17,8 @@ public class GohanSS2 extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje, Partida partida) {
+	public boolean esPosible(Personaje personaje, Equipo equipo) {
 		aux = (personaje.ki() >= this.costo);
-		
-		Equipo equipo = this.partida.obtenerEquipoAliado(personaje);
 				
 		equipo.forEach((k,v)->{
 			aux &=this.comprobarCondicion(personaje,v);

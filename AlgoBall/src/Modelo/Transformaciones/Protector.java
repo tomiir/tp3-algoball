@@ -1,5 +1,6 @@
 package Modelo.Transformaciones;
 
+import Modelo.Equipo;
 import Modelo.Partida;
 import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
@@ -17,11 +18,11 @@ public class Protector extends Transformacion {
 	}
 	
 	@Override
-	public boolean esPosible(Personaje personaje, Partida partida) {
+	public boolean esPosible(Personaje personaje, Equipo equipo) {
 		
 		Personaje gohan;
 		try {
-			gohan = partida.obtenerPersonaje("Gohan");
+			gohan = equipo.obtenerPersonaje("Gohan");
 		} catch (ExcNoHayPersonaje e) {
 			return false;
 		}

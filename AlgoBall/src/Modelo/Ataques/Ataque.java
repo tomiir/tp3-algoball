@@ -10,16 +10,16 @@ public abstract class Ataque {
 	
 	int modificadorDaño=100;
 	
-	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcAtaqueImposible{
+	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcDañoNegativo{
 		
 		int dañoActual = calcularDaño(remitente, destinatario, bonificacionPorcentual);
-		
+		int dañoRecibido;
 		try {
-			destinatario.recibirDaño(dañoActual);
+			dañoRecibido = destinatario.recibirDaño(dañoActual);
 		} catch (ExcDañoNegativo e) {
-			throw new ExcAtaqueImposible("No se pueden hacer daños negativos");
+			throw e;
 		}
-		this.efectosColaterales(remitente, destinatario, dañoActual);
+		this.efectosColaterales(remitente, destinatario, dañoRecibido);
 	}
 	
 	protected int calcularDaño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {

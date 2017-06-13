@@ -27,23 +27,19 @@ public class Posicion{
 		Posicion auxiliar= new Posicion(posX,posY);
 		
 		while(auxiliar.posX()!=destino.posX() || auxiliar.posY()!=destino.posY()){
-			Direccion movimiento = obtenerMovimientoUnitario(auxiliar, destino);
+			Posicion movimiento = obtenerMovimientoUnitario(auxiliar, destino);
 			distancia++;
-			auxiliar=new Posicion(auxiliar.posX()+movimiento.dx(), auxiliar.posY()+movimiento.dy());
+			auxiliar=new Posicion(auxiliar.posX()+movimiento.posX(), auxiliar.posY()+movimiento.posY());
 		}
 		return distancia;
 	}
 	
-	private Direccion obtenerMovimientoUnitario(Posicion origen, Posicion destino) throws ExcPosicionNegativa, ExcDireccionInvalida{
+	private Posicion obtenerMovimientoUnitario(Posicion origen, Posicion destino) throws ExcPosicionNegativa, ExcDireccionInvalida{
 		int dirX=destino.posX()-origen.posX();
 		int dirY=destino.posY()-origen.posY();
 		if(dirX!=0) dirX=dirX/Math.abs(dirX);
 		if(dirY!=0) dirY=dirY/Math.abs(dirY);
-		return new Direccion(dirX, dirY);
+		return new Posicion(dirX, dirY);
 	}
-
-	public Posicion interpretarDireccion(Direccion direccion) throws ExcPosicionNegativa {
-		return new Posicion(posX+direccion.dx(),posY+direccion.dy());
-	} 
 	
 }

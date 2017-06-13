@@ -12,6 +12,8 @@ import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Excepciones.ExcJugadorNoAutorizado;
+import Modelo.Excepciones.ExcJugadorYaAtaco;
 import Modelo.Excepciones.ExcMovimientoIlegitimo;
 import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Excepciones.ExcPersonajeInmovilizado;
@@ -25,8 +27,7 @@ public class Partida {
 	Jugador jugador1;
 	Jugador jugador2;
 	Tablero tablero;
-	Map<String, Integer> movsRestantes= new HashMap<String, Integer>();
-	Map<String, Boolean> yaAtaco= new HashMap<String, Boolean>();
+	Map<String, Integer> movsRestantes= new HashMap<String, Integer>();Map<String, Boolean> yaAtaco=w new HashMap<String, Boolean>();
 	Map<String, Integer> turnosInmovilizados= new HashMap<String, Integer>();
 	
 	public Partida (Tablero tab, Jugador primerJugador, Jugador segundoJugador){
@@ -39,21 +40,8 @@ public class Partida {
 		turnosInmovilizados.put(personaje.nombre(), turnos);
 	}
 
-	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
-		Personaje destinatario; 
-		if(!ataqueLegitimo(jugador, personaje, posicion)) throw new ExcAtaqueIlegitimo();
-		if(estaInmovilizado(personaje)) throw new ExcPersonajeInmovilizado();
-		try {
-			destinatario = tablero.obtenerCasillero(posicion).obtenerPersonaje();
-		} catch (ExcCasilleroDesocupado e) {
-			throw new ExcAtaqueIlegitimo();
-		}
+	public void realizarAtaque(Jugador jugador, Personaje remitente, Personaje destinatario, boolean esEspecial){
 		
-		try {
-			personaje.atacar(destinatario, esEspecial);
-		} catch (ExcFueraDeRango | ExcAtaqueImposible e) {
-			throw e;
-		}
 	}
 	
 	public void realizarMovimiento(Jugador jugador, Personaje personaje, Direccion direccion) throws ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcFueraDeTablero, ExcPersonajeInmovilizado{
@@ -84,13 +72,13 @@ public class Partida {
 		jugador1.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador1.equipo().forEach((k,v)->yaAtaco.put(k,false));
 		jugador1.equipo().forEach((k,v)->{
-			if(!estaInmovilizado(v)) v.sumarKi(5);
+			if(!estaInmovilizado(v)) v.pasoDeTurno(5);
 		});
 		
 		jugador2.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
 		jugador2.equipo().forEach((k,v)->yaAtaco.put(k,false));
 		jugador2.equipo().forEach((k,v)->{
-			if(!estaInmovilizado(v)) v.sumarKi(5);
+			if(!estaInmovilizado(v)) v.pasoDeTurno(5);
 		});
 		
 		turnosInmovilizados.forEach((k,v)->v--);
@@ -108,13 +96,11 @@ public class Partida {
 	}
 
 	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{
-		Personaje busqueda1 = jugador1.equipo().buscarPersonaje(nombre);
-		Personaje busqueda2 = jugador2.equipo().buscarPersonaje(nombre);
-		if(busqueda1 == null){
-			if(busqueda2 == null) throw new ExcNoHayPersonaje();
-			return busqueda2;
+		try {
+			return jugador1.equipo().obtenerPersonaje(nombre);
+		} catch (ExcNoHayPersonaje e) {
+			return jugador2.equipo().obtenerPersonaje(nombre);
 		}
-		return busqueda1;
 	}
 	
 	public boolean estaInmovilizado(Personaje personaje){
@@ -139,22 +125,15 @@ public class Partida {
 		return false;
 	}
 	
-	private boolean movimientoLegitimo(Jugador jugador, Personaje personaje, Direccion dir){
+	private boolean movimientoLegitimo(Jugador jugador, Personaje personaje){
 		if(!personajePerteneceAJugador(jugador,personaje)) return false;
 		if(movsRestantes.get(personaje.nombre())==0) return false;
 		return true;
 	}
 	
-	private boolean ataqueLegitimo(Jugador jugador, Personaje personaje, Posicion posicion){
-		if(!personajePerteneceAJugador(jugador,personaje)) return false;
-		Personaje destinatario;
-		try {
-				destinatario=tablero.obtenerCasillero(posicion).obtenerPersonaje();
-		} catch (ExcCasilleroDesocupado | ExcFueraDeTablero e) {
-			return false;
-		}
-		if(!adversario(jugador).equipo().personajePertenece(destinatario)) return false;
-		return !yaAtaco.get(personaje.nombre());
+	private void verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Personaje destinatario){
+		if(!personajePerteneceAJugador(jugador,remitente)) throw new ExcJugadorNoAutorizado();
+		if(yaAtaco.get(remitente.nombre())) throw new ExcJugadorYaAtaco();
 	}
 	
 	private Jugador adversario(Jugador jugador){

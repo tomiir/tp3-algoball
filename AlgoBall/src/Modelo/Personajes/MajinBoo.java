@@ -1,19 +1,20 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
+import Modelo.Tablero;
 import Modelo.Ataques.ConvierteteEnChocolate;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class MajinBoo extends Personaje {
-	public MajinBoo(Partida p){
+	public MajinBoo(Tablero tablero){
 		
 		nombre = "Majin Boo";
 		puntosDeVida = 300;
 		poderDePelea = 30;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		ataqueEspecial = new ConvierteteEnChocolate(p);
-		partida = p;
+		//ataqueEspecial = new ConvierteteEnChocolate();
+		this.tablero = tablero;
 		inicializar();
 		
 		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20, 2,3,50);
@@ -23,9 +24,5 @@ public class MajinBoo extends Personaje {
 		transformaciones.add(booMalo);
 		transformaciones.add(booOriginal);
 		
-	}
-	
-	protected int bonificacionDeAtaquePorcentual(){
-		return 0;
 	}
 }

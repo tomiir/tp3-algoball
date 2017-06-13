@@ -3,23 +3,27 @@ package Modelo.Personajes;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Modelo.Direccion;
+import Modelo.Equipo;
 import Modelo.Partida;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcDañoNegativo;
 import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Posicion;
-import Modelo.Interfaces.Posicionable;
+import Modelo.Tablero;
+import Modelo.Interfaces.Atacable;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Ataques.Ataque;
 import Modelo.Ataques.AtaqueNormal;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
+import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
+import Modelo.Excepciones.ExcPersonajeInmovilizado;
+import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcPosicionOcupada;
 
-public abstract class Personaje implements Posicionable{
+public class Personaje implements Atacable{
 	
 	String nombre;
 	int vidaInicial;
@@ -28,43 +32,60 @@ public abstract class Personaje implements Posicionable{
 	int rangoDeAtaque;
 	int velocidad;
 	int ki = 0;
+	int tiempoComoChocolate = 0;
 	Modelo.Ataques.Ataque ataqueEspecial;
 	AtaqueNormal ataqueNormal = new AtaqueNormal();
 	Posicion posicion;
-	Partida partida;
+	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	
-	public void recibirDaño(int cantidad) throws ExcDañoNegativo{
-		if(cantidad<0) throw new ExcDañoNegativo();
-		puntosDeVida -= cantidad;
+	
+	public int recibirDaño(int dañoRecibido) throws ExcDañoNegativo{
+		if(dañoRecibido < 0) throw new ExcDañoNegativo();
+		
+		
+		if(dañoRecibido <= puntosDeVida) this.puntosDeVida -= dañoRecibido;
+		else{
+			dañoRecibido = puntosDeVida;
+			puntosDeVida = 0;
+		}
+		
+		return  dañoRecibido;
+		
 	}
 	
 	public void incrementarKi(int cantidad){
 		this.ki += cantidad;
 	}
 	
-	public void mover(Direccion direccion) throws ExcPosicionOcupada, ExcFueraDeTablero {
-		Posicion nuevaPos;
-		try {
-			nuevaPos = posicion.interpretarDireccion(direccion);
-		} catch (ExcPosicionNegativa e) {
-			throw new ExcFueraDeTablero();
-		}
-		partida.tablero().posicionarPersonaje(this, nuevaPos);
+	public void mover(Posicion posicion) throws ExcPosicionOcupada, ExcFueraDeTablero {
+		this.tablero.posicionarPersonaje(this, posicion);
 	}
 	
-	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcAtaqueImposible{
+	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcPersonajeMurio, ExcKiInsuficiente, ExcFueraDeRango, ExcDañoNegativo, ExcPersonajeInmovilizado{
+		if(esChocolate()) throw new ExcPersonajeInmovilizado();
+		if(personajeObjetivo.estaMuerto()) throw new ExcPersonajeMurio();
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
-			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcAtaqueImposible("Ki insuficiente");
-			try{
+			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcKiInsuficiente();
+			try {
 				ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
-			} catch (ExcAtaqueImposible e){
+			} catch (ExcDañoNegativo e) {
 				throw e;
 			}
 			ki -= ataqueElegido(esEspecial).costo();
 		} else {
 			throw new ExcFueraDeRango();
 		}
+		tablero.removerSiEstaMuerto(personajeObjetivo);
+	}
+	
+	public void pasoDeTurno(int aumentoKi){
+		ki+=aumentoKi;
+		if(tiempoComoChocolate >0) tiempoComoChocolate--;
+	}
+	
+	public boolean esChocolate (){
+		return tiempoComoChocolate>0;
 	}
 	
 	public int vidaPorcentual(){
@@ -85,6 +106,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public Posicion posicion(){
+		if(esChocolate()) return null;
 		return posicion;
 	}
 	
@@ -101,10 +123,11 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public boolean estaMuerto(){
-		return (puntosDeVida<0);
+		return (this.puntosDeVida == 0);
 	}
 	
-	public int rangoDeAtaque(){
+	public int 
+	rangoDeAtaque(){
 		return this.rangoDeAtaque;
 	}
 	
@@ -112,9 +135,9 @@ public abstract class Personaje implements Posicionable{
 		return 0;
 	}
 	
-	public void transformar () throws ExcNoEsPosibleTransformarse {
+	public void transformar (Equipo equipoPropio) throws ExcNoEsPosibleTransformarse {
 		Transformacion transformacion = transformaciones.peek();
-		if(transformacion!=null && transformacion.esPosible(this, partida)){
+		if(transformacion!=null && transformacion.esPosible(this, equipoPropio)){
 			transformaciones.remove();
 			rangoDeAtaque = transformacion.rangoDeAtaque();
 			velocidad = transformacion.velocidad();
@@ -125,11 +148,13 @@ public abstract class Personaje implements Posicionable{
 		}
 	}
 	
-	public void sumarKi(int aumento){
-		ki +=aumento;
+	public void convertirEnChocolate(int turnos){
+		tiempoComoChocolate = turnos;
 	}
-	
-	protected abstract int bonificacionDeAtaquePorcentual();
+
+	protected int bonificacionDeAtaquePorcentual(){
+		return 0;
+	}
 	
 	private Ataque ataqueElegido(boolean esEspecial){
 		if(esEspecial){
@@ -153,5 +178,7 @@ public abstract class Personaje implements Posicionable{
 	protected void inicializar(){
 		vidaInicial=puntosDeVida;
 	}
+	
+	
 	
 }

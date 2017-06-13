@@ -1,19 +1,20 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
+import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.Transformacion;
 
 public class PersonajeDePrueba extends Personaje {
 	
 	int cantidadAbsorciones;
-	public PersonajeDePrueba(Partida par, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
+	public PersonajeDePrueba(Tablero tablero, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
 		
 		nombre = Inombre;
 		puntosDeVida = IpuntosDeVida;
 		rangoDeAtaque = IrangoDeAtaque;
 		velocidad = Ivelocidad;
-		partida = par;
+		this.tablero = tablero;
 		poderDePelea=IpoderDePelea;
 		ataqueEspecial = null;
 		inicializar();

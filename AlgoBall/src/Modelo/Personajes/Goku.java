@@ -1,13 +1,14 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
+import Modelo.Tablero;
 import Modelo.Ataques.Kamekameha;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Goku extends Personaje {
 	
 	
-	public Goku(Partida p){
+	public Goku(Tablero tablero){
 		
 		nombre = "Goku";
 		puntosDeVida = 500;
@@ -15,7 +16,7 @@ public class Goku extends Personaje {
 		rangoDeAtaque = 2;
 		velocidad = 2;
 		ataqueEspecial = new Kamekameha();
-		partida = p;
+		this.tablero = tablero;
 		inicializar();
 		
 		TransformacionPorKi kaioken = new TransformacionPorKi("Kaioken", 20, 4,3,40);

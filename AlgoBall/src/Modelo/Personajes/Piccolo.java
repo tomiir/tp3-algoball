@@ -1,13 +1,14 @@
 package Modelo.Personajes;
 
 import Modelo.Partida;
+import Modelo.Tablero;
 import Modelo.Ataques.Makankosappo;
 import Modelo.Transformaciones.Protector;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Piccolo extends Personaje {
 	
-	public Piccolo(Partida p){
+	public Piccolo(Tablero tablero){
 		
 		nombre = "Piccolo";
 		puntosDeVida = 500;
@@ -15,16 +16,13 @@ public class Piccolo extends Personaje {
 		rangoDeAtaque = 2;
 		velocidad = 3;
 		ataqueEspecial = new Makankosappo();
-		partida = p;
+		this.tablero = tablero;
 		inicializar();
 		
 		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20, 4,3,40 );
-		Protector protector = new Protector(p);
+		//Protector protector = new Protector(p);
 		
 		transformaciones.add(fortalecido);
-		transformaciones.add(protector);
-	}
-	protected int bonificacionDeAtaquePorcentual(){
-		return 0;
+		//transformaciones.add(protector);
 	}
 }
