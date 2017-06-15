@@ -137,7 +137,7 @@ public class PersonajeUnitTests {
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
 		Assert.assertEquals("El ki inicial es correcto",personaje1.ki(),0);
-		personaje1.pasoDeTurno(5);
+		personaje1.seAvanzoUnTurno(5);
 		Assert.assertEquals("El ki aumentado es correcto",personaje1.ki(),5);
 	}
 	
@@ -176,16 +176,16 @@ public class PersonajeUnitTests {
 		
 		Assert.assertTrue(personaje1.esChocolate());
 		
-		personaje1.pasoDeTurno(5);
+		personaje1.seAvanzoUnTurno(5);
 		Assert.assertEquals("El ki no aumenta",personaje1.ki(),0);
 		
-		personaje1.pasoDeTurno(5);
+		personaje1.seAvanzoUnTurno(5);
 		Assert.assertEquals("El ki no aumenta",personaje1.ki(),0);
 		
-		personaje1.pasoDeTurno(5);
+		personaje1.seAvanzoUnTurno(5);
 		Assert.assertEquals("El ki no aumenta",personaje1.ki(),0);
 		
-		personaje1.pasoDeTurno(5);
+		personaje1.seAvanzoUnTurno(5);
 		Assert.assertFalse(personaje1.esChocolate());
 		Assert.assertEquals("El ki aumenta pasados 3 turnos",personaje1.ki(),5);
 		

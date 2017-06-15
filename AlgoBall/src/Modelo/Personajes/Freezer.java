@@ -2,7 +2,7 @@ package Modelo.Personajes;
 
 
 import Modelo.Tablero;
-import Modelo.Ataques.RayoMortal;
+import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Freezer extends Personaje {
@@ -14,7 +14,7 @@ public class Freezer extends Personaje {
 		poderDePelea = 20;
 		rangoDeAtaque = 3;
 		velocidad = 4;
-		ataqueEspecial = new RayoMortal();
+		ataqueEspecial = Ataque.RayoMortal();
 		this.tablero = tablero;
 		
 		TransformacionPorKi segundaForma = new TransformacionPorKi("Segunda Forma", 20, 3,4,40 );

@@ -4,11 +4,51 @@ import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Personajes.Personaje;
 
-public abstract class Ataque {
+public class Ataque {
 
-	int costo = 0;
+	private static Ataque Kamekameha;
+	private static Ataque Makankosappo;
+	private static Ataque Masenko;
+	private static Ataque RayoMortal;
+	private static Ataque AtaqueNormal;
 	
-	int modificadorDaño=100;
+	static{
+		Kamekameha = new Ataque (20, 150);
+		Makankosappo = new Ataque (10, 125);
+		Masenko = new Ataque (10, 125);
+		RayoMortal = new Ataque (20, 150);
+		AtaqueNormal = new Ataque (0, 100);		
+	}
+	
+	int costo;
+	int modificadorDaño;
+	
+	public Ataque(){}
+	
+	public Ataque (int costo, int modificadorDaño) {
+		this.costo = costo;
+		this.modificadorDaño = modificadorDaño;		
+	}
+	
+	public static Ataque Makankosappo(){
+		return Makankosappo;
+	}
+	
+	public static Ataque Masenko(){
+		return Masenko;
+	}
+	
+	public static Ataque RayoMortal(){
+		return RayoMortal;
+	}
+	
+	public static Ataque AtaqueNormal(){
+		return AtaqueNormal;
+	}
+	
+	public static Ataque Kamekameha(){
+		return Kamekameha;
+	}
 	
 	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcEsChocolate, ExcNumeroNegativo{
 		
@@ -33,7 +73,6 @@ public abstract class Ataque {
 		return this.costo;
 	}
 	
-	private void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate{
-		
+	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate{		
 	}
 }

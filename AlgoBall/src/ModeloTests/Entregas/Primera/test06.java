@@ -8,9 +8,9 @@ import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
@@ -21,30 +21,32 @@ import Modelo.Personajes.Piccolo;
 public class test06 {
 	
 	Tablero tablero = new Tablero(20,20);
-	Jugador primerJugador = new Jugador("nombre1");
-	Jugador segundoJugador = new Jugador("nombre2");
-	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
 	
-	Goku goku = new Goku(partida);
-	Gohan gohan = new Gohan(partida);
-	Piccolo piccolo = new Piccolo(partida);
+	Goku goku = new Goku(tablero);
+	Gohan gohan = new Gohan(tablero);
+	Piccolo piccolo = new Piccolo(tablero);
 	
 
-	Cell cell = new Cell(partida);
-	Freezer freezer = new Freezer(partida);
-	MajinBoo majinBoo = new MajinBoo(partida);
+	Cell cell = new Cell(tablero);
+	Freezer freezer = new Freezer(tablero);
+	MajinBoo majinBoo = new MajinBoo(tablero);
 	
 	
 	@Test
-	public void Test06CrearJugadoresYPosicionarEquipos() throws ExcPosicionOcupada, ExcFueraDeTablero, ExcPosicionNegativa{
+	public void Test06CrearJugadoresYPosicionarEquipos() throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado{
 	
 		Equipo guerrerosZ = new Equipo("Guerreros Z");
 		
 		guerrerosZ.agregarPersonaje(goku);
 		guerrerosZ.agregarPersonaje(gohan);
 		guerrerosZ.agregarPersonaje(piccolo);
-		
 		Assert.assertEquals("Cantidad de integrantes del equipo GuerrerosZ correcto",guerrerosZ.cantidadPersonajes(),3);
+		Assert.assertTrue(guerrerosZ.personajePertenece(goku));
+		Assert.assertTrue(guerrerosZ.personajePertenece(gohan));
+		Assert.assertTrue(guerrerosZ.personajePertenece(piccolo));
+		Assert.assertFalse(guerrerosZ.personajePertenece(cell));
+		Assert.assertFalse(guerrerosZ.personajePertenece(freezer));
+		Assert.assertFalse(guerrerosZ.personajePertenece(majinBoo));
 		
 		Equipo enemigos = new Equipo("Enemigos de la Tierra");
 		
@@ -52,10 +54,12 @@ public class test06 {
 		enemigos.agregarPersonaje(freezer);
 		enemigos.agregarPersonaje(majinBoo);
 		Assert.assertEquals("Cantidad de integrantes del equipo Enemigos correcto",enemigos.cantidadPersonajes(),3);
-		
-		primerJugador.asignarEquipo(guerrerosZ);
-		segundoJugador.asignarEquipo(enemigos);
-		
+		Assert.assertFalse(enemigos.personajePertenece(goku));
+		Assert.assertFalse(enemigos.personajePertenece(gohan));
+		Assert.assertFalse(enemigos.personajePertenece(piccolo));
+		Assert.assertTrue(enemigos.personajePertenece(cell));
+		Assert.assertTrue(enemigos.personajePertenece(freezer));
+		Assert.assertTrue(enemigos.personajePertenece(majinBoo));
 		
 		tablero.posicionarPersonaje(goku,new Posicion(1,1));
 		tablero.posicionarPersonaje(gohan,new Posicion(2,1));

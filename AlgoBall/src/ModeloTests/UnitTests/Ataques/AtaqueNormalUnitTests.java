@@ -2,7 +2,6 @@ package ModeloTests.UnitTests.Ataques;
 
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcNumeroNegativo;
@@ -14,9 +13,9 @@ import org.junit.Test;
 
 public class AtaqueNormalUnitTests {
 	Tablero tablero = new Tablero(2,100);
-	Ataque ataque = new AtaqueNormal();
 	Personaje personaje1 = new PersonajeDePrueba(tablero,"1", 300, 100, 100,200);
 	Personaje personaje2 = new PersonajeDePrueba(tablero,"1", 300, 100, 100,100);
+	Ataque ataque = Ataque.AtaqueNormal();
 	
 	@Test
 	public void seCreaUnAtaqueCorrectamente(){

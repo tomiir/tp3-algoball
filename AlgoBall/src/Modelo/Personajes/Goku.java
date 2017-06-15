@@ -1,7 +1,7 @@
 package Modelo.Personajes;
 
 import Modelo.Tablero;
-import Modelo.Ataques.Kamekameha;
+import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Goku extends Personaje {
@@ -14,7 +14,7 @@ public class Goku extends Personaje {
 		poderDePelea = 20;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		ataqueEspecial = new Kamekameha();
+		ataqueEspecial = Ataque.Kamekameha();
 		this.tablero = tablero;
 		inicializar();
 		

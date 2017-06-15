@@ -21,6 +21,7 @@ import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
+import Modelo.Excepciones.ExcRemitenteEnEquipoPropio;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
@@ -29,8 +30,8 @@ public class Partida {
 	Jugador jugador1;
 	Jugador jugador2;
 	Tablero tablero;
-	Map<Jugador, Integer> yaMovio= new HashMap<Jugador, Integer>();
-	Map<Jugador, Boolean> yaAtacoOTransformo=new HashMap<Jugador, Boolean>();
+	Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
+	Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
 	
 	public Partida (Tablero tab, Jugador primerJugador, Jugador segundoJugador){
 		tablero = tab;
@@ -38,7 +39,7 @@ public class Partida {
 		jugador2 = segundoJugador;
 	}
 	
-	public void realizarAtaque(Jugador jugador, Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
+	public void realizarAtaque(Jugador jugador, Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcRemitenteEnEquipoPropio{
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
 	}
 	
@@ -66,20 +67,20 @@ public class Partida {
 	public void avanzarTurno() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		
-		jugador1.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
-		jugador1.equipo().forEach((k,v)->yaAtaco.put(k,false));
+		yaMovio.put(jugador1.nombre, false);
+		yaAtacoOTransformo.put(jugador1.nombre,false);
 		jugador1.equipo().forEach((k,v)->{
 			try {
-				v.pasoDeTurno(5);
+				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
 		});
 		
-		jugador2.equipo().forEach((k,v)->movsRestantes.put(k, v.velocidad()));
-		jugador2.equipo().forEach((k,v)->yaAtaco.put(k,false));
+		yaMovio.put(jugador2.nombre, false);
+		yaAtacoOTransformo.put(jugador2.nombre,false);
 		jugador2.equipo().forEach((k,v)->{
 			try {
-				v.pasoDeTurno(5);
+				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
 		});
@@ -112,15 +113,16 @@ public class Partida {
 		return jugador1;
 	}
 	
-	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Personaje destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo{
+	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Personaje destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcRemitenteEnEquipoPropio{
 		if(!personajePerteneceAJugador(jugador,remitente)) throw new ExcJugadorNoAutorizado();
+		if(personajePerteneceAJugador(jugador,destinatario)) throw new ExcRemitenteEnEquipoPropio();
 		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
 		return true;
 	}
 	
 	private boolean verificarMovimientoLegitimo(Jugador jugador, Personaje personaje) throws ExcJugadorNoAutorizado, ExcJugadorYaMovio{
 		if(!personajePerteneceAJugador(jugador,personaje)) throw new ExcJugadorNoAutorizado();
-		if(movsRestantes.get(personaje.nombre())==0) throw new ExcJugadorYaMovio();
+		if(jugadorYaMovio(jugador)) throw new ExcJugadorYaMovio();
 		return true;
 	}
 	
@@ -133,18 +135,11 @@ public class Partida {
 	}
 	
 	private boolean jugadorYaMovio(Jugador jugador){
-		return movsRestantes.get(jugador);
+		return yaMovio.get(jugador.nombre);
 	}
 	
 	private boolean jugadorYaAtacoOTransformo(Jugador jugador){
-		return yaAtaco.get(jugador);
-	}
-	
-	private Jugador adversario(Jugador jugador){
-		if(jugador==jugador1){
-			return jugador2;
-		}
-		return jugador1;
+		return yaAtacoOTransformo.get(jugador);
 	}
 	
 	private void posicionPersonajesInicial() {

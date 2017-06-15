@@ -10,7 +10,7 @@ public class ConvierteteEnChocolate extends Ataque {
 		modificadorDaño = 0;
 	}
 	
-	private void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate {
+	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate {
 		destinatario.convertirEnChocolate(3);
 	}
 }

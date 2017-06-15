@@ -1,7 +1,7 @@
 package Modelo.Personajes;
 
 import Modelo.Tablero;
-import Modelo.Ataques.Makankosappo;
+import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Piccolo extends Personaje {
@@ -13,7 +13,7 @@ public class Piccolo extends Personaje {
 		poderDePelea = 20;
 		rangoDeAtaque = 2;
 		velocidad = 3;
-		ataqueEspecial = new Makankosappo();
+		ataqueEspecial = Ataque.Makankosappo();
 		this.tablero = tablero;
 		inicializar();
 		

@@ -7,6 +7,7 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Personajes.PersonajeDePrueba;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Transformaciones.TransformacionPorKi;
@@ -14,12 +15,8 @@ import Modelo.Transformaciones.TransformacionPorKi;
 public class TransformacionPorKiUnitTests {
 	
 	Tablero tablero = new Tablero(5, 5);
-	Jugador jugador1 = new Jugador("nombre1");
-	Jugador jugador2 = new Jugador("nombre2");
-	Partida partida = new Partida(tablero, jugador1, jugador2);
-	Equipo equipo1 = new Equipo("equipo1");
-	Equipo equipo2 = new Equipo("equipo2");
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
+	Equipo equipo = new Equipo("equipo1");
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
 	Transformacion trans = new TransformacionPorKi("Prueba", 10, 20, 30, 40);
 
 	
@@ -34,12 +31,16 @@ public class TransformacionPorKiUnitTests {
 	
 	@Test
 	public void transformacionNoEsPosible(){
-		Assert.assertFalse(trans.esPosible(personaje1, partida));
+		Equipo equipo = new Equipo("Equipo");
+		equipo.agregarPersonaje(personaje1);
+		Assert.assertFalse(trans.esPosible(personaje1, equipo));
 	}
 	
 	@Test
-	public void transformacionEsPosible(){
-		personaje1.sumarKi(10);
-		Assert.assertTrue(trans.esPosible(personaje1, partida));
+	public void transformacionEsPosible() throws ExcNumeroNegativo{
+		Equipo equipo = new Equipo("Equipo");
+		personaje1.seAvanzoUnTurno(10);
+		equipo.agregarPersonaje(personaje1);
+		Assert.assertTrue(trans.esPosible(personaje1, equipo));
 	}
 }

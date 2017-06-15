@@ -1,7 +1,7 @@
 package Modelo.Personajes;
 
 import Modelo.Tablero;
-import Modelo.Ataques.Masenko;
+import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.GohanSS2;
 import Modelo.Transformaciones.TransformacionPorKi;
 
@@ -14,7 +14,7 @@ public class Gohan extends Personaje {
 		poderDePelea = 15;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		ataqueEspecial = new Masenko();
+		ataqueEspecial = Ataque.Masenko();
 		this.tablero = tablero;
 		
 		TransformacionPorKi superSaiyan1 = new TransformacionPorKi("Super Saiyan 1", 10, 2,2,30 );

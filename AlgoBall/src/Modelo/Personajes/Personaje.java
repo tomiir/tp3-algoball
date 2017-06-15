@@ -11,7 +11,6 @@ import Modelo.Tablero;
 import Modelo.Interfaces.Atacable;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Ataques.Ataque;
-import Modelo.Ataques.AtaqueNormal;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcKiInsuficiente;
@@ -32,7 +31,7 @@ public class Personaje implements Atacable{
 	int ki = 0;
 	int tiempoComoChocolate = 0;
 	Modelo.Ataques.Ataque ataqueEspecial;
-	AtaqueNormal ataqueNormal = new AtaqueNormal();
+	Ataque ataqueNormal = Ataque.AtaqueNormal();
 	Posicion posicion;
 	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
@@ -70,7 +69,7 @@ public class Personaje implements Atacable{
 		tablero.removerSiEstaMuerto(personajeObjetivo);
 	}
 	
-	public void pasoDeTurno(int aumentoKi) throws ExcNumeroNegativo{
+	public void seAvanzoUnTurno(int aumentoKi) throws ExcNumeroNegativo{
 		if(aumentoKi<0) throw new ExcNumeroNegativo();
 		if(!this.esChocolate())ki+=aumentoKi;
 		if(tiempoComoChocolate >0) tiempoComoChocolate--;

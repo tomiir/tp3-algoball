@@ -13,24 +13,23 @@ import org.junit.Assert;
 
 public class PerfectoUnitTest {
 	Tablero tablero = new Tablero(5, 5);
-	Jugador jugador1 = new Jugador("nombre1");
-	Jugador jugador2 = new Jugador("nombre2");
-	Partida partida = new Partida(tablero, jugador1, jugador2);
-	Equipo equipo1 = new Equipo("equipo1");
-	Equipo equipo2 = new Equipo("equipo2");
-
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "Personaje1", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
 	
 	Perfecto perfecto = new Perfecto();
 	
 	@Test
 	public void NoEsPosibleTransformarSemiPerfecto(){
-		Assert.assertEquals(perfecto.esPosible(personaje1, partida),false);
-	} 
+		Equipo equipo = new Equipo("Equipo");
+		equipo.agregarPersonaje(personaje1);
+		Assert.assertFalse(perfecto.esPosible(personaje1, equipo)); 
+	}
+		
 	@Test
 	public void esPosibleTransformarSemiPerfecto() {
+		Equipo equipo = new Equipo("Equipo");
+		equipo.agregarPersonaje(personaje1);
 		personaje1.setAbsorciones(8);
-		Assert.assertEquals(perfecto.esPosible(personaje1, partida), true);
+		Assert.assertTrue(perfecto.esPosible(personaje1,equipo));
 	}
 	
 }
