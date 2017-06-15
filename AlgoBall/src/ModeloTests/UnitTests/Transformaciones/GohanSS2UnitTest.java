@@ -103,18 +103,5 @@ public class GohanSS2UnitTest {
 		Assert.assertEquals(personaje4.puntosDeVida(), 200);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }

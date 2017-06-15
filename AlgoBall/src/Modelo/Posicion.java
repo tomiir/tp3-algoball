@@ -26,8 +26,8 @@ public class Posicion{
 		Posicion auxiliar= new Posicion(posX,posY);
 		
 		while(auxiliar.posX()!=destino.posX() || auxiliar.posY()!=destino.posY()){
-			int dirX=destino.posX()-posX();
-			int dirY=destino.posY()-posY();
+			int dirX=destino.posX()-auxiliar.posX();
+			int dirY=destino.posY()-auxiliar.posY();
 			if(dirX!=0) dirX=dirX/Math.abs(dirX);
 			if(dirY!=0) dirY=dirY/Math.abs(dirY);
 			distancia++;
