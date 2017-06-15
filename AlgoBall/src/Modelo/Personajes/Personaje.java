@@ -4,10 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import Modelo.Equipo;
-import Modelo.Partida;
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
-import Modelo.Excepciones.ExcDireccionInvalida;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Interfaces.Atacable;
@@ -18,10 +16,10 @@ import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
+import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Excepciones.ExcPosicionOcupada;
+
 
 public class Personaje implements Atacable{
 	
@@ -40,8 +38,8 @@ public class Personaje implements Atacable{
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	
 	
-	public int recibirDaño(int dañoRecibido) throws ExcDañoNegativo{
-		if(dañoRecibido < 0) throw new ExcDañoNegativo();
+	public int recibirDaño(int dañoRecibido) throws ExcNumeroNegativo{
+		if(dañoRecibido < 0) throw new ExcNumeroNegativo();
 		
 		
 		if(dañoRecibido <= puntosDeVida) this.puntosDeVida -= dañoRecibido;
@@ -54,24 +52,17 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	public void incrementarKi(int cantidad){
-		this.ki += cantidad;
-	}
-	
-	public void mover(Posicion posicion) throws ExcPosicionOcupada, ExcFueraDeTablero {
+	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate{
+		if(esChocolate()) throw new ExcEsChocolate();
 		this.tablero.posicionarPersonaje(this, posicion);
 	}
 	
-	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcPersonajeMurio, ExcKiInsuficiente, ExcFueraDeRango, ExcDañoNegativo, ExcPersonajeInmovilizado{
-		if(esChocolate()) throw new ExcPersonajeInmovilizado();
+	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+		if(esChocolate()) throw new ExcEsChocolate();
 		if(personajeObjetivo.estaMuerto()) throw new ExcPersonajeMurio();
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
 			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcKiInsuficiente();
-			try {
-				ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
-			} catch (ExcDañoNegativo e) {
-				throw e;
-			}
+			ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
 			ki -= ataqueElegido(esEspecial).costo();
 		} else {
 			throw new ExcFueraDeRango();
@@ -79,8 +70,9 @@ public class Personaje implements Atacable{
 		tablero.removerSiEstaMuerto(personajeObjetivo);
 	}
 	
-	public void pasoDeTurno(int aumentoKi){
-		ki+=aumentoKi;
+	public void pasoDeTurno(int aumentoKi) throws ExcNumeroNegativo{
+		if(aumentoKi<0) throw new ExcNumeroNegativo();
+		if(!this.esChocolate())ki+=aumentoKi;
 		if(tiempoComoChocolate >0) tiempoComoChocolate--;
 	}
 	
@@ -106,7 +98,7 @@ public class Personaje implements Atacable{
 	}
 	
 	public Posicion posicion(){
-		if(esChocolate()) return null;
+		if(estaMuerto()) return null;
 		return posicion;
 	}
 	
@@ -135,7 +127,8 @@ public class Personaje implements Atacable{
 		return 0;
 	}
 	
-	public void transformar (Equipo equipoPropio) throws ExcNoEsPosibleTransformarse {
+	public void transformar (Equipo equipoPropio) throws ExcNoEsPosibleTransformarse, ExcEsChocolate {
+		if(esChocolate()) throw new ExcEsChocolate();
 		Transformacion transformacion = transformaciones.peek();
 		if(transformacion!=null && transformacion.esPosible(this, equipoPropio)){
 			transformaciones.remove();
@@ -148,7 +141,8 @@ public class Personaje implements Atacable{
 		}
 	}
 	
-	public void convertirEnChocolate(int turnos){
+	public void convertirEnChocolate(int turnos) throws ExcEsChocolate{
+		if(this.esChocolate()) throw new ExcEsChocolate();
 		tiempoComoChocolate = turnos;
 	}
 
@@ -169,7 +163,7 @@ public class Personaje implements Atacable{
 			if(posicion.distanciaA(objetivo)>rangoDeAtaque){
 				return false;
 			}
-		} catch (ExcPosicionNegativa | ExcDireccionInvalida e) {
+		} catch (ExcPosicionNegativa e) {
 			return false;
 		}
 		return true;

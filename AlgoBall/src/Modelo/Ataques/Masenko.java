@@ -8,9 +8,5 @@ public class Masenko extends Ataque {
 		costo = 10;
 		modificadorDaño = 125;
 	}
-
-	@Override
-	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) {
-	}
 	
 }

@@ -1,5 +1,5 @@
 package Modelo.Excepciones;
 
-public class ExcDireccionInvalida extends Exception {
+public class ExcDireccionInvalida {
 
 }

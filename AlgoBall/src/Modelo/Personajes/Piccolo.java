@@ -1,9 +1,7 @@
 package Modelo.Personajes;
 
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Ataques.Makankosappo;
-import Modelo.Transformaciones.Protector;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Piccolo extends Personaje {

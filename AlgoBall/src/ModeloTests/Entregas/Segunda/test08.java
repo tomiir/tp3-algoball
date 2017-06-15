@@ -90,7 +90,6 @@ import Modelo.Personajes.Piccolo;
 		for(int i=0;i<3;i++){
 			partida.avanzarTurno();
 		}
-		//Esta prueba deberia fallar y el ki deberia ser 60, implementar q no gane ki
 		Assert.assertEquals("El ki de Goku es correcto", goku.ki(), 30);
 		
 	}

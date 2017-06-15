@@ -1,7 +1,7 @@
 package Modelo.Ataques;
 
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
+import Modelo.Excepciones.ExcEsChocolate;
+import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Personajes.Personaje;
 
 public abstract class Ataque {
@@ -10,15 +10,11 @@ public abstract class Ataque {
 	
 	int modificadorDaño=100;
 	
-	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcDañoNegativo{
+	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcEsChocolate, ExcNumeroNegativo{
 		
 		int dañoActual = calcularDaño(remitente, destinatario, bonificacionPorcentual);
 		int dañoRecibido;
-		try {
-			dañoRecibido = destinatario.recibirDaño(dañoActual);
-		} catch (ExcDañoNegativo e) {
-			throw e;
-		}
+		dañoRecibido = destinatario.recibirDaño(dañoActual);
 		this.efectosColaterales(remitente, destinatario, dañoRecibido);
 	}
 	
@@ -37,5 +33,7 @@ public abstract class Ataque {
 		return this.costo;
 	}
 	
-	protected abstract void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado);
+	private void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate{
+		
+	}
 }

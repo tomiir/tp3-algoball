@@ -1,6 +1,6 @@
 package Modelo.Ataques;
 
-import Modelo.Partida;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Personajes.Personaje;
 
 public class ConvierteteEnChocolate extends Ataque {
@@ -10,8 +10,7 @@ public class ConvierteteEnChocolate extends Ataque {
 		modificadorDaño = 0;
 	}
 	
-	@Override
-	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) {
+	private void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate {
 		destinatario.convertirEnChocolate(3);
 	}
 }

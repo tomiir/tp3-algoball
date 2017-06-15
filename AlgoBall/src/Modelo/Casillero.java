@@ -2,28 +2,28 @@ package Modelo;
 
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
-import Modelo.Personajes.Personaje;
+import Modelo.Interfaces.Atacable;
 
 public class Casillero {
-	Personaje personaje;
+	Atacable atacable;
 	
-	public Personaje obtenerPersonaje() throws ExcCasilleroDesocupado{
+	public Atacable obtenerAtacable() throws ExcCasilleroDesocupado{
 		if(!estaOcupado()) throw new ExcCasilleroDesocupado();
-		return personaje;
+		return atacable;
 	}
 
 	public boolean estaOcupado() {
-		if(personaje==null) return false;
+		if(atacable==null) return false;
 		return true;
 	}
 
-	public void ocupar(Personaje p) throws ExcCasilleroOcupado{
+	public void ocuparAtacable(Atacable atacable) throws ExcCasilleroOcupado{
 		if(estaOcupado()) throw new ExcCasilleroOcupado();
-		personaje=p;
+		this.atacable=atacable;
 	}
 
 	public void desocupar() {
-		personaje=null;
+		atacable=null;
 	}
 }
 

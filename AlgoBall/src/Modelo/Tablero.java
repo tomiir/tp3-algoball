@@ -2,7 +2,6 @@ package Modelo;
 
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcPosicionOcupada;
 import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
@@ -31,16 +30,14 @@ public class Tablero {
 		return alto;
 	}
 	
-	public void posicionarPersonaje(Personaje p, Posicion pos) throws ExcPosicionOcupada, ExcFueraDeTablero{
+	public void posicionarPersonaje(Personaje personaje, Posicion pos) throws ExcFueraDeTablero, ExcCasilleroOcupado{
 		Casillero casNuevo = obtenerCasillero(pos);
-		Posicion posAnterior = p.posicion();
-		try{
-			casNuevo.ocupar(p);
-		} catch(ExcCasilleroOcupado e){
-			throw new ExcPosicionOcupada();
-		}
-		if(posAnterior!=null) obtenerCasillero(p.posicion()).desocupar();
-		p.setPosicion(pos);
+		Posicion posAnterior = personaje.posicion();
+		
+		casNuevo.ocuparAtacable(personaje);
+		
+		if(posAnterior!=null) obtenerCasillero(personaje.posicion()).desocupar();
+		personaje.setPosicion(pos);
 	}
 	
 	private boolean coordenadasEstanEnRango(Posicion pos) {

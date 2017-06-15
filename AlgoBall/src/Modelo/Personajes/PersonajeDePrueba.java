@@ -1,6 +1,5 @@
 package Modelo.Personajes;
 
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.Transformacion;

@@ -1,8 +1,6 @@
 package Modelo.Personajes;
 
-import Modelo.Partida;
 import Modelo.Tablero;
-import Modelo.Ataques.ConvierteteEnChocolate;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class MajinBoo extends Personaje {

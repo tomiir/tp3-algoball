@@ -1,11 +1,13 @@
 package Modelo;
 
-import Modelo.Excepciones.ExcAtaqueIlegitimo;
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcCasilleroDesocupado;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
+import Modelo.Excepciones.ExcKiInsuficiente;
+import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Personajes.Personaje;
 
 public class Jugador {
@@ -22,28 +24,18 @@ public class Jugador {
 		this.equipo = equipoNuevo;
 	}
 	
-	public void realizarAtaque(Jugador jugador, Personaje personaje, Posicion posicion, boolean esEspecial) throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
-		
-		if(estaInmovilizado(personaje)) throw new ExcPersonajeInmovilizado();
-		try {
-			destinatario = tablero.obtenerCasillero(posicion).obtenerPersonaje();
-		} catch (ExcCasilleroDesocupado e) {
-			throw new ExcAtaqueIlegitimo();
-		}
-		
-		try {
-			personaje.atacar(destinatario, esEspecial);
-		} catch (ExcFueraDeRango | ExcAtaqueImposible e) {
-			throw e;
-		}
+	public void realizarAtaque(Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
+		remitente.atacar(destinatario, esEspecial);
 	}
 	
-	public void realizarAtaque (Personaje remitente, Personaje destinatario, boolean esEspecial){
-		if(!partida.verificarAtaqueLegitimo(this, remitente, destinatario) throw ExcPoronga;
-		if()
-		
-		
+	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado{
+		personaje.mover(posicion);
 	}
+	
+	public void realizarTransformacion(Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate{
+		personaje.transformar(equipo);
+	}
+	
 	
 	public Equipo equipo(){
 		return equipo;

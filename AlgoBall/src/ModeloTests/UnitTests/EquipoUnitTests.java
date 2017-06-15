@@ -5,7 +5,6 @@ import java.util.HashMap;
 import org.junit.*;
 import Modelo.Equipo;
 import Modelo.Jugador;
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
@@ -14,13 +13,12 @@ public class EquipoUnitTests {
 	Tablero tablero = new Tablero(5, 5);
 	Jugador jugador1 = new Jugador("nombre1");
 	Jugador jugador2 = new Jugador("nombre2");
-	Partida partida = new Partida(tablero, jugador1, jugador2);
 	Equipo equipo1 = new Equipo("equipo1");
 	Equipo equipo2 = new Equipo("equipo2");
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje4 = new PersonajeDePrueba(partida, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje4 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
 	
 	@Test
 	public void seCreaCorrectamente(){
@@ -41,20 +39,20 @@ public class EquipoUnitTests {
 		String nombre = "Test";
 		Equipo equipo = new Equipo(nombre);
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida,"personaje",500,4,4,50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero,"personaje",500,4,4,50);
 		equipo.agregarPersonaje(personaje1);
 		
 		Assert.assertTrue(equipo.personajePertenece(personaje1));
 		Assert.assertTrue(equipo.cantidadPersonajes() == 1);
 		
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida,"personaje2",500,4,4,50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero,"personaje2",500,4,4,50);
 		equipo.agregarPersonaje(personaje2);
 	
 
 		Assert.assertTrue(equipo.personajePertenece(personaje2));
 		Assert.assertTrue(equipo.cantidadPersonajes() == 2);
 		
-		PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida,"personaje3",500,4,4,50);
+		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero,"personaje3",500,4,4,50);
 		
 		Assert.assertFalse(equipo.personajePertenece(personaje3));
 	}
@@ -67,9 +65,9 @@ public class EquipoUnitTests {
 		
 		HashMap<String,Personaje> diccionario = new HashMap<String, Personaje>();
 
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(partida,"personaje1",500,4,4,50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(partida,"personaje2",500,4,4,50);
-		PersonajeDePrueba personaje3 = new PersonajeDePrueba(partida,"personaje3",500,4,4,50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero,"personaje1",500,4,4,50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero,"personaje2",500,4,4,50);
+		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero,"personaje3",500,4,4,50);
 		
 		equipo.agregarPersonaje(personaje1);
 		equipo.agregarPersonaje(personaje2);
@@ -82,10 +80,6 @@ public class EquipoUnitTests {
 		Assert.assertTrue(diccionario.containsKey("personaje2"));
 		Assert.assertTrue(diccionario.containsKey("personaje3"));
 		
-		
-		
 	}
 	
-	
-
 }

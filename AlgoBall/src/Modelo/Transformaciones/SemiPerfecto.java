@@ -1,7 +1,6 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
-import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 
 public class SemiPerfecto extends Transformacion {

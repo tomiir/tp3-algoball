@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Posicion;
-import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcPosicionNegativa;
 
 public class PosicionUnitTests {
@@ -17,12 +16,12 @@ public class PosicionUnitTests {
 	}
 	
 	@Test (expected = ExcPosicionNegativa.class)
-	public void posicionNegativaNoSePuedeCrear() throws ExcPosicionNegativa, ExcDireccionInvalida {
+	public void posicionNegativaNoSePuedeCrear() throws ExcPosicionNegativa {
 		new Posicion(-1,1);
 	}
 	
 	@Test
-	public void posicionCalculaSuDistanciaBien() throws ExcPosicionNegativa, ExcDireccionInvalida {
+	public void posicionCalculaSuDistanciaBien() throws ExcPosicionNegativa {
 		Posicion pos1 = new Posicion(1,1);
 		Posicion pos2 = new Posicion(2,6);
 		Assert.assertEquals("La distancia es lo que debe",pos1.distanciaA(pos2),5);
