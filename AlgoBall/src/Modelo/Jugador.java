@@ -29,7 +29,7 @@ public class Jugador {
 		remitente.atacar(destinatario, esEspecial);
 	}
 	
-	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado{
+	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
 		personaje.mover(posicion);
 	}
 	

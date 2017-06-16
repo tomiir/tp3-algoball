@@ -39,7 +39,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnLineaRecta() throws ExcFueraDeTablero,  ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {
+	public void seMueveCorrectamenteEnLineaRecta() throws ExcFueraDeTablero,  ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango {
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(3,3));
@@ -50,7 +50,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnDiagonal () throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {
+	public void seMueveCorrectamenteEnDiagonal () throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango {
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(3,3));
@@ -62,7 +62,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMinimo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void seMueveCorrectamenteAlMinimo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
@@ -73,7 +73,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMaximo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void seMueveCorrectamenteAlMaximo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(14,13));
@@ -84,7 +84,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
-	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionNegativa, ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {		
+	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionNegativa, ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango {		
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		Posicion pos = new Posicion(1,1);
@@ -93,7 +93,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcCasilleroOcupado.class)
-	public void noSePuedeMoverAPosicionDeOtro () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{		
+	public void noSePuedeMoverAPosicionDeOtro () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{		
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 100);
@@ -102,6 +102,37 @@ public class PersonajeUnitTests {
 		tablero.posicionarPersonaje(personaje2, new Posicion(1,3));
 		personaje1.mover (new Posicion(1,3));
 	}
+	
+	
+	@Test(expected = ExcFueraDeRango.class)
+	public void noSePuedeMoverFueraDeRango() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
+		
+		Tablero tablero = new Tablero(15,15);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero,"nombre", 300,1,3,100);
+		
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
+		
+		personaje1.mover(new Posicion(10,10));
+			
+	}
+	
+	@Test
+	public void sePuedeMoverAlRangoLimite() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
+		
+		Tablero tablero = new Tablero(15,15);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero,"nombre", 300,1,3,100);
+		
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
+		
+		personaje1.mover(new Posicion(4,1));
+		personaje1.mover(new Posicion(7,1));
+		personaje1.mover(new Posicion(7,4));
+		personaje1.mover(new Posicion(10,7));
+		personaje1.mover(new Posicion(7,10));
+		
+		
+	}
+	
 	
 	@Test
 	public void atacaConDañoEsperado () throws ExcFueraDeTablero, ExcFueraDeRango, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo {		
@@ -143,7 +174,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcEsChocolate.class)
-	public void noSePuedeMoverSiEsChocolate () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void noSePuedeMoverSiEsChocolate () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));

@@ -49,7 +49,7 @@ public class JugadorUnitTests {
 	}
 	
 	@Test
-	public void jugadorPuedeMoverPersonaje() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void jugadorPuedeMoverPersonaje() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
@@ -63,7 +63,7 @@ public class JugadorUnitTests {
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
-	public void jugadorNoPuedeMoverPersonajePorFueraDeTablero() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void jugadorNoPuedeMoverPersonajePorFueraDeTablero() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
@@ -76,7 +76,7 @@ public class JugadorUnitTests {
 	}
 	
 	@Test (expected = ExcCasilleroOcupado.class)
-	public void jugadorNoPuedeMoverPersonajePorCasilleroOcupado() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void jugadorNoPuedeMoverPersonajePorCasilleroOcupado() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
@@ -89,7 +89,7 @@ public class JugadorUnitTests {
 	}
 	
 	@Test (expected = ExcPosicionNegativa.class)
-	public void jugadorNoPuedeMoverPersonajePorPosicionNegativa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
+	public void jugadorNoPuedeMoverPersonajePorPosicionNegativa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
@@ -100,8 +100,19 @@ public class JugadorUnitTests {
 		
 	}
 	
+	@Test (expected = ExcFueraDeRango.class)
+	public void jugadorNoPuedeMoverPersonajePorFueraDeRango() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
+		jugador1.asignarEquipo(equipo1);
+		equipo1.agregarPersonaje(personaje1);
+		
+		tablero.posicionarPersonaje(personaje1, new Posicion(1,2));
+		
+		jugador1.realizarMovimiento(personaje1, new Posicion(1,7));
+		
+	}
+	
 	@Test (expected = ExcEsChocolate.class)
-	public void jugadorNoPuedeMoverPersonajePorPersonajeEsChocolate() throws ExcEsChocolate, ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcCasilleroDesocupado{
+	public void jugadorNoPuedeMoverPersonajePorPersonajeEsChocolate() throws ExcEsChocolate, ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcCasilleroDesocupado, ExcFueraDeRango{
 
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);

@@ -27,7 +27,7 @@ import Modelo.Excepciones.ExcRemitenteEnEquipoPropio;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
-	//LOGICA DE LA PARTIDA (turnos,...)
+	
 	boolean iniciada=false;
 	Jugador jugador1;
 	Jugador jugador2;
@@ -35,8 +35,8 @@ public class Partida {
 	Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
 	Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
 	
-	public Partida (Tablero tab, Jugador primerJugador, Jugador segundoJugador){
-		tablero = tab;
+	public Partida (Tablero tablero, Jugador primerJugador, Jugador segundoJugador){
+		this.tablero = tablero;
 		jugador1 = primerJugador;
 		jugador2 = segundoJugador;
 	}
@@ -50,7 +50,7 @@ public class Partida {
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
 	}
 	
-	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado{
+	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(verificarMovimientoLegitimo(jugador, personaje)) jugador.realizarMovimiento(personaje, posicion);
 	}
 	
@@ -164,10 +164,10 @@ public class Partida {
 			i++;
 		}
 		Iterator<Personaje> iter2 = listaEquipo2.iterator();
-		i = 1;
+		i = 0;
 		while(iter2.hasNext()){
 			try {
-				tablero.posicionarPersonaje(iter2.next(), new Posicion(i, tablero.alto()));
+				tablero.posicionarPersonaje(iter2.next(), new Posicion(tablero.ancho()-i, tablero.alto()));
 			} catch (ExcFueraDeTablero | ExcCasilleroOcupado | ExcPosicionNegativa e) {
 			}
 			i++;

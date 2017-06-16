@@ -32,8 +32,8 @@ public class Aplicacion extends Application {
         
         Partida partida = crearModelo();
         
-        Juego jugar = new Juego(stage, partida);
-        Scene escenaJugar = new Scene(jugar, 640, 480);
+        Juego vistaJugar = new Juego(stage, partida);
+        Scene escenaJugar = new Scene(vistaJugar, 640, 480);
         
     	MenuPrincipal menuPrincipal = new MenuPrincipal(stage, escenaJugar);
         Scene escenaPrincipal = new Scene(menuPrincipal, 640, 480);
@@ -45,7 +45,7 @@ public class Aplicacion extends Application {
     }
     
     private Partida crearModelo(){
-    	Tablero tablero = new Tablero(5,5);
+    	Tablero tablero = new Tablero(14,6);
 		Jugador jugador1 = new Jugador("Guerreros Z");
     	Jugador jugador2 = new Jugador("Enemigos de la tierra");
     	
