@@ -3,8 +3,6 @@ package ModeloTests.UnitTests.Transformaciones;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Personajes.PersonajeDePrueba;
 import Modelo.Transformaciones.Perfecto;

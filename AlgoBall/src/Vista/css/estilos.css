@@ -1,0 +1,52 @@
+@font-face {
+    src: url("../fonts/Raleway-Regular.ttf"),
+}
+
+@font-face {
+    src: url("../fonts/Roboto-Regular.ttf"),
+}
+
+@font-face {
+    src: url("../fonts/Saiyan-Sans.ttf"),
+}
+
+.ventana-menu {
+	-fx-background-color:rgb(0,124,200);
+}
+
+.info-personaje {
+	-fx-background-color:rgb(209,163,163);
+	-fx-border-radius:10;
+	-fx-background-radius:10;
+	-fx-min-width:90;
+	-fx-min-height:40;
+	-fx-padding:5;
+}
+
+.nombre-personaje {
+	-fx-font-family: "Raleway";
+    -fx-font-size: 15;
+    -fx-text-fill:black;
+}
+
+.titulo-algoball {
+	-fx-font-family: "Saiyan Sans";
+    -fx-font-size: 80;
+    -fx-text-fill:linear-gradient(to bottom, #ba0005 0%,#ef0012 100%);
+    -fx-effect: dropshadow(two-pass-box , black, 10, 0.0 , 4, 5); 
+}
+
+.boton-menu {
+	-fx-min-width: 200;
+	-fx-padding:10;
+	-fx-font-family: "Roboto";
+	-fx-font-size:20;
+	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
+	-fx-effect: dropshadow(two-pass-box , black, 2,0.5,1, 1); 
+	-fx-border-radius:10;
+	-fx-background-radius:10;
+}
+
+.boton-menu:hover {
+	-fx-effect: innershadow(  gaussian , black , 2 , 0.2 , 1 , 1 ); 
+}

@@ -3,128 +3,115 @@ package ModeloTests.Entregas.Segunda;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Modelo.Direccion;
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcAtaqueIlegitimo;
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDireccionInvalida;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcHayGanador;
-import Modelo.Excepciones.ExcMovimientoIlegitimo;
+import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
-import Modelo.Excepciones.ExcPosicionOcupada;
-import Modelo.Personajes.Cell;
-import Modelo.Personajes.Freezer;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Gohan;
-import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
-import Modelo.Personajes.Piccolo;
 	
 	public class test08 {
 		
-		Tablero tablero = new Tablero(3, 3);
-		Jugador jugador1 = new Jugador("Jugador Guerreros Z");
-		Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
-		Partida partida;
-		Equipo equipo1;
-		Equipo equipo2;
-		Goku goku;
-		Gohan gohan;
-		Piccolo piccolo;
-		Cell cell;
-		Freezer freezer;
-		MajinBoo majinBoo;
+		Tablero tablero = new Tablero(15, 15);
+		Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
+		MajinBoo majinBoo = new MajinBoo(tablero);
 		
-		
-		
-		private void iniciarPartida(){
-			partida = new Partida(tablero, jugador1, jugador2);
-			equipo1 = new Equipo("Guerreros Z");
-			equipo2 = new Equipo("Enemigos de la tierra");
-			goku = new Goku(partida);
-			gohan = new Gohan(partida);
-			piccolo = new Piccolo(partida);
-			cell = new Cell(partida);
-			freezer = new Freezer(partida);
-			majinBoo = new MajinBoo(partida);
+		@Test
+		public void MajinBooConvierteEnChocolateYRivalNoGanaKi () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate{
+			Gohan gohan = new Gohan(tablero);
+			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
 			
-			//Guerreros Z
-			equipo1.agregarPersonaje (goku);
-			equipo1.agregarPersonaje (gohan);
-			equipo1.agregarPersonaje (piccolo);
+			majinBoo.seAvanzoUnTurno(30);
 			
-			//Enemigos de la tierra
-			equipo2.agregarPersonaje (cell);
-			equipo2.agregarPersonaje (freezer);
-			equipo2.agregarPersonaje (majinBoo);
+			int puntosKiGohanIniciales = gohan.ki();
 			
-			jugador1.asignarEquipo(equipo1);
-			jugador2.asignarEquipo(equipo2);
-			partida.iniciar();
+			majinBoo.atacar(gohan, true);
+			
+			gohan.seAvanzoUnTurno(10);
+			
+			int puntosKiGohanFinales = gohan.ki();
+			
+			Assert.assertEquals("Gohan no gana puntos de ki cuando es chocolate", puntosKiGohanIniciales, puntosKiGohanFinales);			
 		}
 		
-	@Test (expected = ExcAtaqueImposible.class)	
-	public void majinBooNoPuedeHacerAtaqueEspecialSinKi() throws ExcNoEsPosibleTransformarse, ExcFueraDeRango, ExcAtaqueImposible, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
-		iniciarPartida();
-		partida.realizarAtaque(jugador2, majinBoo, goku.posicion(), true);
-	}
-	
-	@Test
-	public void majinBooPuedeHacerAtaqueEspecial() throws ExcNoEsPosibleTransformarse, ExcHayGanador, ExcFueraDeRango, ExcAtaqueImposible, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado{
-		iniciarPartida();
-		for(int i=0;i<5;i++){
-			partida.avanzarTurno();
+		@Test (expected = ExcEsChocolate.class)
+		public void MajinBooConvierteEnChocolateYRivalNoPuedeAtacar() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+			Gohan gohan = new Gohan(tablero);
+			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
+			
+			majinBoo.seAvanzoUnTurno(30);
+			
+			majinBoo.atacar(gohan, true);
+			
+			gohan.atacar(majinBoo, false);
 		}
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 30);
-		Assert.assertEquals("El ki de Goku es correcto", goku.ki(), 30);
 		
-		partida.realizarAtaque(jugador2, majinBoo, goku.posicion(), true);
-		
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 0);
-		
-		for(int i=0;i<3;i++){
-			partida.avanzarTurno();
+		@Test (expected = ExcEsChocolate.class)
+		public void MajinBooConvierteEnChocolateYRivalNoPuedeMover() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+			Gohan gohan = new Gohan(tablero);
+			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
+			
+			majinBoo.seAvanzoUnTurno(30);
+			
+			majinBoo.atacar(gohan, true);
+			
+			gohan.mover(new Posicion(5, 4));
 		}
-		Assert.assertEquals("El ki de Goku es correcto", goku.ki(), 30);
 		
-	}
-
-	@Test (expected = ExcPersonajeInmovilizado.class)	
-	public void gokuNoPuedeMoverseAlSerConvertidoEnChocolate() throws ExcNoEsPosibleTransformarse, ExcHayGanador, ExcFueraDeRango, ExcAtaqueImposible, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcDireccionInvalida{
-		iniciarPartida();
-		for(int i=0;i<5;i++){
-			partida.avanzarTurno();
+		@Test (expected = ExcEsChocolate.class)
+		public void MajinBooConvierteEnChocolateYRivalNoPuedeTransformar() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcNoEsPosibleTransformarse{
+			Gohan gohan = new Gohan(tablero);
+			Equipo GuerrerosZ = new Equipo("GuerrerosZ");
+			GuerrerosZ.agregarPersonaje(gohan);
+			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
+			
+			majinBoo.seAvanzoUnTurno(30);
+			
+			majinBoo.atacar(gohan, true);
+			
+			gohan.seAvanzoUnTurno(50);
+			gohan.transformar(GuerrerosZ);
 		}
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 30);
 		
-		partida.realizarAtaque(jugador2, majinBoo, goku.posicion(), true);
-		
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 0);
-		
-		partida.realizarMovimiento(jugador1, goku, new Direccion(1,1));
-		
-	}
-	
-	@Test (expected = ExcPersonajeInmovilizado.class)	
-	public void gokuNoPuedeAtacarAlSerConvertidoEnChocolate() throws ExcNoEsPosibleTransformarse, ExcHayGanador, ExcFueraDeRango, ExcAtaqueImposible, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcDireccionInvalida{
-		iniciarPartida();
-		for(int i=0;i<5;i++){
-			partida.avanzarTurno();
+		@Test
+		public void MajinBooConvierteEnChocolateYLuegoDeTresTurnosSeVa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse{
+			Gohan gohan = new Gohan(tablero);
+			Equipo GuerrerosZ = new Equipo("GuerrerosZ");
+			GuerrerosZ.agregarPersonaje(gohan);
+			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
+			
+			gohan.seAvanzoUnTurno(30);
+			majinBoo.seAvanzoUnTurno(30);
+			
+			majinBoo.atacar(gohan, true);
+			
+			gohan.seAvanzoUnTurno(0);
+			gohan.seAvanzoUnTurno(0);
+			gohan.seAvanzoUnTurno(0);
+			
+			gohan.atacar(majinBoo, false);
+			gohan.transformar(GuerrerosZ);
+			gohan.mover(new Posicion(5, 4));
+			
+			//hago un assert de una sola, pero ya se que las otras se puede hacer ya que no tiro excepcion
+			
+			Assert.assertEquals(gohan.posicion().posX(), 5);
+			Assert.assertEquals(gohan.posicion().posY(), 4);
+			
 		}
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 30);
-		
-		partida.realizarAtaque(jugador2, majinBoo, goku.posicion(), true);
-		
-		Assert.assertEquals("El ki de majinBoo es correcto", majinBoo.ki(), 0);
-		
-		partida.realizarAtaque(jugador1, goku, majinBoo.posicion(), false);
-		
-	}
 		
 }
 

@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.Consumibles.Consumible;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Interfaces.Atacable;
@@ -36,7 +37,7 @@ public class Tablero {
 		
 		casNuevo.ocuparAtacable(personaje);
 		
-		if(posAnterior!=null) obtenerCasillero(personaje.posicion()).desocupar();
+		if(posAnterior!=null) obtenerCasillero(posAnterior).desocupar();
 		personaje.setPosicion(pos);
 	}
 	
@@ -52,16 +53,19 @@ public class Tablero {
 		}
 	}
 	
-	
-	public void removerSiEstaMuerto(Atacable atacable){
-		
+	public void removerSiEstaMuerto(Atacable atacable){	
 		if(atacable.estaMuerto()){
 			Posicion posicion = atacable.posicion();
-			Casillero casillero = casilleros[posicion.posX()][posicion.posY()];
+			Casillero casillero = casilleros[posicion.posX()-1][posicion.posY()-1];
 			casillero.desocupar();	
 		}
-		
-		
-	
 	}
+
+	public void posicionarConsumible(Consumible consumible, Posicion posicion) throws ExcCasilleroOcupado {
+		
+		Casillero casillero = this.casilleros[posicion.posX()][posicion.posY()];
+		if(!casillero.tieneUnConsumible()) casillero.ocuparConsumible(consumible);
+		
+	}	
+	
 }

@@ -4,142 +4,64 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcAtaqueIlegitimo;
-import Modelo.Excepciones.ExcAtaqueImposible;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Cell;
-import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
-import Modelo.Personajes.Goku;
-import Modelo.Personajes.MajinBoo;
-import Modelo.Personajes.Piccolo;
 
 public class test07 {
-	Tablero tablero = new Tablero(3, 3);
-	Jugador jugador1 = new Jugador("Jugador Guerreros Z");
-	Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
-	Partida partida;
-	Equipo equipo1;
-	Equipo equipo2;
-	Goku goku;
-	Gohan gohan;
-	Piccolo piccolo;
-	Cell cell;
-	Freezer freezer;
-	MajinBoo majinBoo;
-	
-	
-	
-	private void iniciarPartida(){
-		partida = new Partida(tablero, jugador1, jugador2);
-		equipo1 = new Equipo("Guerreros Z");
-		equipo2 = new Equipo("Enemigos de la tierra");
-		goku = new Goku(partida);
-		gohan = new Gohan(partida);
-		piccolo = new Piccolo(partida);
-		cell = new Cell(partida);
-		freezer = new Freezer(partida);
-		majinBoo = new MajinBoo(partida);
-		
-		//Guerreros Z
-		equipo1.agregarPersonaje (goku);
-		equipo1.agregarPersonaje (gohan);
-		equipo1.agregarPersonaje (piccolo);
-		
-		//Enemigos de la tierra
-		equipo2.agregarPersonaje (cell);
-		equipo2.agregarPersonaje (freezer);
-		equipo2.agregarPersonaje (majinBoo);
-		
-		jugador1.asignarEquipo(equipo1);
-		jugador2.asignarEquipo(equipo2);
-		partida.iniciar();
-	}
-	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void cellNoSePuedeTransformar() throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador, ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		
-		Assert.assertEquals("Cell hizo 4 absorciones", cell.cantidadDeAbsorciones(),3);
-		
-		cell.transformar();
-	}
+	Tablero tablero = new Tablero(15, 15);
+	Cell cell = new Cell(tablero);
+	Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
 	
 	@Test
-	public void cellHaceSuPrimerTransformacionCorrectamente() throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador, ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
+	public void CellAbsorbeVidaCorrectamente () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse{
+		Gohan gohan = new Gohan(tablero);
+		tablero.posicionarPersonaje(gohan, new Posicion(5, 5));
+		tablero.posicionarPersonaje(cell, new Posicion(5, 6));
 		
-		Assert.assertEquals("Cell hizo 4 absorciones", cell.cantidadDeAbsorciones(),4);
+		cell.seAvanzoUnTurno(5);
+		cell.recibirDaño(200);
+		cell.seAvanzoUnTurno(5);
+		cell.recibirDaño(200);
+		cell.seAvanzoUnTurno(5);
+		cell.recibirDaño(200);		
 		
-		cell.transformar();
-		Assert.assertEquals("El poder de pelea de cell es correcto", cell.poderDePelea(),40);
-		Assert.assertEquals("El rango de ataque de cell es correcto", cell.rangoDeAtaque(), 4);
-		Assert.assertEquals("La velocidad de cell es correcta", cell.velocidad(), 3);
-	}
-	
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void cellNoSePuedeVolverATransformar() throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador, ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
+		cell.seAvanzoUnTurno(5);
+		cell.recibirDaño(200);		
 		
-		Assert.assertEquals("Cell hizo 4 absorciones", cell.cantidadDeAbsorciones(),4);
+		cell.atacar(gohan, true);
+				
+		cell.atacar(gohan, true);
+		cell.atacar(gohan, true);
 		
-		cell.transformar();
-		cell.transformar();
-	}
-	
-	@Test
-	public void cellHaceSuSegundaPrimerTransformacionCorrectamente() throws ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador, ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
+		int vidaInicialCell = cell.puntosDeVida();
 		
-		Assert.assertEquals("Cell hizo 4 absorciones", cell.cantidadDeAbsorciones(),4);
-		cell.transformar();
+		cell.atacar(gohan, true);
 		
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		partida.avanzarTurno();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		Assert.assertEquals("Cell hizo 8 absorciones", cell.cantidadDeAbsorciones(),8);
+		int vidaFinalCell = cell.puntosDeVida();
+		int vidaAbsorbidaPorCellSinHaberseTransformado = vidaFinalCell - vidaInicialCell;
 		
-		cell.transformar();
-		Assert.assertEquals("El poder de pelea de cell es correcto", cell.poderDePelea(),80);
-		Assert.assertEquals("El rango de ataque de cell es correcto", cell.rangoDeAtaque(), 4);
-		Assert.assertEquals("La velocidad de cell es correcta", cell.velocidad(), 4);
-	}
+		cell.transformar(EnemigosDeLaTierra);
+		cell.seAvanzoUnTurno(5);
+		
+		vidaInicialCell = cell.puntosDeVida();
+		
+		cell.atacar(gohan, true);
+		
+		vidaFinalCell = cell.puntosDeVida();
+		
+		int vidaAbsorbidaPorCellConTransformacion = vidaFinalCell - vidaInicialCell;
+		
+		Assert.assertTrue("Una vez realizada la transfomacion, se absorbe mas vida", vidaAbsorbidaPorCellConTransformacion > vidaAbsorbidaPorCellSinHaberseTransformado);
+	}		
 }

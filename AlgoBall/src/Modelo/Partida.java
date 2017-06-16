@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
@@ -37,6 +39,11 @@ public class Partida {
 		tablero = tab;
 		jugador1 = primerJugador;
 		jugador2 = segundoJugador;
+	}
+	
+	public void iterarPersonajes(BiConsumer<String, Personaje> action){
+		jugador1.equipo().forEach(action);
+		jugador2.equipo().forEach(action);
 	}
 	
 	public void realizarAtaque(Jugador jugador, Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcRemitenteEnEquipoPropio{
@@ -166,6 +173,8 @@ public class Partida {
 			i++;
 		}
 	}
+	
+
 	
 }
 

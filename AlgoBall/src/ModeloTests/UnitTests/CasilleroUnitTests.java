@@ -4,7 +4,10 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import Modelo.Casillero;
+import Modelo.Consumibles.Consumible;
 import Modelo.Tablero;
+import Modelo.Consumibles.NubeVoladora;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
@@ -13,6 +16,9 @@ public class CasilleroUnitTests {
 	Tablero tablero = new Tablero(10,10);
 	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
 	Casillero casilleroNuevo = new Casillero();
+	NubeVoladora nube = new NubeVoladora();
+	
+	
 	
 	@Test
 	public void seCreaCorrectamente(){
@@ -31,4 +37,14 @@ public class CasilleroUnitTests {
 		Assert.assertTrue(casilleroNuevo.estaOcupado());
 		casilleroNuevo.ocuparAtacable(personaje1);
 	}
+	
+	@Test
+	public void desocuparCasillero() throws ExcCasilleroOcupado{
+		casilleroNuevo.ocuparAtacable(personaje1);
+		Assert.assertTrue(casilleroNuevo.estaOcupado());
+		casilleroNuevo.desocupar();
+		Assert.assertTrue(!casilleroNuevo.estaOcupado());		
+	}
+	
+	
 }

@@ -15,8 +15,8 @@ public class TableroUnitTests {
 
 	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
 	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje4 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personajeMuerto = new PersonajeDePrueba(tablero, "nombre", 0, 3, 3, 1);
+
 	
 	@Test
 	public void sePosicionaCorrectamente() throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado{
@@ -51,4 +51,13 @@ public class TableroUnitTests {
 	public void noSePuedeObtenerCasilleroFueraDeRangoNegativo() throws ExcFueraDeTablero, ExcPosicionNegativa{
 		tablero.obtenerCasillero(new Posicion(0,1));
 	}
+	
+	public void sePuedeEliminarPersonajeMuerto() throws ExcPosicionNegativa, ExcFueraDeTablero, ExcCasilleroOcupado{
+		Posicion pos1=new Posicion(20,30);
+		tablero.posicionarPersonaje(personajeMuerto, pos1);
+		Assert.assertTrue("Se ocupo el tablero",tablero.obtenerCasillero(pos1).estaOcupado());
+		tablero.removerSiEstaMuerto(personajeMuerto);
+		Assert.assertFalse("No esta ocupado por que el personaje",tablero.obtenerCasillero(pos1).estaOcupado());
+	}
+
 }

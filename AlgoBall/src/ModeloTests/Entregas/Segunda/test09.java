@@ -4,86 +4,49 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcAtaqueIlegitimo;
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDañoNegativo;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcHayGanador;
-import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
-import Modelo.Personajes.Cell;
-import Modelo.Personajes.Freezer;
-import Modelo.Personajes.Gohan;
+import Modelo.Excepciones.ExcKiInsuficiente;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
-import Modelo.Personajes.Piccolo;
 	
-	public class test09 {
+	public class test09 {		
+		Tablero tablero = new Tablero(15, 15);
+		Goku goku = new Goku(tablero);
+		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 		
-		Tablero tablero = new Tablero(3, 3);
-		Jugador jugador1 = new Jugador("Jugador Guerreros Z");
-		Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
-		Partida partida;
-		Equipo equipo1;
-		Equipo equipo2;
-		Goku goku;
-		Gohan gohan;
-		Piccolo piccolo;
-		Cell cell;
-		Freezer freezer;
-		MajinBoo majinBoo;
+		@Test
+		public void GokuAumentaDañoCuandoTienePocaVida () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+			GuerrerosZ.agregarPersonaje(goku);
+			MajinBoo majinBoo = new MajinBoo(tablero);
 		
-		
-		
-		private void iniciarPartida(){
-			partida = new Partida(tablero, jugador1, jugador2);
-			equipo1 = new Equipo("Guerreros Z");
-			equipo2 = new Equipo("Enemigos de la tierra");
-			goku = new Goku(partida);
-			gohan = new Gohan(partida);
-			piccolo = new Piccolo(partida);
-			cell = new Cell(partida);
-			freezer = new Freezer(partida);
-			majinBoo = new MajinBoo(partida);
+			tablero.posicionarPersonaje(goku, new Posicion(5, 5));
+			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 6));
 			
-			//Guerreros Z
-			equipo1.agregarPersonaje (goku);
-			equipo1.agregarPersonaje (gohan);
-			equipo1.agregarPersonaje (piccolo);
+			int vidaInicialMajinBoo = majinBoo.puntosDeVida();
+			goku.atacar(majinBoo, false);
+			int vidaFinalMajinBoo = majinBoo.puntosDeVida();
 			
-			//Enemigos de la tierra
-			equipo2.agregarPersonaje (cell);
-			equipo2.agregarPersonaje (freezer);
-			equipo2.agregarPersonaje (majinBoo);
+			int dañoRealizadoConAltoNivelDeVida = vidaInicialMajinBoo- vidaFinalMajinBoo;
+						
+			goku.recibirDaño(450);
 			
-			jugador1.asignarEquipo(equipo1);
-			jugador2.asignarEquipo(equipo2);
-			partida.iniciar();
-		}
-		
-	@Test	
-	public void gokuAumentaDañoAlTenerMenosDel30PorcientoDeVida() throws ExcNoEsPosibleTransformarse, ExcDañoNegativo, ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcHayGanador{
-		iniciarPartida();
-		
-		int vida_cell = cell.puntosDeVida();
-		partida.realizarAtaque(jugador1, goku, cell.posicion(), false);
-		
-		Assert.assertEquals("El ataque hace el daño correcto",cell.puntosDeVida(),vida_cell-goku.poderDePelea());
-		
-		goku.recibirDaño(355);
-		partida.avanzarTurno();
-		
-		Assert.assertEquals("La vida porcentual de goku es correcta",goku.vidaPorcentual(), 29);
-		int vida_freezer = freezer.puntosDeVida();
-		partida.realizarAtaque(jugador1, goku, freezer.posicion(), false);
-		
-		Assert.assertEquals("El ataque hace 20% mas de daño ",freezer.puntosDeVida(),vida_freezer-goku.poderDePelea()-(goku.poderDePelea()*20)/100);
-	}
-	
-	
+			vidaInicialMajinBoo = vidaFinalMajinBoo;
+			
+			goku.atacar(majinBoo, false);
+			
+			vidaFinalMajinBoo = majinBoo.puntosDeVida();
+			
+			int dañoRealizadoConBajoNivelDeVida = vidaInicialMajinBoo - vidaFinalMajinBoo;
+			
+			Assert.assertTrue("El daño realizado con menos vida es mayor al realizado con mas", dañoRealizadoConBajoNivelDeVida > dañoRealizadoConAltoNivelDeVida);
+		}	
 		
 }

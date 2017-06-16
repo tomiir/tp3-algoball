@@ -21,7 +21,7 @@ public class Ataque {
 	}
 	
 	int costo;
-	int modificadorDaño;
+	int modificadorDaño=100;
 	
 	public Ataque(){}
 	

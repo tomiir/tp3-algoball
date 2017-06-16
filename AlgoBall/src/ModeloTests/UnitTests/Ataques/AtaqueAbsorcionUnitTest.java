@@ -36,6 +36,6 @@ public class AtaqueAbsorcionUnitTest {
 		absorcion.enviar(cell,personaje2, 0);
 	
 		Assert.assertEquals(personaje2.puntosDeVida(), vida_anterior_personaje - cell.poderDePelea());
-		Assert.assertEquals(cell.puntosDeVida(), vida_anterior_cell+cell.poderDePelea());
+		Assert.assertEquals(cell.puntosDeVida(), vida_anterior_cell);
 	}
 }

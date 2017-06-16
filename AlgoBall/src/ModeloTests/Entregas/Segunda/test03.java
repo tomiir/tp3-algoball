@@ -6,9 +6,18 @@ import org.junit.Test;
 import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
+import Modelo.Excepciones.ExcFueraDeRango;
+import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
@@ -19,74 +28,61 @@ import Modelo.Personajes.Piccolo;
 	public class test03 {
 		
 		Tablero tablero = new Tablero(15, 15);
-		Jugador jugador1 = new Jugador("Jugador Guerreros Z");
-		Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
-		Partida partida;
-		Equipo equipo1;
-		Equipo equipo2;
-		Goku goku;
-		Gohan gohan;
-		Piccolo piccolo;
-		Cell cell;
-		Freezer freezer;
-		MajinBoo majinBoo;
+		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
+		Piccolo piccolo = new Piccolo(tablero);
+		Gohan gohan = new Gohan(tablero);
 		
-		
-		
-		private void iniciarPartida(){
-			partida = new Partida(tablero, jugador1, jugador2);
-			equipo1 = new Equipo("Guerreros Z");
-			equipo2 = new Equipo("Enemigos de la tierra");
-			goku = new Goku(partida);
-			gohan = new Gohan(partida);
-			piccolo = new Piccolo(partida);
-			cell = new Cell(partida);
-			freezer = new Freezer(partida);
-			majinBoo = new MajinBoo(partida);
+		@Test
+		public void PiccoloSeTransformaCorrectamente() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcNoEsPosibleTransformarse{
+			GuerrerosZ.agregarPersonaje(piccolo);
+			GuerrerosZ.agregarPersonaje(gohan);
 			
-			//Guerreros Z
-			equipo1.agregarPersonaje (goku);
-			equipo1.agregarPersonaje (gohan);
-			equipo1.agregarPersonaje (piccolo);
+			tablero.posicionarPersonaje(gohan, new Posicion(1, 1));
+			tablero.posicionarPersonaje(piccolo, new Posicion(5,5));
 			
-			//Enemigos de la tierra
-			equipo2.agregarPersonaje (cell);
-			equipo2.agregarPersonaje (freezer);
-			equipo2.agregarPersonaje (majinBoo);
+			Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
+			Freezer freezer = new Freezer(tablero);
+			EnemigosDeLaTierra.agregarPersonaje(freezer);
 			
-			jugador1.asignarEquipo(equipo1);
-			jugador2.asignarEquipo(equipo2);
-			partida.iniciar();
+			tablero.posicionarPersonaje(freezer, new Posicion(5,6));
+			
+			int vidaInicial = freezer.puntosDeVida();
+			piccolo.atacar(freezer, false);
+			
+			int vidaTrasAtaqueSinTransformacion = freezer.puntosDeVida();
+			int dañoRealizadoConAtaqueSinTransformacion = vidaInicial - vidaTrasAtaqueSinTransformacion;
+			
+			piccolo.seAvanzoUnTurno(20);
+			
+			piccolo.transformar(GuerrerosZ);
+			
+			piccolo.atacar(freezer, false);
+			
+			int vidaTrasAtaqueConTrasformacion = freezer.puntosDeVida();
+			int dañoRealizadoConAtaqueConTransformacion = vidaTrasAtaqueSinTransformacion - vidaTrasAtaqueConTrasformacion;
+			
+			Assert.assertTrue("El ataque habiendose trasnformado saca mas", (dañoRealizadoConAtaqueConTransformacion > dañoRealizadoConAtaqueSinTransformacion));
 		}
-	@Test (expected = ExcNoEsPosibleTransformarse.class)	
-	public void piccoloNoSePuedeTransformarSinKi() throws ExcNoEsPosibleTransformarse{
-		iniciarPartida();
-		piccolo.transformar();
-	}
-	
-	@Test
-	public void piccoloSePuedeTransformarConKiSuficiente() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		for(int i=0;i<3;i++){
-			partida.avanzarTurno();
-		}
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 20);
-		piccolo.transformar();
 		
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 0);
-		Assert.assertEquals("El poder de pelea de piccolo es correcto", piccolo.poderDePelea(),40);
-		Assert.assertEquals("El rango de ataque de piccolo es correcto", piccolo.rangoDeAtaque(), 4);
-		Assert.assertEquals("La velocidad de piccolo es correcta", piccolo.velocidad(), 3);
-	}
-
-	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void piccoloNoSePuedeTransformarDevuelta() throws ExcNoEsPosibleTransformarse, ExcHayGanador{
-		iniciarPartida();
-		partida.avanzarTurno();
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 10);
-		piccolo.transformar();
-		Assert.assertEquals("El ki de piccolo es correcto", piccolo.ki(), 0);
-		piccolo.transformar();
-	}
+		@Test (expected = ExcNoEsPosibleTransformarse.class)
+		public void PiccoloNoPuedeLlegarALaSegundaTransformacionYaQueSeAtacoAGohan() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcNoEsPosibleTransformarse, ExcEsChocolate{			
+			GuerrerosZ.agregarPersonaje(piccolo);
+			GuerrerosZ.agregarPersonaje(gohan);
+			
+			tablero.posicionarPersonaje(gohan, new Posicion(1, 1));
+			tablero.posicionarPersonaje(piccolo, new Posicion(5,5));
+			
+			piccolo.seAvanzoUnTurno(20);
+			piccolo.transformar(GuerrerosZ);
+			
+			piccolo.seAvanzoUnTurno(20);
+			piccolo.transformar(GuerrerosZ);
+			
+			
+			
+			
+			
+		}
+		
 		
 }

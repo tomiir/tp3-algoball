@@ -2,6 +2,7 @@ package Modelo.Personajes;
 
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
+import Modelo.Transformaciones.Protector;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Piccolo extends Personaje {
@@ -18,9 +19,11 @@ public class Piccolo extends Personaje {
 		inicializar();
 		
 		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20, 4,3,40 );
-		//Protector protector = new Protector(p);
 		
 		transformaciones.add(fortalecido);
-		//transformaciones.add(protector);
+		
+		Protector protector = new Protector();
+		
+		transformaciones.add(protector);	
 	}
 }

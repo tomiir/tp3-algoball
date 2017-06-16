@@ -1,6 +1,7 @@
 package Modelo.Personajes;
 
 import Modelo.Tablero;
+import Modelo.Ataques.ConvierteteEnChocolate;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class MajinBoo extends Personaje {
@@ -11,7 +12,7 @@ public class MajinBoo extends Personaje {
 		poderDePelea = 30;
 		rangoDeAtaque = 2;
 		velocidad = 2;
-		//ataqueEspecial = new ConvierteteEnChocolate();
+		ataqueEspecial = new ConvierteteEnChocolate();
 		this.tablero = tablero;
 		inicializar();
 		

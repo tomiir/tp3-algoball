@@ -1,5 +1,6 @@
 package Modelo.Personajes;
 
+import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.Transformacion;
@@ -22,6 +23,10 @@ public class PersonajeDePrueba extends Personaje {
 	
 	protected int bonificacionDeAtaquePorcentual(){
 		return 0;
+	}
+	
+	public Posicion posicion(){
+		return posicion;
 	}
 	
 	public void setAtaqueEspecial (Ataque ataque){

@@ -4,76 +4,51 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
+import Modelo.Posicion;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcAtaqueIlegitimo;
-import Modelo.Excepciones.ExcAtaqueImposible;
-import Modelo.Excepciones.ExcDireccionInvalida;
+import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
-import Modelo.Excepciones.ExcHayGanador;
-import Modelo.Excepciones.ExcMovimientoIlegitimo;
-import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
-import Modelo.Excepciones.ExcPersonajeInmovilizado;
-import Modelo.Excepciones.ExcPosicionOcupada;
+import Modelo.Excepciones.ExcKiInsuficiente;
+import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Cell;
-import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
-import Modelo.Personajes.Goku;
-import Modelo.Personajes.MajinBoo;
-import Modelo.Personajes.Piccolo;
 
 public class test06 {
-	Tablero tablero = new Tablero(3, 3);
-	Jugador jugador1 = new Jugador("Jugador Guerreros Z");
-	Jugador jugador2 = new Jugador("Jugador Enemigos de la tierra");
-	Partida partida;
-	Equipo equipo1;
-	Equipo equipo2;
-	Goku goku;
-	Gohan gohan;
-	Piccolo piccolo;
-	Cell cell;
-	Freezer freezer;
-	MajinBoo majinBoo;
-	
-	
-	
-	private void iniciarPartida(){
-		partida = new Partida(tablero, jugador1, jugador2);
-		equipo1 = new Equipo("Guerreros Z");
-		equipo2 = new Equipo("Enemigos de la tierra");
-		goku = new Goku(partida);
-		gohan = new Gohan(partida);
-		piccolo = new Piccolo(partida);
-		cell = new Cell(partida);
-		freezer = new Freezer(partida);
-		majinBoo = new MajinBoo(partida);
-		
-		//Guerreros Z
-		equipo1.agregarPersonaje (goku);
-		equipo1.agregarPersonaje (gohan);
-		equipo1.agregarPersonaje (piccolo);
-		
-		//Enemigos de la tierra
-		equipo2.agregarPersonaje (cell);
-		equipo2.agregarPersonaje (freezer);
-		equipo2.agregarPersonaje (majinBoo);
-		
-		jugador1.asignarEquipo(equipo1);
-		jugador2.asignarEquipo(equipo2);
-		partida.iniciar();
-	}
+	Tablero tablero = new Tablero(15, 15);
+	Cell cell = new Cell(tablero);
+	Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
 	
 	@Test
-	public void cellAbsorveCorrectamente() throws ExcNoEsPosibleTransformarse, ExcHayGanador, ExcAtaqueImposible, ExcFueraDeRango, ExcAtaqueIlegitimo, ExcFueraDeTablero, ExcPersonajeInmovilizado, ExcMovimientoIlegitimo, ExcPosicionOcupada, ExcDireccionInvalida{
-		iniciarPartida();
-		int vidaCell=cell.puntosDeVida();
-		int vidaGoku=goku.puntosDeVida();
-		partida.realizarAtaque(jugador2, cell, goku.posicion(), true);
-		Assert.assertEquals("A goku se le resta la vida",goku.puntosDeVida(),vidaGoku-cell.poderDePelea());
-		Assert.assertEquals("A cell se le suma la vida",cell.puntosDeVida(),vidaCell+cell.poderDePelea());
-		Assert.assertEquals("La cantidad de absorciones de Cell es correcta",cell.cantidadDeAbsorciones(),1);
+	public void CellAbsorbeVidaCorrectamente () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate{
+		Gohan gohan = new Gohan(tablero);
+		tablero.posicionarPersonaje(gohan, new Posicion(5, 5));
+		tablero.posicionarPersonaje(cell, new Posicion(5, 6));
+		
+		cell.seAvanzoUnTurno(5);
+		cell.recibirDaño(200);
+		
+		int vidaInicialCell = cell.puntosDeVida();
+		int vidaInicialGohan = gohan.puntosDeVida();
+		
+		cell.atacar(gohan, true);
+		
+		int vidaFinalCell = cell.puntosDeVida();
+		int vidaFinalGohan = gohan.puntosDeVida();
+		
+		Assert.assertTrue("La vida de cell aumenta al absorber vida", vidaFinalCell > vidaInicialCell);
+		
+		Assert.assertTrue("La vida final de gohan disminuye", vidaFinalGohan < vidaInicialGohan);
+		
+		int vidaAbsorbidaPorCell = vidaFinalCell - vidaInicialCell;
+		int vidaAbsorbidaDeGohan = vidaInicialGohan - vidaFinalGohan;
+		
+		Assert.assertEquals("La cantidades de vida son correctas", vidaAbsorbidaDeGohan, vidaAbsorbidaPorCell);		
+		
 	}
+	
+
 }
