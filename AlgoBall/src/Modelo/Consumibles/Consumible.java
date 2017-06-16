@@ -26,7 +26,7 @@ public abstract class Consumible {
 		return turnosRestantes;
 	}
 	
-	public void avanceDeTurno(){
+	public void avanzarTurno(){
 		turnosRestantes--;
 	}
 }

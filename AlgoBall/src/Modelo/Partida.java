@@ -50,7 +50,7 @@ public class Partida {
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
 	}
 	
-	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado{
+	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado{
 		if(verificarMovimientoLegitimo(jugador, personaje)) jugador.realizarMovimiento(personaje, posicion);
 	}
 	

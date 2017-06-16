@@ -55,18 +55,15 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate{
+	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado{
 		if(esChocolate()) throw new ExcEsChocolate();
 		this.tablero.posicionarPersonaje(this, posicion);
-		Consumible consumible;
-		try {
-			consumible = this.tablero.obtenerCasillero(posicion).obtenerConsumible();
-			consumir(consumible);
-			tablero.obtenerCasillero(posicion).eliminarConsumible();
-			
-			
-		} catch (ExcCasilleroDesocupado e){}
 		
+		Consumible consumible;
+		if(tablero.obtenerCasillero(posicion).tieneUnConsumible()){
+			consumible = this.tablero.obtenerCasillero(posicion).obtenerConsumible();
+			this.consumir(consumible);
+		}		
 		
 	}
 	
@@ -75,7 +72,7 @@ public class Personaje implements Atacable{
 		if(personajeObjetivo.estaMuerto()) throw new ExcPersonajeMurio();
 		if(estaEnRangoDeAtaque(personajeObjetivo.posicion())){
 			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcKiInsuficiente();
-			ataqueElegido(esEspecial).enviar(this, personajeObjetivo, bonificacionDeAtaquePorcentual());
+			ataqueElegido(esEspecial).enviar(this, personajeObjetivo, this.bonificacionDeAtaquePorcentual() + this.bonificacionDeAtaquePorcentualPorConsumibles());
 			ki -= ataqueElegido(esEspecial).costo();
 		} else {
 			throw new ExcFueraDeRango();
@@ -87,8 +84,7 @@ public class Personaje implements Atacable{
 		if(aumentoKi<0) throw new ExcNumeroNegativo();
 		if(!this.esChocolate())ki+=aumentoKi;
 		if(tiempoComoChocolate >0) tiempoComoChocolate--;
-		
-		actualizarConsumidos();
+		this.actualizarConsumidos();
 	}
 	
 	public boolean esChocolate (){
@@ -160,9 +156,24 @@ public class Personaje implements Atacable{
 		if(this.esChocolate()) throw new ExcEsChocolate();
 		tiempoComoChocolate = turnos;
 	}
-
+	
 	protected int bonificacionDeAtaquePorcentual(){
 		return 0;
+	}
+
+	protected int bonificacionDeAtaquePorcentualPorConsumibles(){
+		int bonificacionDeAtaquePorcentual = 0;
+		
+		if (this.consumidos.isEmpty() == false){
+			Iterator<Consumible> iterador = consumidos.iterator();
+			while(iterador.hasNext()){				
+				Consumible consumible = iterador.next();
+				bonificacionDeAtaquePorcentual += consumible.obtenerBonificacionAtaque();
+			}			
+		}
+		
+		return bonificacionDeAtaquePorcentual;
+		
 	}
 	
 	private Ataque ataqueElegido(boolean esEspecial){
@@ -198,8 +209,7 @@ public class Personaje implements Atacable{
 		int vida = consumible.obtenerAumentoDeVida();
 		aumentarVida(vida);
 		
-		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);
-		
+		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);		
 		
 	}
 	
@@ -208,7 +218,7 @@ public class Personaje implements Atacable{
 		while(iterador.hasNext()){
 			
 			Consumible consumible = iterador.next();
-			consumible.avanceDeTurno();
+			consumible.avanzarTurno();
 			if(consumible.turnosRestantes() == 0) consumidos.remove(consumible);
 		}
 		

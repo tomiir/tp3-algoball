@@ -14,6 +14,7 @@ import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
@@ -35,7 +36,7 @@ public class test05 {
 	Partida partida = new Partida(tablero, primerJugador, segundoJugador);
 	
 	@Test
-	public void Test05SePosicionaYTransformaCorrectamente() throws ExcNoEsPosibleTransformarse, ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa, ExcEsChocolate, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio{
+	public void Test05SePosicionaYTransformaCorrectamente() throws ExcNoEsPosibleTransformarse, ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa, ExcEsChocolate, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcCasilleroDesocupado{
 		equipo.agregarPersonaje(goku);
 		equipo_2.agregarPersonaje(personaje1);
 		

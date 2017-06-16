@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
@@ -28,7 +29,7 @@ public class Jugador {
 		remitente.atacar(destinatario, esEspecial);
 	}
 	
-	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado{
+	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado{
 		personaje.mover(posicion);
 	}
 	

@@ -6,7 +6,7 @@ public class NubeVoladora extends Consumible {
 		
 		this.aumentoDeVida = 0;
 		this.bonificacionAtaque =0;
-		this.bonificacionVelocidad =25;
+		this.bonificacionVelocidad = 25;
 		this.turnosRestantes = 2;
 	}
 }

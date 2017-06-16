@@ -25,7 +25,7 @@ public class Casillero {
 	}
 	
 	public boolean tieneUnConsumible(){
-		return !(consumible == null);
+		return (consumible != null);
 	}
 
 	public void ocuparAtacable(Atacable atacable) throws ExcCasilleroOcupado{

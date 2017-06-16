@@ -2,6 +2,7 @@ package ModeloTests.UnitTests;
 
 import Modelo.Posicion;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
@@ -38,7 +39,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnLineaRecta() throws ExcFueraDeTablero,  ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate {
+	public void seMueveCorrectamenteEnLineaRecta() throws ExcFueraDeTablero,  ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(3,3));
@@ -49,7 +50,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteEnDiagonal () throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate {
+	public void seMueveCorrectamenteEnDiagonal () throws ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(3,3));
@@ -61,7 +62,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMinimo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate{
+	public void seMueveCorrectamenteAlMinimo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
@@ -72,7 +73,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test
-	public void seMueveCorrectamenteAlMaximo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate{
+	public void seMueveCorrectamenteAlMaximo () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(14,13));
@@ -83,7 +84,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
-	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionNegativa, ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate {		
+	public void noSePuedeMoverFueraDelTablero () throws ExcPosicionNegativa, ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado {		
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		Posicion pos = new Posicion(1,1);
@@ -92,7 +93,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcCasilleroOcupado.class)
-	public void noSePuedeMoverAPosicionDeOtro () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate{		
+	public void noSePuedeMoverAPosicionDeOtro () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{		
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 100);
@@ -142,7 +143,7 @@ public class PersonajeUnitTests {
 	}
 	
 	@Test (expected = ExcEsChocolate.class)
-	public void noSePuedeMoverSiEsChocolate () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate{
+	public void noSePuedeMoverSiEsChocolate () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado{
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
 		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));

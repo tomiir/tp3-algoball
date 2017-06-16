@@ -6,6 +6,7 @@ import org.junit.Test;
 import Modelo.Equipo;
 import Modelo.Posicion;
 import Modelo.Tablero;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
@@ -57,7 +58,7 @@ import Modelo.Personajes.MajinBoo;
 		}
 		
 		@Test (expected = ExcEsChocolate.class)
-		public void MajinBooConvierteEnChocolateYRivalNoPuedeMover() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+		public void MajinBooConvierteEnChocolateYRivalNoPuedeMover() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcCasilleroDesocupado{
 			Gohan gohan = new Gohan(tablero);
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
 			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
@@ -86,7 +87,7 @@ import Modelo.Personajes.MajinBoo;
 		}
 		
 		@Test
-		public void MajinBooConvierteEnChocolateYLuegoDeTresTurnosSeVa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse{
+		public void MajinBooConvierteEnChocolateYLuegoDeTresTurnosSeVa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse, ExcCasilleroDesocupado{
 			Gohan gohan = new Gohan(tablero);
 			Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 			GuerrerosZ.agregarPersonaje(gohan);

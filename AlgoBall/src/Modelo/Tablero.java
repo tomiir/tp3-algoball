@@ -61,9 +61,9 @@ public class Tablero {
 		}
 	}
 
-	public void posicionarConsumible(Consumible consumible, Posicion posicion) throws ExcCasilleroOcupado {
+	public void posicionarConsumible(Consumible consumible, Posicion posicion) throws ExcCasilleroOcupado, ExcFueraDeTablero {
 		
-		Casillero casillero = this.casilleros[posicion.posX()][posicion.posY()];
+		Casillero casillero = this.obtenerCasillero(posicion);
 		if(!casillero.tieneUnConsumible()) casillero.ocuparConsumible(consumible);
 		
 	}	
