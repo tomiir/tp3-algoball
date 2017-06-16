@@ -14,6 +14,7 @@ import Modelo.Personajes.Piccolo;
 import Vista.eventos.SalirEventoWindowEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Aplicacion extends Application {
@@ -27,6 +28,7 @@ public class Aplicacion extends Application {
     	
         stage.setTitle("AlgoBall");
         stage.setOnCloseRequest(new SalirEventoWindowEvent());
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("img/esferaDragon.png")));
         
         Partida partida = crearModelo();
         

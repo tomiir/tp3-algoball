@@ -19,9 +19,6 @@ public class PanelDeVida extends HBox{
 	
 	private void update(){
 		this.getChildren().clear();
-		Label cartel= new Label();
-		this.getChildren().add(cartel);
-		
 		partida.iterarPersonajes((k,v)->{
 			this.getChildren().add(new InfoPersonaje(v));
 		});

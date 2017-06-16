@@ -20,8 +20,6 @@ public class SalirEventoOnAction implements EventHandler<ActionEvent>{
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
     		System.exit(0);
-    	} else {
-    		
     	}
     }
 }

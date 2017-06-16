@@ -23,6 +23,8 @@ public class InfoPersonaje extends VBox {
 		
 		ProgressBar vida = new ProgressBar((double)personaje.vidaPorcentual()/100);
 		
+		vida.getStyleClass().add("progress-bar");
+		
 		this.getChildren().addAll(cartel, vida);
 		this.getStylesheets().add(getClass().getResource("css/estilos.css").toExternalForm());
 	}

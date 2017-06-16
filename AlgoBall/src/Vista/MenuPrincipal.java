@@ -16,13 +16,10 @@ import javafx.stage.Stage;
 public class MenuPrincipal extends VBox {
 	
 	public MenuPrincipal(Stage stage, Scene escenaJugar){
-		super();
-		
 		this.setPadding(new Insets(20));
 		this.setSpacing(10);
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("ventana-menu");
-		stage.getIcons().add(new Image(getClass().getResourceAsStream("img/esferaDragon.png")));
 		
 		Label cartel= new Label();
 		cartel.setText("AlgoBall");

@@ -29,6 +29,10 @@
     -fx-text-fill:black;
 }
 
+.progress-bar{
+	-fx-accent: rgb(124,252,0);
+}
+
 .titulo-algoball {
 	-fx-font-family: "Saiyan Sans";
     -fx-font-size: 80;
@@ -48,5 +52,5 @@
 }
 
 .boton-menu:hover {
-	-fx-effect: innershadow(  gaussian , black , 2 , 0.2 , 1 , 1 ); 
+	-fx-effect: innershadow(gaussian , black , 2 , 0.2 , 1 , 1 ); 
 }
