@@ -50,6 +50,10 @@
 	-fx-accent: red;
 }
 
+.progress-bar.naranja {
+	-fx-accent: orange;
+}
+
 .titulo-algoball {
 	-fx-font-family: "Saiyan Sans";
     -fx-font-size: 80;
@@ -68,7 +72,7 @@
 	-fx-background-radius:10;
 }
 
-.menuPersonaje .boton-menu {
+.vista-lateral .boton-menu {
 	-fx-min-width:135;
 	-fx-padding:5;
 	-fx-font-size:14;
@@ -88,7 +92,7 @@
 .tablero .personaje {
 	-fx-background-position: center center;
     -fx-background-repeat: stretch;
-    -fx-background-size: 40 80;
+    -fx-background-size: 30 60;
 }
 
 .tablero .personaje.coloreado {
@@ -99,16 +103,24 @@
 	-fx-background-color:rgb(150,150,240);
 }
 
+.opcion-movimiento {
+	-fx-opacity:0.3
+}
+
 .turnoDelJugador{
-	-fx-min-width:90;
+	-fx-min-width:150;
 	-fx-min-height:40;
 	-fx-background-color:rgb(121,164,239);
 	-fx-font-size: 15;
 	-fx-font-family: "Roboto";
-
+	-fx-alignment:center;
 }
 
 .MenuPersonaje{
 }
 
+.labels-informacion{
+	-fx-font-family: "Roboto";
+	-fx-font-size: 18;
+}
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 import Modelo.Jugador;
 import Modelo.Posicion;
 import Modelo.Tablero;
-import Modelo.Consumibles.SemillaDeHermitaño;
+import Modelo.Consumibles.SemillaDeErmitaño;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
@@ -21,7 +21,7 @@ public class SemillaDelErmitañoUnitTest {
 	
 	@Test
 	public void semillaDeHErmitañoAumentaVidaCorrectamente () throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango, ExcNumeroNegativo {
-		SemillaDeHermitaño semilla = new SemillaDeHermitaño();
+		SemillaDeErmitaño semilla = new SemillaDeErmitaño();
 		tablero.posicionarConsumible(semilla, new Posicion(3,3));
 		
 		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero, "nombre", 500, 3, 3, 5);
@@ -42,7 +42,7 @@ public class SemillaDelErmitañoUnitTest {
 	}
 	@Test
 	public void semillaDelHermitañoNoAumentaMasDeLaVidaMaxima() throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa, ExcCasilleroDesocupado, ExcFueraDeRango, ExcEsChocolate{
-		SemillaDeHermitaño semilla = new SemillaDeHermitaño();
+		SemillaDeErmitaño semilla = new SemillaDeErmitaño();
 		tablero.posicionarConsumible(semilla, new Posicion(3,3));
 		
 		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero, "nombre", 500, 3, 3, 5);

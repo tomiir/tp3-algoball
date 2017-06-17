@@ -12,6 +12,7 @@ import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcJugadorNoAutorizado;
 import Modelo.Excepciones.ExcJugadorYaMovio;
 import Modelo.Personajes.Personaje;
+import Vista.Juego;
 import Vista.VistaTablero;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -23,13 +24,13 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 	Personaje personaje;
 	Posicion posicion;
 	Partida partida;
-	VistaTablero vistaTablero;
+	Juego juego;
 	
-	public MoverEvento(Personaje personaje,Posicion posicion,Partida partida, VistaTablero vistaTablero){
+	public MoverEvento(Juego juego, Personaje personaje,Posicion posicion,Partida partida){
 		this.personaje = personaje;
 		this.posicion = posicion;
 		this.partida = partida;
-		this.vistaTablero = vistaTablero;
+		this.juego = juego;
 	}
 	public void handle(MouseEvent event) {
 		try {
@@ -53,7 +54,7 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 		} catch (ExcFueraDeRango e) {
 
 		}
-		vistaTablero.update();
+		juego.update();
 		event.consume();
 	}
 	

@@ -13,32 +13,30 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.Node;
 
 public class VistaTablero extends GridPane {
-	static final int pixelesAncho=40;
-	static final int pixelesAlto=80;
 	
 	int ancho, alto;
-	VistaLateral vistaLateral;
 	VistaPersonaje[][] vistasPersonajes;
 	Partida partida;
+	Juego juego;
 	
-	public VistaTablero(Partida partida, VistaLateral vistaLateral){
+	public VistaTablero(Partida partida, Juego juego){
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("tablero");
 		ancho=partida.tablero().ancho();
 		alto=partida.tablero().alto();
 		vistasPersonajes= new VistaPersonaje[ancho][alto];
 		this.partida = partida;
-		this.vistaLateral = vistaLateral;
+		this.juego = juego;
 		
 		this.setGridLinesVisible(true);
 		
 		for (int j = 0; j < ancho; j++) {
-		    ColumnConstraints cc = new ColumnConstraints(pixelesAncho);
+		    ColumnConstraints cc = new ColumnConstraints(juego.pixelesAncho());
 		    this.getColumnConstraints().add(cc);
 		}
 
 		for (int j = 0; j < alto; j++) {
-		    RowConstraints rc = new RowConstraints(pixelesAlto);
+		    RowConstraints rc = new RowConstraints(juego.pixelesAlto());
 		    this.getRowConstraints().add(rc);
 		}
 		
@@ -73,7 +71,7 @@ public class VistaTablero extends GridPane {
 			for(int j=0;j<alto;j++){
 				try {
 					if(vistasPersonajes[i][j]==null && inicial.distanciaA(new Posicion(i+1,j+1))<=rango){
-						this.add(new OpcionDeMovimiento(personaje, new Posicion(i+1,j+1), partida, this, pixelesAncho, pixelesAlto), i, j);
+						this.add(new OpcionDeMovimiento(juego, partida ,personaje, new Posicion(i+1,j+1)), i, j);
 					}
 				} catch (ExcPosicionNegativa e) {
 				}
@@ -89,7 +87,7 @@ public class VistaTablero extends GridPane {
 		this.getChildren().clear();
 		vistasPersonajes=new VistaPersonaje[ancho][alto];
 		partida.iterarPersonajes((k,v)->{
-			VistaPersonaje vistaPersonaje=new VistaPersonaje(v, pixelesAncho,pixelesAlto, partida, vistaLateral);
+			VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
 			this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
 			vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
 		});

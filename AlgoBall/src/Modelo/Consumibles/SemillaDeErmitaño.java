@@ -1,8 +1,8 @@
 package Modelo.Consumibles;
 
-public class SemillaDeHermitaño extends Consumible {
+public class SemillaDeErmitaño extends Consumible {
 	
-	public SemillaDeHermitaño(){
+	public SemillaDeErmitaño(){
 		
 		this.aumentoDeVida = 100;
 		this.bonificacionAtaque =0;

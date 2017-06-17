@@ -19,6 +19,7 @@ public class InfoPersonaje extends VBox {
 		
 		ProgressBar vida = new ProgressBar((double)personaje.vidaPorcentual()/100);
 		if(personaje.vidaPorcentual()<30) vida.getStyleClass().add("rojo");
+		else if(personaje.vidaPorcentual()<70) vida.getStyleClass().add("naranja");
 		vida.getStyleClass().add("progress-bar");
 		
 		NameTagPersonaje nameTag = new NameTagPersonaje(personaje);

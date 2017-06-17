@@ -4,7 +4,7 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
-
+import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
@@ -45,7 +45,7 @@ public class Aplicacion extends Application {
     }
     
     private Partida crearModelo(){
-    	Tablero tablero = new Tablero(14,6);
+    	Tablero tablero = new Tablero(21,8);
 		Jugador jugador1 = new Jugador("Guerreros Z");
     	Jugador jugador2 = new Jugador("Enemigos de la tierra");
     	

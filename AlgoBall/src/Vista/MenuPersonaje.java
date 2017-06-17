@@ -12,7 +12,7 @@ public class MenuPersonaje extends VBox {
 	public MenuPersonaje (Personaje personaje, VistaTablero vistaTablero){
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("menuPersonaje");
-		this.setSpacing(20);
+		this.setSpacing(12);
 		
 		NameTagPersonaje nombreDelPersonaje = new NameTagPersonaje(personaje);
 		
@@ -30,7 +30,15 @@ public class MenuPersonaje extends VBox {
 		botonTransformar.setText("Transformar");
 		botonTransformar.getStyleClass().add("boton-menu");
 		
-		this.getChildren().addAll(nombreDelPersonaje, botonAtacar, botonMover, botonTransformar);
+		Label puntosDeVida = new Label();
+		puntosDeVida.setText("Vida:" + personaje.puntosDeVida());
+		puntosDeVida.getStyleClass().add("labels-informacion");
+		
+		Label puntosKi = new Label();
+		puntosKi.setText("Ki:" + personaje.ki());
+		puntosKi.getStyleClass().add("labels-informacion");
+		
+		this.getChildren().addAll(nombreDelPersonaje, puntosDeVida, puntosKi, botonAtacar, botonMover, botonTransformar);
 		
 		
 	}

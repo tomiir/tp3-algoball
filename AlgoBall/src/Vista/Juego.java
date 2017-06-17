@@ -13,9 +13,12 @@ import Vista.VistaLateral;
 import Vista.VistaTablero;
 
 public class Juego extends BorderPane{
+	static final int pixelesAncho=30;
+	static final int pixelesAlto=60;
 	Partida partida;
 	VistaTablero vistaTablero;
 	VistaLateral vistaLateral;
+	PanelDeVida panelDeVida;
 	
 	public Juego(Stage stage, Partida partida){
 		this.partida = partida;
@@ -23,17 +26,38 @@ public class Juego extends BorderPane{
 			partida.iniciar();
 		} catch (ErrorFatal e) {
 		}
-		vistaLateral = new VistaLateral(partida);
-		vistaTablero = new VistaTablero(partida, vistaLateral);
-		vistaLateral.setVistaTablero(vistaTablero);
+		vistaLateral = new VistaLateral(partida, this);
+		vistaTablero = new VistaTablero(partida, this);
+		panelDeVida = new PanelDeVida(partida);
 		setSuperior();
 		setCentro();
 		setVistaLateralDerecha();
-		
+	}
+	
+	public void update(){
+		vistaLateral.update();
+		vistaTablero.update();
+		panelDeVida.update();
+	}
+	
+	public VistaTablero vistaTablero(){
+		return vistaTablero;
+	}
+	
+	public VistaLateral vistaLateral(){
+		return vistaLateral;
+	}
+	
+	public int pixelesAncho(){
+		return pixelesAncho;
+	}
+	
+	public int pixelesAlto(){
+		return pixelesAlto;
 	}
 	
 	private void setSuperior(){
-		this.setTop(new PanelDeVida(partida));
+		this.setTop(panelDeVida);
 	}
 	
 	private void setCentro(){

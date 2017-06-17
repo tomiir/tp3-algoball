@@ -22,7 +22,7 @@ public class MenuPrincipal extends VBox {
 		this.getStyleClass().add("ventana-menu");
 		
 		Label cartel= new Label();
-		cartel.setText("AlgoBall");
+		cartel.setText("DragonAlgoBall");
 		cartel.getStyleClass().add("titulo-algoball");
 		cartel.setTextAlignment(TextAlignment.CENTER);
 		

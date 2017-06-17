@@ -1,11 +1,17 @@
 package Modelo;
 
 import java.util.HashMap;
+
+import java.util.Random;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+import Modelo.Consumibles.Consumible;
+import Modelo.Consumibles.EsferaDelDragon;
+import Modelo.Consumibles.NubeVoladora;
+import Modelo.Consumibles.SemillaDeErmitaño;
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
@@ -30,18 +36,31 @@ public class Partida {
 	boolean iniciada=false;
 	Jugador jugador1;
 	Jugador jugador2;
+	Jugador jugadorActivo;
+	
 	Tablero tablero;
 	Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
 	Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
-	int contadorDeTurnos;
+	
 	
 	public Partida (Tablero tablero, Jugador primerJugador, Jugador segundoJugador){
 		this.tablero = tablero;
 		jugador1 = primerJugador;
 		jugador2 = segundoJugador;
-		contadorDeTurnos = 0;
+		
+		jugadorActivo = randomJugadorInicial();
+		
 	}
 	
+	private Jugador randomJugadorInicial() {
+		Random generador = new Random();
+		int randomNum = generador.nextInt(2);
+		
+		if(randomNum == 0) return jugador1;
+		return jugador2;
+		
+	}
+
 	public void iterarPersonajes(BiConsumer<String, Personaje> action){
 		jugador1.equipo().forEach(action);
 		jugador2.equipo().forEach(action);
@@ -76,28 +95,29 @@ public class Partida {
 	public void avanzarTurno() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		
-		yaMovio.put(jugador1.nombre, false);
-		yaAtacoOTransformo.put(jugador1.nombre,false);
-		jugador1.equipo().forEach((k,v)->{
+		cambiarJugadorActivo();
+		
+		yaMovio.put(jugadorActivo.nombre, false);
+		yaAtacoOTransformo.put(jugadorActivo.nombre,false);
+		jugadorActivo.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
-			} catch (ExcNumeroNegativo e) {
-			}
+			} catch (ExcNumeroNegativo e) {	}	
 		});
 		
 		
-		yaMovio.put(jugador2.nombre, false);
-		yaAtacoOTransformo.put(jugador2.nombre,false);
-		jugador2.equipo().forEach((k,v)->{
-			try {
-				v.seAvanzoUnTurno(5);
-			} catch (ExcNumeroNegativo e) {
-			}
-		});
+		this.posicionarConsumibleRandom();
 		
-		this.contadorDeTurnos++;
 	}
 	
+	
+
+	private void cambiarJugadorActivo() {
+
+		if(jugadorActivo == jugador1) jugadorActivo = jugador2;
+		else jugadorActivo = jugador1 ;
+	}
+
 	public Equipo obtenerEquipoAliado(Personaje personaje) {
 		
 		Equipo equipo1 = jugador1.equipo();		
@@ -186,12 +206,33 @@ public class Partida {
 	}
 	
 	public Jugador esTurnoDelJugador(){
-		if(this.contadorDeTurnos % 2 == 0){
-			return this.jugador1;
-		}
-		return this.jugador2;
+		return jugadorActivo;
 	}
 
-	
+	private void posicionarConsumibleRandom(){
+		
+		Random generador = new Random();
+		int numeroConsumible = generador.nextInt(3);
+		Consumible consumible = new NubeVoladora();
+		
+		switch(numeroConsumible){
+			case 0: consumible = new SemillaDeErmitaño();
+			case 1: consumible = new EsferaDelDragon();
+					
+		}
+		
+		int randAlto = generador.nextInt(tablero.alto());
+		int randAncho = generador.nextInt(tablero.ancho());
+		int randChance = generador.nextInt(10);
+		
+		//20% de chances de aparicion
+		if(randChance <= 1)
+			try {
+				tablero.posicionarConsumible(consumible, new Posicion(randAncho,randAlto));
+			} catch (ExcCasilleroOcupado | ExcFueraDeTablero | ExcPosicionNegativa e) {	}
+		
+		
+		
+	}
 }
 

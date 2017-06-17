@@ -2,6 +2,7 @@ package Vista;
 
 import Modelo.Partida;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
@@ -14,10 +15,11 @@ public class PanelDeVida extends HBox{
 		this.partida = partida;
 		this.setPadding(new Insets(2));
 		this.setSpacing(5);
+		this.setAlignment(Pos.CENTER);
 		update();
 	}
 	
-	private void update(){
+	public void update(){
 		this.getChildren().clear();
 		partida.iterarPersonajes((k,v)->{
 			this.getChildren().add(new InfoPersonaje(v));
