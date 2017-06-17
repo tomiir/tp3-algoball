@@ -1,0 +1,114 @@
+@font-face {
+    src: url("../fonts/Raleway-Regular.ttf"),
+}
+
+@font-face {
+    src: url("../fonts/Roboto-Regular.ttf"),
+}
+
+@font-face {
+    src: url("../fonts/Saiyan-Sans.ttf"),
+}
+
+@font-face {
+    src: url("../fonts/Morpheus.ttf"),
+}
+
+.ventana-menu {
+	-fx-background-color:rgb(0,124,200);
+}
+
+.info-personaje {
+	-fx-background-color:linear-gradient(to bottom, #bf6e4e 0%,#bf6e4e 11%,#f0b7a1 100%);
+	-fx-border-radius:10;
+	-fx-background-radius:10;
+	-fx-min-width:90;
+	-fx-min-height:40;
+	-fx-padding:5;
+}
+
+.nombre-personaje {
+	-fx-font-family: "Raleway";
+    -fx-font-size: 15;
+    -fx-text-fill:black;
+}
+
+.cara-personaje{
+	height:15;
+	width:15;
+}
+
+.menuPersonaje .nombre-personaje{
+	-fx-font-family: "Morpheus";
+}
+
+.progress-bar{
+	-fx-accent: rgb(124,252,0);
+}
+
+.progress-bar.rojo {
+	-fx-accent: red;
+}
+
+.titulo-algoball {
+	-fx-font-family: "Saiyan Sans";
+    -fx-font-size: 80;
+    -fx-text-fill:linear-gradient(to bottom, #ba0005 0%,#ef0012 100%);
+    -fx-effect: dropshadow(two-pass-box , black, 10, 0.0 , 4, 5); 
+}
+
+.boton-menu {
+	-fx-min-width: 200;
+	-fx-padding:10;
+	-fx-font-family: "Roboto";
+	-fx-font-size:20;
+	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
+	-fx-effect: dropshadow(two-pass-box , black, 2,0.5,1, 1); 
+	-fx-border-radius:10;
+	-fx-background-radius:10;
+}
+
+.menuPersonaje .boton-menu {
+	-fx-min-width:135;
+	-fx-padding:5;
+	-fx-font-size:14;
+	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
+	-fx-font-family:"Morpheus";
+}
+
+.boton-menu:hover {
+	-fx-effect: innershadow(gaussian , black , 2 , 0.2 , 1 , 1 ); 
+}
+
+.tablero {
+	-fx-background-image: url("../img/background.jpg");
+	-fx-background-repeat: repeat; 
+}
+
+.tablero .personaje {
+	-fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 40 80;
+}
+
+.tablero .personaje.coloreado {
+	-fx-background-color:rgb(150,240,150);
+}
+
+.tablero .personaje.remarcado {
+	-fx-background-color:rgb(150,150,240);
+}
+
+.turnoDelJugador{
+	-fx-min-width:90;
+	-fx-min-height:40;
+	-fx-background-color:rgb(121,164,239);
+	-fx-font-size: 15;
+	-fx-font-family: "Roboto";
+
+}
+
+.MenuPersonaje{
+}
+
+

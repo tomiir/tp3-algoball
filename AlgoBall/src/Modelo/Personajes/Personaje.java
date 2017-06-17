@@ -57,7 +57,8 @@ public class Personaje implements Atacable{
 	
 	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(esChocolate()) throw new ExcEsChocolate();
-		if(this.estaEnRango(posicion, this.velocidad + this.bonificacionDeVelocidadPorConsumibles())){
+		int rangoFinal = (int) (this.velocidad + this.bonificacionDeVelocidadPorConsumibles());
+		if(this.estaEnRango(posicion, rangoFinal)){
 			this.tablero.posicionarPersonaje(this, posicion);
 		
 			Consumible consumible;
@@ -179,8 +180,8 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	protected int bonificacionDeVelocidadPorConsumibles(){
-		int bonificacion = 0;
+	protected float bonificacionDeVelocidadPorConsumibles(){
+		float bonificacion = 0;
 		if (this.consumidos.isEmpty() == false){
 			Iterator<Consumible> iterador = consumidos.iterator();
 			while(iterador.hasNext()){				
@@ -188,7 +189,7 @@ public class Personaje implements Atacable{
 				bonificacion += consumible.obtenerBonificacionVelocidad();
 			}			
 		}
-		bonificacion = (int) (this.velocidad * (bonificacion + 100)/100);
+		bonificacion = (this.velocidad * (bonificacion/100));
 		return bonificacion;
 		
 	}

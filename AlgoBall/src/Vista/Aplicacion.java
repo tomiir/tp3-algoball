@@ -4,7 +4,7 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
-import Modelo.Excepciones.ExcNumeroNegativo;
+
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;

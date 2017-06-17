@@ -28,7 +28,7 @@ public class NubeVoladoraUnitTest {
 		
 		//Posiciono al personaje y lo muevo a un casillero fuera de su rango
 		tablero.posicionarPersonaje(personaje, new Posicion(1,1));
-		personaje.mover(new Posicion(1,5));
+		personaje.mover(new Posicion(1,6));
 		
 		
 	
