@@ -2,13 +2,10 @@ package ModeloTests.UnitTests.Ataques;
 
 import org.junit.Test;
 
-import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
+
 import Modelo.Tablero;
 import Modelo.Ataques.Ataque;
 import Modelo.Ataques.ConvierteteEnChocolate;
-import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcNumeroNegativo;

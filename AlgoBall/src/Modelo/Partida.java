@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import Modelo.Consumibles.Consumible;
 import Modelo.Consumibles.EsferaDelDragon;
@@ -29,18 +30,19 @@ import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Excepciones.ExcRemitenteEnEquipoPropio;
+import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
 public class Partida {
 	
-	boolean iniciada=false;
-	Jugador jugador1;
-	Jugador jugador2;
-	Jugador jugadorActivo;
+	protected boolean iniciada=false;
+	protected Jugador jugador1;
+	protected Jugador jugador2;
+	protected Jugador jugadorActivo;
 	
-	Tablero tablero;
-	Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
-	Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
+	protected Tablero tablero;
+	protected Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
+	protected Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
 	
 	
 	public Partida (Tablero tablero, Jugador primerJugador, Jugador segundoJugador){
@@ -66,8 +68,10 @@ public class Partida {
 		jugador2.equipo().forEach(action);
 	}
 	
-	public void realizarAtaque(Jugador jugador, Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcRemitenteEnEquipoPropio{
+	public void realizarAtaque(Jugador jugador, Personaje remitente, Posicion posicion, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcRemitenteEnEquipoPropio, ExcCasilleroDesocupado{
+		Atacable destinatario = tablero.obtenerCasillero(posicion).obtenerAtacable();
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
+		jugadorAtacoOTransformo(jugador);
 	}
 	
 	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
@@ -78,6 +82,7 @@ public class Partida {
 	public void realizarTransformacion(Jugador jugador, Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate, ExcJugadorYaAtacoOTransformo{
 		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
 		jugador.realizarTransformacion(personaje);
+		jugadorAtacoOTransformo(jugador);
 	}
 	
 	public void iniciar() throws ErrorFatal{
@@ -123,7 +128,7 @@ public class Partida {
 		Equipo equipo1 = jugador1.equipo();		
 		Equipo equipo2 = jugador2.equipo();
 		
-		if(equipo1.personajePertenece(personaje)){
+		if(equipo1.personajePertenece(personaje.nombre())){
 			return equipo1;
 		}
 		return equipo2;
@@ -141,43 +146,51 @@ public class Partida {
 		return tablero;
 	}
 	
+	public void iterarCasilleros(BiConsumer<Casillero,Posicion> accion){
+		tablero.iterarCasilleros(accion);
+	}
+	
 	private Jugador ganador(){
 		if (jugador1.equipo().perdio()) return jugador2;
 		if (jugador1.equipo().perdio()) return jugador1;
 		return null;
 	}
 	
-	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Personaje destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcRemitenteEnEquipoPropio{
-		if(!personajePerteneceAJugador(jugador,remitente)) throw new ExcJugadorNoAutorizado();
-		if(personajePerteneceAJugador(jugador,destinatario)) throw new ExcRemitenteEnEquipoPropio();
+	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Atacable destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcRemitenteEnEquipoPropio{
+		if(!personajePerteneceAJugador(jugador,remitente.nombre())) throw new ExcJugadorNoAutorizado();
+		if(personajePerteneceAJugador(jugador,destinatario.nombre())) throw new ExcRemitenteEnEquipoPropio();
 		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
 		return true;
 	}
 	
 	private boolean verificarMovimientoLegitimo(Jugador jugador, Personaje personaje) throws ExcJugadorNoAutorizado, ExcJugadorYaMovio{
-		if(!personajePerteneceAJugador(jugador,personaje)) throw new ExcJugadorNoAutorizado();
+		if(!personajePerteneceAJugador(jugador,personaje.nombre())) throw new ExcJugadorNoAutorizado();
 		if(jugadorYaMovio(jugador)) throw new ExcJugadorYaMovio();
 		return true;
 	}
 	
-	private boolean personajePerteneceAJugador(Jugador jugador, Personaje personaje){
-		return jugador.equipo().personajePertenece(personaje);
+	private boolean personajePerteneceAJugador(Jugador jugador, String nombre){
+		return jugador.equipo().personajePertenece(nombre);
 	}
 	
 	private boolean hayGanador(){
 		return (jugador1.equipo().perdio() | jugador2.equipo().perdio());
 	}
 	
-	private void jugadorMovio(Jugador jugador){
-		yaMovio.put(jugador.nombre, true);
+	public void jugadorMovio(Jugador jugador){
+		yaMovio.put(jugador.nombre(), true);
 	}
 	
-	private boolean jugadorYaMovio(Jugador jugador){
-		return yaMovio.get(jugador.nombre);
+	public boolean jugadorYaMovio(Jugador jugador){
+		return yaMovio.get(jugador.nombre());
 	}
 	
-	private boolean jugadorYaAtacoOTransformo(Jugador jugador){
-		return yaAtacoOTransformo.get(jugador);
+	public void jugadorAtacoOTransformo(Jugador jugador){
+		yaAtacoOTransformo.put(jugador.nombre(),true);
+	}
+	
+	public boolean jugadorYaAtacoOTransformo(Jugador jugador){
+		return yaAtacoOTransformo.get(jugador.nombre());
 	}
 	
 	private void posicionPersonajesInicial() {

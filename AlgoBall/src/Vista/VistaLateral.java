@@ -2,8 +2,10 @@ package Vista;
 
 import Modelo.Jugador;
 import Modelo.Partida;
+import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Personajes.Personaje;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -27,12 +29,21 @@ public class VistaLateral extends BorderPane{
 		botonPasarDeTurno.setText("Pasar de turno");
 		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoControlador(this.juego, this.partida));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
+		botonPasarDeTurno.setAlignment(Pos.CENTER);
 		this.setBottom(botonPasarDeTurno);
 		
 		update();		
 	}
 	
-	 public void update(){
+	 public void update() {
+		if(partida.jugadorYaAtacoOTransformo(partida.esTurnoDelJugador()) && partida.jugadorYaMovio(partida.esTurnoDelJugador())){
+			try {
+				partida.avanzarTurno();
+			} catch (ExcHayGanador e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		this.setCenter(null);
 		this.setTop(null);
 		Label turnoDelJugador = new Label();
@@ -46,7 +57,7 @@ public class VistaLateral extends BorderPane{
 	 public void personajeClickeado(Personaje personaje){
 		 juego.update();
 		 juego.vistaTablero().remarcarPersonaje(personaje);
-		 this.setCenter(new MenuPersonaje(personaje, juego.vistaTablero));
+		 this.setCenter(new MenuPersonaje(personaje, juego, partida));
 		 
 	 } 
 	

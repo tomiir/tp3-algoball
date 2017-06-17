@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import Modelo.Casillero;
 import Modelo.Equipo;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
@@ -57,14 +58,12 @@ public class Personaje implements Atacable{
 	
 	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(esChocolate()) throw new ExcEsChocolate();
-		int rangoFinal = (int) (this.velocidad + this.bonificacionDeVelocidadPorConsumibles());
-		if(this.estaEnRango(posicion, rangoFinal)){
+		if(this.estaEnRango(posicion, velocidad())){
 			this.tablero.posicionarPersonaje(this, posicion);
 		
-			Consumible consumible;
 			if(tablero.obtenerCasillero(posicion).tieneUnConsumible()){
-				consumible = this.tablero.obtenerCasillero(posicion).obtenerConsumible();
-				this.consumir(consumible);
+				Consumible consumible = this.tablero.obtenerCasillero(posicion).obtenerConsumible();
+				this.consumir(consumible, posicion);
 			}		
 		}
 		else{
@@ -72,7 +71,7 @@ public class Personaje implements Atacable{
 		}
 	}
 	
-	public void atacar(Personaje personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+	public void atacar(Atacable personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
 		if(esChocolate()) throw new ExcEsChocolate();
 		if(personajeObjetivo.estaMuerto()) throw new ExcPersonajeMurio();
 		if(estaEnRango(personajeObjetivo.posicion(), this.rangoDeAtaque)){
@@ -110,7 +109,7 @@ public class Personaje implements Atacable{
 	}
 	
 	public int velocidad(){
-		return velocidad;
+		return this.velocidad + this.bonificacionDeVelocidadPorConsumibles();
 	}
 	
 	public Posicion posicion(){
@@ -142,6 +141,10 @@ public class Personaje implements Atacable{
 		return 0;
 	}
 	
+	public Transformacion getTransformacion(){
+		return this.transformaciones.peek();
+	}
+	
 	public void transformar (Equipo equipoPropio) throws ExcNoEsPosibleTransformarse, ExcEsChocolate {
 		if(esChocolate()) throw new ExcEsChocolate();
 		Transformacion transformacion = transformaciones.peek();
@@ -159,6 +162,10 @@ public class Personaje implements Atacable{
 	public void convertirEnChocolate(int turnos) throws ExcEsChocolate{
 		if(this.esChocolate()) throw new ExcEsChocolate();
 		tiempoComoChocolate = turnos;
+	}
+	
+	public Ataque getAtaqueEspecial(){
+		return ataqueEspecial;
 	}
 	
 	protected int bonificacionDeAtaquePorcentual(){
@@ -180,8 +187,8 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	protected float bonificacionDeVelocidadPorConsumibles(){
-		float bonificacion = 0;
+	protected int bonificacionDeVelocidadPorConsumibles(){
+		int bonificacion = 0;
 		if (this.consumidos.isEmpty() == false){
 			Iterator<Consumible> iterador = consumidos.iterator();
 			while(iterador.hasNext()){				
@@ -189,7 +196,7 @@ public class Personaje implements Atacable{
 				bonificacion += consumible.obtenerBonificacionVelocidad();
 			}			
 		}
-		bonificacion = (this.velocidad * (bonificacion/100));
+		bonificacion = (this.velocidad * bonificacion)/100;
 		return bonificacion;
 		
 	}
@@ -236,12 +243,16 @@ public class Personaje implements Atacable{
 		puntosDeVida += cantidad;
 		if(puntosDeVida >= vidaInicial) puntosDeVida = vidaInicial;
 	}
-	private void consumir(Consumible consumible){
+	private void consumir(Consumible consumible, Posicion posicion) throws ExcFueraDeTablero{
 		
 		int vida = consumible.obtenerAumentoDeVida();
 		aumentarVida(vida);
+	
+		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);
 		
-		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);		
+		tablero.obtenerCasillero(posicion).desocuparConsumible();
+		
+		
 		
 	}
 	

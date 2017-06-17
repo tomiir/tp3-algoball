@@ -9,8 +9,8 @@ import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
 
 public class Equipo{
-	HashMap<String, Personaje> personajes;
-	String nombre;
+	protected HashMap<String, Personaje> personajes;
+	protected String nombre;
 	
 	public Equipo(String nombreNuevo){
 		this.nombre = nombreNuevo;
@@ -30,8 +30,8 @@ public class Equipo{
 		personajes.forEach(action);
 	}
 	
-	public boolean personajePertenece(Personaje personaje){
-		return personajes.containsKey(personaje.nombre());
+	public boolean personajePertenece(String nombre){
+		return personajes.containsKey(nombre);
 	}
 	
 	public Personaje obtenerPersonaje(String nombre) throws ExcNoHayPersonaje{

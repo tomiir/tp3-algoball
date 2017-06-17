@@ -41,12 +41,12 @@ public class test06 {
 		guerrerosZ.agregarPersonaje(gohan);
 		guerrerosZ.agregarPersonaje(piccolo);
 		Assert.assertEquals("Cantidad de integrantes del equipo GuerrerosZ correcto",guerrerosZ.cantidadPersonajes(),3);
-		Assert.assertTrue(guerrerosZ.personajePertenece(goku));
-		Assert.assertTrue(guerrerosZ.personajePertenece(gohan));
-		Assert.assertTrue(guerrerosZ.personajePertenece(piccolo));
-		Assert.assertFalse(guerrerosZ.personajePertenece(cell));
-		Assert.assertFalse(guerrerosZ.personajePertenece(freezer));
-		Assert.assertFalse(guerrerosZ.personajePertenece(majinBoo));
+		Assert.assertTrue(guerrerosZ.personajePertenece(goku.nombre()));
+		Assert.assertTrue(guerrerosZ.personajePertenece(gohan.nombre()));
+		Assert.assertTrue(guerrerosZ.personajePertenece(piccolo.nombre()));
+		Assert.assertFalse(guerrerosZ.personajePertenece(cell.nombre()));
+		Assert.assertFalse(guerrerosZ.personajePertenece(freezer.nombre()));
+		Assert.assertFalse(guerrerosZ.personajePertenece(majinBoo.nombre()));
 		
 		Equipo enemigos = new Equipo("Enemigos de la Tierra");
 		
@@ -54,12 +54,12 @@ public class test06 {
 		enemigos.agregarPersonaje(freezer);
 		enemigos.agregarPersonaje(majinBoo);
 		Assert.assertEquals("Cantidad de integrantes del equipo Enemigos correcto",enemigos.cantidadPersonajes(),3);
-		Assert.assertFalse(enemigos.personajePertenece(goku));
-		Assert.assertFalse(enemigos.personajePertenece(gohan));
-		Assert.assertFalse(enemigos.personajePertenece(piccolo));
-		Assert.assertTrue(enemigos.personajePertenece(cell));
-		Assert.assertTrue(enemigos.personajePertenece(freezer));
-		Assert.assertTrue(enemigos.personajePertenece(majinBoo));
+		Assert.assertFalse(enemigos.personajePertenece(goku.nombre()));
+		Assert.assertFalse(enemigos.personajePertenece(gohan.nombre()));
+		Assert.assertFalse(enemigos.personajePertenece(piccolo.nombre()));
+		Assert.assertTrue(enemigos.personajePertenece(cell.nombre()));
+		Assert.assertTrue(enemigos.personajePertenece(freezer.nombre()));
+		Assert.assertTrue(enemigos.personajePertenece(majinBoo.nombre()));
 		
 		tablero.posicionarPersonaje(goku,new Posicion(1,1));
 		tablero.posicionarPersonaje(gohan,new Posicion(2,1));

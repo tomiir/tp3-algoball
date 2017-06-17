@@ -3,6 +3,7 @@ package Vista;
 
 import Modelo.Partida;
 import Modelo.Posicion;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Personaje;
 import javafx.collections.ObservableList;
@@ -50,18 +51,19 @@ public class VistaTablero extends GridPane {
 		obtenerVistaPersonaje(personaje.posicion()).remarcar();
 	}
 	
-	public void ofrecerAtaque(Personaje personaje){
-		/*Posicion inicial = personaje.posicion();
-		int rangoDeAtaque = personaje.rangoDeAtaque();
+	public void ofrecerAtaque(Personaje personaje, boolean esEspecial){
+		Posicion inicial = personaje.posicion();
+		int rango=personaje.velocidad();
 		for(int i=0;i<ancho;i++){
 			for(int j=0;j<alto;j++){
-				if(vistasPersonajes[i][j]] != null && inicial.distanciaA(new Posicion(i+1,, j+1)) <= rangoDeAtaque){
-					
+				try {
+					if(vistasPersonajes[i][j]!=null && inicial.distanciaA(new Posicion(i+1,j+1))<=rango && !(inicial.posX()==i+1 && inicial.posY()==j+1)){
+						this.add(new OpcionDeAtaque(juego, partida ,personaje, new Posicion(i+1,j+1), esEspecial), i, j);
+					}
+				} catch (ExcPosicionNegativa e) {
 				}
-				
 			}
-			
-		}*/
+		}
 	}
 	
 	public void ofrecerMovimiento(Personaje personaje){
@@ -86,10 +88,25 @@ public class VistaTablero extends GridPane {
 	public void update(){
 		this.getChildren().clear();
 		vistasPersonajes=new VistaPersonaje[ancho][alto];
+		setFondoCasillero();
 		partida.iterarPersonajes((k,v)->{
 			VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
 			this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
 			vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
 		});
+		partida.iterarCasilleros((cas,pos)->{
+			try {
+				this.add(new VistaConsumible(juego, cas.obtenerConsumible()),pos.posX()-1,pos.posY()-1);
+			} catch (ExcCasilleroDesocupado e) {
+			}
+		});
+	}
+	
+	private void setFondoCasillero(){
+		for(int i=0;i<ancho;i++){
+			for(int j=0;j<alto;j++){
+				this.add(new CasilleroFondo(), i, j);
+			}
+		}
 	}
 }

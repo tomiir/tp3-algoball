@@ -4,8 +4,8 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 
 public class Posicion{
 	
-	int posX;
-	int posY;
+	protected int posX;
+	protected int posY;
 	
 	public Posicion(int posX, int posY) throws ExcPosicionNegativa{
 		if(posX<0 || posY<0) throw new ExcPosicionNegativa();

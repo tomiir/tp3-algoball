@@ -1,15 +1,19 @@
 package Modelo;
 
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 import Modelo.Consumibles.Consumible;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
 public class Tablero {
-	Casillero[][] casilleros;
-	int ancho; 
-	int alto;
+	protected Casillero[][] casilleros;
+	protected int ancho; 
+	protected int alto;
 	
 	public Tablero(int anchoDeseado, int altoDeseado){
 		ancho = anchoDeseado;
@@ -66,6 +70,17 @@ public class Tablero {
 		Casillero casillero = this.obtenerCasillero(posicion);
 		if(!casillero.tieneUnConsumible()) casillero.ocuparConsumible(consumible);
 		
+	}
+
+	public void iterarCasilleros(BiConsumer<Casillero,Posicion> accion) {
+		for(int i=0;i<ancho;i++){
+			for(int j=0;j<alto;j++){
+				try {
+					accion.accept(casilleros[i][j], new Posicion(i+1,j+1));
+				} catch (ExcPosicionNegativa e) {
+				}
+			}
+		}
 	}	
 	
 }

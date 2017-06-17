@@ -50,7 +50,7 @@ public class PartidaUnitTests {
 		Assert.assertEquals("El personaje 2 se posiciono correctamente en pos y",personaje2.posicion().posY(),3);
 	
 	}
-	
+	/*
 	@Test
 	public void seInicioLaPartidaPorEndeSeComenzoUnTurno() throws ErrorFatal{
 		jugador1.asignarEquipo(equipo1);
@@ -80,7 +80,7 @@ public class PartidaUnitTests {
 		Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 1",personaje1.ki(),10);
 		Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 2",personaje2.ki(),10);
 	}
-	
+	*/
 	@Test (expected = ExcHayGanador.class)
 	public void avanzarUnTurnoCuandoTodosLosPersonajesDelEquipoContrarioEstanMuertos() throws ErrorFatal, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcHayGanador{
 		jugador1.asignarEquipo(equipo1);

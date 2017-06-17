@@ -2,6 +2,7 @@ package Modelo.Ataques;
 
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcNumeroNegativo;
+import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
 public class Ataque {
@@ -13,21 +14,23 @@ public class Ataque {
 	private static Ataque AtaqueNormal;
 	
 	static{
-		Kamekameha = new Ataque (20, 150);
-		Makankosappo = new Ataque (10, 125);
-		Masenko = new Ataque (10, 125);
-		RayoMortal = new Ataque (20, 150);
-		AtaqueNormal = new Ataque (0, 100);		
+		Kamekameha = new Ataque (20, 150,"Kamehameha");
+		Makankosappo = new Ataque (10, 125, "Makankosappo");
+		Masenko = new Ataque (10, 125, "Masenko");
+		RayoMortal = new Ataque (20, 150, "Rayo Mortal");
+		AtaqueNormal = new Ataque (0, 100, "Ataque Normal");		
 	}
 	
-	int costo;
-	int modificadorDaño=100;
+	protected int costo;
+	protected int modificadorDaño=100;
+	protected String nombre;
 	
 	public Ataque(){}
 	
-	public Ataque (int costo, int modificadorDaño) {
+	public Ataque (int costo, int modificadorDaño, String nombre) {
 		this.costo = costo;
-		this.modificadorDaño = modificadorDaño;		
+		this.modificadorDaño = modificadorDaño;	
+		this.nombre = nombre;
 	}
 	
 	public static Ataque Makankosappo(){
@@ -50,15 +53,15 @@ public class Ataque {
 		return Kamekameha;
 	}
 	
-	public void enviar(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) throws ExcEsChocolate, ExcNumeroNegativo{
+	public void enviar(Personaje remitente, Atacable destinatario, int bonificacionPorcentual) throws ExcEsChocolate, ExcNumeroNegativo{
 		
 		int dañoActual = calcularDaño(remitente, destinatario, bonificacionPorcentual);
 		int dañoRecibido;
 		dañoRecibido = destinatario.recibirDaño(dañoActual);
-		this.efectosColaterales(remitente, destinatario, dañoRecibido);
+		efectosColaterales(remitente, destinatario, dañoRecibido);
 	}
 	
-	protected int calcularDaño(Personaje remitente, Personaje destinatario, int bonificacionPorcentual) {
+	protected int calcularDaño(Personaje remitente, Atacable destinatario, int bonificacionPorcentual) {
 		
 		int daño = remitente.poderDePelea() * modificadorDaño / 100;
 		
@@ -73,6 +76,10 @@ public class Ataque {
 		return this.costo;
 	}
 	
-	protected void efectosColaterales(Personaje remitente, Personaje destinatario, int dañoRealizado) throws ExcEsChocolate{		
+	public String nombre(){
+		return nombre;
+	}
+	
+	protected void efectosColaterales(Personaje remitente, Atacable destinatario, int dañoRealizado) throws ExcEsChocolate{		
 	}
 }

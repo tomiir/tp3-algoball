@@ -8,6 +8,7 @@ public abstract class Consumible {
 	int bonificacionAtaque;
 	int bonificacionVelocidad;
 	int aumentoDeVida;
+	String nombre;
 	
 	
 	public int obtenerBonificacionAtaque() {
@@ -28,5 +29,9 @@ public abstract class Consumible {
 	
 	public void avanzarTurno(){
 		turnosRestantes--;
+	}
+	
+	public String nombre(){
+		return nombre;
 	}
 }

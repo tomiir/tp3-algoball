@@ -42,19 +42,19 @@ public class EquipoUnitTests {
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero,"personaje",500,4,4,50);
 		equipo.agregarPersonaje(personaje1);
 		
-		Assert.assertTrue(equipo.personajePertenece(personaje1));
+		Assert.assertTrue(equipo.personajePertenece(personaje1.nombre()));
 		Assert.assertTrue(equipo.cantidadPersonajes() == 1);
 		
 		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero,"personaje2",500,4,4,50);
 		equipo.agregarPersonaje(personaje2);
 	
 
-		Assert.assertTrue(equipo.personajePertenece(personaje2));
+		Assert.assertTrue(equipo.personajePertenece(personaje2.nombre()));
 		Assert.assertTrue(equipo.cantidadPersonajes() == 2);
 		
 		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero,"personaje3",500,4,4,50);
 		
-		Assert.assertFalse(equipo.personajePertenece(personaje3));
+		Assert.assertFalse(equipo.personajePertenece(personaje3.nombre()));
 	}
 	
 	@Test

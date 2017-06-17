@@ -28,7 +28,7 @@
 }
 
 .nombre-personaje {
-	-fx-font-family: "Raleway";
+	-fx-font-family: "Morpheus";
     -fx-font-size: 15;
     -fx-text-fill:black;
 }
@@ -36,10 +36,6 @@
 .cara-personaje{
 	height:15;
 	width:15;
-}
-
-.menuPersonaje .nombre-personaje{
-	-fx-font-family: "Morpheus";
 }
 
 .progress-bar{
@@ -74,6 +70,7 @@
 
 .vista-lateral .boton-menu {
 	-fx-min-width:135;
+	-fx-max-width:135;
 	-fx-padding:5;
 	-fx-font-size:14;
 	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
@@ -89,10 +86,24 @@
 	-fx-background-repeat: repeat; 
 }
 
+.fondo-casillero {
+	-fx-min-width: 30;
+	-fx-min-height: 60;
+	-fx-background-image: url("../img/pasto.jpg");
+	-fx-background-repeat: repeat;
+	-fx-background-size: 16 16;
+}
+
 .tablero .personaje {
 	-fx-background-position: center center;
     -fx-background-repeat: stretch;
     -fx-background-size: 30 60;
+}
+
+.tablero .consumible {
+	-fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 30 auto;
 }
 
 .tablero .personaje.coloreado {
@@ -103,7 +114,7 @@
 	-fx-background-color:rgb(150,150,240);
 }
 
-.opcion-movimiento {
+.opcion-movimiento,.opcion-ataque {
 	-fx-opacity:0.3
 }
 
@@ -121,6 +132,6 @@
 
 .labels-informacion{
 	-fx-font-family: "Roboto";
-	-fx-font-size: 18;
+	-fx-font-size: 9;
 }
 

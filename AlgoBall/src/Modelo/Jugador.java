@@ -9,12 +9,13 @@ import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
+import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
 public class Jugador {
 	
-	String nombre;
-	Equipo equipo;
+	protected String nombre;
+	protected Equipo equipo;
 	
 	
 	public Jugador(String nombreNuevo){
@@ -25,7 +26,7 @@ public class Jugador {
 		this.equipo = equipoNuevo;
 	}
 	
-	public void realizarAtaque(Personaje remitente, Personaje destinatario, boolean esEspecial) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
+	public void realizarAtaque(Personaje remitente, Atacable destinatario, boolean esEspecial) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
 		remitente.atacar(destinatario, esEspecial);
 	}
 	

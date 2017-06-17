@@ -6,8 +6,8 @@ import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Interfaces.Atacable;
 
 public class Casillero {
-	Atacable atacable;
-	Consumible consumible;
+	protected Atacable atacable;
+	protected Consumible consumible;
 	
 	public Atacable obtenerAtacable() throws ExcCasilleroDesocupado{
 		if(!estaOcupado()) throw new ExcCasilleroDesocupado();
@@ -43,6 +43,12 @@ public class Casillero {
 	}
 	public void eliminarConsumible(){
 		consumible = null;
+	}
+
+	public void desocuparConsumible() {
+		
+		this.consumible = null;
+		
 	}
 }
 

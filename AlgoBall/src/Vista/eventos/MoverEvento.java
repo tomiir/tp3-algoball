@@ -36,9 +36,17 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 		try {
 			partida.realizarMovimiento(partida.esTurnoDelJugador(), personaje, posicion);
 		} catch (ExcFueraDeTablero e) {
-			
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Error");
+	    	alert.setHeaderText("Error");
+	    	alert.setContentText("La posicion a la que se intenta mover no existe en el tablero");
+	    	alert.showAndWait();
 		} catch (ExcJugadorNoAutorizado e) {
-			
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Error");
+	    	alert.setHeaderText("Error");
+	    	alert.setContentText("El jugador no puede mover a ese personaje, no le pertenece.");
+	    	alert.showAndWait();
 		} catch (ExcJugadorYaMovio e) {
 			Alert alert = new Alert(AlertType.WARNING);
 	    	alert.setTitle("Error");
@@ -46,13 +54,25 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 	    	alert.setContentText("El jugador ya gasto su movimiento");
 	    	alert.showAndWait();
 		} catch (ExcEsChocolate e) {
-
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Error");
+	    	alert.setHeaderText("Error");
+	    	alert.setContentText("El personaje es de chocolate, no se puede mover");
+	    	alert.showAndWait();
 		} catch (ExcCasilleroOcupado e) {
-
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Error");
+	    	alert.setHeaderText("Error");
+	    	alert.setContentText("El casillero al que intenta moverse esta ocupado");
+	    	alert.showAndWait();
 		} catch (ExcCasilleroDesocupado e) {
 
 		} catch (ExcFueraDeRango e) {
-
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Error");
+	    	alert.setHeaderText("Error");
+	    	alert.setContentText("El personaje esta fuera del rango de ese casillero");
+	    	alert.showAndWait();
 		}
 		juego.update();
 		event.consume();
