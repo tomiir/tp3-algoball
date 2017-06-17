@@ -1,5 +1,6 @@
 package Vista;
 
+import Modelo.Jugador;
 import Modelo.Partida;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
@@ -10,8 +11,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class VistaTablero extends GridPane {
-	static final int pixelesAncho=30;
-	static final int pixelesAlto=60;
+	static final int pixelesAncho=45;
+	static final int pixelesAlto=90;
+	VistaLateral vistaLateral;
 	Partida partida;
 	
 	public VistaTablero(Partida partida){
@@ -24,12 +26,12 @@ public class VistaTablero extends GridPane {
 		this.setGridLinesVisible(true);
 		
 		for (int j = 0; j < ancho; j++) {
-		    ColumnConstraints cc = new ColumnConstraints(30);
+		    ColumnConstraints cc = new ColumnConstraints(pixelesAncho);
 		    this.getColumnConstraints().add(cc);
 		}
 
 		for (int j = 0; j < alto; j++) {
-		    RowConstraints rc = new RowConstraints(60);
+		    RowConstraints rc = new RowConstraints(pixelesAlto);
 		    this.getRowConstraints().add(rc);
 		}
 		
@@ -40,7 +42,11 @@ public class VistaTablero extends GridPane {
 	
 	private void update(){
 		partida.iterarPersonajes((k,v)->{
-			this.add(new VistaPersonaje(v, pixelesAncho,pixelesAlto), v.posicion().posX()-1, v.posicion().posY()-1);
+			this.add(new VistaPersonaje(v, pixelesAncho,pixelesAlto, partida, vistaLateral), v.posicion().posX()-1, v.posicion().posY()-1);
 		});
+	}
+	
+	public void setVistaLateral(VistaLateral vista){
+		this.vistaLateral = vista;
 	}
 }

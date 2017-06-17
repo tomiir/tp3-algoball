@@ -23,14 +23,23 @@
 	-fx-padding:5;
 }
 
-.nombre-personaje {
+.info-personaje .nombre-personaje {
 	-fx-font-family: "Raleway";
     -fx-font-size: 15;
     -fx-text-fill:black;
 }
 
+.info-personaje .cara-personaje{
+	height:15;
+	width:15;
+}
+
 .progress-bar{
 	-fx-accent: rgb(124,252,0);
+}
+
+.progress-bar.rojo {
+	-fx-accent: red;
 }
 
 .titulo-algoball {
@@ -60,7 +69,20 @@
 }
 
 .tablero .personaje {
-	-fx-background-color:blue;
 	-fx-background-position: center center;
     -fx-background-repeat: stretch;
+    -fx-background-size: 45 90;
+}
+
+.tablero .personaje.coloreado {
+	-fx-background-color:rgb(150,240,150);
+}
+
+.turnoDelJugador{
+	-fx-min-width:90;
+	-fx-min-height:40;
+	-fx-background-color:rgb(121,164,239);
+	-fx-font-size: 15;
+	-fx-font-family: "Roboto";
+
 }

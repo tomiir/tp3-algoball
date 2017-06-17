@@ -26,17 +26,17 @@ public class Aplicacion extends Application {
     @Override
     public void start(final Stage stage) throws Exception {
     	
-        stage.setTitle("AlgoBall");
+        stage.setTitle("DragonAlgoBall");
         stage.setOnCloseRequest(new SalirEventoWindowEvent());
         stage.getIcons().add(new Image(getClass().getResourceAsStream("img/esferaDragon.png")));
         
         Partida partida = crearModelo();
         
         Juego vistaJugar = new Juego(stage, partida);
-        Scene escenaJugar = new Scene(vistaJugar, 640, 480);
+        Scene escenaJugar = new Scene(vistaJugar, 800,600);
         
     	MenuPrincipal menuPrincipal = new MenuPrincipal(stage, escenaJugar);
-        Scene escenaPrincipal = new Scene(menuPrincipal, 640, 480);
+        Scene escenaPrincipal = new Scene(menuPrincipal, 800,600);
 
         stage.setScene(escenaPrincipal);
 
@@ -59,6 +59,19 @@ public class Aplicacion extends Application {
     	Cell cell = new Cell(tablero);
     	Freezer freezer = new Freezer(tablero);
     	MajinBoo majinBoo = new MajinBoo(tablero);
+    	
+    	
+    	/*try {
+			gohan.recibirDaño(250);
+			piccolo.recibirDaño(400);
+			goku.recibirDaño(400);
+			
+			cell.recibirDaño(400);
+			freezer.recibirDaño(350);
+			majinBoo.recibirDaño(250);
+		} catch (ExcNumeroNegativo e) {
+		}*/
+    	
     	
     	guerrerosZ.agregarPersonaje(goku);
     	guerrerosZ.agregarPersonaje(gohan);

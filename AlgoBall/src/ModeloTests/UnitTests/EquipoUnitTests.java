@@ -82,4 +82,27 @@ public class EquipoUnitTests {
 		
 	}
 	
+	@Test
+	public void equipoPerdio(){
+		Equipo equipo = new Equipo ("Equipo 1");
+		PersonajeDePrueba personajeMuerto = new PersonajeDePrueba(tablero,"personaje1",0,4,4,50);
+		
+		equipo.agregarPersonaje(personajeMuerto);
+		Assert.assertTrue("El equipo perdio",equipo.perdio());
+		
+	}
+	
+	@Test
+	public void equipoNoPerdio(){
+		Equipo equipo = new Equipo ("Equipo 1");
+		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"personaje",10,4,4,50);
+		PersonajeDePrueba personajeMuerto = new PersonajeDePrueba(tablero,"personaje1",0,4,4,50);
+
+		
+		equipo.agregarPersonaje(personaje);
+		equipo.agregarPersonaje(personajeMuerto);
+		Assert.assertFalse("El equipo no perdio",equipo.perdio());
+		
+	}
+	
 }

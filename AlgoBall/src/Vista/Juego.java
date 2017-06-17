@@ -16,6 +16,7 @@ public class Juego extends BorderPane{
 		}
 		setSuperior();
 		setCentro();
+		setVistaLateralDerecha();
 	}
 	
 	private void setSuperior(){
@@ -24,5 +25,9 @@ public class Juego extends BorderPane{
 	
 	private void setCentro(){
 		this.setCenter(new VistaTablero(partida));
+	}
+	
+	private void setVistaLateralDerecha(){
+		this.setRight(new VistaLateral(partida));
 	}
 }

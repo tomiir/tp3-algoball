@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.function.BiConsumer;
 
 import Modelo.Excepciones.ExcNoHayPersonaje;
@@ -42,6 +44,18 @@ public class Equipo{
 
 	public String nombre() {
 		return this.nombre;
+	}
+	
+	public boolean perdio(){
+		LinkedList<Personaje> listaEquipo = new LinkedList<Personaje>();
+		personajes.forEach((nombre,personaje)->listaEquipo.addLast(personaje));
+		Iterator<Personaje> iter = listaEquipo.iterator();
+		
+		while(iter.hasNext()){
+			Personaje personaje = iter.next();
+			if (!personaje.estaMuerto()) return false;
+		}
+		return true;
 	}
 	
 }

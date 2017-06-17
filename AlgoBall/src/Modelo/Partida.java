@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
@@ -34,11 +33,13 @@ public class Partida {
 	Tablero tablero;
 	Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
 	Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
+	int contadorDeTurnos;
 	
 	public Partida (Tablero tablero, Jugador primerJugador, Jugador segundoJugador){
 		this.tablero = tablero;
 		jugador1 = primerJugador;
 		jugador2 = segundoJugador;
+		contadorDeTurnos = 0;
 	}
 	
 	public void iterarPersonajes(BiConsumer<String, Personaje> action){
@@ -73,24 +74,27 @@ public class Partida {
 
 	public void avanzarTurno() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
-		
-		yaMovio.put(jugador1.nombre, false);
-		yaAtacoOTransformo.put(jugador1.nombre,false);
-		jugador1.equipo().forEach((k,v)->{
+		Jugador jugador = esTurnoDelJugador();
+		yaMovio.put(jugador.nombre, false);
+		yaAtacoOTransformo.put(jugador.nombre,false);
+		jugador.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
 		});
 		
-		yaMovio.put(jugador2.nombre, false);
+		//Cambiamos para que avance de a un solo turno.
+		/*yaMovio.put(jugador2.nombre, false);
 		yaAtacoOTransformo.put(jugador2.nombre,false);
 		jugador2.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
-		});
+		});*/
+		
+		this.contadorDeTurnos++;
 	}
 	
 	public Equipo obtenerEquipoAliado(Personaje personaje) {
@@ -117,7 +121,9 @@ public class Partida {
 	}
 	
 	private Jugador ganador(){
-		return jugador1;
+		if (jugador1.equipo().perdio()) return jugador2;
+		if (jugador1.equipo().perdio()) return jugador1;
+		return null;
 	}
 	
 	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Personaje destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcRemitenteEnEquipoPropio{
@@ -138,7 +144,7 @@ public class Partida {
 	}
 	
 	private boolean hayGanador(){
-		return false;
+		return (jugador1.equipo().perdio() | jugador2.equipo().perdio());
 	}
 	
 	private boolean jugadorYaMovio(Jugador jugador){
@@ -174,6 +180,12 @@ public class Partida {
 		}
 	}
 	
+	public Jugador esTurnoDelJugador(){
+		if(this.contadorDeTurnos % 2 == 0){
+			return this.jugador1;
+		}
+		return this.jugador2;
+	}
 
 	
 }
