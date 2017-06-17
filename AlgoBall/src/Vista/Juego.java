@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 public class Juego extends BorderPane{
 	Partida partida;
+	VistaTablero vistaTablero;
+	VistaLateral vistaLateral;
 	
 	public Juego(Stage stage, Partida partida){
 		this.partida = partida;
@@ -14,6 +16,9 @@ public class Juego extends BorderPane{
 			partida.iniciar();
 		} catch (ErrorFatal e) {
 		}
+		vistaLateral = new VistaLateral(partida);
+		vistaTablero = new VistaTablero(partida, vistaLateral);
+		vistaLateral.setVistaTablero(vistaTablero);
 		setSuperior();
 		setCentro();
 		setVistaLateralDerecha();
@@ -24,10 +29,10 @@ public class Juego extends BorderPane{
 	}
 	
 	private void setCentro(){
-		this.setCenter(new VistaTablero(partida));
+		this.setCenter(vistaTablero);
 	}
 	
 	private void setVistaLateralDerecha(){
-		this.setRight(new VistaLateral(partida));
+		this.setRight(vistaLateral);
 	}
 }

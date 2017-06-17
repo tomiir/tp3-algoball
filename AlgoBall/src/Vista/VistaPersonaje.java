@@ -19,4 +19,8 @@ public class VistaPersonaje extends HBox{
 		}
 		
 	}
+	
+	public void remarcar(){
+		this.getStyleClass().add("remarcado");
+	}
 }

@@ -10,6 +10,10 @@
     src: url("../fonts/Saiyan-Sans.ttf"),
 }
 
+@font-face {
+    src: url("../fonts/Morpheus.ttf"),
+}
+
 .ventana-menu {
 	-fx-background-color:rgb(0,124,200);
 }
@@ -23,15 +27,19 @@
 	-fx-padding:5;
 }
 
-.info-personaje .nombre-personaje {
+.nombre-personaje {
 	-fx-font-family: "Raleway";
     -fx-font-size: 15;
     -fx-text-fill:black;
 }
 
-.info-personaje .cara-personaje{
+.cara-personaje{
 	height:15;
 	width:15;
+}
+
+.menuPersonaje .nombre-personaje{
+	-fx-font-family: "Morpheus";
 }
 
 .progress-bar{
@@ -60,6 +68,13 @@
 	-fx-background-radius:10;
 }
 
+.menuPersonaje .boton-menu {
+	-fx-min-width:135;
+	-fx-padding:5;
+	-fx-font-size:14;
+	-fx-font-family:"Morpheus";
+}
+
 .boton-menu:hover {
 	-fx-effect: innershadow(gaussian , black , 2 , 0.2 , 1 , 1 ); 
 }
@@ -71,11 +86,15 @@
 .tablero .personaje {
 	-fx-background-position: center center;
     -fx-background-repeat: stretch;
-    -fx-background-size: 45 90;
+    -fx-background-size: 40 80;
 }
 
 .tablero .personaje.coloreado {
 	-fx-background-color:rgb(150,240,150);
+}
+
+.tablero .personaje.remarcado {
+	-fx-background-color:rgb(150,150,240);
 }
 
 .turnoDelJugador{
@@ -86,3 +105,8 @@
 	-fx-font-family: "Roboto";
 
 }
+
+.MenuPersonaje{
+}
+
+
