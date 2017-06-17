@@ -3,6 +3,7 @@ package Vista;
 
 import Modelo.Partida;
 import Modelo.Posicion;
+import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Personaje;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -51,16 +52,40 @@ public class VistaTablero extends GridPane {
 		obtenerVistaPersonaje(personaje.posicion()).remarcar();
 	}
 	
-	public void mostrarRangoDeMovimiento(Personaje personaje){
+	public void ofrecerAtaque(Personaje personaje){
+		/*Posicion inicial = personaje.posicion();
+		int rangoDeAtaque = personaje.rangoDeAtaque();
+		for(int i=0;i<ancho;i++){
+			for(int j=0;j<alto;j++){
+				if(vistasPersonajes[i][j]] != null && inicial.distanciaA(new Posicion(i+1,, j+1)) <= rangoDeAtaque){
+					
+				}
+				
+			}
+			
+		}*/
+	}
+	
+	public void ofrecerMovimiento(Personaje personaje){
 		Posicion inicial = personaje.posicion();
-		int rango=personaje.rangoDeAtaque();
+		int rango=personaje.velocidad();
+		for(int i=0;i<ancho;i++){
+			for(int j=0;j<alto;j++){
+				try {
+					if(vistasPersonajes[i][j]==null && inicial.distanciaA(new Posicion(i+1,j+1))<=rango){
+						this.add(new OpcionDeMovimiento(personaje, new Posicion(i+1,j+1), partida, this, pixelesAncho, pixelesAlto), i, j);
+					}
+				} catch (ExcPosicionNegativa e) {
+				}
+			}
+		}
 	}
 	
 	public VistaPersonaje obtenerVistaPersonaje(Posicion posicion){
 		return vistasPersonajes[posicion.posX()-1][posicion.posY()-1];
 	}
 	
-	private void update(){
+	public void update(){
 		this.getChildren().clear();
 		vistasPersonajes=new VistaPersonaje[ancho][alto];
 		partida.iterarPersonajes((k,v)->{
@@ -68,20 +93,5 @@ public class VistaTablero extends GridPane {
 			this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
 			vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
 		});
-	}
-	
-	//https://stackoverflow.com/questions/20825935/javafx-get-node-by-row-and-column
-	public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-	    Node result = null;
-	    ObservableList<Node> childrens = gridPane.getChildren();
-
-	    for (Node node : childrens) {
-	        if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-	            result = node;
-	            break;
-	        }
-	    }
-
-	    return result;
 	}
 }

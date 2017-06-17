@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 public class MenuPersonaje extends VBox {
 	
-	public MenuPersonaje (Personaje personaje){
+	public MenuPersonaje (Personaje personaje, VistaTablero vistaTablero){
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("menuPersonaje");
 		this.setSpacing(20);
@@ -19,12 +19,18 @@ public class MenuPersonaje extends VBox {
 		Button botonAtacar = new Button();
 		botonAtacar.setText("Atacar");
 		botonAtacar.getStyleClass().add("boton-menu");
+		botonAtacar.setOnAction(new BotonAtacarControlador(personaje, vistaTablero));
 		
 		Button botonMover = new Button();
 		botonMover.setText("Mover");
 		botonMover.getStyleClass().add("boton-menu");
+		botonMover.setOnAction(new BotonMoverControlador(personaje, vistaTablero));
 		
-		this.getChildren().addAll(nombreDelPersonaje, botonAtacar, botonMover);
+		Button botonTransformar = new Button();
+		botonTransformar.setText("Transformar");
+		botonTransformar.getStyleClass().add("boton-menu");
+		
+		this.getChildren().addAll(nombreDelPersonaje, botonAtacar, botonMover, botonTransformar);
 		
 		
 	}

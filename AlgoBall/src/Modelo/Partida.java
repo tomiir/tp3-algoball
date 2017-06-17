@@ -53,6 +53,7 @@ public class Partida {
 	
 	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(verificarMovimientoLegitimo(jugador, personaje)) jugador.realizarMovimiento(personaje, posicion);
+		jugadorMovio(jugador);
 	}
 	
 	public void realizarTransformacion(Jugador jugador, Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate, ExcJugadorYaAtacoOTransformo{
@@ -74,25 +75,25 @@ public class Partida {
 
 	public void avanzarTurno() throws ExcHayGanador{
 		if(hayGanador()) throw new ExcHayGanador(ganador());
-		Jugador jugador = esTurnoDelJugador();
-		yaMovio.put(jugador.nombre, false);
-		yaAtacoOTransformo.put(jugador.nombre,false);
-		jugador.equipo().forEach((k,v)->{
+		
+		yaMovio.put(jugador1.nombre, false);
+		yaAtacoOTransformo.put(jugador1.nombre,false);
+		jugador1.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
 		});
 		
-		//Cambiamos para que avance de a un solo turno.
-		/*yaMovio.put(jugador2.nombre, false);
+		
+		yaMovio.put(jugador2.nombre, false);
 		yaAtacoOTransformo.put(jugador2.nombre,false);
 		jugador2.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
 			} catch (ExcNumeroNegativo e) {
 			}
-		});*/
+		});
 		
 		this.contadorDeTurnos++;
 	}
@@ -145,6 +146,10 @@ public class Partida {
 	
 	private boolean hayGanador(){
 		return (jugador1.equipo().perdio() | jugador2.equipo().perdio());
+	}
+	
+	private void jugadorMovio(Jugador jugador){
+		yaMovio.put(jugador.nombre, true);
 	}
 	
 	private boolean jugadorYaMovio(Jugador jugador){

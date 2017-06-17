@@ -19,7 +19,7 @@
 }
 
 .info-personaje {
-	-fx-background-color:rgb(209,163,163);
+	-fx-background-color:linear-gradient(to bottom, #bf6e4e 0%,#bf6e4e 11%,#f0b7a1 100%);
 	-fx-border-radius:10;
 	-fx-background-radius:10;
 	-fx-min-width:90;
@@ -72,6 +72,7 @@
 	-fx-min-width:135;
 	-fx-padding:5;
 	-fx-font-size:14;
+	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
 	-fx-font-family:"Morpheus";
 }
 
@@ -80,7 +81,8 @@
 }
 
 .tablero {
-	-fx-background-color:lightblue
+	-fx-background-image: url("../img/background.jpg");
+	-fx-background-repeat: repeat; 
 }
 
 .tablero .personaje {

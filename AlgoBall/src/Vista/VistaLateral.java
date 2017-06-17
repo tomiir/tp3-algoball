@@ -35,8 +35,7 @@ public class VistaLateral extends VBox {
 	 public void personajeClickeado(Personaje personaje){
 		 this.vistaTablero.remarcarPersonaje(personaje);
 		 update();
-		 this.getChildren().add(new MenuPersonaje(personaje));
-		 
+		 this.getChildren().add(new MenuPersonaje(personaje, vistaTablero));		 
 		 
 	 }
 	 

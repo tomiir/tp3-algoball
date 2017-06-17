@@ -1,8 +1,13 @@
 package Vista;
 
+import java.io.File;
+
 import Modelo.Partida;
 import Modelo.Excepciones.ErrorFatal;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 public class Juego extends BorderPane{
@@ -22,6 +27,7 @@ public class Juego extends BorderPane{
 		setSuperior();
 		setCentro();
 		setVistaLateralDerecha();
+		
 	}
 	
 	private void setSuperior(){
