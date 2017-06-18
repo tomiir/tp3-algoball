@@ -29,8 +29,8 @@ public class VistaLateral extends BorderPane{
 		botonPasarDeTurno.setText("Pasar de turno");
 		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoControlador(this.juego, this.partida));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
-		botonPasarDeTurno.setAlignment(Pos.CENTER);
 		this.setBottom(botonPasarDeTurno);
+		this.setAlignment(getBottom(), Pos.CENTER);
 		
 		update();		
 	}

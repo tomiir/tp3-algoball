@@ -7,6 +7,6 @@ public class EsferaDelDragon extends Consumible {
 			this.bonificacionAtaque = 25;
 			this.bonificacionVelocidad = 0;
 			this.turnosRestantes = 2;
-			this.nombre = "esfera del dragon";
+			this.nombre = "Esfera del dragon";
 	}
 }

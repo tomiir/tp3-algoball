@@ -11,9 +11,9 @@ import javafx.scene.layout.VBox;
 public class MenuPersonaje extends VBox {
 	
 	public MenuPersonaje (Personaje personaje, Juego juego, Partida partida){
-		this.setAlignment(Pos.CENTER);
-		this.getStyleClass().add("menuPersonaje");
-		this.setSpacing(12);
+		this.setSpacing(5);
+		this.setAlignment(Pos.TOP_CENTER);
+		this.getStyleClass().add("menu-personaje");
 		
 		NameTagPersonaje nombreDelPersonaje = new NameTagPersonaje(personaje);		
 		
@@ -62,24 +62,24 @@ public class MenuPersonaje extends VBox {
 		}
 		
 		Label puntosDeVida = new Label();
-		puntosDeVida.setText("Vida:" + personaje.puntosDeVida());
+		puntosDeVida.setText("Vida: " + personaje.puntosDeVida());
 		puntosDeVida.getStyleClass().add("labels-informacion");
 		
 		Label puntosKi = new Label();
-		puntosKi.setText("Ki:" + personaje.ki());
+		puntosKi.setText("Ki: " + personaje.ki());
 		puntosKi.getStyleClass().add("labels-informacion");
 		
 		Label puntosPoderPelea = new Label();
-		puntosKi.setText("Poder de pelea:" + personaje.poderDePelea());
-		puntosKi.getStyleClass().add("labels-informacion");
+		puntosPoderPelea.setText("Poder de pelea: " + personaje.poderDePelea());
+		puntosPoderPelea.getStyleClass().add("labels-informacion");
 		
 		Label puntosVelocidad = new Label();
-		puntosKi.setText("Velocidad:" + personaje.velocidad());
-		puntosKi.getStyleClass().add("labels-informacion");
+		puntosVelocidad.setText("Velocidad: " + personaje.velocidad());
+		puntosVelocidad.getStyleClass().add("labels-informacion");
 		
 		Label puntosDistanciaAtaque= new Label();
-		puntosKi.setText("Rango de ataque:" + personaje.rangoDeAtaque());
-		puntosKi.getStyleClass().add("labels-informacion");
+		puntosDistanciaAtaque.setText("Rango de ataque: " + personaje.rangoDeAtaque());
+		puntosDistanciaAtaque.getStyleClass().add("labels-informacion");
 		
 		this.getChildren().addAll(nombreDelPersonaje, puntosDeVida,  puntosKi, puntosPoderPelea, puntosVelocidad, puntosDistanciaAtaque, botonAtaqueNormal, botonAtaqueEspecial, botonMover, botonTransformar);
 		

@@ -8,6 +8,6 @@ public class SemillaDeErmitaño extends Consumible {
 		this.bonificacionAtaque =0;
 		this.bonificacionVelocidad =0;
 		this.turnosRestantes = 0;
-		this.nombre = "semilla del ermitaño";
+		this.nombre = "Semilla del ermitaño";
 	}
 }

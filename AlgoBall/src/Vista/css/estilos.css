@@ -75,6 +75,7 @@
 	-fx-font-size:14;
 	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
 	-fx-font-family:"Morpheus";
+	-fx-text-alignment:center;
 }
 
 .boton-menu:hover {
@@ -127,11 +128,12 @@
 	-fx-alignment:center;
 }
 
-.MenuPersonaje{
+.menu-personaje{
+	-fx-padding:10 0 0 0;
 }
 
-.labels-informacion{
+.menu-personaje .labels-informacion{
 	-fx-font-family: "Roboto";
-	-fx-font-size: 9;
+	-fx-font-size: 12;
 }
 
