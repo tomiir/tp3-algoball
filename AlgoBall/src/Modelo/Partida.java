@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import Modelo.Consumibles.Consumible;
 import Modelo.Consumibles.EsferaDelDragon;
@@ -102,8 +101,8 @@ public class Partida {
 		
 		cambiarJugadorActivo();
 		
-		yaMovio.put(jugadorActivo.nombre, false);
-		yaAtacoOTransformo.put(jugadorActivo.nombre,false);
+		yaMovio.put(jugadorActivo.nombre(), false);
+		yaAtacoOTransformo.put(jugadorActivo.nombre(),false);
 		jugadorActivo.equipo().forEach((k,v)->{
 			try {
 				v.seAvanzoUnTurno(5);
@@ -228,18 +227,15 @@ public class Partida {
 		int numeroConsumible = generador.nextInt(3);
 		Consumible consumible = new NubeVoladora();
 		
-		switch(numeroConsumible){
-			case 0: consumible = new SemillaDeErmitaño();
-			case 1: consumible = new EsferaDelDragon();
-					
-		}
+		if(numeroConsumible == 1) consumible = new EsferaDelDragon();
+		else if(numeroConsumible == 2) consumible = new SemillaDeErmitaño();
 		
 		int randAlto = generador.nextInt(tablero.alto());
 		int randAncho = generador.nextInt(tablero.ancho());
 		int randChance = generador.nextInt(10);
 		
 		//20% de chances de aparicion
-		if(randChance <= 1)
+		if(randChance <= 3)
 			try {
 				tablero.posicionarConsumible(consumible, new Posicion(randAncho,randAlto));
 			} catch (ExcCasilleroOcupado | ExcFueraDeTablero | ExcPosicionNegativa e) {	}

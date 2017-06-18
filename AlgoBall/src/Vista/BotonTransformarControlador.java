@@ -1,7 +1,9 @@
 package Vista;
 
 import Modelo.Equipo;
+import Modelo.Partida;
 import Modelo.Excepciones.ExcEsChocolate;
+import Modelo.Excepciones.ExcJugadorYaAtacoOTransformo;
 import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Personajes.Personaje;
 import javafx.event.ActionEvent;
@@ -23,7 +25,12 @@ public class BotonTransformarControlador implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			personaje.transformar(this.equipo);
+			Partida partida = juego.partida();
+			try {
+				partida.realizarTransformacion(partida.esTurnoDelJugador(), personaje);
+			} catch (ExcJugadorYaAtacoOTransformo e) {
+				
+			}
 			juego.update();
 		} catch (ExcNoEsPosibleTransformarse e) {
 			Alert alert = new Alert(AlertType.WARNING);

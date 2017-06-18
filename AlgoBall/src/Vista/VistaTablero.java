@@ -91,8 +91,11 @@ public class VistaTablero extends GridPane {
 		setFondoCasillero();
 		partida.iterarPersonajes((k,v)->{
 			VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
-			this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
-			vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
+			if(!(v.estaMuerto())){
+				this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
+				vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
+			}
+			
 		});
 		partida.iterarCasilleros((cas,pos)->{
 			try {

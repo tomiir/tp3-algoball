@@ -6,7 +6,7 @@ import Modelo.Personajes.Personaje;
 public class SemiPerfecto extends Transformacion {
 	
 	public SemiPerfecto(){
-		this.nombre = "Semi-Perfecto";
+		this.nombre = "SemiPerfecto";
 		this.rangoDeAtaque =4;
 		this.costo = 0;
 		this.velocidad = 3;

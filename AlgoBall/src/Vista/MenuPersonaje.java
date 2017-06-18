@@ -44,7 +44,8 @@ public class MenuPersonaje extends VBox {
 		
 		Button botonTransformar = new Button();
 		botonTransformar.setText("Transformar");
-		if(personaje.getTransformacion() != null){
+		// FALTA CAMBIAR ALGO
+		if(personaje.getTransformacion() != null ){
 			botonTransformar.setText("Transformar en " + personaje.getTransformacion().nombre() + "\n(costo:" + personaje.getTransformacion().costo()+ ")");
 		}
 		else{

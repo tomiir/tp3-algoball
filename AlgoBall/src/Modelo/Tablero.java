@@ -69,6 +69,7 @@ public class Tablero {
 		
 		Casillero casillero = this.obtenerCasillero(posicion);
 		if(!casillero.tieneUnConsumible()) casillero.ocuparConsumible(consumible);
+		if(casillero.estaOcupado()) throw new ExcCasilleroOcupado();
 		
 	}
 

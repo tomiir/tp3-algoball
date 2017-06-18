@@ -10,6 +10,8 @@ import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
 import Vista.eventos.SalirEventoWindowEvent;
 import javafx.application.Application;
@@ -52,14 +54,15 @@ public class Aplicacion extends Application {
     	Equipo guerrerosZ = new Equipo("Guerreros Z");
     	Equipo enemigosDeLaTierra = new Equipo("Enemigos de la tierra");
     	
-    	Goku goku = new Goku(tablero);
-    	Gohan gohan = new Gohan(tablero);
-    	Piccolo piccolo = new Piccolo(tablero);
+    	PersonajeFactory factory = new PersonajeFactory(tablero);
     	
-    	Cell cell = new Cell(tablero);
-    	Freezer freezer = new Freezer(tablero);
-    	MajinBoo majinBoo = new MajinBoo(tablero);
+    	Personaje goku = factory.getPersonaje("goku");
+    	Personaje gohan = factory.getPersonaje("gohan");
+    	Personaje piccolo = factory.getPersonaje("piccolo");
     	
+    	Personaje cell = factory.getPersonaje("cell");
+    	Personaje freezer = factory.getPersonaje("freezer");
+    	Personaje majinBoo = factory.getPersonaje("majinboo");
     	
     	/*try {
 			gohan.recibirDaño(250);

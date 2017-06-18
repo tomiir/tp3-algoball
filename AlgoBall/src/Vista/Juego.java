@@ -56,6 +56,10 @@ public class Juego extends BorderPane{
 		return pixelesAlto;
 	}
 	
+	public Partida partida(){
+		return this.partida;
+	}
+	
 	private void setSuperior(){
 		this.setTop(panelDeVida);
 	}
