@@ -42,7 +42,7 @@ public class Cell extends Personaje {
 		if(puntosDeVida >= vidaInicial) puntosDeVida = vidaInicial;
 	}
 	
-	protected int bonificacionDeAtaquePorcentual(){
+	public int bonificacionDeAtaquePorcentual(){
 		return 0;
 	}
 }

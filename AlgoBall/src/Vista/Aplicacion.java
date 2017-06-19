@@ -13,6 +13,7 @@ import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
+import Vista.eventos.AplicacionOnKeyPressEvento;
 import Vista.eventos.SalirEventoWindowEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,12 +31,14 @@ public class Aplicacion extends Application {
     	
         stage.setTitle("DragonAlgoBall");
         stage.setOnCloseRequest(new SalirEventoWindowEvent());
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("img/esferaDragon.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("img/icon.png")));
         
         Partida partida = crearModelo();
         
         Juego vistaJugar = new Juego(stage, partida);
         Scene escenaJugar = new Scene(vistaJugar, 800,600);
+        
+        escenaJugar.setOnKeyPressed(new AplicacionOnKeyPressEvento(vistaJugar.getBarraDeMenu()));
         
     	MenuPrincipal menuPrincipal = new MenuPrincipal(stage, escenaJugar);
         Scene escenaPrincipal = new Scene(menuPrincipal, 800,600);
@@ -47,7 +50,7 @@ public class Aplicacion extends Application {
     }
     
     private Partida crearModelo(){
-    	Tablero tablero = new Tablero(21,8);
+    	Tablero tablero = new Tablero(16,8);
 		Jugador jugador1 = new Jugador("Guerreros Z");
     	Jugador jugador2 = new Jugador("Enemigos de la tierra");
     	
@@ -64,23 +67,6 @@ public class Aplicacion extends Application {
     	Personaje cell = factory.getPersonaje("cell");
     	Personaje freezer = factory.getPersonaje("freezer");
     	Personaje majinBoo = factory.getPersonaje("majinboo");
-    	
-    	try {
-			piccolo.recibirDaño(piccolo.puntosDeVida() -10);
-		} catch (ExcNumeroNegativo e) {
-			
-		}
-    	
-    	/*try {
-			gohan.recibirDaño(250);
-			piccolo.recibirDaño(400);
-			goku.recibirDaño(400);
-			
-			cell.recibirDaño(400);
-			freezer.recibirDaño(350);
-			majinBoo.recibirDaño(250);
-		} catch (ExcNumeroNegativo e) {
-		}*/
     	
     	
     	guerrerosZ.agregarPersonaje(goku);

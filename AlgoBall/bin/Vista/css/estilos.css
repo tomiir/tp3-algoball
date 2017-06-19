@@ -16,6 +16,10 @@
 
 .ventana-menu {
 	-fx-background-image:url("../img/fondomenu.jpg");
+	-fx-background-size: contain;
+	-fx-background-position: center;
+	-fx-background-repeat:no-repeat;
+	-fx-background-color:white;
 }
 
 .info-personaje {
@@ -101,11 +105,11 @@
 }
 
 .tablero .personaje.coloreado {
-	-fx-background-color:rgb(150,240,150);
+	-fx-background-color:rgba(150,240,150,0.5);
 }
 
 .tablero .personaje.remarcado {
-	-fx-background-color:rgb(150,150,240);
+	-fx-background-color:rgba(150,150,240,0.5);
 }
 
 .opcion-movimiento,.opcion-ataque {
@@ -129,4 +133,3 @@
 	-fx-font-family: "Roboto";
 	-fx-font-size: 12;
 }
-

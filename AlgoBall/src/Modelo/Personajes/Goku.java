@@ -25,7 +25,7 @@ public class Goku extends Personaje {
 		transformaciones.add(superSaiyan);
 	}
 	
-	protected int bonificacionDeAtaquePorcentual(){
+	public int bonificacionDeAtaquePorcentual(){
 		if(this.vidaPorcentual()<30) return 20;
 		return 0;
 	}

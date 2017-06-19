@@ -20,11 +20,7 @@ public class PersonajeDePrueba extends Personaje {
 		inicializar();
 		
 	}
-	
-	protected int bonificacionDeAtaquePorcentual(){
-		return 0;
-	}
-	
+
 	public Posicion posicion(){
 		return posicion;
 	}

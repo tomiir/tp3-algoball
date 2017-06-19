@@ -59,7 +59,7 @@ public class Personaje implements Atacable{
 	
 	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(esChocolate()) throw new ExcEsChocolate();
-		if(this.estaEnRango(posicion, velocidad())){
+		if(this.estaEnRango(posicion, velocidad()+this.bonificacionDeVelocidadPorConsumibles())){
 			this.tablero.posicionarPersonaje(this, posicion);
 		
 			if(tablero.obtenerCasillero(posicion).tieneUnConsumible()){
@@ -114,11 +114,10 @@ public class Personaje implements Atacable{
 	}
 	
 	public int velocidad(){
-		return this.velocidad + this.bonificacionDeVelocidadPorConsumibles();
+		return this.velocidad;
 	}
 	
 	public Posicion posicion(){
-		if(estaMuerto()) return null;
 		return posicion;
 	}
 	
@@ -178,11 +177,11 @@ public class Personaje implements Atacable{
 		return ataqueEspecial;
 	}
 	
-	protected int bonificacionDeAtaquePorcentual(){
+	public int bonificacionDeAtaquePorcentual(){
 		return 0;
 	}
 
-	protected int bonificacionDeAtaquePorcentualPorConsumibles(){
+	public int bonificacionDeAtaquePorcentualPorConsumibles(){
 		int bonificacionDeAtaquePorcentual = 0;
 		
 		if (this.consumidos.isEmpty() == false){
@@ -197,7 +196,7 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	protected int bonificacionDeVelocidadPorConsumibles(){
+	public int bonificacionDeVelocidadPorConsumibles(){
 		int bonificacion = 0;
 		if (this.consumidos.isEmpty() == false){
 			Iterator<Consumible> iterador = consumidos.iterator();

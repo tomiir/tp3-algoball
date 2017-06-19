@@ -24,17 +24,18 @@ public class MenuPersonaje extends VBox {
 		botonMover.setText("Mover");
 		botonMover.getStyleClass().add("boton-menu");
 		botonMover.setOnAction(new BotonMoverEvento(personaje, juego.vistaTablero()));
-		if(partida.jugadorYaMovio(partida.esTurnoDelJugador())){
+		if(partida.jugadorYaMovio(partida.esTurnoDelJugador()) || personaje.esChocolate()){
 			botonMover.setDisable(true);
 		}
-		
 		
 		
 		Button botonAtaqueNormal = new Button();
 		botonAtaqueNormal.setText("Ataque normal");
 		botonAtaqueNormal.getStyleClass().add("boton-menu");
 		botonAtaqueNormal.setOnAction(new BotonAtacarEvento(personaje, juego.vistaTablero(), false));
-	
+		if(personaje.esChocolate()){
+			botonAtaqueNormal.setDisable(true);
+		}
 
 		
 		Button botonAtaqueEspecial = new Button();
@@ -42,19 +43,20 @@ public class MenuPersonaje extends VBox {
 		botonAtaqueEspecial.getStyleClass().add("boton-menu");
 		botonAtaqueEspecial.wrapTextProperty().setValue(true);
 		botonAtaqueEspecial.setOnAction(new BotonAtacarEvento(personaje, juego.vistaTablero(), true));
-		if( personaje.ki() < personaje.getAtaqueEspecial().costo() ){
+		if( personaje.ki() < personaje.getAtaqueEspecial().costo() || personaje.esChocolate()){
 			botonAtaqueEspecial.setDisable(true);
 		}
 		
 		
 		Button botonTransformar = new Button();
 		botonTransformar.setText("Transformar");
-		if(personaje.getTransformacion() != null && personaje.getTransformacion().esPosible(personaje, partida.esTurnoDelJugador().equipo()) ){
-			botonTransformar.setText("Transformar en " + personaje.getTransformacion().nombre() + "\n(costo:" + personaje.getTransformacion().costo()+ ")");
-		}
-		else{
+		
+		if(personaje.getTransformacion() != null) botonTransformar.setText("Transformar en " + personaje.getTransformacion().nombre() + "\n(costo:" + personaje.getTransformacion().costo()+ ")");
+		
+		if(personaje.getTransformacion() == null || !personaje.getTransformacion().esPosible(personaje, partida.esTurnoDelJugador().equipo()) || personaje.esChocolate()){
 			botonTransformar.setDisable(true);
 		}
+		
 		botonTransformar.wrapTextProperty().setValue(true);
 		botonTransformar.getStyleClass().add("boton-menu");
 		botonTransformar.setOnAction(new BotonTransformarEvento(personaje, partida.esTurnoDelJugador().equipo(), juego));
@@ -75,11 +77,11 @@ public class MenuPersonaje extends VBox {
 		puntosKi.getStyleClass().add("labels-informacion");
 		
 		Label puntosPoderPelea = new Label();
-		puntosPoderPelea.setText("Poder de pelea: " + personaje.poderDePelea());
+		puntosPoderPelea.setText("Poder de pelea: " + personaje.poderDePelea() + " (+ %" + String.valueOf(personaje.bonificacionDeAtaquePorcentual()+personaje.bonificacionDeAtaquePorcentualPorConsumibles()) + ")");
 		puntosPoderPelea.getStyleClass().add("labels-informacion");
 		
 		Label puntosVelocidad = new Label();
-		puntosVelocidad.setText("Velocidad: " + personaje.velocidad());
+		puntosVelocidad.setText("Velocidad: " + personaje.velocidad()  + " ( +" + String.valueOf(personaje.bonificacionDeVelocidadPorConsumibles()) + ")");
 		puntosVelocidad.getStyleClass().add("labels-informacion");
 		
 		Label puntosDistanciaAtaque= new Label();

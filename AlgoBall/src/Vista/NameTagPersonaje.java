@@ -14,7 +14,9 @@ public class NameTagPersonaje extends HBox{
 		this.setSpacing(5);
 		
 		Image cara;
-		if(personaje.esChocolate()){
+		if (personaje.estaMuerto()){
+			cara = new Image(getClass().getResource("img/personajes/"+personaje.nombre()+"/"+"cara"+personaje.nombre()+"_"+personaje.forma()+"_muerto.png").toExternalForm());
+		}else if(personaje.esChocolate()){
 			cara = new Image(getClass().getResource("img/personajes/cara_chocolate.png").toExternalForm());
 		} else if(personaje.vidaPorcentual()<30){
 			cara = new Image(getClass().getResource("img/personajes/"+personaje.nombre()+"/"+"cara"+personaje.nombre()+"_"+personaje.forma()+"_herido.png").toExternalForm());
