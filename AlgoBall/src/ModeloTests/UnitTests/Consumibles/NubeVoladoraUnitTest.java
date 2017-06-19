@@ -95,7 +95,8 @@ public class NubeVoladoraUnitTest {
 		//Agarro la nube
 		personaje.mover(new Posicion(1,2));
 	
-		//Pruebo que se puede mover 5
+		//Paso un turno y pruebo que se puede mover 5
+		personaje.seAvanzoUnTurno(5);
 		personaje.mover(new Posicion(6,2));
 		
 		//Avanzo un turno y verifico que se pueda mover 5

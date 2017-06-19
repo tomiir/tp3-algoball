@@ -7,7 +7,6 @@ import Modelo.Equipo;
 import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Tablero;
-import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
@@ -34,7 +33,7 @@ public class PartidaUnitTests {
 	
 	
 	@Test
-	public void puedoIniciarLaPartida() throws ErrorFatal, ExcPosicionNegativa{
+	public void puedoIniciarLaPartida() throws ExcPosicionNegativa, ExcHayGanador{
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -50,23 +49,9 @@ public class PartidaUnitTests {
 		Assert.assertEquals("El personaje 2 se posiciono correctamente en pos y",personaje2.posicion().posY(),3);
 	
 	}
-	/*
-	@Test
-	public void seInicioLaPartidaPorEndeSeComenzoUnTurno() throws ErrorFatal{
-		jugador1.asignarEquipo(equipo1);
-		jugador2.asignarEquipo(equipo2);
-		
-		equipo1.agregarPersonaje(personaje1);
-		equipo2.agregarPersonaje(personaje2);
-			
-		partida.iniciar();
-		
-		Assert.assertEquals("Comenzo la partida, el ki es el esperado para jugador 1",personaje1.ki(),5);
-		Assert.assertEquals("Comenzo la partida, el ki es el esperado para jugador 2",personaje2.ki(),5);
-	}
 	
 	@Test
-	public void avanzarUnTurnoModificaElKiDeLosPersonajes() throws ErrorFatal, ExcHayGanador{
+	public void avanzarUnTurnoModificaElKiDeLosPersonajes() throws ExcHayGanador{
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
 		
@@ -76,13 +61,17 @@ public class PartidaUnitTests {
 		partida.iniciar();
 		
 		partida.avanzarTurno();
+		if (partida.esTurnoDelJugador()==jugador1){
+			Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 2",personaje2.ki(),5);
+		}
+		else{
+			Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 1",personaje1.ki(),5);
+		}
 		
-		Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 1",personaje1.ki(),10);
-		Assert.assertEquals("Comenzo la partida y se avanza un turno, el ki es el esperado para jugador 2",personaje2.ki(),10);
 	}
-	*/
+	
 	@Test (expected = ExcHayGanador.class)
-	public void avanzarUnTurnoCuandoTodosLosPersonajesDelEquipoContrarioEstanMuertos() throws ErrorFatal, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcHayGanador{
+	public void avanzarUnTurnoCuandoTodosLosPersonajesDelEquipoContrarioEstanMuertos() throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcHayGanador{
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
 		
@@ -96,7 +85,7 @@ public class PartidaUnitTests {
 		partida.avanzarTurno();
 	}
 	
-	
+	//PRUEBA DE ITERACION LARGA PARA QUE LOS TURNOS NO SE CRUZEN
 	
 	
 }

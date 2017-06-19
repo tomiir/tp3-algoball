@@ -9,9 +9,9 @@ public class VistaSuperior extends VBox {
 	PanelDeVida panelDeVida;
 	BarraDeMenu barraMenu;
 	
-	public VistaSuperior(Partida partida, MediaPlayer mediaPlayer, Stage stage){
-		barraMenu = new BarraDeMenu(mediaPlayer,stage);
-		panelDeVida = new PanelDeVida(partida);
+	public VistaSuperior(Juego juego,MediaPlayer mediaPlayer, Stage stage){
+		barraMenu = new BarraDeMenu(mediaPlayer,stage, juego);
+		panelDeVida = new PanelDeVida(juego.partida());
 
 		this.getChildren().addAll(barraMenu,panelDeVida);
 		

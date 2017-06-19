@@ -81,7 +81,7 @@ public class MenuPersonaje extends VBox {
 		puntosPoderPelea.getStyleClass().add("labels-informacion");
 		
 		Label puntosVelocidad = new Label();
-		puntosVelocidad.setText("Velocidad: " + personaje.velocidad()  + " ( +" + String.valueOf(personaje.bonificacionDeVelocidadPorConsumibles()) + ")");
+		puntosVelocidad.setText("Velocidad: " + personaje.velocidad()  + " (+ " + String.valueOf(personaje.bonificacionDeVelocidadPorConsumibles()) + ")");
 		puntosVelocidad.getStyleClass().add("labels-informacion");
 		
 		Label puntosDistanciaAtaque= new Label();

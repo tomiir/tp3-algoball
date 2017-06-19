@@ -1,7 +1,12 @@
 package Vista;
 
+import Modelo.Equipo;
+import Modelo.Jugador;
 import Modelo.Partida;
-import Modelo.Excepciones.ErrorFatal;
+import Modelo.Tablero;
+import Modelo.Excepciones.ExcHayGanador;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,13 +23,10 @@ public class Juego extends BorderPane{
 	protected VistaSuperior vistaSuperior;
 	protected BarraDeMenu barraMenu;
 	protected MediaPlayer mediaPlayer;
+	protected boolean sonidoMute;
 	
-	public Juego(Stage stage, Partida partida){
-		this.partida = partida;
-		try {
-			partida.iniciar();
-		} catch (ErrorFatal e) {
-		}
+	public Juego(Stage stage){
+		iniciarModelo();
 		
 		String path = getClass().getResource("mp3/Batalla.mp3").toString();
         Media media = new Media(path);
@@ -32,15 +34,13 @@ public class Juego extends BorderPane{
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(0.3);
 		
-		vistaLateral = new VistaLateral(partida, this);
-		vistaTablero = new VistaTablero(partida, this);
-		vistaSuperior = new VistaSuperior(partida,mediaPlayer,stage);
-		
+		vistaLateral = new VistaLateral(this);
+		vistaTablero = new VistaTablero(this);
+		vistaSuperior = new VistaSuperior(this,mediaPlayer,stage);
 		
 		setSuperior();
 		setCentro();
 		setVistaLateralDerecha();
-		
 	}
 	
 	public void update(){
@@ -50,6 +50,45 @@ public class Juego extends BorderPane{
 		vistaTablero.update();
 		
 	}
+	
+    public void iniciarModelo(){
+    	Tablero tablero = new Tablero(16,8);
+		Jugador jugador1 = new Jugador("Guerreros Z");
+    	Jugador jugador2 = new Jugador("Enemigos de la tierra");
+    	
+    	Equipo guerrerosZ = new Equipo("Guerreros Z");
+    	Equipo enemigosDeLaTierra = new Equipo("Enemigos de la tierra");
+    	
+    	PersonajeFactory factory = new PersonajeFactory(tablero);
+    	
+    	Personaje goku = factory.getPersonaje("goku");
+    	Personaje gohan = factory.getPersonaje("gohan");
+    	Personaje piccolo = factory.getPersonaje("piccolo");
+    	
+    	
+    	Personaje cell = factory.getPersonaje("cell");
+    	Personaje freezer = factory.getPersonaje("freezer");
+    	Personaje majinBoo = factory.getPersonaje("majinboo");
+    	
+    	
+    	guerrerosZ.agregarPersonaje(goku);
+    	guerrerosZ.agregarPersonaje(gohan);
+    	guerrerosZ.agregarPersonaje(piccolo);
+    	
+    	enemigosDeLaTierra.agregarPersonaje(cell);
+    	enemigosDeLaTierra.agregarPersonaje(freezer);
+    	enemigosDeLaTierra.agregarPersonaje(majinBoo);
+    	
+    	jugador1.asignarEquipo(guerrerosZ);
+    	jugador2.asignarEquipo(enemigosDeLaTierra);
+    	
+    	Partida partidaAux = new Partida(tablero, jugador1, jugador2);
+    	this.partida = partidaAux;
+    	try {
+			partida.iniciar();
+		} catch (ExcHayGanador e) {
+		}
+    }
 	
 	public VistaTablero vistaTablero(){
 		return vistaTablero;
@@ -72,6 +111,14 @@ public class Juego extends BorderPane{
 	}
 	public BarraDeMenu getBarraDeMenu(){
 		return vistaSuperior.getBarraDeMenu();
+	}
+	
+	public boolean sonidoMuteado(){
+		return sonidoMute;
+	}
+	
+	public void setMuteoSonido(boolean eleccion){
+		sonidoMute=eleccion;
 	}
 	
 	private void setSuperior(){

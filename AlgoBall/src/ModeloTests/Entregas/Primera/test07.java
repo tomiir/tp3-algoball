@@ -3,13 +3,10 @@ package ModeloTests.Entregas.Primera;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Modelo.Jugador;
-import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcAtaqueImposible;
 import Modelo.Excepciones.ExcCasilleroOcupado;
-import Modelo.Excepciones.ExcDireccionInvalida;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;

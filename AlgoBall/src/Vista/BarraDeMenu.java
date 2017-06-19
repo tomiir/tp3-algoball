@@ -2,12 +2,15 @@ package Vista;
 
 import Vista.eventos.MostrarAcercaDeNosotrosEvento;
 import Vista.eventos.MostrarInstruccionesEvento;
-import Vista.eventos.MutearDesmutearMenuEvento;
+import Vista.eventos.MutearDesmutearMusicaJuegoEvento;
+import Vista.eventos.MutearDesmutearSonidoJuegoEvento;
 import Vista.eventos.OpcionPantallaCompletaEvento;
+import Vista.eventos.OpcionReiniciarEvento;
 import Vista.eventos.SalirEventoOnAction;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -15,35 +18,40 @@ public class BarraDeMenu extends MenuBar {
 	
 	MenuItem opcionPantallaCompleta;
 	
-	public BarraDeMenu(MediaPlayer mediaPlayer, Stage stage){
+	public BarraDeMenu(MediaPlayer mediaPlayer, Stage stage, Juego juego){
 	
 		Menu menuArchivo = new Menu("Archivo");
         Menu menuVer = new Menu("Ver");
-        Menu menuInstrucciones = new Menu("Instrucciones");
         Menu menuSonido = new Menu("Sonido");
-        Menu menuAcercaDe = new Menu("Acerca De");
+        Menu menuAyuda = new Menu("Ayuda");
         
 
         MenuItem opcionSalir = new MenuItem("Salir");
         opcionPantallaCompleta = new MenuItem("Pantalla Completa");
-        MenuItem opcionMutearDesmutear = new MenuItem("Mutear");
-        //MenuItem opcionPrincipal = new MenuItem("Menu Principal");
+        MenuItem opcionMusica = new MenuItem("Mutear música");
+        MenuItem opcionFX = new MenuItem("Mutear sonidos");
+        MenuItem opcionReiniciar = new MenuItem("Reiniciar Juego");
+        MenuItem opcionInstrucciones = new MenuItem("Instrucciones");
+        MenuItem opcionAcercaDe = new MenuItem("Acerca De");
         
         opcionSalir.setOnAction(new SalirEventoOnAction());
-        menuInstrucciones.setOnAction(new MostrarInstruccionesEvento());
-        menuAcercaDe.setOnAction(new MostrarAcercaDeNosotrosEvento());
+        opcionInstrucciones.setOnAction(new MostrarInstruccionesEvento());
+        opcionAcercaDe.setOnAction(new MostrarAcercaDeNosotrosEvento());
+        opcionReiniciar.setOnAction(new OpcionReiniciarEvento(juego));
         
-        opcionMutearDesmutear.setOnAction(new MutearDesmutearMenuEvento(opcionMutearDesmutear,mediaPlayer));
+        opcionMusica.setOnAction(new MutearDesmutearMusicaJuegoEvento(opcionMusica,mediaPlayer));
+        opcionFX.setOnAction(new MutearDesmutearSonidoJuegoEvento(juego, opcionFX));
         
         opcionPantallaCompleta.setOnAction(new OpcionPantallaCompletaEvento(opcionPantallaCompleta,stage));
         
         
-        menuArchivo.getItems().addAll(opcionSalir);
+        menuArchivo.getItems().addAll(opcionReiniciar,new SeparatorMenuItem(),opcionSalir);
         menuVer.getItems().addAll(opcionPantallaCompleta);
-        menuSonido.getItems().addAll(opcionMutearDesmutear);
+        menuSonido.getItems().addAll(opcionMusica, opcionFX);
+        menuAyuda.getItems().addAll(opcionInstrucciones,new SeparatorMenuItem(), opcionAcercaDe);
         
         
-        this.getMenus().addAll(menuArchivo, menuInstrucciones,menuVer,menuSonido, menuAcercaDe);
+        this.getMenus().addAll(menuArchivo,menuVer,menuSonido, menuAyuda);
 		
 	}
 

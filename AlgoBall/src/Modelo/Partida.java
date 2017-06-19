@@ -12,9 +12,9 @@ import Modelo.Consumibles.Consumible;
 import Modelo.Consumibles.EsferaDelDragon;
 import Modelo.Consumibles.NubeVoladora;
 import Modelo.Consumibles.SemillaDeErmitaño;
-import Modelo.Excepciones.ErrorFatal;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcDestinatarioEnEquipoPropio;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
@@ -28,7 +28,6 @@ import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Excepciones.ExcRemitenteEnEquipoPropio;
 import Modelo.Interfaces.Atacable;
 import Modelo.Personajes.Personaje;
 
@@ -67,7 +66,7 @@ public class Partida {
 		jugador2.equipo().forEach(action);
 	}
 	
-	public void realizarAtaque(Jugador jugador, Personaje remitente, Posicion posicion, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcRemitenteEnEquipoPropio, ExcCasilleroDesocupado{
+	public void realizarAtaque(Jugador jugador, Personaje remitente, Posicion posicion, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
 		Atacable destinatario = tablero.obtenerCasillero(posicion).obtenerAtacable();
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
 		jugadorAtacoOTransformo(jugador);
@@ -84,13 +83,13 @@ public class Partida {
 		jugadorAtacoOTransformo(jugador);
 	}
 	
-	public void iniciar() throws ErrorFatal{
+	public void iniciar() throws ExcHayGanador{
 		if(iniciada==false){
 			try {
 				posicionPersonajesInicial();
 				avanzarTurno();
 			} catch (ExcHayGanador e) {
-				throw new ErrorFatal();
+				throw e;
 			}
 			iniciada=true;
 		}
@@ -155,9 +154,9 @@ public class Partida {
 		return null;
 	}
 	
-	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Atacable destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcRemitenteEnEquipoPropio{
+	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Atacable destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcDestinatarioEnEquipoPropio{
 		if(!personajePerteneceAJugador(jugador,remitente.nombre())) throw new ExcJugadorNoAutorizado();
-		if(personajePerteneceAJugador(jugador,destinatario.nombre())) throw new ExcRemitenteEnEquipoPropio();
+		if(personajePerteneceAJugador(jugador,destinatario.nombre())) throw new ExcDestinatarioEnEquipoPropio();
 		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
 		return true;
 	}

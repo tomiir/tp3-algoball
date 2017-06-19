@@ -1,6 +1,6 @@
 package Vista;
 
-import Vista.eventos.MutearDesmutearEvento;
+import Vista.eventos.MutearDesmutearMenuEvento;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -46,7 +46,7 @@ public class MenuPrincipal extends BorderPane{
 		botonSilenciar.setAlignment(Pos.TOP_RIGHT);
 		Image sonido = new Image(getClass().getResource("img/speaker.png").toExternalForm());
 		botonSilenciar.setGraphic(new ImageView(sonido));
-		botonSilenciar.setOnAction(new MutearDesmutearEvento(botonSilenciar,mediaPlayer));
+		botonSilenciar.setOnAction(new MutearDesmutearMenuEvento(botonSilenciar,mediaPlayer));
 		
 		VBox panelHorizontal = new VBox();
 		panelHorizontal.getChildren().add(botonSilenciar);

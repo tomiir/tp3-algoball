@@ -17,16 +17,14 @@ public class VistaTablero extends GridPane {
 	
 	int ancho, alto;
 	VistaPersonaje[][] vistasPersonajes;
-	Partida partida;
 	Juego juego;
 	
-	public VistaTablero(Partida partida, Juego juego){
+	public VistaTablero(Juego juego){
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("tablero");
-		ancho=partida.tablero().ancho();
-		alto=partida.tablero().alto();
+		ancho=juego.partida().tablero().ancho();
+		alto=juego.partida().tablero().alto();
 		vistasPersonajes= new VistaPersonaje[ancho][alto];
-		this.partida = partida;
 		this.juego = juego;
 		
 		this.setGridLinesVisible(true);
@@ -58,7 +56,7 @@ public class VistaTablero extends GridPane {
 			for(int j=0;j<alto;j++){
 				try {
 					if(vistasPersonajes[i][j]!=null && inicial.distanciaA(new Posicion(i+1,j+1))<=rango && !(inicial.posX()==i+1 && inicial.posY()==j+1)){
-						this.add(new OpcionDeAtaque(juego, partida ,personaje, new Posicion(i+1,j+1), esEspecial), i, j);
+						this.add(new OpcionDeAtaque(juego, juego.partida() ,personaje, new Posicion(i+1,j+1), esEspecial), i, j);
 					}
 				} catch (ExcPosicionNegativa e) {
 				}
@@ -73,7 +71,7 @@ public class VistaTablero extends GridPane {
 			for(int j=0;j<alto;j++){
 				try {
 					if(vistasPersonajes[i][j]==null && inicial.distanciaA(new Posicion(i+1,j+1))<=rango){
-						this.add(new OpcionDeMovimiento(juego, partida ,personaje, new Posicion(i+1,j+1)), i, j);
+						this.add(new OpcionDeMovimiento(juego, juego.partida() ,personaje, new Posicion(i+1,j+1)), i, j);
 					}
 				} catch (ExcPosicionNegativa e) {
 				}
@@ -89,14 +87,14 @@ public class VistaTablero extends GridPane {
 		this.getChildren().clear();
 		vistasPersonajes=new VistaPersonaje[ancho][alto];
 		setFondoCasillero();
-		partida.iterarPersonajes((k,v)->{
+		juego.partida().iterarPersonajes((k,v)->{
 			if(!(v.estaMuerto())){
-				VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
+				VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, juego.partida());
 				this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
 				vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
 			}
 		});
-		partida.iterarCasilleros((cas,pos)->{
+		juego.partida().iterarCasilleros((cas,pos)->{
 			try {
 				this.add(new VistaConsumible(juego, cas.obtenerConsumible()),pos.posX()-1,pos.posY()-1);
 			} catch (ExcCasilleroDesocupado e) {

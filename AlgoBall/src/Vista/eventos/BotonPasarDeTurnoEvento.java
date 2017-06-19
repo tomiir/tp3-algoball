@@ -24,15 +24,22 @@ public class BotonPasarDeTurnoEvento implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Pasar turno");
-    	//alert.setHeaderText(");
-    	alert.setContentText("Seguro que desea saltear su turno? Aun puede realizar acciones");
+    	alert.setHeaderText("");
+    	alert.setContentText("¿Seguro que desea saltear su turno? Aún puede realizar acciones");
     	
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
     		try {
 				this.partida.avanzarTurno();
 				juego.update();
-			} catch (ExcHayGanador e) {}  		
+			} catch (ExcHayGanador e) {
+				Alert ganador = new Alert(AlertType.INFORMATION);
+		    	ganador.setTitle("Partida terminada");
+		    	ganador.setHeaderText("Hay ganador");
+		    	ganador.setContentText("Gano el jugador:"+e.ganador().nombre());
+		    	ganador.showAndWait();
+		    	System.exit(0);
+			}  		
     		
     	}
 	}

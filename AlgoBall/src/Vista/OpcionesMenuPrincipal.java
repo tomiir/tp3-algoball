@@ -2,7 +2,7 @@ package Vista;
 
 import Vista.eventos.CambiarEscenaEvento;
 import Vista.eventos.MostrarInstruccionesEvento;
-import Vista.eventos.MutearDesmutearEvento;
+import Vista.eventos.MutearDesmutearMenuEvento;
 import Vista.eventos.SalirEventoOnAction;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

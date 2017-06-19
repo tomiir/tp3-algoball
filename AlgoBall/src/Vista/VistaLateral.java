@@ -14,12 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class VistaLateral extends BorderPane{
-	Partida partida;
 	Juego juego;
 	
-	public VistaLateral(Partida partida, Juego juego){
+	public VistaLateral(Juego juego){
 		this.setPadding(new Insets(5));
-		this.partida = partida;
 		this.juego = juego;
 		
 		this.getStyleClass().add("vista-lateral");
@@ -28,7 +26,7 @@ public class VistaLateral extends BorderPane{
 		
 		Button botonPasarDeTurno = new Button();
 		botonPasarDeTurno.setText("Pasar de turno");
-		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego, this.partida));
+		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego, juego.partida()));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
 		this.setBottom(botonPasarDeTurno);
 		this.setAlignment(getBottom(), Pos.CENTER);
@@ -37,9 +35,9 @@ public class VistaLateral extends BorderPane{
 	}
 	
 	 public void update() {
-		if(partida.jugadorYaAtacoOTransformo(partida.esTurnoDelJugador()) && partida.jugadorYaMovio(partida.esTurnoDelJugador())){
+		if(juego.partida().jugadorYaAtacoOTransformo(juego.partida().esTurnoDelJugador()) && juego.partida().jugadorYaMovio(juego.partida().esTurnoDelJugador())){
 			try {
-				partida.avanzarTurno();
+				juego.partida().avanzarTurno();
 			} catch (ExcHayGanador e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -50,7 +48,7 @@ public class VistaLateral extends BorderPane{
 		Label turnoDelJugador = new Label();
 		turnoDelJugador.getStyleClass().add("turnoDelJugador");
 		turnoDelJugador.setTextAlignment(TextAlignment.CENTER);
-		Jugador jugador = partida.esTurnoDelJugador();
+		Jugador jugador = juego.partida().esTurnoDelJugador();
 		turnoDelJugador.setText("Le toca jugar a :\n" + jugador.nombre());
 		this.setTop(turnoDelJugador);
 	}
@@ -58,7 +56,7 @@ public class VistaLateral extends BorderPane{
 	 public void personajeClickeado(Personaje personaje){
 		 juego.update();
 		 juego.vistaTablero().remarcarPersonaje(personaje);
-		 this.setCenter(new MenuPersonaje(personaje, juego, partida));
+		 this.setCenter(new MenuPersonaje(personaje, juego, juego.partida()));
 		 
 	 } 
 	
