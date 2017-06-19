@@ -18,7 +18,7 @@ public class Freezer extends Personaje {
 		this.tablero = tablero;
 		
 		TransformacionPorKi segundaForma = new TransformacionPorKi("Segunda Forma", 20, 3,4,40 );
-		TransformacionPorKi formaFinal = new TransformacionPorKi("Forma Final",50,3,6 ,50);
+		TransformacionPorKi formaFinal = new TransformacionPorKi("Definitiva",50,3,6 ,50);
 		
 		transformaciones.add(segundaForma);
 		transformaciones.add(formaFinal);

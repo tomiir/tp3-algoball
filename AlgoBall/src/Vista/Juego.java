@@ -32,12 +32,18 @@ public class Juego extends BorderPane{
 		setSuperior();
 		setCentro();
 		setVistaLateralDerecha();
+		
+		String path = getClass().getResource("mp3/battle 1.mp3").toString();
+        Media media = new Media(path);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.3);
 	}
 	
 	public void update(){
 		vistaLateral.update();
-		vistaTablero.update();
 		panelDeVida.update();
+		vistaTablero.update();
+		
 	}
 	
 	public VistaTablero vistaTablero(){

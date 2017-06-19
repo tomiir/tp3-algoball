@@ -4,6 +4,7 @@ import Modelo.Jugador;
 import Modelo.Partida;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Personajes.Personaje;
+import Vista.eventos.BotonPasarDeTurnoEvento;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ public class VistaLateral extends BorderPane{
 		
 		Button botonPasarDeTurno = new Button();
 		botonPasarDeTurno.setText("Pasar de turno");
-		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoControlador(this.juego, this.partida));
+		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego, this.partida));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
 		this.setBottom(botonPasarDeTurno);
 		this.setAlignment(getBottom(), Pos.CENTER);

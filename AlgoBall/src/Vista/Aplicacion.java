@@ -60,9 +60,16 @@ public class Aplicacion extends Application {
     	Personaje gohan = factory.getPersonaje("gohan");
     	Personaje piccolo = factory.getPersonaje("piccolo");
     	
+    	
     	Personaje cell = factory.getPersonaje("cell");
     	Personaje freezer = factory.getPersonaje("freezer");
     	Personaje majinBoo = factory.getPersonaje("majinboo");
+    	
+    	try {
+			piccolo.recibirDaño(piccolo.puntosDeVida() -10);
+		} catch (ExcNumeroNegativo e) {
+			
+		}
     	
     	/*try {
 			gohan.recibirDaño(250);

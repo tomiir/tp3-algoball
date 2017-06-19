@@ -15,14 +15,11 @@ public class InfoPersonaje extends VBox {
 		this.setAlignment(Pos.CENTER);
 		
 		
-		ProgressBar vida = new ProgressBar((double)personaje.vidaPorcentual()/100);
-		if(personaje.vidaPorcentual()<30) vida.getStyleClass().add("rojo");
-		else if(personaje.vidaPorcentual()<70) vida.getStyleClass().add("naranja");
-		vida.getStyleClass().add("progress-bar");
+		BarraDeVida barraVida =new BarraDeVida(personaje);
 		
 		NameTagPersonaje nameTag = new NameTagPersonaje(personaje);
 		
-		this.getChildren().addAll(nameTag, vida);
+		this.getChildren().addAll(nameTag, barraVida);
 		this.getStylesheets().add(getClass().getResource("css/estilos.css").toExternalForm());
 	}
 }

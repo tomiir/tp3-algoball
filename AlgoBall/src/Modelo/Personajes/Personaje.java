@@ -27,6 +27,7 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 public class Personaje implements Atacable{
 	
 	String nombre;
+	String forma = "Normal";
 	int vidaInicial;
 	int puntosDeVida;
 	int poderDePelea;
@@ -108,6 +109,10 @@ public class Personaje implements Atacable{
 		return puntosDeVida;
 	}
 	
+	public int vidaInicial(){
+		return vidaInicial;
+	}
+	
 	public int velocidad(){
 		return this.velocidad + this.bonificacionDeVelocidadPorConsumibles();
 	}
@@ -127,6 +132,10 @@ public class Personaje implements Atacable{
 	
 	public String nombre() {
 		return nombre;
+	}
+	
+	public String forma(){
+		return forma;
 	}
 	
 	public boolean estaMuerto(){
@@ -154,6 +163,7 @@ public class Personaje implements Atacable{
 			velocidad = transformacion.velocidad();
 			poderDePelea = transformacion.poderDePelea();
 			ki -= transformacion.costo();
+			forma = transformacion.nombre();
 		} else {
 			throw new ExcNoEsPosibleTransformarse();
 		}
@@ -223,17 +233,6 @@ public class Personaje implements Atacable{
 		return true;
 	}
 	
-	/*private boolean estaEnRangoDeAtaque(Posicion objetivo){
-		try {
-			if(posicion.distanciaA(objetivo)>rangoDeAtaque){
-				return false;
-			}
-		} catch (ExcPosicionNegativa e) {
-			return false;
-		}
-		return true;
-	}*/
-	
 	protected void inicializar(){
 		vidaInicial=puntosDeVida;
 	}
@@ -262,8 +261,10 @@ public class Personaje implements Atacable{
 		while(iterador.hasNext()){
 			
 			Consumible consumible = iterador.next();
-			consumible.avanzarTurno();
 			if(consumible.turnosRestantes() <= 0) eliminables.add(consumible);
+			consumible.avanzarTurno();
+			
+			
 		}
 		
 		Iterator<Consumible> iterador2 = eliminables.iterator();

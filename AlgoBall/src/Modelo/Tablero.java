@@ -68,8 +68,8 @@ public class Tablero {
 	public void posicionarConsumible(Consumible consumible, Posicion posicion) throws ExcCasilleroOcupado, ExcFueraDeTablero {
 		
 		Casillero casillero = this.obtenerCasillero(posicion);
-		if(!casillero.tieneUnConsumible()) casillero.ocuparConsumible(consumible);
-		if(casillero.estaOcupado()) throw new ExcCasilleroOcupado();
+		if(!casillero.tieneUnConsumible() && !casillero.estaOcupado()) casillero.ocuparConsumible(consumible);
+		
 		
 	}
 

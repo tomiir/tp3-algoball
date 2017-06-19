@@ -53,7 +53,7 @@ public class VistaTablero extends GridPane {
 	
 	public void ofrecerAtaque(Personaje personaje, boolean esEspecial){
 		Posicion inicial = personaje.posicion();
-		int rango=personaje.velocidad();
+		int rango=personaje.rangoDeAtaque();
 		for(int i=0;i<ancho;i++){
 			for(int j=0;j<alto;j++){
 				try {
@@ -90,12 +90,11 @@ public class VistaTablero extends GridPane {
 		vistasPersonajes=new VistaPersonaje[ancho][alto];
 		setFondoCasillero();
 		partida.iterarPersonajes((k,v)->{
-			VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
 			if(!(v.estaMuerto())){
+				VistaPersonaje vistaPersonaje=new VistaPersonaje(juego, v, partida);
 				this.add(vistaPersonaje, v.posicion().posX()-1, v.posicion().posY()-1);
 				vistasPersonajes[v.posicion().posX()-1][v.posicion().posY()-1]=vistaPersonaje;
 			}
-			
 		});
 		partida.iterarCasilleros((cas,pos)->{
 			try {

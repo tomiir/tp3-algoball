@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.WindowEvent;
 
 public class SalirEventoWindowEvent implements EventHandler<WindowEvent>{

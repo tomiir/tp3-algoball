@@ -17,7 +17,7 @@ public class Gohan extends Personaje {
 		ataqueEspecial = Ataque.Masenko();
 		this.tablero = tablero;
 		
-		TransformacionPorKi superSaiyan1 = new TransformacionPorKi("Super Saiyan 1", 10, 2,2,30 );
+		TransformacionPorKi superSaiyan1 = new TransformacionPorKi("Super Sayajin 1", 10, 2,2,30 );
 		GohanSS2 superSaiyan2 = new GohanSS2();
 		
 		transformaciones.add(superSaiyan1);

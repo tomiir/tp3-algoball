@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class SalirEventoOnAction implements EventHandler<ActionEvent>{
 	
@@ -16,7 +18,7 @@ public class SalirEventoOnAction implements EventHandler<ActionEvent>{
     	alert.setTitle("Salir");
     	alert.setHeaderText("Salir");
     	alert.setContentText("Seguro que desea salir?");
-
+    	
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
     		System.exit(0);

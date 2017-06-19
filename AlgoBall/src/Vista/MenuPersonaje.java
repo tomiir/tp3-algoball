@@ -3,6 +3,9 @@ package Vista;
 
 import Modelo.Partida;
 import Modelo.Personajes.Personaje;
+import Vista.eventos.BotonAtacarEvento;
+import Vista.eventos.BotonMoverEvento;
+import Vista.eventos.BotonTransformarEvento;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +23,7 @@ public class MenuPersonaje extends VBox {
 		Button botonMover = new Button();
 		botonMover.setText("Mover");
 		botonMover.getStyleClass().add("boton-menu");
-		botonMover.setOnAction(new BotonMoverControlador(personaje, juego.vistaTablero()));
+		botonMover.setOnAction(new BotonMoverEvento(personaje, juego.vistaTablero()));
 		if(partida.jugadorYaMovio(partida.esTurnoDelJugador())){
 			botonMover.setDisable(true);
 		}
@@ -30,7 +33,7 @@ public class MenuPersonaje extends VBox {
 		Button botonAtaqueNormal = new Button();
 		botonAtaqueNormal.setText("Ataque normal");
 		botonAtaqueNormal.getStyleClass().add("boton-menu");
-		botonAtaqueNormal.setOnAction(new BotonAtacarControlador(personaje, juego.vistaTablero(), false));
+		botonAtaqueNormal.setOnAction(new BotonAtacarEvento(personaje, juego.vistaTablero(), false));
 	
 
 		
@@ -38,14 +41,15 @@ public class MenuPersonaje extends VBox {
 		botonAtaqueEspecial.setText(personaje.getAtaqueEspecial().nombre() + "\n(costo:" + personaje.getAtaqueEspecial().costo() + ")");
 		botonAtaqueEspecial.getStyleClass().add("boton-menu");
 		botonAtaqueEspecial.wrapTextProperty().setValue(true);
-		botonAtaqueEspecial.setOnAction(new BotonAtacarControlador(personaje, juego.vistaTablero(), true));
-		
+		botonAtaqueEspecial.setOnAction(new BotonAtacarEvento(personaje, juego.vistaTablero(), true));
+		if( personaje.ki() < personaje.getAtaqueEspecial().costo() ){
+			botonAtaqueEspecial.setDisable(true);
+		}
 		
 		
 		Button botonTransformar = new Button();
 		botonTransformar.setText("Transformar");
-		// FALTA CAMBIAR ALGO
-		if(personaje.getTransformacion() != null ){
+		if(personaje.getTransformacion() != null && personaje.getTransformacion().esPosible(personaje, partida.esTurnoDelJugador().equipo()) ){
 			botonTransformar.setText("Transformar en " + personaje.getTransformacion().nombre() + "\n(costo:" + personaje.getTransformacion().costo()+ ")");
 		}
 		else{
@@ -53,7 +57,7 @@ public class MenuPersonaje extends VBox {
 		}
 		botonTransformar.wrapTextProperty().setValue(true);
 		botonTransformar.getStyleClass().add("boton-menu");
-		botonTransformar.setOnAction(new BotonTransformarControlador(personaje, partida.esTurnoDelJugador().equipo(), juego));
+		botonTransformar.setOnAction(new BotonTransformarEvento(personaje, partida.esTurnoDelJugador().equipo(), juego));
 		
 		if(partida.jugadorYaAtacoOTransformo(partida.esTurnoDelJugador())){
 			botonTransformar.setDisable(true);

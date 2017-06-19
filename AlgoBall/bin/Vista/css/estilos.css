@@ -7,7 +7,7 @@
 }
 
 @font-face {
-    src: url("../fonts/Saiyan-Sans.ttf"),
+    src: url("../fonts/PixelOperator.ttf"),
 }
 
 @font-face {
@@ -15,7 +15,7 @@
 }
 
 .ventana-menu {
-	-fx-background-color:rgb(0,124,200);
+	-fx-background-image:url("../img/fondomenu.jpg");
 }
 
 .info-personaje {
@@ -50,17 +50,10 @@
 	-fx-accent: orange;
 }
 
-.titulo-algoball {
-	-fx-font-family: "Saiyan Sans";
-    -fx-font-size: 80;
-    -fx-text-fill:linear-gradient(to bottom, #ba0005 0%,#ef0012 100%);
-    -fx-effect: dropshadow(two-pass-box , black, 10, 0.0 , 4, 5); 
-}
-
 .boton-menu {
 	-fx-min-width: 200;
 	-fx-padding:10;
-	-fx-font-family: "Roboto";
+	-fx-font-family: "Pixel Operator";
 	-fx-font-size:20;
 	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
 	-fx-effect: dropshadow(two-pass-box , black, 2,0.5,1, 1); 

@@ -53,7 +53,7 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 			Alert alert = new Alert(AlertType.WARNING);
 	    	alert.setTitle("Error");
 	    	alert.setHeaderText("Error");
-	    	alert.setContentText("La posicion a la que se intenta mover no esta en rango");
+	    	alert.setContentText("La posicion a la que intenta atacar no esta en rango");
 	    	alert.showAndWait();
 		} catch (ExcFueraDeTablero e) {
 			Alert alert = new Alert(AlertType.WARNING);

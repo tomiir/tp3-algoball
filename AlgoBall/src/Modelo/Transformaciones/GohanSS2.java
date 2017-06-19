@@ -7,7 +7,7 @@ public class GohanSS2 extends Transformacion {
 	protected boolean aux;
 	
 	public GohanSS2(){
-		this.nombre = "Gohan SS2";
+		this.nombre = "Super Sayajin 2";
 		this.rangoDeAtaque =4;
 		this.costo = 30;
 		this.velocidad = 3;
