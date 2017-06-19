@@ -3,7 +3,6 @@ package Vista;
 import Modelo.Personajes.Personaje;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 
 public class InfoPersonaje extends VBox {

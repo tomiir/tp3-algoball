@@ -67,17 +67,20 @@ public class Partida {
 	}
 	
 	public void realizarAtaque(Jugador jugador, Personaje remitente, Posicion posicion, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
+	
 		Atacable destinatario = tablero.obtenerCasillero(posicion).obtenerAtacable();
 		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
 		jugadorAtacoOTransformo(jugador);
 	}
 	
 	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
+		
 		if(verificarMovimientoLegitimo(jugador, personaje)) jugador.realizarMovimiento(personaje, posicion);
 		jugadorMovio(jugador);
 	}
 	
 	public void realizarTransformacion(Jugador jugador, Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate, ExcJugadorYaAtacoOTransformo{
+		
 		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
 		jugador.realizarTransformacion(personaje);
 		jugadorAtacoOTransformo(jugador);
@@ -150,7 +153,7 @@ public class Partida {
 	
 	private Jugador ganador(){
 		if (jugador1.equipo().perdio()) return jugador2;
-		if (jugador1.equipo().perdio()) return jugador1;
+		if (jugador2.equipo().perdio()) return jugador1;
 		return null;
 	}
 	
@@ -172,7 +175,7 @@ public class Partida {
 	}
 	
 	private boolean hayGanador(){
-		return (jugador1.equipo().perdio() | jugador2.equipo().perdio());
+		return (jugador1.equipo().perdio() || jugador2.equipo().perdio());
 	}
 	
 	public void jugadorMovio(Jugador jugador){

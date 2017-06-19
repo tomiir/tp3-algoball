@@ -1,9 +1,6 @@
 package Vista;
 
-import Modelo.Partida;
 import Modelo.Consumibles.Consumible;
-import Modelo.Personajes.Personaje;
-import Vista.eventos.PersonajePresionadoMouseEvent;
 import javafx.scene.layout.Pane;
 
 public class VistaConsumible extends Pane {

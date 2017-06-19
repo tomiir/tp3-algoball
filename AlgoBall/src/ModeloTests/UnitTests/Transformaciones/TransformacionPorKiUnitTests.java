@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Jugador;
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Personajes.PersonajeDePrueba;

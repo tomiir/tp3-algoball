@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Modelo.Casillero;
 import Modelo.Equipo;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
@@ -34,7 +33,7 @@ public class Personaje implements Atacable{
 	int rangoDeAtaque;
 	int velocidad;
 	int ki = 0;
-	int tiempoComoChocolate = 0;
+	int tiempoComoChocolate = -1;
 	Modelo.Ataques.Ataque ataqueEspecial;
 	Ataque ataqueNormal = Ataque.AtaqueNormal();
 	Posicion posicion;
@@ -59,7 +58,7 @@ public class Personaje implements Atacable{
 	
 	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		if(esChocolate()) throw new ExcEsChocolate();
-		if(this.estaEnRango(posicion, velocidad()+this.bonificacionDeVelocidadPorConsumibles())){
+		if(this.estaEnRango(posicion, velocidad()+ velocidad()*this.bonificacionDeVelocidadPorConsumibles())){
 			this.tablero.posicionarPersonaje(this, posicion);
 		
 			if(tablero.obtenerCasillero(posicion).tieneUnConsumible()){
@@ -87,13 +86,13 @@ public class Personaje implements Atacable{
 	
 	public void seAvanzoUnTurno(int aumentoKi) throws ExcNumeroNegativo{
 		if(aumentoKi<0) throw new ExcNumeroNegativo();
+		if(tiempoComoChocolate >=0) tiempoComoChocolate--;
 		if(!this.esChocolate())ki+=aumentoKi;
-		if(tiempoComoChocolate >0) tiempoComoChocolate--;
 		this.actualizarConsumidos();
 	}
 	
 	public boolean esChocolate (){
-		return tiempoComoChocolate>0;
+		return tiempoComoChocolate>=0;
 	}
 	
 	public int vidaPorcentual(){
@@ -205,7 +204,7 @@ public class Personaje implements Atacable{
 				bonificacion += consumible.obtenerBonificacionVelocidad();
 			}			
 		}
-		bonificacion = (this.velocidad * bonificacion)/100;
+		
 		return bonificacion;
 		
 	}

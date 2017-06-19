@@ -2,7 +2,6 @@ package Modelo.Personajes;
 
 
 import Modelo.Tablero;
-import Modelo.Personajes.*;
 
 public class PersonajeFactory {
 

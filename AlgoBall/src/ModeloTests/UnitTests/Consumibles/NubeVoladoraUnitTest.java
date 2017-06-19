@@ -38,7 +38,7 @@ public class NubeVoladoraUnitTest {
 	public void puedeMoverseCuandoConsumeUnaNube() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		
 		Tablero tablero = new Tablero(15,15);
-		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,4 ,100);
+		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
 		NubeVoladora nube = new NubeVoladora();
 		
 		
@@ -48,13 +48,13 @@ public class NubeVoladoraUnitTest {
 		//Agarro la nube
 		personaje.mover(new Posicion(1,2));
 		
-		//Pruebo que se puede mover en vertical 5 espcios ( 4 de su velocidad + 4*25% = 5)
-		personaje.mover(new Posicion(6,2));
+		//Pruebo que se puede mover en vertical 6 espcios ( el doble de su velocidad)
+		personaje.mover(new Posicion(7,2));
 		
-		//Pruebo que se pueda mover en horizontal 5
-		personaje.mover(new Posicion(6,7));
+		//Pruebo que se pueda mover en horizontal 6
+		personaje.mover(new Posicion(7,8));
 		
-		//Pruebo que se pueda mover en diagonal 5
+		//Pruebo que se pueda mover en diagonal 6
 		personaje.mover(new Posicion(1,2));
 		
 		
@@ -65,7 +65,7 @@ public class NubeVoladoraUnitTest {
 	public void noSePuedeMoverAMasDelRangoAdicional() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
 		
 		Tablero tablero = new Tablero(15,15);
-		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,4 ,100);
+		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
 		NubeVoladora nube = new NubeVoladora();
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(1,1));
@@ -74,11 +74,11 @@ public class NubeVoladoraUnitTest {
 		//Agarro la nube
 		personaje.mover(new Posicion(1,2));
 			
-		//Pruebo que se puede mover 5
-		personaje.mover(new Posicion(6,2));
+		//Pruebo que se puede mover 6
+		personaje.mover(new Posicion(7,2));
 		
-		//Pruebo moverme 6 casilleros, deberia lanzar una excepcion
-		personaje.mover(new Posicion(13,2));
+		//Pruebo moverme 7 casilleros, deberia lanzar una excepcion
+		personaje.mover(new Posicion(14,2));
 		
 	}
 	
@@ -86,7 +86,7 @@ public class NubeVoladoraUnitTest {
 	public void despuesDeDosTurnosElEfectoDesaparece() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango, ExcPosicionNegativa, ExcNumeroNegativo{
 		
 		Tablero tablero = new Tablero(15,15);
-		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,4 ,100);
+		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
 		NubeVoladora nube = new NubeVoladora();
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(1,1));
@@ -95,17 +95,17 @@ public class NubeVoladoraUnitTest {
 		//Agarro la nube
 		personaje.mover(new Posicion(1,2));
 	
-		//Paso un turno y pruebo que se puede mover 5
+		//Paso un turno y pruebo que se puede mover 6
 		personaje.seAvanzoUnTurno(5);
-		personaje.mover(new Posicion(6,2));
+		personaje.mover(new Posicion(7,2));
 		
-		//Avanzo un turno y verifico que se pueda mover 5
+		//Avanzo un turno y verifico que se pueda mover 6
 		personaje.seAvanzoUnTurno(5);
-		personaje.mover(new Posicion(6,7));
+		personaje.mover(new Posicion(13,7));
 
-		//Avanzo un turno y me muevo 5, deberia lanzar una excepcion
+		//Avanzo un turno y me muevo 6, deberia lanzar una excepcion
 		personaje.seAvanzoUnTurno(5);
-		personaje.mover(new Posicion(11,12));
+		personaje.mover(new Posicion(13,13));
 		
 		
 		

@@ -1,7 +1,6 @@
 package Modelo;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import Modelo.Consumibles.Consumible;
 import Modelo.Excepciones.ExcCasilleroOcupado;

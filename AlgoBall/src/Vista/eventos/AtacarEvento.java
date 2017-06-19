@@ -17,9 +17,11 @@ import Vista.Juego;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 public class AtacarEvento implements EventHandler<MouseEvent> {
 	Personaje personaje;
@@ -103,6 +105,8 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 	    	alert.setTitle("Error");
 	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje que intenta atacar es de tu propio equipo");
+	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		} catch (ExcCasilleroDesocupado e) {
 			Alert alert = new Alert(AlertType.WARNING);

@@ -13,12 +13,12 @@ public class Piccolo extends Personaje {
 		puntosDeVida = 500;
 		poderDePelea = 20;
 		rangoDeAtaque = 2;
-		velocidad = 3;
+		velocidad = 2;
 		ataqueEspecial = Ataque.Makankosappo();
 		this.tablero = tablero;
 		inicializar();
 		
-		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20, 4,3,40 );
+		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20,4,3,40 );
 		
 		transformaciones.add(fortalecido);
 		

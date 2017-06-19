@@ -16,7 +16,7 @@ public class MajinBoo extends Personaje {
 		this.tablero = tablero;
 		inicializar();
 		
-		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20, 2,3,50);
+		TransformacionPorKi booMalo = new TransformacionPorKi("Boo Malo", 20,2,3,50);
 		TransformacionPorKi booOriginal = new TransformacionPorKi("Boo Original", 50,3,4,60);
 		
 		

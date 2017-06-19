@@ -1,6 +1,5 @@
 package ModeloTests.Entregas.Segunda;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;

@@ -133,3 +133,13 @@
 	-fx-font-family: "Roboto";
 	-fx-font-size: 12;
 }
+
+.instrucciones .titulo {
+	-fx-font-family: "Roboto";
+	-fx-font-size: 30;
+}
+
+.instrucciones .texto {
+	-fx-font-family: "Roboto";
+	-fx-font-size: 18;
+}

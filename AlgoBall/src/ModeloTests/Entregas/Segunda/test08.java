@@ -103,6 +103,7 @@ import Modelo.Personajes.MajinBoo;
 			gohan.seAvanzoUnTurno(0);
 			gohan.seAvanzoUnTurno(0);
 			
+			gohan.seAvanzoUnTurno(0);
 			gohan.atacar(majinBoo, false);
 			gohan.transformar(GuerrerosZ);
 			gohan.mover(new Posicion(5, 4));

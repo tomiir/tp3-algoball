@@ -69,8 +69,7 @@ public class Juego extends BorderPane{
     	Personaje cell = factory.getPersonaje("cell");
     	Personaje freezer = factory.getPersonaje("freezer");
     	Personaje majinBoo = factory.getPersonaje("majinboo");
-    	
-    	
+
     	guerrerosZ.agregarPersonaje(goku);
     	guerrerosZ.agregarPersonaje(gohan);
     	guerrerosZ.agregarPersonaje(piccolo);

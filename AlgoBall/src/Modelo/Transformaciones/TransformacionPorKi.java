@@ -6,11 +6,11 @@ import Modelo.Personajes.Personaje;
 public class TransformacionPorKi extends Transformacion {
 	
 	
-	public TransformacionPorKi(String str, int costo, int rango, int velocida, int poder){
+	public TransformacionPorKi(String str, int costo, int rango, int velocidad, int poder){
 		nombre=str;
 		this.costo=costo;
 		rangoDeAtaque=rango;
-		velocidad=velocida;
+		this.velocidad=velocidad;
 		poderDePelea=poder;
 	}
 	

@@ -4,10 +4,8 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import Modelo.Casillero;
-import Modelo.Consumibles.Consumible;
 import Modelo.Tablero;
 import Modelo.Consumibles.NubeVoladora;
-import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;

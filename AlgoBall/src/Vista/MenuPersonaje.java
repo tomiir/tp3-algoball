@@ -81,14 +81,20 @@ public class MenuPersonaje extends VBox {
 		puntosPoderPelea.getStyleClass().add("labels-informacion");
 		
 		Label puntosVelocidad = new Label();
-		puntosVelocidad.setText("Velocidad: " + personaje.velocidad()  + " (+ " + String.valueOf(personaje.bonificacionDeVelocidadPorConsumibles()) + ")");
+		puntosVelocidad.setText("Velocidad: " + personaje.velocidad()  + " (+ " + String.valueOf(personaje.bonificacionDeVelocidadPorConsumibles()*personaje.velocidad()) + ")");
 		puntosVelocidad.getStyleClass().add("labels-informacion");
 		
 		Label puntosDistanciaAtaque= new Label();
 		puntosDistanciaAtaque.setText("Rango de ataque: " + personaje.rangoDeAtaque());
 		puntosDistanciaAtaque.getStyleClass().add("labels-informacion");
 		
-		this.getChildren().addAll(nombreDelPersonaje, puntosDeVida,  puntosKi, puntosPoderPelea, puntosVelocidad, puntosDistanciaAtaque, botonAtaqueNormal, botonAtaqueEspecial, botonMover, botonTransformar);
+		Label absorciones= new Label();
+		absorciones.setText("Absorciones: " + personaje.cantidadDeAbsorciones());
+		if (personaje.cantidadDeAbsorciones() == 0) absorciones.setText("");
+		
+		puntosDistanciaAtaque.getStyleClass().add("labels-informacion");
+		
+		this.getChildren().addAll(nombreDelPersonaje, puntosDeVida,  puntosKi, puntosPoderPelea, puntosVelocidad, puntosDistanciaAtaque, absorciones, botonAtaqueNormal, botonAtaqueEspecial, botonMover, botonTransformar);
 		
 	}
 	

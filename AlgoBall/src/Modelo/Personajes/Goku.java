@@ -18,8 +18,8 @@ public class Goku extends Personaje {
 		this.tablero = tablero;
 		inicializar();
 		
-		TransformacionPorKi kaioken = new TransformacionPorKi("Kaio Ken", 20, 4,3,40);
-		TransformacionPorKi superSaiyan = new TransformacionPorKi("Super Sayajin", 50, 4,5,60);
+		TransformacionPorKi kaioken = new TransformacionPorKi("Kaio Ken", 20,4,3,40);
+		TransformacionPorKi superSaiyan = new TransformacionPorKi("Super Sayajin", 50,4,5,60);
 		
 		transformaciones.add(kaioken);
 		transformaciones.add(superSaiyan);

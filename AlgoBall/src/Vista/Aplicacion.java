@@ -1,7 +1,7 @@
 package Vista;
 
 
-import Vista.eventos.AplicacionOnKeyPressEvento;
+import Vista.eventos.AplicacionOnKeyPressedEvento;
 import Vista.eventos.SalirEventoWindowEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -24,7 +24,7 @@ public class Aplicacion extends Application {
         Juego vistaJugar = new Juego(stage);
         Scene escenaJugar = new Scene(vistaJugar, 800,600);
         
-        escenaJugar.setOnKeyPressed(new AplicacionOnKeyPressEvento(vistaJugar.getBarraDeMenu()));
+        escenaJugar.setOnKeyPressed(new AplicacionOnKeyPressedEvento(vistaJugar.getBarraDeMenu()));
         
     	MenuPrincipal menuPrincipal = new MenuPrincipal(stage, escenaJugar);
         Scene escenaPrincipal = new Scene(menuPrincipal, 800,600);

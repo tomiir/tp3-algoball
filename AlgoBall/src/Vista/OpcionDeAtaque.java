@@ -4,7 +4,6 @@ import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Personajes.Personaje;
 import Vista.eventos.AtacarEvento;
-import Vista.eventos.MoverEvento;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 

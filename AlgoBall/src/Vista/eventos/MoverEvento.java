@@ -1,7 +1,5 @@
 package Vista.eventos;
 
-import java.util.Optional;
-
 import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
@@ -13,10 +11,8 @@ import Modelo.Excepciones.ExcJugadorNoAutorizado;
 import Modelo.Excepciones.ExcJugadorYaMovio;
 import Modelo.Personajes.Personaje;
 import Vista.Juego;
-import Vista.VistaTablero;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;

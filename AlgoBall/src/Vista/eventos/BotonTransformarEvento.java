@@ -11,8 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 public class BotonTransformarEvento implements EventHandler<ActionEvent> {
 	Personaje personaje;
@@ -45,12 +47,16 @@ public class BotonTransformarEvento implements EventHandler<ActionEvent> {
 	    	alert.setTitle("Error");
 	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje no se puede transformar");
+	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		} catch (ExcEsChocolate e) {
 			Alert alert = new Alert(AlertType.WARNING);
 	    	alert.setTitle("Error");
 	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje es chocolate");
+	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		}
 	}

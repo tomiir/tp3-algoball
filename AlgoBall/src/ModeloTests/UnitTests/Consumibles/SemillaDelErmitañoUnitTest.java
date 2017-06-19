@@ -3,7 +3,6 @@ package ModeloTests.UnitTests.Consumibles;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Modelo.Jugador;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Consumibles.SemillaDeErmitaño;

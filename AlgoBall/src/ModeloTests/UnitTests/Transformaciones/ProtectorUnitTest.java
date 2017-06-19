@@ -4,10 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Modelo.Equipo;
-import Modelo.Partida;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcNumeroNegativo;
-import Modelo.Personajes.Gohan;
 import Modelo.Personajes.PersonajeDePrueba;
 import Modelo.Transformaciones.Protector;
 

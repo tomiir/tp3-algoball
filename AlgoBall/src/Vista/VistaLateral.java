@@ -1,17 +1,22 @@
 package Vista;
 
+import java.util.Optional;
+
 import Modelo.Jugador;
-import Modelo.Partida;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Personajes.Personaje;
 import Vista.eventos.BotonPasarDeTurnoEvento;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 public class VistaLateral extends BorderPane{
 	Juego juego;
@@ -29,7 +34,7 @@ public class VistaLateral extends BorderPane{
 		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego, juego.partida()));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
 		this.setBottom(botonPasarDeTurno);
-		this.setAlignment(getBottom(), Pos.CENTER);
+		VistaLateral.setAlignment(getBottom(), Pos.CENTER);
 		
 		update();		
 	}
@@ -39,8 +44,27 @@ public class VistaLateral extends BorderPane{
 			try {
 				juego.partida().avanzarTurno();
 			} catch (ExcHayGanador e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Alert ganador = new Alert(AlertType.INFORMATION);
+		    	ganador.setTitle("Partida terminada");
+		    	ganador.setHeaderText("Hay ganador");
+		    	Stage stage2 = (Stage) ganador.getDialogPane().getScene().getWindow();
+		    	stage2.getIcons().add(new Image(getClass().getResourceAsStream("img/icon.png")));
+		    	ganador.setContentText("Gano el jugador: "+ e.ganador().nombre()
+		    			+"\n"
+		    			+"Si desea reiniciar el juego, e iniciar una partida pulse SI, en canso contrario pulse Salir"
+		    			);
+		    	
+		    	ButtonType botonSi = new ButtonType("Si");
+		    	ButtonType botonSalir = new ButtonType("Salir");
+		    	ganador.getButtonTypes().setAll(botonSalir,botonSi);
+		    	Optional<ButtonType> result_2 = ganador.showAndWait();
+		    	if (result_2.get() == botonSi){
+		    		juego.iniciarModelo();
+		    		juego.update();
+		    	}else {
+		    		System.exit(0);
+		    	}
+		    
 			}
 		}
 		this.setCenter(null);

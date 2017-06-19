@@ -32,7 +32,7 @@ public class BarraDeMenu extends MenuBar {
         MenuItem opcionFX = new MenuItem("Mutear sonidos");
         MenuItem opcionReiniciar = new MenuItem("Reiniciar Juego");
         MenuItem opcionInstrucciones = new MenuItem("Instrucciones");
-        MenuItem opcionAcercaDe = new MenuItem("Acerca De");
+        MenuItem opcionAcercaDe = new MenuItem("Acerca de Nosotros");
         
         opcionSalir.setOnAction(new SalirEventoOnAction());
         opcionInstrucciones.setOnAction(new MostrarInstruccionesEvento());

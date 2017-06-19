@@ -1,0 +1,59 @@
+Bienvenidos. DragonAlgoBall es un juego por turnos entre 2 jugadores.
+La partida se desarrolla sobre un tablero. Se asigna un jugador a los Guerreros Z y el otro a los enemigos de la Tierra.
+
+El jugador que inicia la partida es escogido aleatoriamente.\n
+
+Cada equipo consta de 3 personajes:
+Guerreros Z:
+		- Son Goku
+		- Gohan
+		- Piccolo
+Enemigos de la Tierra:
+		- Freezer
+		- Cell
+		- Majin Boo
+    		
+En un turno, el jugador puede hacer click sobre los personajes de su equipo para seleccionarlos y realizar un movimiento o atacar a un enemigo. El movimiento y la acción pueden ser de distintos personajes del equipo.
+
+El juego muestra un cartel indicando de quien es el turno en la esquina superior derecha."
+
+Los personajes pueden moverse dentro acorde a su velocidad. Un punto de velocidad implica que se puede mover un casillero en cualquier dirección (incluyendo diagonales).
+   
+Los personajes ganan 5 puntos de KI por turno. Hay dos tipos de ataques: normales y especiales.
+Cada personaje cuenta con un ataque de cada tipo. El daño de un ataque es determinado por el poder de pelea de los personajes. Además, si un personaje ataca a un enemigo con mayor pode de pelea, el daño realizado por dicho ataque será menor. Los ataques especiales cuestan KI, son más poderosos y a veces tienen efectos especiales: "
+
+Goku: Kamehameha (20 KI): Ataque con daño aumentado.
+Gohan: Masenko (10 KI): Ataque con daño aumentado.
+Piccolo: Makankosappo (10 KI): Ataque con daño aumentado.
+Freezer: Rayo Mortal (20 KI): Ataque con daño aumentado.
+Cell: Absorber (5 KI): Mismo daño que su ataque básico, pero cell aumenta la misma cantidad de vida.
+MajinBoo: Conviertete En Chocolate(30 KI): No causa daño. Inmobiliza a un enemigo por 3 turnos.
+
+Cada personaje cuenta con 2 transformaciones. Para transformarse, un personaje debe cumplir ciertas condiciones:
+    
+- Goku:
+	- Kaioken: 20 unidades de KI.
+	- Super Sayajin: 50 unidades de KI.
+- Gohan:
+	- Super Sayajin: 10 unidades de KI.
+	- Super Sayajin 2: 30 unidades de KI y sus aliados deben tener 30% de vida o menos.
+- Piccolo:
+	- Fortalecido: 20 unidades de KI.
+	- Protector:  Gohan debe tener 20% de vida o menos.
+- Freezer:
+	- Segunda Forma: 20 unidades de KI.
+	- Forma Final: 50 unidades de KI.
+- Cell:
+	- Semi-Perfecto: Debe absorber vida 4 veces.
+	- Perfecto: Debe absorber vida 8 veces.
+- Majin Boo:
+	- Buu Malo: 20 unidades de KI.
+	- Buu Original: 50 unidades de KI.
+    
+Durante la partida aparecerán sobre el tablero diferentes consumibles que brindan bonificaciones
+	- Esfera Del Dragón: Aumenta un 25% el poder de pelea del  personaje.
+	- Nube Voladora: Aumenta un 25% el rango de ataque de movimiento del personaje.
+	- Semillas del Ermitaño: Recupera 100 puntos de vida al personaje, a menos que no esté dañado.
+Los consumibles aparecerán de forma aleatoria.
+    			
+El primero en eliminar todos los personajes del equipo oponente será el ganador.

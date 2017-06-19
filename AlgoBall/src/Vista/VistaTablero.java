@@ -1,17 +1,14 @@
 package Vista;
 
 
-import Modelo.Partida;
 import Modelo.Posicion;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Personaje;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.Node;
 
 public class VistaTablero extends GridPane {
 	
@@ -66,7 +63,7 @@ public class VistaTablero extends GridPane {
 	
 	public void ofrecerMovimiento(Personaje personaje){
 		Posicion inicial = personaje.posicion();
-		int rango=personaje.velocidad();
+		int rango=personaje.velocidad() + personaje.velocidad()*personaje.bonificacionDeVelocidadPorConsumibles();
 		for(int i=0;i<ancho;i++){
 			for(int j=0;j<alto;j++){
 				try {

@@ -3,9 +3,6 @@ package Vista;
 import Modelo.Partida;
 import Modelo.Personajes.Personaje;
 import Vista.eventos.PersonajePresionadoMouseEvent;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 public class VistaPersonaje extends HBox{
