@@ -24,7 +24,7 @@ public class VistaInstrucciones extends ScrollPane{
 		Label instrucciones = new Label();
 		instrucciones.getStyleClass().add("texto");
 		instrucciones.setWrapText(true);
-		instrucciones.setMaxWidth(780);
+		instrucciones.setMaxWidth(770);
 		
 		Path path = null;
 		try {

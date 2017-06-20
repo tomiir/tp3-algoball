@@ -1,7 +1,7 @@
 Bienvenidos. DragonAlgoBall es un juego por turnos entre 2 jugadores.
 La partida se desarrolla sobre un tablero. Se asigna un jugador a los Guerreros Z y el otro a los enemigos de la Tierra.
 
-El jugador que inicia la partida es escogido aleatoriamente.\n
+El jugador que inicia la partida es escogido aleatoriamente.
 
 Cada equipo consta de 3 personajes:
 Guerreros Z:
@@ -15,7 +15,7 @@ Enemigos de la Tierra:
     		
 En un turno, el jugador puede hacer click sobre los personajes de su equipo para seleccionarlos y realizar un movimiento o atacar a un enemigo. El movimiento y la acción pueden ser de distintos personajes del equipo.
 
-El juego muestra un cartel indicando de quien es el turno en la esquina superior derecha."
+El juego muestra un cartel indicando de quien es el turno en la esquina superior derecha.
 
 Los personajes pueden moverse dentro acorde a su velocidad. Un punto de velocidad implica que se puede mover un casillero en cualquier dirección (incluyendo diagonales).
    

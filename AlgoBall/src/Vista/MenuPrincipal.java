@@ -28,7 +28,7 @@ public class MenuPrincipal extends BorderPane{
 		String path = getClass().getResource("mp3/Menu Principal - Opening.mp3").toString();
         Media media = new Media(path);
         mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(0.3);
+        mediaPlayer.setVolume(0.7);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setAutoPlay(true);
         setCentro(mediaPlayer);

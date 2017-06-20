@@ -32,7 +32,7 @@ public class Juego extends BorderPane{
         Media media = new Media(path);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setVolume(0.3);
+        mediaPlayer.setVolume(0.7);
 		
 		vistaLateral = new VistaLateral(this);
 		vistaTablero = new VistaTablero(this);
