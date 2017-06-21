@@ -1,34 +1,21 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Personajes.Personaje;
 
 public abstract class Transformacion {
 	String nombre;
+	Estado estado;
 	int costo;
-	int rangoDeAtaque;
-	int velocidad;
-	int poderDePelea;
 	
 	public abstract boolean esPosible(Personaje personaje, Equipo equipo);
 	
-	public int rangoDeAtaque() {
-		return this.rangoDeAtaque;	
-	}
-
-	public int poderDePelea() {
-		return this.poderDePelea;
-	}
-
-	public int velocidad() {
-		return this.velocidad;
-	}
-
-	public int costo() {
-		return this.costo;
+	public Estado getNuevoEstado(){
+		return estado;
 	}
 	
-	public String nombre(){
-		return this.nombre;
+	public int costo(){
+		return costo;
 	}
 }

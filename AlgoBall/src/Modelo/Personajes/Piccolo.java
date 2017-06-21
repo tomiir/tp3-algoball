@@ -1,22 +1,19 @@
 package Modelo.Personajes;
 
-import Modelo.Tablero;
+import Modelo.Estado;
+import Modelo.Vida;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.Protector;
 import Modelo.Transformaciones.TransformacionPorKi;
 
 public class Piccolo extends Personaje {
 	
-	public Piccolo(Tablero tablero){
+	public Piccolo(){
 		
 		nombre = "Piccolo";
-		puntosDeVida = 500;
-		poderDePelea = 20;
-		rangoDeAtaque = 2;
-		velocidad = 2;
+		vida = new Vida(500);
+		estado = new Estado("Normal", 20, 2, 2);
 		ataqueEspecial = Ataque.Makankosappo();
-		this.tablero = tablero;
-		inicializar();
 		
 		TransformacionPorKi fortalecido = new TransformacionPorKi("Fortalecido", 20,4,3,40 );
 		

@@ -1,6 +1,8 @@
 package Modelo.Personajes;
 
+import Modelo.Estado;
 import Modelo.Tablero;
+import Modelo.Vida;
 import Modelo.Ataques.Absorcion;
 import Modelo.Transformaciones.Perfecto;
 import Modelo.Transformaciones.SemiPerfecto;
@@ -9,23 +11,18 @@ public class Cell extends Personaje {
 	
 	int absorciones=0;
 	
-	public Cell(Tablero tablero){
+	public Cell(){
 		
 		nombre = "Cell";
-		puntosDeVida = 500;
-		poderDePelea = 20;
-		rangoDeAtaque = 3;
-		velocidad = 2;
+		vida = new Vida(500);
+		estado = new Estado("Normal",20,3,2);
 		ataqueEspecial = new Absorcion(this);
-		this.tablero = tablero;
 		
 		SemiPerfecto semiPerfecto = new SemiPerfecto();
 		Perfecto perfecto = new Perfecto();
 		
 		transformaciones.add(semiPerfecto);
 		transformaciones.add(perfecto);
-		
-		inicializar();
 		
 		//Transformacion especial no implementado
 	}
@@ -38,8 +35,7 @@ public class Cell extends Personaje {
 	public void aumentarVidaPorAbsorcion(int aumento){
 		
 		absorciones++;
-		puntosDeVida+=aumento;
-		if(puntosDeVida >= vidaInicial) puntosDeVida = vidaInicial;
+		vida.aumentar(aumento);
 	}
 	
 	public int bonificacionDeAtaquePorcentual(){

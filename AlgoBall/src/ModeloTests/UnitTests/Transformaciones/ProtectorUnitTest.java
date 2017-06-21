@@ -11,8 +11,8 @@ import Modelo.Transformaciones.Protector;
 
 public class ProtectorUnitTest {
 	Tablero tablero = new Tablero(5, 5);
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "Gohan", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("Personaje1", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("Gohan", 300, 3, 3, 1);
 	
 	Protector transformacionProtector = new Protector();
 	

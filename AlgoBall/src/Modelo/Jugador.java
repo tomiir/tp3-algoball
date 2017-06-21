@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.Consumibles.Consumible;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
@@ -16,26 +17,54 @@ public class Jugador {
 	
 	protected String nombre;
 	protected Equipo equipo;
+	protected boolean yaAtaco;
+	protected boolean yaTransformo;
+	protected boolean yaMovio;
+	protected Tablero tablero;
 	
 	
-	public Jugador(String nombreNuevo){
+	public Jugador(String nombreNuevo, Tablero tablero){
 		this.nombre = nombreNuevo;
+		this.tablero = tablero;
 	}
 	
 	public void asignarEquipo(Equipo equipoNuevo){
 		this.equipo = equipoNuevo;
 	}
 	
-	public void realizarAtaque(Personaje remitente, Atacable destinatario, boolean esEspecial) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
-		remitente.atacar(destinatario, esEspecial);
+	public void realizarAtaqueNormal(Personaje remitente, Atacable destinatario) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
+		remitente.atacarNormal(destinatario);
+		this.yaAtaco = true;
+		tablero.removerSiEstaMuerto(destinatario);
 	}
 	
-	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
-		personaje.mover(posicion);
+	public void realizarAtaqueEspecial(Personaje remitente, Atacable destinatario) throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo{
+		remitente.atacarEspecial(destinatario);
+		this.yaAtaco=true;
+		tablero.removerSiEstaMuerto(destinatario);
+	}
+	
+	public void realizarMovimiento(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroOcupado, ExcFueraDeRango{
+		
+		tablero.moverPersonaje(personaje,posicion);
+		this.yaMovio = true;
+			
 	}
 	
 	public void realizarTransformacion(Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate{
 		personaje.transformar(equipo);
+		this.yaTransformo=true;
+	}
+	
+	public void pasarTurno(){
+		this.yaMovio = true;
+		this.yaAtaco = true;
+		this.yaTransformo = true;
+		equipo().forEach(pers->{
+			try {
+				pers.seAvanzoUnTurno(5);
+			} catch (ExcNumeroNegativo e) {	}	
+		});
 	}
 	
 	
@@ -43,7 +72,20 @@ public class Jugador {
 		return equipo;
 	}
 	
+	
 	public String nombre(){
 		return nombre;
+	}
+	
+	public boolean realizoMovimiento(){
+		return yaMovio;
+	}
+	
+	public boolean realizoAtaque(){
+		return yaAtaco;
+	}
+	
+	public boolean realizoTransformacion(){
+		return yaTransformo;
 	}
 }

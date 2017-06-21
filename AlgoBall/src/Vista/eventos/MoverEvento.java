@@ -14,9 +14,11 @@ import Vista.Juego;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 public class MoverEvento implements EventHandler<MouseEvent> {
 	Personaje personaje;
@@ -31,6 +33,11 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 		this.juego = juego;
 	}
 	public void handle(MouseEvent event) {
+		Alert alert = new Alert(AlertType.WARNING);
+    	alert.setTitle("Error");
+    	alert.setHeaderText("");
+    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 		try {
 			partida.realizarMovimiento(partida.esTurnoDelJugador(), personaje, posicion);
 			if(!juego.sonidoMuteado()){
@@ -42,41 +49,21 @@ public class MoverEvento implements EventHandler<MouseEvent> {
 			}
 			juego.update();
 		} catch (ExcFueraDeTablero e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("La posicion a la que se intenta mover no existe en el tablero");
 	    	alert.showAndWait();
 		} catch (ExcJugadorNoAutorizado e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El jugador no puede mover a ese personaje, no le pertenece.");
 	    	alert.showAndWait();
 		} catch (ExcJugadorYaMovio e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El jugador ya gasto su movimiento");
 	    	alert.showAndWait();
 		} catch (ExcEsChocolate e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje es de chocolate, no se puede mover");
 	    	alert.showAndWait();
 		} catch (ExcCasilleroOcupado e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El casillero al que intenta moverse esta ocupado");
 	    	alert.showAndWait();
-		} catch (ExcCasilleroDesocupado e) {
-
 		} catch (ExcFueraDeRango e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje esta fuera del rango de ese casillero");
 	    	alert.showAndWait();
 		}

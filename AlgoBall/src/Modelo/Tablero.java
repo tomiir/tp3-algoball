@@ -3,7 +3,10 @@ package Modelo;
 import java.util.function.BiConsumer;
 
 import Modelo.Consumibles.Consumible;
+import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
+import Modelo.Excepciones.ExcEsChocolate;
+import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Interfaces.Atacable;
@@ -11,27 +14,21 @@ import Modelo.Personajes.Personaje;
 
 public class Tablero {
 	protected Casillero[][] casilleros;
-	protected int ancho; 
-	protected int alto;
+	protected Dimension dimension;
 	
 	public Tablero(int anchoDeseado, int altoDeseado){
-		ancho = anchoDeseado;
-		alto = altoDeseado;
-		casilleros = new Casillero[ancho][alto];
+		dimension = new Dimension(anchoDeseado, altoDeseado);
+		casilleros = new Casillero[dimension().ancho()][dimension().alto()];
 		inicializarCasilleros(casilleros);
 	}
 
 	public Casillero obtenerCasillero(Posicion posicion) throws ExcFueraDeTablero{
-		if(!coordenadasEstanEnRango(posicion)) throw new ExcFueraDeTablero();
+		if(!dimension.posicionEstaEnDimension(posicion)) throw new ExcFueraDeTablero();
 		return casilleros[posicion.posX()-1][posicion.posY()-1];
 	}
 	
-	public int ancho(){
-		return ancho;
-	}
-	
-	public int alto(){
-		return alto;
+	public Dimension dimension(){
+		return dimension;
 	}
 	
 	public void posicionarPersonaje(Personaje personaje, Posicion pos) throws ExcFueraDeTablero, ExcCasilleroOcupado{
@@ -44,13 +41,27 @@ public class Tablero {
 		personaje.setPosicion(pos);
 	}
 	
-	private boolean coordenadasEstanEnRango(Posicion pos) {
-		return (pos.posX() > 0 && pos.posX() <= ancho && pos.posY() > 0 && pos.posY() <= alto);
+	public void moverPersonaje(Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcFueraDeRango, ExcEsChocolate{
+		if(personaje.esChocolate()) throw new ExcEsChocolate();
+		if(personaje.estaEnRango(posicion, personaje.velocidadActual()) ){
+			this.posicionarPersonaje(personaje, posicion);
+		} else {
+			throw new ExcFueraDeRango();
+		}
+		
+		if(this.obtenerCasillero(posicion).tieneUnConsumible()){
+			Consumible consumible;
+			try {
+				consumible = this.obtenerCasillero(posicion).obtenerConsumible();
+				personaje.consumir(consumible, posicion);
+				this.obtenerCasillero(posicion).desocuparConsumible();
+			} catch (ExcCasilleroDesocupado e) {}
+		}	
 	}
 	
 	private void inicializarCasilleros(Casillero[][] casilleros) {
-		for(int i=0;i<ancho;i++){
-			for(int j=0;j<alto;j++){
+		for(int i=0;i<dimension().ancho();i++){
+			for(int j=0;j<dimension().alto();j++){
 				casilleros[i][j]=new Casillero();
 			}
 		}
@@ -73,8 +84,8 @@ public class Tablero {
 	}
 
 	public void iterarCasilleros(BiConsumer<Casillero,Posicion> accion) {
-		for(int i=0;i<ancho;i++){
-			for(int j=0;j<alto;j++){
+		for(int i=0;i<dimension().ancho();i++){
+			for(int j=0;j<dimension().alto();j++){
 				try {
 					accion.accept(casilleros[i][j], new Posicion(i+1,j+1));
 				} catch (ExcPosicionNegativa e) {

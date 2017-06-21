@@ -11,7 +11,7 @@ import org.junit.Assert;
 
 public class PerfectoUnitTest {
 	Tablero tablero = new Tablero(5, 5);
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("Personaje1", 300, 3, 3, 1);
 	
 	Perfecto perfecto = new Perfecto();
 	

@@ -14,18 +14,8 @@ public class TransformacionPorKiUnitTests {
 	
 	Tablero tablero = new Tablero(5, 5);
 	Equipo equipo = new Equipo("equipo1");
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("nombre", 300, 3, 3, 1);
 	Transformacion trans = new TransformacionPorKi("Prueba", 10, 20, 30, 40);
-
-	
-	@Test
-	public void transformacionSeCreaCorrectamente(){
-		Assert.assertEquals("",trans.nombre(),"Prueba");
-		Assert.assertEquals("",trans.costo(),10);
-		Assert.assertEquals("",trans.rangoDeAtaque(),20);
-		Assert.assertEquals("",trans.velocidad(),30);
-		Assert.assertEquals("",trans.poderDePelea(),40);
-	}
 	
 	@Test
 	public void transformacionNoEsPosible(){

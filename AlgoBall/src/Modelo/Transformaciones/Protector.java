@@ -1,17 +1,15 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
 
 public class Protector extends Transformacion {
 	public Protector(){
 		this.nombre = "Protector";
-		this.rangoDeAtaque =6;
 		this.costo = 0;
-		this.velocidad = 4;
-		this.poderDePelea = 60;
-		
+		this.estado = new Estado("Protector", 60, 6, 4);		
 	}
 	
 	@Override

@@ -4,15 +4,13 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import Modelo.Casillero;
-import Modelo.Tablero;
 import Modelo.Consumibles.NubeVoladora;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
 
 public class CasilleroUnitTests {
-	Tablero tablero = new Tablero(10,10);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
+	Personaje personaje1 = new PersonajeDePrueba ("Jorge", 300, 5, 3,100);
 	Casillero casilleroNuevo = new Casillero();
 	NubeVoladora nube = new NubeVoladora();
 	

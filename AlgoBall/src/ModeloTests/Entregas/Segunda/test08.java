@@ -18,16 +18,19 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Gohan;
 import Modelo.Personajes.MajinBoo;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 	
 	public class test08 {
 		
 		Tablero tablero = new Tablero(15, 15);
 		Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
-		MajinBoo majinBoo = new MajinBoo(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
+		Personaje gohan = factory.getPersonaje("gohan");
+		Personaje majinBoo = factory.getPersonaje("majinboo");
 		
 		@Test
 		public void MajinBooConvierteEnChocolateYRivalNoGanaKi () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate{
-			Gohan gohan = new Gohan(tablero);
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
 			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
 			
@@ -35,7 +38,7 @@ import Modelo.Personajes.MajinBoo;
 			
 			int puntosKiGohanIniciales = gohan.ki();
 			
-			majinBoo.atacar(gohan, true);
+			majinBoo.atacarEspecial(gohan);
 			
 			gohan.seAvanzoUnTurno(10);
 			
@@ -46,33 +49,32 @@ import Modelo.Personajes.MajinBoo;
 		
 		@Test (expected = ExcEsChocolate.class)
 		public void MajinBooConvierteEnChocolateYRivalNoPuedeAtacar() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
-			Gohan gohan = new Gohan(tablero);
+	
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
 			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
 			
 			majinBoo.seAvanzoUnTurno(30);
 			
-			majinBoo.atacar(gohan, true);
+			majinBoo.atacarEspecial(gohan);
 			
-			gohan.atacar(majinBoo, false);
+			gohan.atacarNormal(majinBoo);
 		}
 		
 		@Test (expected = ExcEsChocolate.class)
 		public void MajinBooConvierteEnChocolateYRivalNoPuedeMover() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcCasilleroDesocupado{
-			Gohan gohan = new Gohan(tablero);
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
 			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 5));
 			
 			majinBoo.seAvanzoUnTurno(30);
 			
-			majinBoo.atacar(gohan, true);
+			majinBoo.atacarEspecial(gohan);
 			
-			gohan.mover(new Posicion(5, 4));
+			tablero.moverPersonaje(gohan, new Posicion(5,4));;
 		}
 		
 		@Test (expected = ExcEsChocolate.class)
 		public void MajinBooConvierteEnChocolateYRivalNoPuedeTransformar() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcNoEsPosibleTransformarse{
-			Gohan gohan = new Gohan(tablero);
+
 			Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 			GuerrerosZ.agregarPersonaje(gohan);
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
@@ -80,7 +82,7 @@ import Modelo.Personajes.MajinBoo;
 			
 			majinBoo.seAvanzoUnTurno(30);
 			
-			majinBoo.atacar(gohan, true);
+			majinBoo.atacarEspecial(gohan);
 			
 			gohan.seAvanzoUnTurno(50);
 			gohan.transformar(GuerrerosZ);
@@ -88,7 +90,7 @@ import Modelo.Personajes.MajinBoo;
 		
 		@Test
 		public void MajinBooConvierteEnChocolateYLuegoDeTresTurnosSeVa() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse, ExcCasilleroDesocupado{
-			Gohan gohan = new Gohan(tablero);
+		
 			Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 			GuerrerosZ.agregarPersonaje(gohan);
 			tablero.posicionarPersonaje(gohan, new Posicion(5, 6));
@@ -97,16 +99,16 @@ import Modelo.Personajes.MajinBoo;
 			gohan.seAvanzoUnTurno(30);
 			majinBoo.seAvanzoUnTurno(30);
 			
-			majinBoo.atacar(gohan, true);
+			majinBoo.atacarEspecial(gohan);
 			
 			gohan.seAvanzoUnTurno(0);
 			gohan.seAvanzoUnTurno(0);
 			gohan.seAvanzoUnTurno(0);
 			
 			gohan.seAvanzoUnTurno(0);
-			gohan.atacar(majinBoo, false);
+			gohan.atacarNormal(majinBoo);
 			gohan.transformar(GuerrerosZ);
-			gohan.mover(new Posicion(5, 4));
+			tablero.moverPersonaje(gohan, new Posicion(5, 4));
 			
 			//hago un assert de una sola, pero ya se que las otras se puede hacer ya que no tiro excepcion
 			

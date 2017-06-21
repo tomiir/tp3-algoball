@@ -1,16 +1,15 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Personajes.Personaje;
 
 public class SemiPerfecto extends Transformacion {
 	
 	public SemiPerfecto(){
 		this.nombre = "Semi Perfecto";
-		this.rangoDeAtaque =4;
 		this.costo = 0;
-		this.velocidad = 3;
-		this.poderDePelea = 40;
+		this.estado = new Estado("Semi perfecto", 40, 4, 3);
 		
 	}
 	

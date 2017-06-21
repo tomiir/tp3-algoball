@@ -5,6 +5,7 @@ import java.util.Optional;
 import Modelo.Jugador;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Personajes.Personaje;
+import Vista.Interpretes.InterpretePersonaje;
 import Vista.eventos.BotonPasarDeTurnoEvento;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -40,7 +41,8 @@ public class VistaLateral extends BorderPane{
 	}
 	
 	 public void update() {
-		if(juego.partida().jugadorYaAtacoOTransformo(juego.partida().esTurnoDelJugador()) && juego.partida().jugadorYaMovio(juego.partida().esTurnoDelJugador())){
+		if( (juego.partida().esTurnoDelJugador().realizoTransformacion() || juego.partida().esTurnoDelJugador().realizoTransformacion())
+				&& juego.partida().esTurnoDelJugador().realizoMovimiento()){
 			try {
 				juego.partida().avanzarTurno();
 			} catch (ExcHayGanador e) {

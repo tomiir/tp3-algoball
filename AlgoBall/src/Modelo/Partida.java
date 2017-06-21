@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import Modelo.Consumibles.Consumible;
 import Modelo.Consumibles.EsferaDelDragon;
@@ -38,10 +39,7 @@ public class Partida {
 	protected Jugador jugador2;
 	protected Jugador jugadorActivo;
 	
-	protected Tablero tablero;
-	protected Map<String, Boolean> yaMovio= new HashMap<String, Boolean>();
-	protected Map<String, Boolean> yaAtacoOTransformo=new HashMap<String, Boolean>();
-	
+	protected Tablero tablero;	
 	
 	public Partida (Tablero tablero, Jugador primerJugador, Jugador segundoJugador){
 		this.tablero = tablero;
@@ -61,29 +59,33 @@ public class Partida {
 		
 	}
 
-	public void iterarPersonajes(BiConsumer<String, Personaje> action){
+	public void iterarPersonajes(Consumer<Personaje> action){
 		jugador1.equipo().forEach(action);
 		jugador2.equipo().forEach(action);
 	}
 	
-	public void realizarAtaque(Jugador jugador, Personaje remitente, Posicion posicion, boolean esEspecial) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
-	
+	public void realizarAtaqueNormal(Jugador jugador, Personaje remitente, Posicion posicion) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
 		Atacable destinatario = tablero.obtenerCasillero(posicion).obtenerAtacable();
-		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaque(remitente, destinatario, esEspecial);
-		jugadorAtacoOTransformo(jugador);
+		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaqueNormal(remitente, destinatario);
+		tablero.removerSiEstaMuerto(destinatario);
 	}
 	
-	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango{
-		
+	public void realizarAtaqueEspecial(Jugador jugador, Personaje remitente, Posicion posicion) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
+		Atacable destinatario = tablero.obtenerCasillero(posicion).obtenerAtacable();
+		if(verificarAtaqueLegitimo(jugador, remitente, destinatario)) jugador.realizarAtaqueEspecial(remitente, destinatario);
+		tablero.removerSiEstaMuerto(destinatario);
+	}
+	
+	
+	public void realizarMovimiento(Jugador jugador, Personaje personaje, Posicion posicion) throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcFueraDeRango{
 		if(verificarMovimientoLegitimo(jugador, personaje)) jugador.realizarMovimiento(personaje, posicion);
-		jugadorMovio(jugador);
+	
 	}
 	
 	public void realizarTransformacion(Jugador jugador, Personaje personaje) throws ExcNoEsPosibleTransformarse, ExcEsChocolate, ExcJugadorYaAtacoOTransformo{
 		
-		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
+		if(jugador.realizoAtaque() || jugador.realizoTransformacion()) throw new ExcJugadorYaAtacoOTransformo();
 		jugador.realizarTransformacion(personaje);
-		jugadorAtacoOTransformo(jugador);
 	}
 	
 	public void iniciar() throws ExcHayGanador{
@@ -102,18 +104,8 @@ public class Partida {
 		if(hayGanador()) throw new ExcHayGanador(ganador());
 		
 		cambiarJugadorActivo();
-		
-		yaMovio.put(jugadorActivo.nombre(), false);
-		yaAtacoOTransformo.put(jugadorActivo.nombre(),false);
-		jugadorActivo.equipo().forEach((k,v)->{
-			try {
-				v.seAvanzoUnTurno(5);
-			} catch (ExcNumeroNegativo e) {	}	
-		});
-		
-		
+		jugadorActivo.pasarTurno();
 		this.posicionarConsumibleRandom();
-		
 	}
 	
 	
@@ -160,13 +152,13 @@ public class Partida {
 	private boolean verificarAtaqueLegitimo(Jugador jugador, Personaje remitente, Atacable destinatario) throws ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcDestinatarioEnEquipoPropio{
 		if(!personajePerteneceAJugador(jugador,remitente.nombre())) throw new ExcJugadorNoAutorizado();
 		if(personajePerteneceAJugador(jugador,destinatario.nombre())) throw new ExcDestinatarioEnEquipoPropio();
-		if(jugadorYaAtacoOTransformo(jugador)) throw new ExcJugadorYaAtacoOTransformo();
+		if(jugador.realizoAtaque() || jugador.realizoTransformacion()) throw new ExcJugadorYaAtacoOTransformo();
 		return true;
 	}
 	
 	private boolean verificarMovimientoLegitimo(Jugador jugador, Personaje personaje) throws ExcJugadorNoAutorizado, ExcJugadorYaMovio{
 		if(!personajePerteneceAJugador(jugador,personaje.nombre())) throw new ExcJugadorNoAutorizado();
-		if(jugadorYaMovio(jugador)) throw new ExcJugadorYaMovio();
+		if(jugador.realizoMovimiento()) throw new ExcJugadorYaMovio();
 		return true;
 	}
 	
@@ -178,27 +170,11 @@ public class Partida {
 		return (jugador1.equipo().perdio() || jugador2.equipo().perdio());
 	}
 	
-	public void jugadorMovio(Jugador jugador){
-		yaMovio.put(jugador.nombre(), true);
-	}
-	
-	public boolean jugadorYaMovio(Jugador jugador){
-		return yaMovio.get(jugador.nombre());
-	}
-	
-	public void jugadorAtacoOTransformo(Jugador jugador){
-		yaAtacoOTransformo.put(jugador.nombre(),true);
-	}
-	
-	public boolean jugadorYaAtacoOTransformo(Jugador jugador){
-		return yaAtacoOTransformo.get(jugador.nombre());
-	}
-	
 	private void posicionPersonajesInicial() {
 		LinkedList<Personaje> listaEquipo1 = new LinkedList<Personaje>();
 		LinkedList<Personaje> listaEquipo2 = new LinkedList<Personaje>();
-		jugador1.equipo().forEach((n,p)->listaEquipo1.addLast(p));
-		jugador2.equipo().forEach((n,p)->listaEquipo2.addLast(p));
+		jugador1.equipo().forEach((p)->listaEquipo1.addLast(p));
+		jugador2.equipo().forEach((p)->listaEquipo2.addLast(p));
 		Iterator<Personaje> iter1 = listaEquipo1.iterator();
 		int i = 1;
 		while(iter1.hasNext()){
@@ -212,7 +188,7 @@ public class Partida {
 		i = 0;
 		while(iter2.hasNext()){
 			try {
-				tablero.posicionarPersonaje(iter2.next(), new Posicion(tablero.ancho()-i, tablero.alto()));
+				tablero.posicionarPersonaje(iter2.next(), new Posicion(tablero.dimension().ancho()-i, tablero.dimension().alto()));
 			} catch (ExcFueraDeTablero | ExcCasilleroOcupado | ExcPosicionNegativa e) {
 			}
 			i++;
@@ -232,8 +208,8 @@ public class Partida {
 		if(numeroConsumible == 1) consumible = new EsferaDelDragon();
 		else if(numeroConsumible == 2) consumible = new SemillaDeErmitaño();
 		
-		int randAlto = generador.nextInt(tablero.alto());
-		int randAncho = generador.nextInt(tablero.ancho());
+		int randAlto = generador.nextInt(tablero.dimension().alto());
+		int randAncho = generador.nextInt(tablero.dimension().ancho());
 		int randChance = generador.nextInt(10);
 		
 		//20% de chances de aparicion
@@ -241,9 +217,6 @@ public class Partida {
 			try {
 				tablero.posicionarConsumible(consumible, new Posicion(randAncho,randAlto));
 			} catch (ExcCasilleroOcupado | ExcFueraDeTablero | ExcPosicionNegativa e) {	}
-		
-		
-		
-	}
+		}
 }
 

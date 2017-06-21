@@ -30,7 +30,12 @@ public class BotonTransformarEvento implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent event) {
-			Partida partida = juego.partida();
+		Partida partida = juego.partida();
+		Alert alert = new Alert(AlertType.WARNING);
+    	alert.setTitle("Error");
+    	alert.setHeaderText("");
+	    Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	    stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 		try {
 			partida.realizarTransformacion(partida.esTurnoDelJugador(), personaje);
 			juego.update();
@@ -43,20 +48,10 @@ public class BotonTransformarEvento implements EventHandler<ActionEvent> {
 		} catch (ExcJugadorYaAtacoOTransformo e) {
 			
 		} catch (ExcNoEsPosibleTransformarse e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje no se puede transformar");
-	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		} catch (ExcEsChocolate e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje es chocolate");
-	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		}
 	}

@@ -5,13 +5,14 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.json.simple.JSONObject;
+
 import Modelo.Equipo;
-import Modelo.Excepciones.ExcCasilleroDesocupado;
-import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Posicion;
-import Modelo.Tablero;
+import Modelo.Vida;
 import Modelo.Interfaces.Atacable;
+import Modelo.Estado;
 import Modelo.Transformaciones.Transformacion;
 import Modelo.Ataques.Ataque;
 import Modelo.Consumibles.Consumible;
@@ -26,62 +27,39 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 public class Personaje implements Atacable{
 	
 	String nombre;
-	String forma = "Normal";
-	int vidaInicial;
-	int puntosDeVida;
-	int poderDePelea;
-	int rangoDeAtaque;
-	int velocidad;
+	Vida vida;
+	Estado estado;
 	int ki = 0;
 	int tiempoComoChocolate = -1;
-	Modelo.Ataques.Ataque ataqueEspecial;
+	Ataque ataqueEspecial;
 	Ataque ataqueNormal = Ataque.AtaqueNormal();
 	Posicion posicion;
-	Tablero tablero;
 	Queue <Transformacion> transformaciones = new LinkedList<Transformacion>();
 	ArrayList<Consumible> consumidos = new ArrayList<Consumible>();
 	
 	
 	public int recibirDaño(int dañoRecibido) throws ExcNumeroNegativo{
-		if(dañoRecibido < 0) throw new ExcNumeroNegativo();
-		
-		
-		if(dañoRecibido <= puntosDeVida) this.puntosDeVida -= dañoRecibido;
-		else{
-			dañoRecibido = puntosDeVida;
-			puntosDeVida = 0;
-		}
-		
-		return  dañoRecibido;
-		
+		return vida.recibirDaño(dañoRecibido);
 	}
 	
-	public void mover(Posicion posicion) throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
-		if(esChocolate()) throw new ExcEsChocolate();
-		if(this.estaEnRango(posicion, velocidad()+ velocidad()*this.bonificacionDeVelocidadPorConsumibles())){
-			this.tablero.posicionarPersonaje(this, posicion);
-		
-			if(tablero.obtenerCasillero(posicion).tieneUnConsumible()){
-				Consumible consumible = this.tablero.obtenerCasillero(posicion).obtenerConsumible();
-				this.consumir(consumible, posicion);
-			}		
-		}
-		else{
-			throw new ExcFueraDeRango();
-		}
+	public void atacarNormal(Atacable personajeObjetivo) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+		this.enviarAtaque(personajeObjetivo, ataqueNormal);
 	}
 	
-	public void atacar(Atacable personajeObjetivo, boolean esEspecial) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+	public void atacarEspecial(Atacable personajeObjetivo) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+		this.enviarAtaque(personajeObjetivo, ataqueEspecial);
+	}
+	
+	private void enviarAtaque(Atacable personajeObjetivo, Ataque ataque) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
 		if(esChocolate()) throw new ExcEsChocolate();
 		if(personajeObjetivo.estaMuerto()) throw new ExcPersonajeMurio();
-		if(estaEnRango(personajeObjetivo.posicion(), this.rangoDeAtaque)){
-			if(ki < ataqueElegido(esEspecial).costo()) throw new ExcKiInsuficiente();
-			ataqueElegido(esEspecial).enviar(this, personajeObjetivo, this.bonificacionDeAtaquePorcentual() + this.bonificacionDeAtaquePorcentualPorConsumibles());
-			ki -= ataqueElegido(esEspecial).costo();
+		if(estaEnRango(personajeObjetivo.posicion(), this.estado.getRangoDeAtaque())){
+			if(ki < ataque.costo()) throw new ExcKiInsuficiente();
+			ataque.enviar(this, personajeObjetivo, this.bonificacionDeAtaquePorcentual() + this.bonificacionDeAtaquePorcentualPorConsumibles());
+			ki -= ataque.costo();
 		} else {
 			throw new ExcFueraDeRango();
 		}
-		tablero.removerSiEstaMuerto(personajeObjetivo);
 	}
 	
 	public void seAvanzoUnTurno(int aumentoKi) throws ExcNumeroNegativo{
@@ -95,25 +73,16 @@ public class Personaje implements Atacable{
 		return tiempoComoChocolate>=0;
 	}
 	
-	public int vidaPorcentual(){
-		float porcentaje = (puntosDeVida*100)/vidaInicial;
-		return (int)porcentaje;
-	}
-	
 	public void setPosicion(Posicion casillero){
 		this.posicion = casillero;
 	}
 	
-	public int puntosDeVida(){
-		return puntosDeVida;
+	public int poderDePelea(){
+		return estado.getPoderDePelea();
 	}
 	
-	public int vidaInicial(){
-		return vidaInicial;
-	}
-	
-	public int velocidad(){
-		return this.velocidad;
+	public int velocidadActual(){
+		return this.estado.getVelocidad() + this.estado.getVelocidad()*this.bonificacionDeVelocidadPorConsumibles();
 	}
 	
 	public Posicion posicion(){
@@ -124,32 +93,17 @@ public class Personaje implements Atacable{
 		return ki;
 	}
 	
-	public int poderDePelea(){
-		return poderDePelea;
-	}
-	
 	public String nombre() {
 		return nombre;
 	}
 	
-	public String forma(){
-		return forma;
-	}
-	
 	public boolean estaMuerto(){
-		return (this.puntosDeVida == 0);
-	}
-	
-	public int rangoDeAtaque(){
-		return this.rangoDeAtaque;
+		if(vida.getVidaActual()==0) return true;
+		return false;
 	}
 	
 	public int cantidadDeAbsorciones(){
 		return 0;
-	}
-	
-	public Transformacion getTransformacion(){
-		return this.transformaciones.peek();
 	}
 	
 	public void transformar (Equipo equipoPropio) throws ExcNoEsPosibleTransformarse, ExcEsChocolate {
@@ -157,11 +111,8 @@ public class Personaje implements Atacable{
 		Transformacion transformacion = transformaciones.peek();
 		if(transformacion!=null && transformacion.esPosible(this, equipoPropio)){
 			transformaciones.remove();
-			rangoDeAtaque = transformacion.rangoDeAtaque();
-			velocidad = transformacion.velocidad();
-			poderDePelea = transformacion.poderDePelea();
+			estado = transformacion.getNuevoEstado();
 			ki -= transformacion.costo();
-			forma = transformacion.nombre();
 		} else {
 			throw new ExcNoEsPosibleTransformarse();
 		}
@@ -172,15 +123,11 @@ public class Personaje implements Atacable{
 		tiempoComoChocolate = turnos;
 	}
 	
-	public Ataque getAtaqueEspecial(){
-		return ataqueEspecial;
-	}
-	
-	public int bonificacionDeAtaquePorcentual(){
+	protected int bonificacionDeAtaquePorcentual(){
 		return 0;
 	}
 
-	public int bonificacionDeAtaquePorcentualPorConsumibles(){
+	private int bonificacionDeAtaquePorcentualPorConsumibles(){
 		int bonificacionDeAtaquePorcentual = 0;
 		
 		if (this.consumidos.isEmpty() == false){
@@ -195,7 +142,7 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	public int bonificacionDeVelocidadPorConsumibles(){
+	private int bonificacionDeVelocidadPorConsumibles(){
 		int bonificacion = 0;
 		if (this.consumidos.isEmpty() == false){
 			Iterator<Consumible> iterador = consumidos.iterator();
@@ -206,21 +153,14 @@ public class Personaje implements Atacable{
 		}
 		
 		return bonificacion;
-		
+	}
+	
+	public int vidaPorcentual(){
+		return vida.vidaPorcentual();
 	}
 	
 	
-	private Ataque ataqueElegido(boolean esEspecial){
-		if(esEspecial){
-			return this.ataqueEspecial;
-		} else {
-			return this.ataqueNormal;
-		}
-	}
-	
-	
-	
-	private boolean estaEnRango (Posicion objetivo, int rango){
+	public boolean estaEnRango (Posicion objetivo, int rango){
 		try{
 			if(this.posicion.distanciaA(objetivo) > rango){
 				return false;
@@ -231,25 +171,17 @@ public class Personaje implements Atacable{
 		return true;
 	}
 	
-	protected void inicializar(){
-		vidaInicial=puntosDeVida;
+	public int puntosDeVida(){
+		return vida.getVidaActual();
 	}
+
 	
-	private void aumentarVida(int cantidad){
-		
-		puntosDeVida += cantidad;
-		if(puntosDeVida >= vidaInicial) puntosDeVida = vidaInicial;
-	}
-	private void consumir(Consumible consumible, Posicion posicion) throws ExcFueraDeTablero{
+	public void consumir(Consumible consumible, Posicion posicion) throws ExcFueraDeTablero{
 		
 		int vida = consumible.obtenerAumentoDeVida();
-		aumentarVida(vida);
+		this.vida.aumentar(vida);
 	
-		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);
-		
-		tablero.obtenerCasillero(posicion).desocuparConsumible();
-		
-		
+		if(consumible.turnosRestantes() > 0) consumidos.add(consumible);		
 		
 	}
 	
@@ -273,4 +205,41 @@ public class Personaje implements Atacable{
 		}
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public String representar(){
+		JSONObject personajeJSON = new JSONObject();
+		personajeJSON.put("nombre", this.nombre);
+		personajeJSON.put("estado", estado.getNombre());
+		personajeJSON.put("poder_de_pelea", estado.getPoderDePelea());
+		personajeJSON.put("rango_de_ataque", estado.getRangoDeAtaque());
+		personajeJSON.put("velocidad", estado.getVelocidad());
+		personajeJSON.put("ki", ki);
+		personajeJSON.put("cantidad_de_absorciones", cantidadDeAbsorciones());
+		personajeJSON.put("es_chocolate", esChocolate());
+		personajeJSON.put("esta_muerto", estaMuerto());
+		personajeJSON.put("vida_actual", this.vida.getVidaActual());
+		personajeJSON.put("vida_inicial", this.vida.getVidaInicial());
+		personajeJSON.put("vida_porcentual", this.vida.vidaPorcentual());
+		
+		JSONObject ataqueEspecialJSON = new JSONObject();
+		ataqueEspecialJSON.put("nombre", this.ataqueEspecial.nombre());
+		ataqueEspecialJSON.put("costo", this.ataqueEspecial.costo());
+		
+		personajeJSON.put("ataque_especial", ataqueEspecialJSON.toJSONString());
+		
+		if(transformaciones.peek() == null){
+			personajeJSON.put("tiene_transformaciones", false);
+		} else {
+			personajeJSON.put("tiene_transformaciones", true);
+			
+			JSONObject transformacionJSON = new JSONObject();
+			transformacionJSON.put("nombre", transformaciones.peek().getNuevoEstado().getNombre());
+			transformacionJSON.put("costo", transformaciones.peek().costo());
+			
+			personajeJSON.put("siguiente_transformacion", transformacionJSON.toJSONString());
+		}
+		
+		return personajeJSON.toJSONString();
+	}
 }

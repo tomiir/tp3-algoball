@@ -36,15 +36,15 @@ public class PartidaUnitTests {
 	public void puedoIniciarLaPartida() throws ExcPosicionNegativa, ExcHayGanador{
 		
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "bueno1", 300, 2, 3, 50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "bueno2", 50, 2, 3, 50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba("bueno1", 300, 2, 3, 50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba("bueno2", 50, 2, 3, 50);
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -64,15 +64,15 @@ public class PartidaUnitTests {
 	@Test
 	public void avanzarUnTurnoModificaElKiDeLosPersonajes() throws ExcHayGanador{
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "bueno1", 300, 2, 3, 50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "bueno2", 50, 2, 3, 50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba("bueno1", 300, 2, 3, 50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba("bueno2", 50, 2, 3, 50);
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -95,15 +95,15 @@ public class PartidaUnitTests {
 	@Test (expected = ExcHayGanador.class)
 	public void avanzarUnTurnoCuandoTodosLosPersonajesDelEquipoContrarioEstanMuertos() throws ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcHayGanador{
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "bueno1", 300, 2, 3, 50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "bueno2", 50, 2, 3, 50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba("bueno1", 300, 2, 3, 50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba("bueno2", 50, 2, 3, 50);
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -113,7 +113,7 @@ public class PartidaUnitTests {
 			
 		partida.iniciar();
 		
-		jugador1.realizarAtaque(personaje1, personaje2, false);
+		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 		
 		partida.avanzarTurno();
 	}
@@ -121,17 +121,17 @@ public class PartidaUnitTests {
 	@Test (expected = ExcJugadorYaAtacoOTransformo.class)
 	public void jugadorNoPuedeAtacarDosVecesEnElMismoTurno() throws ExcHayGanador, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado{
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "bueno1", 300, 2, 3, 50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "bueno2", 50, 2, 3, 50);
-		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "malo1", 500, 2, 3, 50);
-		PersonajeDePrueba personaje4 = new PersonajeDePrueba(tablero, "malo2", 500, 2, 3, 50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba("bueno1", 300, 2, 3, 50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba("bueno2", 50, 2, 3, 50);
+		PersonajeDePrueba personaje3 = new PersonajeDePrueba("malo1", 500, 2, 3, 50);
+		PersonajeDePrueba personaje4 = new PersonajeDePrueba("malo2", 500, 2, 3, 50);
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -144,35 +144,35 @@ public class PartidaUnitTests {
 		partida.iniciar();
 		
 		if(partida.esTurnoDelJugador() == jugador1){
-			partida.realizarAtaque(jugador1, personaje1, personaje3.posicion(), false);			
-			partida.realizarAtaque(jugador1, personaje2, personaje4.posicion(), false);
+			partida.realizarAtaqueNormal(jugador1, personaje1, personaje3.posicion());			
+			partida.realizarAtaqueNormal(jugador1, personaje2, personaje4.posicion());
 		}
 		
 		if(partida.esTurnoDelJugador() == jugador2){
-			partida.realizarAtaque(jugador2, personaje3, personaje1.posicion(), false);
-			partida.realizarAtaque(jugador2, personaje3, personaje2.posicion(), false);
+			partida.realizarAtaqueNormal(jugador2, personaje3, personaje1.posicion());
+			partida.realizarAtaqueNormal(jugador2, personaje3, personaje2.posicion());
 		}
 		
-		partida.realizarAtaque(jugador1, personaje1, personaje3.posicion(), false);
+		partida.realizarAtaqueNormal(jugador1, personaje1, personaje3.posicion());
 		
-		partida.realizarAtaque(jugador1, personaje2, personaje4.posicion(), false);
+		partida.realizarAtaqueNormal(jugador1, personaje2, personaje4.posicion());
 		
 	}
 	
 	@Test(expected = ExcJugadorYaMovio.class)
 	public void jugadorNoPuedeMoverseDosVecesEnElMismoTurno() throws ExcFueraDeTablero, ExcJugadorNoAutorizado, ExcJugadorYaMovio, ExcEsChocolate, ExcCasilleroOcupado, ExcCasilleroDesocupado, ExcFueraDeRango, ExcPosicionNegativa, ExcHayGanador{
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "bueno1", 300, 2, 3, 50);
-		PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "bueno2", 50, 2, 3, 50);
-		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "malo1", 500, 2, 3, 50);
-		PersonajeDePrueba personaje4 = new PersonajeDePrueba(tablero, "malo2", 500, 2, 3, 50);
+		PersonajeDePrueba personaje1 = new PersonajeDePrueba("bueno1", 300, 2, 3, 50);
+		PersonajeDePrueba personaje2 = new PersonajeDePrueba("bueno2", 50, 2, 3, 50);
+		PersonajeDePrueba personaje3 = new PersonajeDePrueba("malo1", 500, 2, 3, 50);
+		PersonajeDePrueba personaje4 = new PersonajeDePrueba("malo2", 500, 2, 3, 50);
 		
 		jugador1.asignarEquipo(equipo1);
 		jugador2.asignarEquipo(equipo2);
@@ -200,14 +200,14 @@ public class PartidaUnitTests {
 	@Test (expected = ExcJugadorYaAtacoOTransformo.class)
 	public void jugadorNoPuedeAtacarYTransformarEnElMismoTurno() throws ExcHayGanador, ExcJugadorNoAutorizado, ExcJugadorYaAtacoOTransformo, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcDestinatarioEnEquipoPropio, ExcCasilleroDesocupado, ExcNoEsPosibleTransformarse{
 		Tablero tablero = new Tablero(2,2);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeFactory factory = new PersonajeFactory(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
 		Personaje goku = factory.getPersonaje("Goku");
 		Personaje freezer = factory.getPersonaje("Freezer");
 		
@@ -226,12 +226,12 @@ public class PartidaUnitTests {
 		partida.avanzarTurno();
 		
 		if(partida.esTurnoDelJugador() == jugador1){
-			partida.realizarAtaque(jugador1, goku, freezer.posicion(), false);
+			partida.realizarAtaqueNormal(jugador1, goku, freezer.posicion());
 			partida.realizarTransformacion(jugador1, goku);
 		}
 		
 		if(partida.esTurnoDelJugador() == jugador2){
-			partida.realizarAtaque(jugador2, freezer, goku.posicion(), false);
+			partida.realizarAtaqueNormal(jugador2, freezer, goku.posicion());
 			partida.realizarTransformacion(jugador2, freezer);
 		}
 				
@@ -240,14 +240,14 @@ public class PartidaUnitTests {
 	@Test
 	public void sePruebaQueSeAvanzaDeTurnoCorrectamente() throws ExcHayGanador{
 		Tablero tablero = new Tablero(3,3);
-		Jugador jugador1 = new Jugador("Jugador 1");
-		Jugador jugador2 = new Jugador("Jugador 2");
+		Jugador jugador1 = new Jugador("Jugador 1", tablero);
+		Jugador jugador2 = new Jugador("Jugador 2", tablero);
 		Partida partida = new Partida(tablero,jugador1,jugador2);
 
 		Equipo equipo1 = new Equipo("Guerreros Z");
 		Equipo equipo2 = new Equipo("Enemigos de la tierra");
 		
-		PersonajeFactory factory = new PersonajeFactory(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
 		Personaje goku = factory.getPersonaje("Goku");
 		Personaje freezer = factory.getPersonaje("Freezer");
 		

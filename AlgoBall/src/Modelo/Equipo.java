@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import Modelo.Excepciones.ExcNoHayPersonaje;
 import Modelo.Personajes.Personaje;
@@ -26,8 +27,8 @@ public class Equipo{
 		return personajes.size();
 	}
 	
-	public void forEach(BiConsumer<? super String, ? super Personaje> action){
-		personajes.forEach(action);
+	public void forEach(Consumer<? super Personaje> action){
+		personajes.values().forEach(action);
 	}
 	
 	public boolean personajePertenece(String nombre){

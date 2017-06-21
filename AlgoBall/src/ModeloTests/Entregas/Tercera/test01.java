@@ -21,7 +21,7 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class test01 {
 	Tablero tablero = new Tablero(15,15);
-	Jugador jugador = new Jugador("Jorge");
+	Jugador jugador = new Jugador("Jorge", tablero);
 	
 	
 	@Test
@@ -30,9 +30,9 @@ public class test01 {
 		EsferaDelDragon esfera = new EsferaDelDragon();
 		tablero.posicionarConsumible(esfera, posConsumible);
 		
-		Personaje personaje1 = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
+		Personaje personaje1 = new PersonajeDePrueba("pj",300, 3 ,3 ,100);
 		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
-		personaje1.mover(posConsumible);
+		tablero.moverPersonaje(personaje1, posConsumible);
 		
 		Assert.assertFalse(tablero.obtenerCasillero(posConsumible).tieneUnConsumible());
 		
@@ -43,22 +43,22 @@ public class test01 {
 		EsferaDelDragon esfera = new EsferaDelDragon();
 		tablero.posicionarConsumible(esfera, new Posicion(3,3));
 		
-		Personaje personaje1 = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
-		Personaje personaje2 = new PersonajeDePrueba(tablero, "pj2", 300, 3, 3, 100);
+		Personaje personaje1 = new PersonajeDePrueba("pj",300, 3 ,3 ,100);
+		Personaje personaje2 = new PersonajeDePrueba("pj2", 300, 3, 3, 100);
 		
 		tablero.posicionarPersonaje(personaje1, new Posicion(2, 3));
 		tablero.posicionarPersonaje(personaje2, new Posicion(4, 3));
 		
 		int vidaInicialPersonaje2 = personaje2.puntosDeVida();
-		personaje1.atacar(personaje2, false);
+		personaje1.atacarNormal(personaje2);
 		int vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
 		int dañoRealizadoSinConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
 		
-		personaje1.mover(new Posicion(3, 3));
+		tablero.moverPersonaje(personaje1, new Posicion(3, 3));
 		
 		vidaInicialPersonaje2 = vidaFinalPersonaje2;
-		personaje1.atacar(personaje2, false);
+		personaje1.atacarNormal(personaje2);
 		vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
 		int dañoRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
@@ -72,19 +72,19 @@ public class test01 {
 		EsferaDelDragon esfera = new EsferaDelDragon();
 		tablero.posicionarConsumible(esfera, new Posicion(3,3));
 		
-		Personaje personaje1 = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
-		Personaje personaje2 = new PersonajeDePrueba(tablero, "pj2", 300, 3, 3, 100);
+		Personaje personaje1 = new PersonajeDePrueba("pj",300, 3 ,3 ,100);
+		Personaje personaje2 = new PersonajeDePrueba("pj2", 300, 3, 3, 100);
 		
 		tablero.posicionarPersonaje(personaje1, new Posicion(2, 3));
 		tablero.posicionarPersonaje(personaje2, new Posicion(4, 3));
 		
 		//El personaje agarra la esfera
-		personaje1.mover(new Posicion(3, 3));
+		tablero.moverPersonaje(personaje1, new Posicion(3, 3));
 		
 		personaje1.seAvanzoUnTurno(5);
 		
 		int vidaInicialPersonaje2 = personaje2.puntosDeVida();
-		personaje1.atacar(personaje2, false);
+		personaje1.atacarNormal(personaje2);
 		int vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
 		int dañoRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
@@ -94,7 +94,7 @@ public class test01 {
 		
 		vidaInicialPersonaje2 = vidaFinalPersonaje2;
 		
-		personaje1.atacar(personaje2, false);
+		personaje1.atacarNormal(personaje2);
 		
 		vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		

@@ -59,7 +59,7 @@ public class Juego extends BorderPane{
     	Equipo guerrerosZ = new Equipo("Guerreros Z");
     	Equipo enemigosDeLaTierra = new Equipo("Enemigos de la tierra");
     	
-    	PersonajeFactory factory = new PersonajeFactory(tablero);
+    	PersonajeFactory factory = new PersonajeFactory();
     	
     	Personaje goku = factory.getPersonaje("goku");
     	Personaje gohan = factory.getPersonaje("gohan");

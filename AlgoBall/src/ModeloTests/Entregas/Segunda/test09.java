@@ -16,22 +16,25 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 	
 	public class test09 {		
 		Tablero tablero = new Tablero(15, 15);
-		Goku goku = new Goku(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
+		Personaje goku = factory.getPersonaje("goku");
+		Personaje majinBoo = factory.getPersonaje("majinboo");
 		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 		
 		@Test
 		public void GokuAumentaDañoCuandoTienePocaVida () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
 			GuerrerosZ.agregarPersonaje(goku);
-			MajinBoo majinBoo = new MajinBoo(tablero);
 		
 			tablero.posicionarPersonaje(goku, new Posicion(5, 5));
 			tablero.posicionarPersonaje(majinBoo, new Posicion(5, 6));
 			
 			int vidaInicialMajinBoo = majinBoo.puntosDeVida();
-			goku.atacar(majinBoo, false);
+			goku.atacarNormal(majinBoo);
 			int vidaFinalMajinBoo = majinBoo.puntosDeVida();
 			
 			int dañoRealizadoConAltoNivelDeVida = vidaInicialMajinBoo- vidaFinalMajinBoo;
@@ -40,7 +43,7 @@ import Modelo.Personajes.MajinBoo;
 			
 			vidaInicialMajinBoo = vidaFinalMajinBoo;
 			
-			goku.atacar(majinBoo, false);
+			goku.atacarNormal(majinBoo);
 			
 			vidaFinalMajinBoo = majinBoo.puntosDeVida();
 			

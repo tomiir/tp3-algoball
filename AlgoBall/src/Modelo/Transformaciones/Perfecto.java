@@ -1,16 +1,15 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Personajes.Personaje;
 
 public class Perfecto extends Transformacion {
 	
 	public Perfecto(){
 		this.nombre = "Perfecto";
-		this.rangoDeAtaque =4;
 		this.costo = 0;
-		this.velocidad = 4;
-		this.poderDePelea = 80;
+		this.estado = new Estado("Perfecto", 80, 4, 4);
 		
 	}
 	

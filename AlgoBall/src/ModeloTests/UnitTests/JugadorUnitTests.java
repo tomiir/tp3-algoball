@@ -26,13 +26,13 @@ public class JugadorUnitTests {
 	
 	Tablero tablero = new Tablero(15, 14);
 	
-	Jugador jugador1 = new Jugador("Jugador 1");
+	Jugador jugador1 = new Jugador("Jugador 1", tablero);
 	Equipo equipo1 = new Equipo("Equipo 1");
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba( "nombre", 300, 1, 3, 50);
 	
-	Jugador jugador2 = new Jugador("Jugador 2");
+	Jugador jugador2 = new Jugador("Jugador 2", tablero);
 	Equipo equipo2 = new Equipo("Equipo 2");
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 1, 3, 50);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("nombre", 300, 1, 3, 50);
 
 	@Test
 	public void seCreaJugadorCorrectamente(){		
@@ -64,7 +64,6 @@ public class JugadorUnitTests {
 	
 	@Test (expected = ExcFueraDeTablero.class)
 	public void jugadorNoPuedeMoverPersonajePorFueraDeTablero() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango{
-		
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
 		
@@ -133,7 +132,7 @@ public class JugadorUnitTests {
 		tablero.posicionarPersonaje(personaje2, new Posicion(1,2));
 		
 		int vida_inicial = personaje2.puntosDeVida();
-		jugador1.realizarAtaque(personaje1, personaje2, false);
+		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 		
 		Assert.assertEquals("Se realizo el ataque correcto",personaje2.puntosDeVida(),vida_inicial-personaje1.poderDePelea());
 		
@@ -148,7 +147,7 @@ public class JugadorUnitTests {
 		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
 		tablero.posicionarPersonaje(personaje2, new Posicion(10,10));
 		
-		jugador1.realizarAtaque(personaje1, personaje2, false);
+		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 	}
 	
 	@Test (expected = ExcFueraDeTablero.class)
@@ -160,7 +159,7 @@ public class JugadorUnitTests {
 		tablero.posicionarPersonaje(personaje1, new Posicion(14,15));
 		tablero.posicionarPersonaje(personaje2, new Posicion(15,15));
 		
-		jugador1.realizarAtaque(personaje1, personaje2, false);
+		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 	}
 	
 	@Test (expected = ExcKiInsuficiente.class)
@@ -175,10 +174,10 @@ public class JugadorUnitTests {
 		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
 		tablero.posicionarPersonaje(personaje2, new Posicion(1,2));
 		
-		jugador1.realizarAtaque(personaje1, personaje2, true);
+		jugador1.realizarAtaqueEspecial(personaje1, personaje2);
 	}
 	@Test (expected = ExcEsChocolate.class)
-	public void jugadorNoPuedeRealizarAtaqueEsCholate() throws ExcEsChocolate, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcNumeroNegativo, ExcCasilleroOcupado, ExcPosicionNegativa{
+	public void jugadorNoPuedeRealizarAtaqueEsChocolate() throws ExcEsChocolate, ExcFueraDeRango, ExcFueraDeTablero, ExcPersonajeMurio, ExcKiInsuficiente, ExcNumeroNegativo, ExcCasilleroOcupado, ExcPosicionNegativa{
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
 		equipo2.agregarPersonaje(personaje2);
@@ -188,25 +187,25 @@ public class JugadorUnitTests {
 		
 		personaje1.convertirEnChocolate(3);
 		
-		jugador1.realizarAtaque(personaje1,personaje2,false);
+		jugador1.realizarAtaqueNormal(personaje1,personaje2);
 
 	}
 	
 	@Test
 	public void jugadorPuedeRealizarAtaqueLanzaExcepcionAlMorir() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcNumeroNegativo, ExcCasilleroDesocupado{
-		PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "pj", 50, 1, 3, 50);
+		PersonajeDePrueba personaje3 = new PersonajeDePrueba("pj", 50, 1, 3, 20);
 		
 		jugador1.asignarEquipo(equipo1);
 		equipo1.agregarPersonaje(personaje1);
 		equipo2.agregarPersonaje(personaje3);
 		
 		tablero.posicionarPersonaje(personaje1, new Posicion(1,1));
-		Posicion pos_2=  new Posicion(1,2);
-		tablero.posicionarPersonaje(personaje3,pos_2);
+	
+		tablero.posicionarPersonaje(personaje3, new Posicion (1,2));
 		
-		jugador1.realizarAtaque(personaje1,personaje3,false);
+		jugador1.realizarAtaqueNormal(personaje1,personaje3);
 		
-		jugador1.realizarMovimiento(personaje1, pos_2);
+		jugador1.realizarMovimiento(personaje1, new Posicion(1,2));
 	}
 	
 	@Test
@@ -223,7 +222,7 @@ public class JugadorUnitTests {
 		
 		int vida_inicial = personaje2.puntosDeVida();
 		
-		jugador1.realizarAtaque(personaje1, personaje2, false);
+		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 		
 		Assert.assertEquals("Se espera el daño esperado",personaje2.puntosDeVida(),vida_inicial-personaje1.poderDePelea());
 		
@@ -253,7 +252,7 @@ public class JugadorUnitTests {
 		
 		personaje1.convertirEnChocolate(3);
 		
-		jugador1.realizarAtaque(personaje1,personaje2,false);
+		jugador1.realizarAtaqueNormal(personaje1,personaje2);
 		
 	}
 }

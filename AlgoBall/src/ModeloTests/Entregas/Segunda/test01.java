@@ -17,15 +17,18 @@ import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Goku;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
 import org.junit.Assert;
 
 public class test01 {
 	Tablero tablero = new Tablero(15, 15);
 	Equipo GuerrerosZ = new Equipo("GuerrerosZ");
-	Goku goku = new Goku(tablero);
-	Piccolo piccolo = new Piccolo(tablero);
-	Gohan gohan = new Gohan(tablero);
+	PersonajeFactory factory = new PersonajeFactory();
+	Personaje goku = factory.getPersonaje("goku");
+	Personaje piccolo = factory.getPersonaje("piccolo");
+	Personaje gohan = factory.getPersonaje("gohan");
 	
 	@Test
 	public void GohanSeTransformaCorrectamente() throws ExcNoEsPosibleTransformarse, ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
@@ -34,7 +37,7 @@ public class test01 {
 		GuerrerosZ.agregarPersonaje(gohan);
 		
 		Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
-		Freezer freezer = new Freezer(tablero);
+		Personaje freezer = factory.getPersonaje("freezer");
 		EnemigosDeLaTierra.agregarPersonaje(freezer);
 		
 		tablero.posicionarPersonaje(goku, new Posicion(1, 1));
@@ -44,7 +47,7 @@ public class test01 {
 		tablero.posicionarPersonaje(freezer, new Posicion(6, 6));;
 		
 		int vidaInicialFreezer = freezer.puntosDeVida();
-		gohan.atacar(freezer, false);
+		gohan.atacarNormal(freezer);
 		
 		int vidaTrasPrimerAtaque = freezer.puntosDeVida();
 		
@@ -54,7 +57,7 @@ public class test01 {
 		
 		gohan.transformar(GuerrerosZ);
 		
-		gohan.atacar(freezer, false);
+		gohan.atacarNormal(freezer);
 		
 		int vidaTrasSegundoAtaque = freezer.puntosDeVida();
 		

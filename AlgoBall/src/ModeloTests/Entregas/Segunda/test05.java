@@ -16,26 +16,30 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Goku;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 
 
 public class test05 {
 	Tablero tablero = new Tablero(15, 15);
-	Cell cell = new Cell(tablero);
+	
+	PersonajeFactory factory = new PersonajeFactory();
+	Personaje goku = factory.getPersonaje("goku");
+	Personaje cell = factory.getPersonaje("cell");
+	
 	Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
 	
 	@Test (expected = ExcNoEsPosibleTransformarse.class)
 	public void CellNoSePuedeTransformarYaQueNoAbsorbeVida4Veces () throws ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNoEsPosibleTransformarse{
-		Goku goku = new Goku (tablero);
-		
 		tablero.posicionarPersonaje(cell, new Posicion(5, 5));
 		tablero.posicionarPersonaje(goku, new Posicion(5,6));
 		
 		cell.seAvanzoUnTurno(5);
-		cell.atacar(goku, true);
+		cell.atacarNormal(goku);
 		cell.seAvanzoUnTurno(5);
-		cell.atacar(goku, true);
+		cell.atacarNormal(goku);
 		cell.seAvanzoUnTurno(5);
-		cell.atacar(goku, true);
+		cell.atacarNormal(goku);
 		
 		cell.transformar(EnemigosDeLaTierra);		
 	}

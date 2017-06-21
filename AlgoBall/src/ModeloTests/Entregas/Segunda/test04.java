@@ -17,13 +17,17 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
 	
 	public class test04 {
 		Tablero tablero = new Tablero(15, 15);
 		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
-		Piccolo piccolo = new Piccolo(tablero);
-		Gohan gohan = new Gohan(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
+		Personaje goku = factory.getPersonaje("goku");
+		Personaje piccolo = factory.getPersonaje("piccolo");
+		Personaje gohan = factory.getPersonaje("gohan");
 		
 		@Test
 		public void PiccoloSeTransformaCorrectamenteEnProtector () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcNoEsPosibleTransformarse, ExcEsChocolate, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio{
@@ -31,7 +35,7 @@ import Modelo.Personajes.Piccolo;
 			GuerrerosZ.agregarPersonaje(gohan);
 			
 			Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
-			Freezer freezer = new Freezer(tablero);
+			Personaje freezer = factory.getPersonaje("freezer");
 			EnemigosDeLaTierra.agregarPersonaje(freezer);
 			
 		
@@ -44,7 +48,7 @@ import Modelo.Personajes.Piccolo;
 			piccolo.transformar(GuerrerosZ);
 			
 			int vidaInicial = freezer.puntosDeVida();
-			piccolo.atacar(freezer, false);
+			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaquePrimeraTransformacion = freezer.puntosDeVida();
 			
@@ -53,7 +57,7 @@ import Modelo.Personajes.Piccolo;
 			gohan.recibirDaño(450);
 			
 			piccolo.transformar(GuerrerosZ);
-			piccolo.atacar(freezer, false);
+			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueSegundaTransformacion = freezer.puntosDeVida();
 			

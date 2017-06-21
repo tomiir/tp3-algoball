@@ -14,20 +14,24 @@ import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Goku;
 import Modelo.Personajes.MajinBoo;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
 
 public class test06 {
 	
 	Tablero tablero = new Tablero(20,20);
 	
-	Goku goku = new Goku(tablero);
-	Gohan gohan = new Gohan(tablero);
-	Piccolo piccolo = new Piccolo(tablero);
+	PersonajeFactory factory = new PersonajeFactory();
+	
+	Personaje goku = factory.getPersonaje("goku");
+	Personaje gohan = factory.getPersonaje("gohan");
+	Personaje piccolo = factory.getPersonaje("piccolo");
 	
 
-	Cell cell = new Cell(tablero);
-	Freezer freezer = new Freezer(tablero);
-	MajinBoo majinBoo = new MajinBoo(tablero);
+	Personaje cell = factory.getPersonaje("cell");
+	Personaje freezer = factory.getPersonaje("freezer");
+	Personaje majinBoo = factory.getPersonaje("majinboo");
 	
 	
 	@Test

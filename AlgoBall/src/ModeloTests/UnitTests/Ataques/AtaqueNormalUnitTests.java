@@ -13,8 +13,8 @@ import org.junit.Test;
 
 public class AtaqueNormalUnitTests {
 	Tablero tablero = new Tablero(2,100);
-	Personaje personaje1 = new PersonajeDePrueba(tablero,"1", 300, 100, 100,200);
-	Personaje personaje2 = new PersonajeDePrueba(tablero,"1", 300, 100, 100,100);
+	Personaje personaje1 = new PersonajeDePrueba("1", 300, 100, 100,200);
+	Personaje personaje2 = new PersonajeDePrueba("1", 300, 100, 100,100);
 	Ataque ataque = Ataque.AtaqueNormal();
 	
 	@Test

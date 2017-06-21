@@ -17,18 +17,24 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Cell;
 import Modelo.Personajes.Gohan;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 
 public class test07 {
 	Tablero tablero = new Tablero(15, 15);
-	Cell cell = new Cell(tablero);
+	PersonajeFactory factory = new PersonajeFactory();
+	Personaje gohan = factory.getPersonaje("gohan");
+	Personaje cell = factory.getPersonaje("cell");
 	Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
 	
 	@Test
 	public void CellAbsorbeVidaCorrectamente () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNoEsPosibleTransformarse{
-		Gohan gohan = new Gohan(tablero);
+		EnemigosDeLaTierra.agregarPersonaje(cell);
+		
 		tablero.posicionarPersonaje(gohan, new Posicion(5, 5));
 		tablero.posicionarPersonaje(cell, new Posicion(5, 6));
 		
+		
 		cell.seAvanzoUnTurno(5);
 		cell.recibirDaño(200);
 		cell.seAvanzoUnTurno(5);
@@ -39,14 +45,14 @@ public class test07 {
 		cell.seAvanzoUnTurno(5);
 		cell.recibirDaño(200);		
 		
-		cell.atacar(gohan, true);
+		cell.atacarEspecial(gohan);
 				
-		cell.atacar(gohan, true);
-		cell.atacar(gohan, true);
+		cell.atacarEspecial(gohan);
+		cell.atacarEspecial(gohan);
 		
 		int vidaInicialCell = cell.puntosDeVida();
 		
-		cell.atacar(gohan, true);
+		cell.atacarEspecial(gohan);
 		
 		int vidaFinalCell = cell.puntosDeVida();
 		int vidaAbsorbidaPorCellSinHaberseTransformado = vidaFinalCell - vidaInicialCell;
@@ -56,7 +62,7 @@ public class test07 {
 		
 		vidaInicialCell = cell.puntosDeVida();
 		
-		cell.atacar(gohan, true);
+		cell.atacarEspecial(gohan);
 		
 		vidaFinalCell = cell.puntosDeVida();
 		

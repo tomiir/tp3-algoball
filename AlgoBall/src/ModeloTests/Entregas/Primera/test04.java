@@ -19,15 +19,21 @@ import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
 import Modelo.Personajes.Goku;
+import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
+import Modelo.Personajes.PersonajeFactory;
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp.Factory;
 
 public class test04 {
 	
 	Tablero tablero = new Tablero(15,14);
-	Jugador primerJugador = new Jugador("nombre1");
-	Jugador segundoJugador = new Jugador("nombre2");
-	Goku goku = new Goku(tablero);
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
+	Jugador primerJugador = new Jugador("nombre1", tablero);
+	Jugador segundoJugador = new Jugador("nombre2", tablero);
+	
+	PersonajeFactory factory = new PersonajeFactory();
+	
+	Personaje goku = factory.getPersonaje("goku");
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("Personaje1", 300, 3, 3, 1);
 	
 	Equipo equipo = new Equipo("Guerreros de la Tierra");
 	Equipo equipo_2 = new Equipo("Equipo 2");
@@ -51,11 +57,11 @@ public class test04 {
 		
 		goku.transformar(equipo);
 		Assert.assertEquals("Goku tiene el ki correcto", goku.ki() ,0);
-		goku.mover(new Posicion (13,10));
+		tablero.moverPersonaje(goku, new Posicion(13, 10));
 		Assert.assertEquals("Tiene la velocidad correcta", goku.posicion().posX(),13);
 				
 		int vida_anterior = personaje1.puntosDeVida();
-		goku.atacar(personaje1, false);
+		goku.atacarNormal(personaje1);
 		
 		Assert.assertEquals("Tiene el rango de ataque y poder de pelea correcto",personaje1.puntosDeVida(),vida_anterior-goku.poderDePelea()); 
 		

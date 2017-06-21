@@ -1,6 +1,7 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Personajes.Personaje;
 
 public class TransformacionPorKi extends Transformacion {
@@ -8,10 +9,8 @@ public class TransformacionPorKi extends Transformacion {
 	
 	public TransformacionPorKi(String str, int costo, int rango, int velocidad, int poder){
 		nombre=str;
-		this.costo=costo;
-		rangoDeAtaque=rango;
-		this.velocidad=velocidad;
-		poderDePelea=poder;
+		this.costo=costo;		
+		this.estado = new Estado(str, poder, rango, velocidad);
 	}
 	
 	@Override
@@ -19,26 +18,4 @@ public class TransformacionPorKi extends Transformacion {
 		return (personaje.ki()>=this.costo);
 	}
 
-	@Override
-	public int rangoDeAtaque() {
-		return rangoDeAtaque;
-	}
-	
-	@Override
-	public int poderDePelea() {
-		return poderDePelea;
-	}
-
-	@Override
-	public int velocidad() {
-		return velocidad;
-	}
-	
-	public String nombre(){
-		return this.nombre;
-	}
-	
-	public int costo(){
-		return this.costo;
-	}
 }

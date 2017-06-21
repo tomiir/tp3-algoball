@@ -1,24 +1,21 @@
 package Modelo.Personajes;
 
+import Modelo.Estado;
 import Modelo.Posicion;
 import Modelo.Tablero;
+import Modelo.Vida;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.Transformacion;
 
 public class PersonajeDePrueba extends Personaje {
 	
 	int cantidadAbsorciones;
-	public PersonajeDePrueba(Tablero tablero, String Inombre, int IpuntosDeVida, int IrangoDeAtaque, int Ivelocidad, int IpoderDePelea){
+	public PersonajeDePrueba(String nombre, int puntosDeVida, int rangoDeAtaque, int velocidad, int poderDePelea){
 		
-		nombre = Inombre;
-		puntosDeVida = IpuntosDeVida;
-		rangoDeAtaque = IrangoDeAtaque;
-		velocidad = Ivelocidad;
-		this.tablero = tablero;
-		poderDePelea=IpoderDePelea;
+		this.nombre = nombre;
+		vida = new Vida(puntosDeVida);
+		estado = new Estado("Normal", poderDePelea, rangoDeAtaque, velocidad);
 		ataqueEspecial = null;
-		inicializar();
-		
 	}
 
 	public Posicion posicion(){

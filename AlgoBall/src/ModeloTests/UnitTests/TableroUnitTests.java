@@ -13,9 +13,9 @@ public class TableroUnitTests {
 	
 	Tablero tablero = new Tablero(20, 30);
 
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "nombre", 300, 3, 3, 1);
-	PersonajeDePrueba personajeMuerto = new PersonajeDePrueba(tablero, "nombre", 0, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("nombre", 300, 3, 3, 1);
+	PersonajeDePrueba personajeMuerto = new PersonajeDePrueba("nombre", 0, 3, 3, 1);
 
 	
 	@Test

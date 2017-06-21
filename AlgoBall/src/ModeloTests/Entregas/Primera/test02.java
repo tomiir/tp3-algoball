@@ -14,8 +14,8 @@ import Modelo.Personajes.PersonajeDePrueba;
 public class test02 {
 	
 	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre1", 300, 5, 3,100);
-	Personaje personaje2 = new PersonajeDePrueba (tablero, "Nombre2", 300, 5, 3,100);
+	Personaje personaje1 = new PersonajeDePrueba ("Nombre1", 300, 5, 3,100);
+	Personaje personaje2 = new PersonajeDePrueba ("Nombre2", 300, 5, 3,100);
 	
 	@Test (expected = ExcCasilleroOcupado.class)
 	public void noSePuedePosicionarEnCasilleroOcupado() throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa{

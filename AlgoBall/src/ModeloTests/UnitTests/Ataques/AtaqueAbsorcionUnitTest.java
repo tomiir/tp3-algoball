@@ -13,8 +13,8 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class AtaqueAbsorcionUnitTest {
 	Tablero mundo = new Tablero(5, 5);
-	Cell cell = new Cell(mundo);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(mundo, "Nombre1", 300, 5, 3, 20);
+	Cell cell = new Cell();
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("Nombre1", 300, 5, 3, 20);
 	Absorcion absorcion = new Absorcion(cell);
 	
 	@Test

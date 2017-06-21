@@ -38,8 +38,15 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 		this.esEspecial = esEspecial;
 	}
 	public void handle(MouseEvent event) {
+		Alert alert = new Alert(AlertType.WARNING);
+    	alert.setTitle("Error");
+    	alert.setHeaderText("");
+    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 		try {
-			partida.realizarAtaque(partida.esTurnoDelJugador(),personaje, posicion, esEspecial);
+			if(!esEspecial) partida.realizarAtaqueNormal(partida.esTurnoDelJugador(),personaje, posicion);
+			else partida.realizarAtaqueEspecial(partida.esTurnoDelJugador(), personaje, posicion);
+			
 			if(!juego.sonidoMuteado()){
 				String path = getClass().getResource("../mp3/efectos/atacar.mp3").toString();
 				if(esEspecial){
@@ -52,66 +59,35 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 		        mediaPlayer.setVolume(0.3);
 			}
 			juego.update();
+			
 		} catch (ExcJugadorNoAutorizado e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El jugador no esta autorizado a manejar ese personaje");
 	    	alert.showAndWait();
 		} catch (ExcJugadorYaAtacoOTransformo e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El jugador ya ataco o transformo.");
 	    	alert.showAndWait();
 		} catch (ExcFueraDeRango e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("La posicion a la que intenta atacar no esta en rango");
 	    	alert.showAndWait();
 		} catch (ExcFueraDeTablero e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("La posicion a la que se intenta mover no existe en el tablero");
 	    	alert.showAndWait();
 		} catch (ExcPersonajeMurio e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje esta muerto");
 	    	alert.showAndWait();
 		} catch (ExcKiInsuficiente e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El ki es insuficiente");
 	    	alert.showAndWait();
 		} catch (ExcEsChocolate e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje con el que se intenta atacar es chocolate");
 	    	alert.showAndWait();
 		} catch (ExcNumeroNegativo e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("No se puede realizar la accion deseada (ExcNumeroNegativo)");
 	    	alert.showAndWait();
 		} catch (ExcDestinatarioEnEquipoPropio e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("El personaje que intenta atacar es de tu propio equipo");
-	    	Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 	    	alert.showAndWait();
 		} catch (ExcCasilleroDesocupado e) {
-			Alert alert = new Alert(AlertType.WARNING);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("");
 	    	alert.setContentText("Se intenta atacar un casillero desocupado");
 	    	alert.showAndWait();
 		}

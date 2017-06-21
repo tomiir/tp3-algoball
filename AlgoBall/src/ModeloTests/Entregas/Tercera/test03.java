@@ -26,9 +26,9 @@ public class test03 {
 		SemillaDeErmitaño esfera = new SemillaDeErmitaño();
 		tablero.posicionarConsumible(esfera, posConsumible);
 		
-		Personaje personaje1 = new PersonajeDePrueba(tablero,"pj",300, 3 ,3 ,100);
+		Personaje personaje1 = new PersonajeDePrueba("pj",300, 3 ,3 ,100);
 		tablero.posicionarPersonaje(personaje1, new Posicion(2,2));
-		personaje1.mover(posConsumible);
+		tablero.moverPersonaje(personaje1, posConsumible);
 		
 		Assert.assertFalse(tablero.obtenerCasillero(posConsumible).tieneUnConsumible());
 		
@@ -40,7 +40,7 @@ public class test03 {
 		SemillaDeErmitaño semilla = new SemillaDeErmitaño();
 		tablero.posicionarConsumible(semilla, new Posicion(3,3));
 		
-		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero, "nombre", 500, 3, 3, 5);
+		PersonajeDePrueba personaje = new PersonajeDePrueba("nombre", 500, 3, 3, 5);
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(2,3));
 		
@@ -48,7 +48,7 @@ public class test03 {
 		
 		int vidaInicial = personaje.puntosDeVida();
 		
-		personaje.mover(new Posicion (3,3));
+		tablero.moverPersonaje(personaje, new Posicion(3,3));
 		
 		int vidaFinal = personaje.puntosDeVida();
 		
@@ -61,12 +61,12 @@ public class test03 {
 		SemillaDeErmitaño semilla = new SemillaDeErmitaño();
 		tablero.posicionarConsumible(semilla, new Posicion(3,3));
 		
-		PersonajeDePrueba personaje = new PersonajeDePrueba(tablero, "nombre", 500, 3, 3, 5);
+		PersonajeDePrueba personaje = new PersonajeDePrueba( "nombre", 500, 3, 3, 5);
 		tablero.posicionarPersonaje(personaje, new Posicion(2,3));
 		
 		int vida_inicial =  personaje.puntosDeVida();
 		
-		personaje.mover(new Posicion (3,3));
+		tablero.moverPersonaje(personaje, new Posicion(3,3));
 		
 		Assert.assertEquals("No aumenta la vida maxima del personaje",vida_inicial,personaje.puntosDeVida());
 		

@@ -19,8 +19,8 @@ public class VistaTablero extends GridPane {
 	public VistaTablero(Juego juego){
 		this.setAlignment(Pos.CENTER);
 		this.getStyleClass().add("tablero");
-		ancho=juego.partida().tablero().ancho();
-		alto=juego.partida().tablero().alto();
+		ancho=juego.partida().tablero().dimension().ancho();
+		alto=juego.partida().tablero().dimension().ancho();
 		vistasPersonajes= new VistaPersonaje[ancho][alto];
 		this.juego = juego;
 		

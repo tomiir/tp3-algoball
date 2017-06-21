@@ -17,7 +17,7 @@ import Modelo.Personajes.PersonajeDePrueba;
 
 public class test01 {
 	Tablero tablero = new Tablero(15,14);
-	Personaje personaje1 = new PersonajeDePrueba (tablero, "Nombre", 300, 5, 3,100);
+	Personaje personaje1 = new PersonajeDePrueba ("Nombre", 300, 5, 3,100);
 	
 	@Test
 	public void seMueveCorrectamenteEnLineaRecta() throws ExcCasilleroOcupado, ExcFueraDeTablero, ExcPosicionNegativa, ExcEsChocolate, ExcCasilleroDesocupado, ExcFueraDeRango {
@@ -25,15 +25,15 @@ public class test01 {
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 1, personaje1.posicion().posX());
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 2, personaje1.posicion().posY());
 		
-		personaje1.mover (new Posicion(2,1));
+		tablero.moverPersonaje(personaje1, new Posicion(2,1));
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 2, personaje1.posicion().posX());
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
 		
-		personaje1.mover (new Posicion(1,1));
+		tablero.moverPersonaje(personaje1, new Posicion(1,1));
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 1, personaje1.posicion().posX());
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 1, personaje1.posicion().posY());
 		
-		personaje1.mover (new Posicion(1,2));
+		tablero.moverPersonaje(personaje1, new Posicion(1,2));
 		Assert.assertEquals("El personaje esta en la posicion 'x' correcta", 1, personaje1.posicion().posX());
 		Assert.assertEquals("El personaje esta en la posicion 'y' correcta", 2, personaje1.posicion().posY());
 	}

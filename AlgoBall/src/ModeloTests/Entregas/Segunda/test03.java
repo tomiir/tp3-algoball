@@ -17,14 +17,18 @@ import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
 import Modelo.Personajes.Freezer;
 import Modelo.Personajes.Gohan;
+import Modelo.Personajes.Personaje;
+import Modelo.Personajes.PersonajeFactory;
 import Modelo.Personajes.Piccolo;
 	
 	public class test03 {
 		
 		Tablero tablero = new Tablero(15, 15);
 		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
-		Piccolo piccolo = new Piccolo(tablero);
-		Gohan gohan = new Gohan(tablero);
+		PersonajeFactory factory = new PersonajeFactory();
+	
+		Personaje piccolo = factory.getPersonaje("piccolo");
+		Personaje gohan = factory.getPersonaje("gohan");
 		
 		@Test
 		public void PiccoloSeTransformaCorrectamente() throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo, ExcNoEsPosibleTransformarse{
@@ -35,13 +39,13 @@ import Modelo.Personajes.Piccolo;
 			tablero.posicionarPersonaje(piccolo, new Posicion(5,5));
 			
 			Equipo EnemigosDeLaTierra = new Equipo("EnemigosDeLaTierra");
-			Freezer freezer = new Freezer(tablero);
+			Personaje freezer = factory.getPersonaje("freezer");
 			EnemigosDeLaTierra.agregarPersonaje(freezer);
 			
 			tablero.posicionarPersonaje(freezer, new Posicion(5,6));
 			
 			int vidaInicial = freezer.puntosDeVida();
-			piccolo.atacar(freezer, false);
+			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueSinTransformacion = freezer.puntosDeVida();
 			int dañoRealizadoConAtaqueSinTransformacion = vidaInicial - vidaTrasAtaqueSinTransformacion;
@@ -50,7 +54,7 @@ import Modelo.Personajes.Piccolo;
 			
 			piccolo.transformar(GuerrerosZ);
 			
-			piccolo.atacar(freezer, false);
+			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueConTrasformacion = freezer.puntosDeVida();
 			int dañoRealizadoConAtaqueConTransformacion = vidaTrasAtaqueSinTransformacion - vidaTrasAtaqueConTrasformacion;
@@ -70,11 +74,7 @@ import Modelo.Personajes.Piccolo;
 			piccolo.transformar(GuerrerosZ);
 			
 			piccolo.seAvanzoUnTurno(20);
-			piccolo.transformar(GuerrerosZ);
-			
-			
-			
-			
+			piccolo.transformar(GuerrerosZ);			
 			
 		}
 		

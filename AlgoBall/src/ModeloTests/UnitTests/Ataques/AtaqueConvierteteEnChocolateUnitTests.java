@@ -14,8 +14,8 @@ import org.junit.Assert;
 
 public class AtaqueConvierteteEnChocolateUnitTests {
 	Tablero tablero = new Tablero(5, 5);
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "Personaje2", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("Personaje1", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("Personaje2", 300, 3, 3, 1);
 	Ataque convierteteEnChocolate = new ConvierteteEnChocolate();
 	
 	@Test

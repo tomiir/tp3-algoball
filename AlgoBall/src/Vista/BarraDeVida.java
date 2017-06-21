@@ -1,21 +1,21 @@
 package Vista;
 
 import Modelo.Personajes.Personaje;
+import Vista.Interpretes.InterpretePersonaje;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 
 public class BarraDeVida extends StackPane{
-	Personaje personaje;
 	
 	public BarraDeVida(Personaje personaje){
-		this.personaje = personaje;
-		ProgressBar vida = new ProgressBar((double)personaje.vidaPorcentual()/100);
-		if(personaje.vidaPorcentual()<30) vida.getStyleClass().add("rojo");
-		else if(personaje.vidaPorcentual()<70) vida.getStyleClass().add("naranja");
+		InterpretePersonaje interprete = new InterpretePersonaje(personaje);
+		ProgressBar vida = new ProgressBar((double)interprete.vidaPorcentual()/100);
+		if(interprete.vidaPorcentual()<30) vida.getStyleClass().add("rojo");
+		else if(interprete.vidaPorcentual()<70) vida.getStyleClass().add("naranja");
 		vida.getStyleClass().add("progress-bar");
 		
-		Label texto = new Label(String.valueOf(personaje.puntosDeVida())+"/"+String.valueOf(personaje.vidaInicial()));
+		Label texto = new Label(String.valueOf(interprete.vidaActual())+"/"+String.valueOf(interprete.vidaInicial()));
 		
 		this.getChildren().addAll(vida, texto);
 	}

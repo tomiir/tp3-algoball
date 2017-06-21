@@ -22,10 +22,10 @@ public class GohanSS2UnitTest {
 	
 	Tablero tablero = new Tablero(5, 5);
 	
-	PersonajeDePrueba personaje1 = new PersonajeDePrueba(tablero, "Personaje1", 300, 3, 3, 1);
-	PersonajeDePrueba personaje2 = new PersonajeDePrueba(tablero, "Personaje2", 300, 3, 3, 1);
-	PersonajeDePrueba personaje3 = new PersonajeDePrueba(tablero, "Personaje3", 300, 3, 3, 1);
-	PersonajeDePrueba personaje4 = new PersonajeDePrueba(tablero, "Personaje4", 300, 3, 3, 1);
+	PersonajeDePrueba personaje1 = new PersonajeDePrueba("Personaje1", 300, 3, 3, 1);
+	PersonajeDePrueba personaje2 = new PersonajeDePrueba("Personaje2", 300, 3, 3, 1);
+	PersonajeDePrueba personaje3 = new PersonajeDePrueba("Personaje3", 300, 3, 3, 1);
+	PersonajeDePrueba personaje4 = new PersonajeDePrueba("Personaje4", 300, 3, 3, 1);
 	
 	
 	
@@ -98,10 +98,9 @@ public class GohanSS2UnitTest {
 		
 		personaje1.transformar(equipo);
 		
-		personaje1.atacar(personaje4, false);
+		personaje1.atacarNormal(personaje4);
 		
 		Assert.assertEquals(personaje4.puntosDeVida(), 200);
-		
 		
 	}
 }

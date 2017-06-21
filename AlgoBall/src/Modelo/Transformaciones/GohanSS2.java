@@ -1,6 +1,7 @@
 package Modelo.Transformaciones;
 
 import Modelo.Equipo;
+import Modelo.Estado;
 import Modelo.Personajes.Personaje;
 
 public class GohanSS2 extends Transformacion {
@@ -8,10 +9,8 @@ public class GohanSS2 extends Transformacion {
 	
 	public GohanSS2(){
 		this.nombre = "Super Sayajin 2";
-		this.rangoDeAtaque =4;
 		this.costo = 30;
-		this.velocidad = 3;
-		this.poderDePelea = 100;
+		this.estado = new Estado("Super Sayajin 2", 100, 4, 3);
 		
 	}
 	
@@ -19,9 +18,9 @@ public class GohanSS2 extends Transformacion {
 	public boolean esPosible(Personaje personaje, Equipo equipo) {
 		aux = (personaje.ki() >= this.costo);
 				
-		equipo.forEach((k,v)->{
-			aux &=this.comprobarCondicion(personaje,v);
-			});
+		equipo.forEach(pers->{
+			aux &=this.comprobarCondicion(personaje,pers);
+		});
 		
 		return aux;
 	}
