@@ -16,36 +16,48 @@ public class InterpretePersonaje {
 		} catch (ParseException e) {}
 	}
 	
-	public int ki(){
-		return (int) json.get("ki");
+	public String nombre(){
+		return (String) json.get("nombre");
 	}
 	
-	public int cantidadDeAbsorciones(){
-		return (int) json.get("cantidad_de_absorciones");
+	public String estado(){
+		return (String) json.get("estado");
+	}
+	
+	public boolean estaMuerto(){
+		return (boolean) json.get("esta_muerto");
+	}
+	
+	public long ki(){
+		return (long) json.get("ki");
+	}
+	
+	public long cantidadDeAbsorciones(){
+		return (long) json.get("cantidad_de_absorciones");
 	}
 
-	public int poderDePelea(){
-		return (int) json.get("poder_de_pelea");
+	public long poderDePelea(){
+		return (long) json.get("poder_de_pelea");
 	}
 	
-	public int rangoDeAtaque(){
-		return (int) json.get("rango_de_ataque");
+	public long rangoDeAtaque(){
+		return (long) json.get("rango_de_ataque");
 	}
 	
-	public int velocidad(){
-		return (int) json.get("velocidad");
+	public long velocidad(){
+		return (long) json.get("velocidad");
 	}
 	
-	public int vidaPorcentual(){
-		return (int) json.get("vida_porcentual");
+	public long vidaPorcentual(){
+		return (long) json.get("vida_porcentual");
 	}
 	
-	public int vidaActual(){
-		return (int) json.get("vida_actual");
+	public long vidaActual(){
+		return (long) json.get("vida_actual");
 	}
 	
-	public int vidaInicial(){
-		return (int) json.get("vida_inicial");
+	public long vidaInicial(){
+		return (long) json.get("vida_inicial");
 	}
 	
 	public boolean esChocolate(){
@@ -56,15 +68,42 @@ public class InterpretePersonaje {
 		return (String) ataqueEspecialJSON().get("nombre");
 	}
 	
-	public int costoAtaqueEspecial(){
-		return (int) ataqueEspecialJSON().get("costo");
+	public long costoAtaqueEspecial(){
+		return (long) ataqueEspecialJSON().get("costo");
 	}
 	
 	public boolean tieneTransformacion(){
 		return (boolean) json.get("tiene_transformacion");
 	}
 	
-	private JSONObject 
+	public long costoTransformar(){
+		return (long) siguienteTransformacion().get("costo");
+	}
+	
+	public String nombreTransformacion(){
+		return (String) siguienteTransformacion().get("nombre");
+	}
+	
+	public long bonificacionDeAtaquePorcentualPorConsumibles(){
+		return (long) json.get("bonificacion_ataque_por_consumibles");
+	}
+	
+	public long bonificacionDeAtaquePorcentual(){
+		return (long) json.get("bonificacion_ataque_porcentual");
+	}
+	
+	public long multiplicadorDeVelocidadPorConsumibles(){
+		return (long) json.get("multiplicador_velocidad_consumibles");
+	}
+	
+	private JSONObject siguienteTransformacion(){
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject transformacionJSON = (JSONObject) parser.parse((String) json.get("siguiente_transformacion"));
+			return transformacionJSON;
+		} catch (ParseException e) {}
+		return null;
+	}
 	
 	private JSONObject ataqueEspecialJSON(){
 		JSONParser parser = new JSONParser();

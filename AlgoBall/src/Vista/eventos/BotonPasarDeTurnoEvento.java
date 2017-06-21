@@ -2,7 +2,6 @@ package Vista.eventos;
 
 import java.util.Optional;
 
-import Modelo.Partida;
 import Modelo.Excepciones.ExcHayGanador;
 import Vista.Juego;
 import javafx.event.ActionEvent;
@@ -14,11 +13,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class BotonPasarDeTurnoEvento implements EventHandler<ActionEvent> {
-	Partida partida;
 	Juego juego;
 	
-	public BotonPasarDeTurnoEvento(Juego juego, Partida partida){
-		this.partida = partida;
+	public BotonPasarDeTurnoEvento(Juego juego){
 		this.juego = juego;
 	}
 		
@@ -34,7 +31,7 @@ public class BotonPasarDeTurnoEvento implements EventHandler<ActionEvent> {
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
     		try {
-				this.partida.avanzarTurno();
+				juego.partida().avanzarTurno();
 				juego.update();
 			} catch (ExcHayGanador e) {
 				Alert ganador = new Alert(AlertType.INFORMATION);

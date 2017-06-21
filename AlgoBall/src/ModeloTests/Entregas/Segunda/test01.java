@@ -14,12 +14,8 @@ import Modelo.Excepciones.ExcNoEsPosibleTransformarse;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Personajes.Freezer;
-import Modelo.Personajes.Gohan;
-import Modelo.Personajes.Goku;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeFactory;
-import Modelo.Personajes.Piccolo;
 import org.junit.Assert;
 
 public class test01 {

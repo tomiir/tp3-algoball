@@ -1,7 +1,6 @@
 package Modelo.Personajes;
 
 import Modelo.Estado;
-import Modelo.Tablero;
 import Modelo.Vida;
 import Modelo.Ataques.Absorcion;
 import Modelo.Transformaciones.Perfecto;
@@ -23,8 +22,7 @@ public class Cell extends Personaje {
 		
 		transformaciones.add(semiPerfecto);
 		transformaciones.add(perfecto);
-		
-		//Transformacion especial no implementado
+
 	}
 	
 	

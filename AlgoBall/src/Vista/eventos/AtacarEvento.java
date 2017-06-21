@@ -14,6 +14,7 @@ import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Personajes.Personaje;
 import Vista.Juego;
+import Vista.Interpretes.InterpretePersonaje;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -38,6 +39,7 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 		this.esEspecial = esEspecial;
 	}
 	public void handle(MouseEvent event) {
+		InterpretePersonaje interprete = new InterpretePersonaje(personaje);
 		Alert alert = new Alert(AlertType.WARNING);
     	alert.setTitle("Error");
     	alert.setHeaderText("");
@@ -50,7 +52,7 @@ public class AtacarEvento implements EventHandler<MouseEvent> {
 			if(!juego.sonidoMuteado()){
 				String path = getClass().getResource("../mp3/efectos/atacar.mp3").toString();
 				if(esEspecial){
-					path = getClass().getResource("../mp3/efectos/"+personaje.getAtaqueEspecial().nombre()+".mp3").toString();
+					path = getClass().getResource("../mp3/efectos/"+interprete.nombreAtaqueEspecial()+".mp3").toString();
 				}
 				
 		        Media media = new Media(path);

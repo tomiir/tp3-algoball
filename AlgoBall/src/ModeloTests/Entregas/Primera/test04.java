@@ -18,11 +18,9 @@ import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
-import Modelo.Personajes.Goku;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeDePrueba;
 import Modelo.Personajes.PersonajeFactory;
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp.Factory;
 
 public class test04 {
 	

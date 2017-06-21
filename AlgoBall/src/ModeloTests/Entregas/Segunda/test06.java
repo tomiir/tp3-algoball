@@ -3,7 +3,6 @@ package ModeloTests.Entregas.Segunda;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Modelo.Equipo;
 import Modelo.Posicion;
 import Modelo.Tablero;
 import Modelo.Excepciones.ExcCasilleroOcupado;
@@ -14,8 +13,6 @@ import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Personajes.Cell;
-import Modelo.Personajes.Gohan;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeFactory;
 

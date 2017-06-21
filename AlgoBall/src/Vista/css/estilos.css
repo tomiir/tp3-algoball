@@ -70,7 +70,6 @@
 	-fx-max-width:135;
 	-fx-padding:5;
 	-fx-font-size:14;
-	-fx-background-color:linear-gradient(to bottom, #f9a500 0%,#ffd900 100%);
 	-fx-font-family:"Morpheus";
 	-fx-text-alignment:center;
 }

@@ -19,7 +19,7 @@ public class Vida {
 		else{
 			dañoRecibido = vidaActual;
 			vidaActual = 0;
-		}		
+		}
 		return  dañoRecibido;		
 	}
 	
@@ -37,8 +37,8 @@ public class Vida {
 	}
 	
 	public int vidaPorcentual(){
-		float vidaPorcentual = (vidaActual / vidaInicial)*100;
-		return (int)vidaPorcentual;
+		float vidaPorcentual = ((float)vidaActual / (float)vidaInicial)*100;
+		return (int) vidaPorcentual;
 	}
 
 	

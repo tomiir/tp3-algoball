@@ -1,7 +1,6 @@
 package Modelo.Personajes;
 
 import Modelo.Estado;
-import Modelo.Tablero;
 import Modelo.Vida;
 import Modelo.Ataques.Ataque;
 import Modelo.Transformaciones.TransformacionPorKi;

@@ -9,14 +9,8 @@ import Modelo.Tablero;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcFueraDeTablero;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Personajes.Cell;
-import Modelo.Personajes.Freezer;
-import Modelo.Personajes.Gohan;
-import Modelo.Personajes.Goku;
-import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeFactory;
-import Modelo.Personajes.Piccolo;
 
 public class test06 {
 	

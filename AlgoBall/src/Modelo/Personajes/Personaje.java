@@ -82,7 +82,7 @@ public class Personaje implements Atacable{
 	}
 	
 	public int velocidadActual(){
-		return this.estado.getVelocidad() + this.estado.getVelocidad()*this.bonificacionDeVelocidadPorConsumibles();
+		return this.estado.getVelocidad() + this.estado.getVelocidad()*this.multiplicadorDeVelocidadPorConsumibles();
 	}
 	
 	public Posicion posicion(){
@@ -142,7 +142,7 @@ public class Personaje implements Atacable{
 		
 	}
 	
-	private int bonificacionDeVelocidadPorConsumibles(){
+	private int multiplicadorDeVelocidadPorConsumibles(){
 		int bonificacion = 0;
 		if (this.consumidos.isEmpty() == false){
 			Iterator<Consumible> iterador = consumidos.iterator();
@@ -173,6 +173,11 @@ public class Personaje implements Atacable{
 	
 	public int puntosDeVida(){
 		return vida.getVidaActual();
+	}
+	
+	public boolean sePuedeTransformar(Equipo miEquipo){
+		if(transformaciones.peek()!=null) return transformaciones.peek().esPosible(this, miEquipo);
+		return false;
 	}
 
 	
@@ -221,6 +226,9 @@ public class Personaje implements Atacable{
 		personajeJSON.put("vida_actual", this.vida.getVidaActual());
 		personajeJSON.put("vida_inicial", this.vida.getVidaInicial());
 		personajeJSON.put("vida_porcentual", this.vida.vidaPorcentual());
+		personajeJSON.put("bonificacion_ataque_por_consumibles", this.bonificacionDeAtaquePorcentualPorConsumibles());
+		personajeJSON.put("bonificacion_ataque_porcentual", this.bonificacionDeAtaquePorcentual());
+		personajeJSON.put("multiplicador_velocidad_consumibles", this.multiplicadorDeVelocidadPorConsumibles());
 		
 		JSONObject ataqueEspecialJSON = new JSONObject();
 		ataqueEspecialJSON.put("nombre", this.ataqueEspecial.nombre());
@@ -229,9 +237,9 @@ public class Personaje implements Atacable{
 		personajeJSON.put("ataque_especial", ataqueEspecialJSON.toJSONString());
 		
 		if(transformaciones.peek() == null){
-			personajeJSON.put("tiene_transformaciones", false);
+			personajeJSON.put("tiene_transformacion", false);
 		} else {
-			personajeJSON.put("tiene_transformaciones", true);
+			personajeJSON.put("tiene_transformacion", true);
 			
 			JSONObject transformacionJSON = new JSONObject();
 			transformacionJSON.put("nombre", transformaciones.peek().getNuevoEstado().getNombre());

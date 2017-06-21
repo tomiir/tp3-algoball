@@ -20,7 +20,7 @@ public class MenuPersonaje extends VBox {
 		this.setAlignment(Pos.TOP_CENTER);
 		this.getStyleClass().add("menu-personaje");
 		
-		NameTagPersonaje nombreDelPersonaje = new NameTagPersonaje(personaje);		
+		NameTagPersonaje nombreDelPersonaje = new NameTagPersonaje(interprete);		
 		
 		Button botonMover = new Button();
 		botonMover.setText("Mover");
@@ -53,9 +53,9 @@ public class MenuPersonaje extends VBox {
 		Button botonTransformar = new Button();
 		botonTransformar.setText("Transformar");
 		
-		if(interprete.tieneTransformacion()) botonTransformar.setText("Transformar en " + interprete.getTransformacion().nombre() + "\n(costo:" + interprete.getTransformacion().costo()+ ")");
+		if(interprete.tieneTransformacion()) botonTransformar.setText("Transformar en " + interprete.nombreTransformacion() + "\n(costo:" + interprete.costoTransformar()+ ")");
 		
-		if(!inteprete.tieneTransformacion() || !interprete.getTransformacion().esPosible(personaje, partida.esTurnoDelJugador().equipo()) || interprete.esChocolate()){
+		if(!interprete.tieneTransformacion() || interprete.esChocolate() || !personaje.sePuedeTransformar(partida.esTurnoDelJugador().equipo())){
 			botonTransformar.setDisable(true);
 		}
 		
@@ -83,7 +83,7 @@ public class MenuPersonaje extends VBox {
 		puntosPoderPelea.getStyleClass().add("labels-informacion");
 		
 		Label puntosVelocidad = new Label();
-		puntosVelocidad.setText("Velocidad: " + interprete.velocidad()  + " (+ " + String.valueOf(interprete.bonificacionDeVelocidadPorConsumibles()*interprete.velocidad()) + ")");
+		puntosVelocidad.setText("Velocidad: " + interprete.velocidad()  + " (+ " + String.valueOf(interprete.multiplicadorDeVelocidadPorConsumibles()*interprete.velocidad()) + ")");
 		puntosVelocidad.getStyleClass().add("labels-informacion");
 		
 		Label puntosDistanciaAtaque= new Label();

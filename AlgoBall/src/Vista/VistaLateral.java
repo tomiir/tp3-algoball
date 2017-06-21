@@ -5,7 +5,6 @@ import java.util.Optional;
 import Modelo.Jugador;
 import Modelo.Excepciones.ExcHayGanador;
 import Modelo.Personajes.Personaje;
-import Vista.Interpretes.InterpretePersonaje;
 import Vista.eventos.BotonPasarDeTurnoEvento;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,7 +31,7 @@ public class VistaLateral extends BorderPane{
 		
 		Button botonPasarDeTurno = new Button();
 		botonPasarDeTurno.setText("Pasar de turno");
-		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego, juego.partida()));
+		botonPasarDeTurno.setOnAction(new BotonPasarDeTurnoEvento(this.juego));
 		botonPasarDeTurno.getStyleClass().add("boton-menu");
 		this.setBottom(botonPasarDeTurno);
 		VistaLateral.setAlignment(getBottom(), Pos.CENTER);
@@ -41,7 +40,7 @@ public class VistaLateral extends BorderPane{
 	}
 	
 	 public void update() {
-		if( (juego.partida().esTurnoDelJugador().realizoTransformacion() || juego.partida().esTurnoDelJugador().realizoTransformacion())
+		if( (juego.partida().esTurnoDelJugador().realizoTransformacion() || juego.partida().esTurnoDelJugador().realizoAtaque())
 				&& juego.partida().esTurnoDelJugador().realizoMovimiento()){
 			try {
 				juego.partida().avanzarTurno();

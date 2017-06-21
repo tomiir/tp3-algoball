@@ -1,7 +1,5 @@
 package Modelo;
 
-import Modelo.Consumibles.Consumible;
-import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;
@@ -17,9 +15,9 @@ public class Jugador {
 	
 	protected String nombre;
 	protected Equipo equipo;
-	protected boolean yaAtaco;
-	protected boolean yaTransformo;
-	protected boolean yaMovio;
+	protected boolean yaAtaco=false;
+	protected boolean yaTransformo=false;
+	protected boolean yaMovio=false;
 	protected Tablero tablero;
 	
 	
@@ -57,9 +55,9 @@ public class Jugador {
 	}
 	
 	public void pasarTurno(){
-		this.yaMovio = true;
-		this.yaAtaco = true;
-		this.yaTransformo = true;
+		this.yaMovio = false;
+		this.yaAtaco = false;
+		this.yaTransformo = false;
 		equipo().forEach(pers->{
 			try {
 				pers.seAvanzoUnTurno(5);

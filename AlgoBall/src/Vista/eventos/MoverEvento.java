@@ -2,7 +2,6 @@ package Vista.eventos;
 
 import Modelo.Partida;
 import Modelo.Posicion;
-import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcFueraDeRango;

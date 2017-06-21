@@ -14,8 +14,6 @@ import Modelo.Excepciones.ExcKiInsuficiente;
 import Modelo.Excepciones.ExcNumeroNegativo;
 import Modelo.Excepciones.ExcPersonajeMurio;
 import Modelo.Excepciones.ExcPosicionNegativa;
-import Modelo.Personajes.Goku;
-import Modelo.Personajes.MajinBoo;
 import Modelo.Personajes.Personaje;
 import Modelo.Personajes.PersonajeFactory;
 	

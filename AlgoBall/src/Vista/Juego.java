@@ -53,8 +53,8 @@ public class Juego extends BorderPane{
 	
     public void iniciarModelo(){
     	Tablero tablero = new Tablero(16,8);
-		Jugador jugador1 = new Jugador("Guerreros Z");
-    	Jugador jugador2 = new Jugador("Enemigos de la tierra");
+		Jugador jugador1 = new Jugador("Guerreros Z",tablero);
+    	Jugador jugador2 = new Jugador("Enemigos de la tierra",tablero);
     	
     	Equipo guerrerosZ = new Equipo("Guerreros Z");
     	Equipo enemigosDeLaTierra = new Equipo("Enemigos de la tierra");
