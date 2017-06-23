@@ -56,7 +56,7 @@
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
 		<javac srcdir="${rootFolder}/src/Modelo" destdir="${build}" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-			<classpath refid="classpath">
+			<classpath>
 				<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
 			</classpath>
 		</javac>
@@ -64,7 +64,7 @@
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
 		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-			<classpath refid="classpath">
+			<classpath>
 				<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
 			</classpath>
 		</javac>
@@ -72,7 +72,7 @@
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
         <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-		<classpath refid="classpath">
+		<classpath>
 			<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
 		</classpath>
         </javac>
