@@ -13,6 +13,7 @@
 	<property name="coverage.xml.dir" location="${reports.dir}/cobertura-xml" />
 	<property name="coverage.summaryxml.dir" location="${reports.dir}/cobertura-summary-xml" />
 	<property name="coverage.html.dir" location="${reports.dir}/cobertura-html" />
+	<property name="utilities.dir" value="{rootFolder}/libs"/>
 
 	<!-- Ivy customization -->
 	<property name="ivy.install.version" value="2.2.0" />
@@ -27,6 +28,9 @@
 		<fileset dir="${libs}">
 			<include name="*.jar" />
 		</fileset>
+		 <fileset dir="${utilities.dir}">
+	       		<include name="*.jar"/>
+ 		</fileset>
 		<pathelement location="${build}" />
 		<pathelement location="${instrumented.dir}" />
 		<pathelement location="${build}/tests" />
