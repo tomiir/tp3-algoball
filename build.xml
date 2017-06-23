@@ -30,6 +30,7 @@
 		<pathelement location="${build}" />
 		<pathelement location="${instrumented.dir}" />
 		<pathelement location="${build}/tests" />
+		<pathelement path="${rootFolder}/libs/*.jar"/>
 	</path>
 
 	<path id="cobertura.classpath">
@@ -56,25 +57,19 @@
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
 		<javac srcdir="${rootFolder}/src/Modelo" destdir="${build}" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-			<classpath>
-				<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
-			</classpath>
+			<classpath refid="classpath" />
 		</javac>
 	</target>
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
 		<javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-			<classpath>
-				<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
-			</classpath>
+			<classpath refid="classpath" />
 		</javac>
 	</target>
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
         <javac srcdir="${rootFolder}/src/ModeloTests" destdir="${build}/tests" encoding="iso-8859-1" includeantruntime="false" debug="yes" target="1.8">
-		<classpath>
-			<pathelement path="${rootFolder}/libs/json-simple-1.1.1.jar.jar"/>
-		</classpath>
+		<classpath refid="classpath" />
         </javac>
     </target>
 
