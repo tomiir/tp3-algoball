@@ -41,7 +41,7 @@ public class BotonPasarDeTurnoEvento implements EventHandler<ActionEvent> {
 		    	stage2.getIcons().add(new Image(getClass().getResourceAsStream("../img/icon.png")));
 		    	ganador.setContentText("Gano el jugador: "+e.ganador().nombre()
 		    			+"\n"
-		    			+"Si desea reiniciar el juego, e iniciar una partida pulse SI, en canso contrario pulse Salir"
+		    			+"Si desea reiniciar el juego, e iniciar una partida pulse Si, en caso contrario pulse Salir"
 		    			);
 		    	
 		    	
