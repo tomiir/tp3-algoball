@@ -13,8 +13,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import Vista.VistaLateral;
 import Vista.VistaTablero;
+import Vista.interfaces.Responsivo;
 
-public class Juego extends BorderPane{
+public class Juego extends BorderPane implements Responsivo{
 	static final int pixelesAncho=30;
 	static final int pixelesAlto=60;
 	protected Partida partida;
@@ -130,5 +131,10 @@ public class Juego extends BorderPane{
 	
 	private void setVistaLateralDerecha(){
 		this.setRight(vistaLateral);
+	}
+
+	@Override
+	public void cambiarDimension() {
+		
 	}
 }

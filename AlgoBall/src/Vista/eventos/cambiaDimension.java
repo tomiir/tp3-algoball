@@ -1,21 +1,22 @@
 package Vista.eventos;
 
 import Vista.MenuPrincipal;
+import Vista.interfaces.Responsivo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 
-public class menuCambiaDimension implements ChangeListener<Number>  {
+public class cambiaDimension implements ChangeListener<Number>  {
 	
-	MenuPrincipal menuPrincipal;
+	Responsivo responsivo;
 	
-	public menuCambiaDimension(MenuPrincipal menuPrincipal){
-		this.menuPrincipal = menuPrincipal;
+	public cambiaDimension(Responsivo responsivo){
+		this.responsivo = responsivo;
 	}
 	
 	@Override
 	public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-		menuPrincipal.cambiarDimension();
+		responsivo.cambiarDimension();
 	}
 
 }

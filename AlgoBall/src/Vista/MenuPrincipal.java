@@ -2,6 +2,7 @@ package Vista;
 
 import javax.script.Bindings;
 
+import Vista.interfaces.Responsivo;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
@@ -9,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-public class MenuPrincipal extends StackPane{
+public class MenuPrincipal extends StackPane implements Responsivo{
 	MediaView mediaView;
 	Stage stage;
 	
@@ -32,6 +33,5 @@ public class MenuPrincipal extends StackPane{
 
 	public void cambiarDimension() {
 		mediaView.setFitHeight(stage.getHeight()-45);
-        System.out.println(stage.getHeight());
 	}
 }
