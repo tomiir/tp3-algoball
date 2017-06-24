@@ -3,7 +3,9 @@ package Vista;
 
 import Vista.eventos.AplicacionOnKeyPressedEvento;
 import Vista.eventos.SalirEventoWindowEvent;
+import Vista.eventos.menuCambiaDimension;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -28,6 +30,8 @@ public class Aplicacion extends Application {
         
     	MenuPrincipal menuPrincipal = new MenuPrincipal(stage, escenaJugar);
         Scene escenaPrincipal = new Scene(menuPrincipal, 800,600);
+        
+		escenaPrincipal.heightProperty().addListener(new menuCambiaDimension(menuPrincipal));
 
         stage.setScene(escenaPrincipal);
 
