@@ -1,11 +1,9 @@
 package Vista;
 
-
 import Vista.eventos.AplicacionOnKeyPressedEvento;
 import Vista.eventos.SalirEventoWindowEvent;
 import Vista.eventos.cambiaDimension;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

@@ -1,10 +1,8 @@
 package Vista.eventos;
 
-import Vista.MenuPrincipal;
 import Vista.interfaces.Responsivo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.stage.Stage;
 
 public class cambiaDimension implements ChangeListener<Number>  {
 	
