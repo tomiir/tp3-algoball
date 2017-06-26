@@ -26,7 +26,7 @@ public class EsferaDelDragonUnitTest {
 	Jugador jugador = new Jugador("Jorge", tablero);
 	
 	@Test
-	public void incrementaElDañoRealizadoPorElPersonajeQueLoConsume() throws ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeTablero, ExcEsChocolate, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcNumeroNegativo, ExcCasilleroDesocupado{
+	public void incrementaElDanioRealizadoPorElPersonajeQueLoConsume() throws ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeTablero, ExcEsChocolate, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcNumeroNegativo, ExcCasilleroDesocupado{
 		EsferaDelDragon esfera = new EsferaDelDragon();
 		tablero.posicionarConsumible(esfera, new Posicion(3,3));
 		
@@ -40,7 +40,7 @@ public class EsferaDelDragonUnitTest {
 		personaje1.atacarNormal(personaje2);
 		int vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
-		int dañoRealizadoSinConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
+		int danioRealizadoSinConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
 		
 		tablero.moverPersonaje(personaje1, new Posicion(3, 3));
 		
@@ -48,10 +48,10 @@ public class EsferaDelDragonUnitTest {
 		personaje1.atacarNormal(personaje2);
 		vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
-		int dañoRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
+		int danioRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
 		
-		Assert.assertTrue(dañoRealizadoConConsumible > dañoRealizadoSinConsumible);
-		Assert.assertEquals(dañoRealizadoConConsumible, (dañoRealizadoSinConsumible + (dañoRealizadoSinConsumible * esfera.obtenerBonificacionAtaque()/100) ));	
+		Assert.assertTrue(danioRealizadoConConsumible > danioRealizadoSinConsumible);
+		Assert.assertEquals(danioRealizadoConConsumible, (danioRealizadoSinConsumible + (danioRealizadoSinConsumible * esfera.obtenerBonificacionAtaque()/100) ));	
 	}
 	
 	@Test
@@ -74,7 +74,7 @@ public class EsferaDelDragonUnitTest {
 		personaje1.atacarNormal(personaje2);
 		int vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
-		int dañoRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
+		int danioRealizadoConConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
 		
 		personaje1.seAvanzoUnTurno(5);
 		personaje1.seAvanzoUnTurno(5);
@@ -85,11 +85,11 @@ public class EsferaDelDragonUnitTest {
 		
 		vidaFinalPersonaje2 = personaje2.puntosDeVida();
 		
-		int dañoRealizadoSinConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
+		int danioRealizadoSinConsumible = vidaInicialPersonaje2 - vidaFinalPersonaje2;
 
 		
-		Assert.assertTrue(dañoRealizadoConConsumible > dañoRealizadoSinConsumible);
-		Assert.assertEquals(dañoRealizadoConConsumible, (dañoRealizadoSinConsumible + (dañoRealizadoSinConsumible * esfera.obtenerBonificacionAtaque()/100) ));
+		Assert.assertTrue(danioRealizadoConConsumible > danioRealizadoSinConsumible);
+		Assert.assertEquals(danioRealizadoConConsumible, (danioRealizadoSinConsumible + (danioRealizadoSinConsumible * esfera.obtenerBonificacionAtaque()/100) ));
 		
 	}	
 

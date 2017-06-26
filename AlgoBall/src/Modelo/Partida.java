@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 import Modelo.Consumibles.Consumible;
 import Modelo.Consumibles.EsferaDelDragon;
 import Modelo.Consumibles.NubeVoladora;
-import Modelo.Consumibles.SemillaDeErmitaño;
+import Modelo.Consumibles.SemillaDeErmitanio;
 import Modelo.Excepciones.ExcCasilleroDesocupado;
 import Modelo.Excepciones.ExcCasilleroOcupado;
 import Modelo.Excepciones.ExcDestinatarioEnEquipoPropio;
@@ -204,7 +204,7 @@ public class Partida {
 		Consumible consumible = new NubeVoladora();
 		
 		if(numeroConsumible == 1) consumible = new EsferaDelDragon();
-		else if(numeroConsumible == 2) consumible = new SemillaDeErmitaño();
+		else if(numeroConsumible == 2) consumible = new SemillaDeErmitanio();
 		
 		int randAlto = generador.nextInt(tablero.dimension().alto());
 		int randAncho = generador.nextInt(tablero.dimension().ancho());

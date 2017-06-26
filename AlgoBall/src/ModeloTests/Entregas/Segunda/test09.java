@@ -25,7 +25,7 @@ import Modelo.Personajes.PersonajeFactory;
 		Equipo GuerrerosZ = new Equipo("GuerrerosZ");
 		
 		@Test
-		public void GokuAumentaDañoCuandoTienePocaVida () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
+		public void GokuAumentaDanioCuandoTienePocaVida () throws ExcFueraDeTablero, ExcCasilleroOcupado, ExcPosicionNegativa, ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{
 			GuerrerosZ.agregarPersonaje(goku);
 		
 			tablero.posicionarPersonaje(goku, new Posicion(5, 5));
@@ -35,9 +35,9 @@ import Modelo.Personajes.PersonajeFactory;
 			goku.atacarNormal(majinBoo);
 			int vidaFinalMajinBoo = majinBoo.puntosDeVida();
 			
-			int dañoRealizadoConAltoNivelDeVida = vidaInicialMajinBoo- vidaFinalMajinBoo;
+			int danioRealizadoConAltoNivelDeVida = vidaInicialMajinBoo- vidaFinalMajinBoo;
 						
-			goku.recibirDaño(450);
+			goku.recibirDanio(450);
 			
 			vidaInicialMajinBoo = vidaFinalMajinBoo;
 			
@@ -45,9 +45,9 @@ import Modelo.Personajes.PersonajeFactory;
 			
 			vidaFinalMajinBoo = majinBoo.puntosDeVida();
 			
-			int dañoRealizadoConBajoNivelDeVida = vidaInicialMajinBoo - vidaFinalMajinBoo;
+			int danioRealizadoConBajoNivelDeVida = vidaInicialMajinBoo - vidaFinalMajinBoo;
 			
-			Assert.assertTrue("El daño realizado con menos vida es mayor al realizado con mas", dañoRealizadoConBajoNivelDeVida > dañoRealizadoConAltoNivelDeVida);
+			Assert.assertTrue("El danio realizado con menos vida es mayor al realizado con mas", danioRealizadoConBajoNivelDeVida > danioRealizadoConAltoNivelDeVida);
 		}	
 		
 }

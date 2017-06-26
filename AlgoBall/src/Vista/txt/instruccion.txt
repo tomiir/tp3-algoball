@@ -20,14 +20,14 @@ El juego muestra un cartel indicando de quien es el turno en la esquina superior
 Los personajes pueden moverse dentro acorde a su velocidad. Un punto de velocidad implica que se puede mover un casillero en cualquier dirección (incluyendo diagonales).
    
 Los personajes ganan 5 puntos de KI por turno. Hay dos tipos de ataques: normales y especiales.
-Cada personaje cuenta con un ataque de cada tipo. El daño de un ataque es determinado por el poder de pelea de los personajes. Además, si un personaje ataca a un enemigo con mayor pode de pelea, el daño realizado por dicho ataque será menor. Los ataques especiales cuestan KI, son más poderosos y a veces tienen efectos especiales: "
+Cada personaje cuenta con un ataque de cada tipo. El danio de un ataque es determinado por el poder de pelea de los personajes. Además, si un personaje ataca a un enemigo con mayor pode de pelea, el danio realizado por dicho ataque será menor. Los ataques especiales cuestan KI, son más poderosos y a veces tienen efectos especiales: "
 
-Goku: Kamehameha (20 KI): Ataque con daño aumentado.
-Gohan: Masenko (10 KI): Ataque con daño aumentado.
-Piccolo: Makankosappo (10 KI): Ataque con daño aumentado.
-Freezer: Rayo Mortal (20 KI): Ataque con daño aumentado.
-Cell: Absorber (5 KI): Mismo daño que su ataque básico, pero cell aumenta la misma cantidad de vida.
-MajinBoo: Conviertete En Chocolate(30 KI): No causa daño. Inmobiliza a un enemigo por 3 turnos.
+Goku: Kamehameha (20 KI): Ataque con danio aumentado.
+Gohan: Masenko (10 KI): Ataque con danio aumentado.
+Piccolo: Makankosappo (10 KI): Ataque con danio aumentado.
+Freezer: Rayo Mortal (20 KI): Ataque con danio aumentado.
+Cell: Absorber (5 KI): Mismo danio que su ataque básico, pero cell aumenta la misma cantidad de vida.
+MajinBoo: Conviertete En Chocolate(30 KI): No causa danio. Inmobiliza a un enemigo por 3 turnos.
 
 Cada personaje cuenta con 2 transformaciones. Para transformarse, un personaje debe cumplir ciertas condiciones:
     
@@ -53,7 +53,7 @@ Cada personaje cuenta con 2 transformaciones. Para transformarse, un personaje d
 Durante la partida aparecerán sobre el tablero diferentes consumibles que brindan bonificaciones
 	- Esfera Del Dragón: Aumenta un 25% el poder de pelea del  personaje.
 	- Nube Voladora: Aumenta un 25% el rango de ataque de movimiento del personaje.
-	- Semillas del Ermitaño: Recupera 100 puntos de vida al personaje, a menos que no esté dañado.
+	- Semillas del Ermitanio: Recupera 100 puntos de vida al personaje, a menos que no esté daniado.
 Los consumibles aparecerán de forma aleatoria.
     			
 El primero en eliminar todos los personajes del equipo oponente será el ganador.

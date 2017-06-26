@@ -23,21 +23,21 @@ public class AtaqueNormalUnitTests {
 	}
 	
 	@Test
-	public void ataqueDañaLoEsperadoParaMenorPoderDePelea() throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo{
-		int dañoEsperado=personaje1.poderDePelea();
+	public void ataqueDaniaLoEsperadoParaMenorPoderDePelea() throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo{
+		int danioEsperado=personaje1.poderDePelea();
 		
 		int vidaAnterior = personaje2.puntosDeVida();
 		ataque.enviar(personaje1, personaje2, 0);
-		Assert.assertEquals("Se hizo el daño esperado", personaje2.puntosDeVida(), vidaAnterior-dañoEsperado);
+		Assert.assertEquals("Se hizo el danio esperado", personaje2.puntosDeVida(), vidaAnterior-danioEsperado);
 	}
 	
 	@Test
-	public void ataqueDañaLoEsperadoParaMayorPoderDePelea () throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo{
-		int dañoEsperado = personaje2.poderDePelea() * 80/100; 
+	public void ataqueDaniaLoEsperadoParaMayorPoderDePelea () throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo{
+		int danioEsperado = personaje2.poderDePelea() * 80/100; 
 		int vidaAnterior = personaje1.puntosDeVida(); 
 		ataque.enviar(personaje2, personaje1, 0);
 		
-		Assert.assertEquals("Se hizo el daño esperado", personaje1.puntosDeVida(), vidaAnterior - dañoEsperado);
+		Assert.assertEquals("Se hizo el danio esperado", personaje1.puntosDeVida(), vidaAnterior - danioEsperado);
 	}	
 	
 }

@@ -35,7 +35,7 @@ public class PersonajeUnitTests {
 	
 	
 	@Test
-	public void atacaConDañoEsperado () throws ExcFueraDeTablero, ExcFueraDeRango, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo {		
+	public void atacaConDanioEsperado () throws ExcFueraDeTablero, ExcFueraDeRango, ExcPersonajeMurio, ExcKiInsuficiente, ExcEsChocolate, ExcCasilleroOcupado, ExcPosicionNegativa, ExcNumeroNegativo {		
 		Tablero tablero = new Tablero(15, 14);
 		PersonajeDePrueba personaje1 = new PersonajeDePrueba("nombre", 300, 1, 3, 50);
 		PersonajeDePrueba personaje2 = new PersonajeDePrueba("nombre 2", 300, 1, 3, 100);
@@ -47,9 +47,9 @@ public class PersonajeUnitTests {
 		int pts2inicial=personaje2.puntosDeVida();
 		
 		personaje1.atacarNormal(personaje2);
-		Assert.assertEquals("El personaje2 recibe el daño esperado",pts2inicial-personaje2.puntosDeVida(),(personaje1.poderDePelea()*8)/10);
+		Assert.assertEquals("El personaje2 recibe el danio esperado",pts2inicial-personaje2.puntosDeVida(),(personaje1.poderDePelea()*8)/10);
 		personaje2.atacarNormal(personaje1);
-		Assert.assertEquals("El personaje1 recibe el daño esperado",pts1inicial-personaje1.puntosDeVida(),personaje2.poderDePelea());
+		Assert.assertEquals("El personaje1 recibe el danio esperado",pts1inicial-personaje1.puntosDeVida(),personaje2.poderDePelea());
 	}
 	
 	@Test (expected = ExcFueraDeRango.class)

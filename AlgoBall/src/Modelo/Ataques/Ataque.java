@@ -22,14 +22,14 @@ public class Ataque {
 	}
 	
 	protected int costo;
-	protected int modificadorDaño=100;
+	protected int modificadorDanio=100;
 	protected String nombre;
 	
 	public Ataque(){}
 	
-	public Ataque (int costo, int modificadorDaño, String nombre) {
+	public Ataque (int costo, int modificadorDanio, String nombre) {
 		this.costo = costo;
-		this.modificadorDaño = modificadorDaño;	
+		this.modificadorDanio = modificadorDanio;	
 		this.nombre = nombre;
 	}
 	
@@ -55,20 +55,20 @@ public class Ataque {
 	
 	public void enviar(Personaje remitente, Atacable destinatario, int bonificacionPorcentual) throws ExcEsChocolate, ExcNumeroNegativo{
 		
-		int dañoActual = calcularDaño(remitente, destinatario, bonificacionPorcentual);
-		int dañoRecibido;
-		dañoRecibido = destinatario.recibirDaño(dañoActual);
-		efectosColaterales(remitente, destinatario, dañoRecibido);
+		int danioActual = calcularDanio(remitente, destinatario, bonificacionPorcentual);
+		int danioRecibido;
+		danioRecibido = destinatario.recibirDanio(danioActual);
+		efectosColaterales(remitente, destinatario, danioRecibido);
 	}
 	
-	protected int calcularDaño(Personaje remitente, Atacable destinatario, int bonificacionPorcentual) {
+	protected int calcularDanio(Personaje remitente, Atacable destinatario, int bonificacionPorcentual) {
 		
-		int daño = remitente.poderDePelea() * modificadorDaño / 100;
+		int danio = remitente.poderDePelea() * modificadorDanio / 100;
 		
 		if(remitente.poderDePelea()<destinatario.poderDePelea()){
-			daño = daño*8/10;
+			danio = danio*8/10;
 		}
-		return (daño*(100+bonificacionPorcentual))/100;
+		return (danio*(100+bonificacionPorcentual))/100;
 		
 	}
 	
@@ -80,6 +80,6 @@ public class Ataque {
 		return nombre;
 	}
 	
-	protected void efectosColaterales(Personaje remitente, Atacable destinatario, int dañoRealizado) throws ExcEsChocolate{		
+	protected void efectosColaterales(Personaje remitente, Atacable destinatario, int danioRealizado) throws ExcEsChocolate{		
 	}
 }

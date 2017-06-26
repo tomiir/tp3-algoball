@@ -224,7 +224,7 @@ public class JugadorUnitTests {
 		
 		jugador1.realizarAtaqueNormal(personaje1, personaje2);
 		
-		Assert.assertEquals("Se espera el daño esperado",personaje2.puntosDeVida(),vida_inicial-personaje1.poderDePelea());
+		Assert.assertEquals("Se espera el danio esperado",personaje2.puntosDeVida(),vida_inicial-personaje1.poderDePelea());
 		
 	}
 	

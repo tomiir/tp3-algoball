@@ -5,7 +5,7 @@ import Modelo.Excepciones.ExcEsChocolate;
 import Modelo.Excepciones.ExcNumeroNegativo;
 
 public interface Atacable {
-	public abstract int recibirDaño(int cantidad) throws ExcNumeroNegativo;
+	public abstract int recibirDanio(int cantidad) throws ExcNumeroNegativo;
 	public abstract boolean estaMuerto();
 	public abstract Posicion posicion();
 	public abstract String nombre();

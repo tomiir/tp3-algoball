@@ -32,7 +32,7 @@ public class test06 {
 		tablero.posicionarPersonaje(cell, new Posicion(5, 6));
 		
 		cell.seAvanzoUnTurno(5);
-		cell.recibirDaño(200);
+		cell.recibirDanio(200);
 		
 		int vidaInicialCell = cell.puntosDeVida();
 		int vidaInicialGohan = gohan.puntosDeVida();

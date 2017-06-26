@@ -13,8 +13,8 @@ public class Absorcion extends Ataque{
 		nombre = "Absorcion";
 	}
 	
-	protected void efectosColaterales(Personaje remitente, Atacable destinatario, int dañoRealizado){
-		beneficiario.aumentarVidaPorAbsorcion(dañoRealizado);
+	protected void efectosColaterales(Personaje remitente, Atacable destinatario, int danioRealizado){
+		beneficiario.aumentarVidaPorAbsorcion(danioRealizado);
 	}
 
 }

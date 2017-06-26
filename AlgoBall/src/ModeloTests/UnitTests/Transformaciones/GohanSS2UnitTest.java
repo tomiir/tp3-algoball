@@ -41,8 +41,8 @@ public class GohanSS2UnitTest {
 		equipo.agregarPersonaje(personaje2);
 		equipo.agregarPersonaje(personaje3);
 		
-		personaje2.recibirDaño(210);
-		personaje3.recibirDaño(210);
+		personaje2.recibirDanio(210);
+		personaje3.recibirDanio(210);
 		
 		Assert.assertFalse(transformacionEspecialGohan.esPosible(personaje1, equipo));		
 	}
@@ -71,8 +71,8 @@ public class GohanSS2UnitTest {
 		equipo.agregarPersonaje(personaje3);
 		
 		personaje1.seAvanzoUnTurno(30);
-		personaje2.recibirDaño(210);
-		personaje3.recibirDaño(210);
+		personaje2.recibirDanio(210);
+		personaje3.recibirDanio(210);
 		
 		Assert.assertTrue(transformacionEspecialGohan.esPosible(personaje1, equipo));		
 	}
@@ -92,8 +92,8 @@ public class GohanSS2UnitTest {
 		tablero.posicionarPersonaje(personaje4, new Posicion(2,1));
 		
 		personaje1.seAvanzoUnTurno(30);
-		personaje2.recibirDaño(210);
-		personaje3.recibirDaño(210);
+		personaje2.recibirDanio(210);
+		personaje3.recibirDanio(210);
 		
 		
 		personaje1.transformar(equipo);

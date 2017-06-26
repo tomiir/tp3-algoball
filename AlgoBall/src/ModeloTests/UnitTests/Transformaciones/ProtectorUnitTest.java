@@ -30,7 +30,7 @@ public class ProtectorUnitTest {
 	public void esPosibleTransformarProtector () throws ExcNumeroNegativo{
 		equipo1.agregarPersonaje(personaje1);
 		equipo1.agregarPersonaje(personaje2);
-		personaje2.recibirDaño(241);
+		personaje2.recibirDanio(241);
 		Assert.assertEquals(transformacionProtector.esPosible(personaje1, equipo1), true);
 	}
 	

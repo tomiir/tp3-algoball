@@ -38,8 +38,8 @@ public class Personaje implements Atacable{
 	ArrayList<Consumible> consumidos = new ArrayList<Consumible>();
 	
 	
-	public int recibirDaño(int dañoRecibido) throws ExcNumeroNegativo{
-		return vida.recibirDaño(dañoRecibido);
+	public int recibirDanio(int danioRecibido) throws ExcNumeroNegativo{
+		return vida.recibirDanio(danioRecibido);
 	}
 	
 	public void atacarNormal(Atacable personajeObjetivo) throws ExcFueraDeRango, ExcKiInsuficiente, ExcPersonajeMurio, ExcEsChocolate, ExcNumeroNegativo{

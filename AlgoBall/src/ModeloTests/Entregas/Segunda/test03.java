@@ -45,7 +45,7 @@ import Modelo.Personajes.PersonajeFactory;
 			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueSinTransformacion = freezer.puntosDeVida();
-			int dañoRealizadoConAtaqueSinTransformacion = vidaInicial - vidaTrasAtaqueSinTransformacion;
+			int danioRealizadoConAtaqueSinTransformacion = vidaInicial - vidaTrasAtaqueSinTransformacion;
 			
 			piccolo.seAvanzoUnTurno(20);
 			
@@ -54,9 +54,9 @@ import Modelo.Personajes.PersonajeFactory;
 			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueConTrasformacion = freezer.puntosDeVida();
-			int dañoRealizadoConAtaqueConTransformacion = vidaTrasAtaqueSinTransformacion - vidaTrasAtaqueConTrasformacion;
+			int danioRealizadoConAtaqueConTransformacion = vidaTrasAtaqueSinTransformacion - vidaTrasAtaqueConTrasformacion;
 			
-			Assert.assertTrue("El ataque habiendose trasnformado saca mas", (dañoRealizadoConAtaqueConTransformacion > dañoRealizadoConAtaqueSinTransformacion));
+			Assert.assertTrue("El ataque habiendose trasnformado saca mas", (danioRealizadoConAtaqueConTransformacion > danioRealizadoConAtaqueSinTransformacion));
 		}
 		
 		@Test (expected = ExcNoEsPosibleTransformarse.class)

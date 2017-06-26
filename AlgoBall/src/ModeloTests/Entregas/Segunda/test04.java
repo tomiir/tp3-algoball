@@ -49,18 +49,18 @@ import Modelo.Personajes.PersonajeFactory;
 			
 			int vidaTrasAtaquePrimeraTransformacion = freezer.puntosDeVida();
 			
-			int dañoRealizadoConAtaqueDePrimeraTransformacion = vidaInicial - vidaTrasAtaquePrimeraTransformacion;
+			int danioRealizadoConAtaqueDePrimeraTransformacion = vidaInicial - vidaTrasAtaquePrimeraTransformacion;
 			
-			gohan.recibirDaño(450);
+			gohan.recibirDanio(450);
 			
 			piccolo.transformar(GuerrerosZ);
 			piccolo.atacarNormal(freezer);
 			
 			int vidaTrasAtaqueSegundaTransformacion = freezer.puntosDeVida();
 			
-			int dañoRealizadoConAtaqueDeSegundaTransformacion = vidaTrasAtaquePrimeraTransformacion - vidaTrasAtaqueSegundaTransformacion;
+			int danioRealizadoConAtaqueDeSegundaTransformacion = vidaTrasAtaquePrimeraTransformacion - vidaTrasAtaqueSegundaTransformacion;
 			
-			Assert.assertTrue("El ataque cuando hizo la segunda transformacion saca mas que el ataque de la primera", (dañoRealizadoConAtaqueDeSegundaTransformacion > dañoRealizadoConAtaqueDePrimeraTransformacion));
+			Assert.assertTrue("El ataque cuando hizo la segunda transformacion saca mas que el ataque de la primera", (danioRealizadoConAtaqueDeSegundaTransformacion > danioRealizadoConAtaqueDePrimeraTransformacion));
 		}		
 		
 }

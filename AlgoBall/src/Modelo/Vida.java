@@ -11,16 +11,16 @@ public class Vida {
 		this.vidaActual = vidaInicial;
 	}
 	
-	public int recibirDaño(int dañoRecibido) throws ExcNumeroNegativo{
-		if(dañoRecibido < 0) throw new ExcNumeroNegativo();
+	public int recibirDanio(int danioRecibido) throws ExcNumeroNegativo{
+		if(danioRecibido < 0) throw new ExcNumeroNegativo();
 		
 		
-		if(dañoRecibido <= vidaActual) this.vidaActual -= dañoRecibido;
+		if(danioRecibido <= vidaActual) this.vidaActual -= danioRecibido;
 		else{
-			dañoRecibido = vidaActual;
+			danioRecibido = vidaActual;
 			vidaActual = 0;
 		}
-		return  dañoRecibido;		
+		return  danioRecibido;		
 	}
 	
 	public void aumentar (int vida){

@@ -47,7 +47,7 @@ public class test01 {
 		
 		int vidaTrasPrimerAtaque = freezer.puntosDeVida();
 		
-		int dañoRealizadoSinTransformar = vidaInicialFreezer - vidaTrasPrimerAtaque;
+		int danioRealizadoSinTransformar = vidaInicialFreezer - vidaTrasPrimerAtaque;
 		
 		gohan.seAvanzoUnTurno(10);
 		
@@ -57,14 +57,14 @@ public class test01 {
 		
 		int vidaTrasSegundoAtaque = freezer.puntosDeVida();
 		
-		int dañoRealizadoSiTransformo = vidaTrasPrimerAtaque - vidaTrasSegundoAtaque;
+		int danioRealizadoSiTransformo = vidaTrasPrimerAtaque - vidaTrasSegundoAtaque;
 		
-		Assert.assertTrue("El ataque cuando se transformo saca mas vida", (dañoRealizadoSiTransformo - dañoRealizadoSinTransformar) > 0);
+		Assert.assertTrue("El ataque cuando se transformo saca mas vida", (danioRealizadoSiTransformo - danioRealizadoSinTransformar) > 0);
 		
 	}
 	
 	@Test (expected = ExcNoEsPosibleTransformarse.class)
-	public void GohanNoPuedeLlegarALaSegundaTransformacionYaQueNoSeAtacoASusCompañeros() throws ExcNumeroNegativo, ExcNoEsPosibleTransformarse, ExcEsChocolate{
+	public void GohanNoPuedeLlegarALaSegundaTransformacionYaQueNoSeAtacoASusCompanieros() throws ExcNumeroNegativo, ExcNoEsPosibleTransformarse, ExcEsChocolate{
 		GuerrerosZ.agregarPersonaje(goku);
 		GuerrerosZ.agregarPersonaje(piccolo);
 		GuerrerosZ.agregarPersonaje(gohan);

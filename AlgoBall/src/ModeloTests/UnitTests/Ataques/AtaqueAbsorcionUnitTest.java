@@ -25,7 +25,7 @@ public class AtaqueAbsorcionUnitTest {
 	}
 	
 	@Test
-	public void haceElDañoCorrecto () throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo {
+	public void haceElDanioCorrecto () throws ExcAtaqueImposible, ExcEsChocolate, ExcNumeroNegativo {
 		
 		int vida_anterior_cell = cell.puntosDeVida();
 		int vida_anterior_personaje = personaje2.puntosDeVida();

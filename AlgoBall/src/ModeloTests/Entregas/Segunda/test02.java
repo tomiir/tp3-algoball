@@ -51,19 +51,19 @@ public class test02 {
 		
 		int vidaTrasAtaquePrimeraTransformacion = freezer.puntosDeVida();
 		
-		int dañoRealizadoConAtaqueDePrimeraTransformacion = vidaInicial - vidaTrasAtaquePrimeraTransformacion;
+		int danioRealizadoConAtaqueDePrimeraTransformacion = vidaInicial - vidaTrasAtaquePrimeraTransformacion;
 		
 		gohan.seAvanzoUnTurno(30);
-		goku.recibirDaño(400);
-		piccolo.recibirDaño(400);
+		goku.recibirDanio(400);
+		piccolo.recibirDanio(400);
 		gohan.transformar(GuerrerosZ);
 		gohan.atacarNormal(freezer);
 		
 		int vidaTrasAtaqueSegundaTransformacion = freezer.puntosDeVida();
 		
-		int dañoRealizadoConAtaqueDeSegundaTransformacion = vidaTrasAtaquePrimeraTransformacion - vidaTrasAtaqueSegundaTransformacion;
+		int danioRealizadoConAtaqueDeSegundaTransformacion = vidaTrasAtaquePrimeraTransformacion - vidaTrasAtaqueSegundaTransformacion;
 		
-		Assert.assertTrue("El ataque cuando hizo la segunda transformacion saca mas que el ataque de la primera", (dañoRealizadoConAtaqueDeSegundaTransformacion > dañoRealizadoConAtaqueDePrimeraTransformacion));
+		Assert.assertTrue("El ataque cuando hizo la segunda transformacion saca mas que el ataque de la primera", (danioRealizadoConAtaqueDeSegundaTransformacion > danioRealizadoConAtaqueDePrimeraTransformacion));
 	}
 	
 }

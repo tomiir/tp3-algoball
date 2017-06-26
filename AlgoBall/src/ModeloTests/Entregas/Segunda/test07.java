@@ -34,14 +34,14 @@ public class test07 {
 		
 		
 		cell.seAvanzoUnTurno(5);
-		cell.recibirDaño(200);
+		cell.recibirDanio(200);
 		cell.seAvanzoUnTurno(5);
-		cell.recibirDaño(200);
+		cell.recibirDanio(200);
 		cell.seAvanzoUnTurno(5);
-		cell.recibirDaño(200);		
+		cell.recibirDanio(200);		
 		
 		cell.seAvanzoUnTurno(5);
-		cell.recibirDaño(200);		
+		cell.recibirDanio(200);		
 		
 		cell.atacarEspecial(gohan);
 				

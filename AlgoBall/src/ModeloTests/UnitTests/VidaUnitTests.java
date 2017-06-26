@@ -21,7 +21,7 @@ public class VidaUnitTests {
 		int cantidad_vida = 300;
 		Vida vida = new Vida(cantidad_vida);
 		
-		vida.recibirDaño(30);
+		vida.recibirDanio(30);
 		Assert.assertEquals("La vida inicial no se modifica",cantidad_vida,vida.getVidaInicial());
 	}
 	
@@ -29,9 +29,9 @@ public class VidaUnitTests {
 	public void vidaQueSeReduceEsVidaActual() throws ExcNumeroNegativo{
 		int cantidad_vida = 300;
 		Vida vida = new Vida(cantidad_vida);
-		int cantidad_daño = 30;
-		vida.recibirDaño(cantidad_daño);
-		Assert.assertEquals("La vida actual es la correcta",cantidad_vida-cantidad_daño,vida.getVidaActual());
+		int cantidad_danio = 30;
+		vida.recibirDanio(cantidad_danio);
+		Assert.assertEquals("La vida actual es la correcta",cantidad_vida-cantidad_danio,vida.getVidaActual());
 	}
 		
 	@Test
@@ -42,8 +42,8 @@ public class VidaUnitTests {
 		Assert.assertEquals("La vida porcentual es la correcta",vida.vidaPorcentual(),porcentaje_actual);
 		
 		int porcentaje = 80;
-		int cantidad_daño = cantidad_vida - (porcentaje*cantidad_vida/100);
-		vida.recibirDaño(cantidad_daño);
+		int cantidad_danio = cantidad_vida - (porcentaje*cantidad_vida/100);
+		vida.recibirDanio(cantidad_danio);
 		
 		Assert.assertEquals("La vida porcentual es la correcta",vida.vidaPorcentual(),porcentaje);
 
